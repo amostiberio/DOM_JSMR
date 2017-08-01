@@ -11,13 +11,12 @@
 			$stakhir= $_POST['stakhir'];
 			$realisasi= $_POST['realisasi'];
 		//cek input double
-		$cek_rencana = mysqli_query($connect,"SELECT * beban_rencana WHERE id_sp='$id_subpk' AND tahun='$tahun' AND jenis 
-			= '$jenis'");
+		$cek_rencana = mysqli_query($connect,"SELECT * FROM beban_rencana WHERE id_sp='$id_subpk' AND tahun='$tahun' AND jenis 	= '$jenis'");
 		$datarencana = mysqli_fetch_array($cek_rencana,MYSQLI_NUM);
 
 		if($datarencana[0] > 0){
 
-		$cek_realisasi = mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$id_subpk' AND tahun ='$tahun' AND jenis ='$jenis'");
+		$cek_realisasi = mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$id_subpk' AND tahun ='$tahun' AND jenis ='$jenis' AND stat_twrl ='$sttwrl'");
 		$datarealisasi = mysqli_fetch_array($cek_realisasi,MYSQLI_NUM);
 
 		if($datarealisasi[0] > 0){ 
@@ -43,5 +42,20 @@
 			<script>document.location.href="javascript:history.back()";</script> 
 <?php 		}
 		}
-		}}
+		}
+		else {
+
+?>
+		<script> window.alert('Data Rencana Belum Tersedia') </script>
+		<script>document.location.href="javascript:history.back()";</script> 
+
+
+
+
+<?php
+		}
+
+
+
+	}
 ?>

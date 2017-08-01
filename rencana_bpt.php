@@ -13,7 +13,7 @@ include ('connect.php'); //connect ke database
   $cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT nama_cabang FROM cabang WHERE id_cabang = '$idcabang'"));
   $namacabang = $cabang['nama_cabang'];
 
-  $resultuntukrencana = $connect-> query("SELECT * FROM program_kerja WHERE id_cabang = '$idcabang' AND jenis = 'beban' ");
+  $resultuntukrencana = $connect-> query("SELECT * FROM program_kerja WHERE id_cabang = '$idcabang' AND jenis = 'bpt' ");
 
 ?>
 <!DOCTYPE html>
@@ -125,6 +125,8 @@ include ('connect.php'); //connect ke database
 								<th colspan="1">TW 2</th>
 								<th colspan="1">TW 3</th>
 								<th colspan="1">TW 4</th>
+								<th rowspan="2">Aksi</th>
+
                               </tr>
                               <tr>
                                 <th>RKAP</th>
@@ -161,6 +163,7 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo $datatwrc2['rkap'] ?></td>
                                 <td><?php echo $datatwrc3['rkap'] ?></td>
 								<td><?php echo $datatwrc4['rkap'] ?></td>
+								<td><button type="button" class="btn btn-round btn-primary">Primary</button></td>
                               </tr>
                               <?php } ?>
                             </tbody>
@@ -197,6 +200,7 @@ include ('connect.php'); //connect ke database
 					<div class="modal-body">
 					<form action="tambahprogrambeban.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                         <input name ="idcabang" type="text" id="idcabang" value="<?php echo $idcabang; ?>" hidden>
+                        <input name ="jenis" type="text" id="jenis" value="bpt" hidden>
 						  <div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="ma">Nomor MA</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
@@ -241,7 +245,7 @@ include ('connect.php'); //connect ke database
 
 								<option></option>
 								<?php
-                                    $programkerja = mysqli_query($connect, "SELECT * FROM program_kerja WHERE id_cabang ='$idcabang' AND jenis = 'beban'");
+                                    $programkerja = mysqli_query($connect, "SELECT * FROM program_kerja WHERE id_cabang ='$idcabang' AND jenis = 'bpt'");
                                     while($dataprogram = mysqli_fetch_array($programkerja)){
                                 ?>
 								<option  value="<?php echo $dataprogram['id_pk'];?>"><?php echo $dataprogram['nama_pk'];?></option>
@@ -303,23 +307,14 @@ include ('connect.php'); //connect ke database
 						  <div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="subProgram">Subprogram Kerja</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input name ="jenis" type="text" id="jenis" value="bpt" hidden>
 							    <input name ="idcabang" type="text" id="idcabang" value="<?php echo $idcabang; ?>" hidden>
 								<select required="required" name="subprogram" id="subprogram-list" class="select2_single form-control" tabindex="-1">
 									<option>Pilih Subprogram Kerja</option>
 								</select>
 							</div>
 						  </div>
-						  <div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis">Jenis</label>
-							<div class="col-md-6 col-sm-6 col-xs-12">							   
-								<select  required="required" name="jenis" id="jenis-list" class="select2_single form-control" tabindex="-1">
-									<option>Pilih Jenis</option>
-									<option value ="bpt">Beban Pengumpulan Tol</option>
-									<option value ="bpll">Beban Pelayanan Lalu Lintas</option>
-								</select>
-							</div>
-						  </div>
-						  
+						 					  
 					      <div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">

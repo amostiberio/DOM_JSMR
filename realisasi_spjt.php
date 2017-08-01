@@ -13,7 +13,7 @@ include ('connect.php'); //connect ke database
   $cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT nama_cabang FROM cabang WHERE id_cabang = '$idcabang'"));
   $namacabang = $cabang['nama_cabang'];
 
-  $resultuntukrealisasi = $connect-> query("SELECT * FROM program_kerja WHERE id_cabang = '$idcabang' AND jenis = 'capex' ");
+  $resultuntukrealisasi = $connect-> query("SELECT * FROM program_kerja WHERE id_cabang = '$idcabang' AND jenis = 'spjt' ");
 
 ?>
 <!DOCTYPE html>
@@ -226,16 +226,8 @@ include ('connect.php'); //connect ke database
 								</select>
 							</div>
 						  </div>
-						  <div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis">Jenis</label>
-							<div class="col-md-6 col-sm-6 col-xs-12">							   
-								<select required="required" name="jenis" id="jenis-list" class="select2_single form-control" tabindex="-1">
-									<option>Pilih Jenis</option>
-									<option value ="spojt">SPOJT</option>
-									<option value ="spjt">SPJT</option>
-								</select>
-							</div>
-						  </div>
+  						 <input name ="jenis" type="text" id="jenis" value="spjt" hidden>
+
 						  <div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
