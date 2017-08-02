@@ -15,7 +15,11 @@ include ('connect.php'); //connect ke database
 
   $resultuntukrencana = $connect-> query("SELECT * FROM program_kerja WHERE id_cabang = '$idcabang' AND jenis = 'bpt' ");
 
+  //ambil informasi jenis sub gardu
   $gardu = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM jenis_subgardu"));
+
+  $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM gerbang"));
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -101,7 +105,7 @@ include ('connect.php'); //connect ke database
 	                    </button>
 	                    <ul role="menu" class="dropdown-menu pull-right">
                             <li><a data-toggle="modal" data-target=".bs-gerbang" >Tambah Gerbang</a></li>
-						                <li><a data-toggle="modal" data-target=".bs-rencana" >Tambah Rencana</a></li>
+						                <li><a data-toggle="modal" data-target=".bs-rencana" >Tambah Waktu Transaksi</a></li>
 
 	                    </ul>
 	                    </div>
@@ -147,7 +151,8 @@ include ('connect.php'); //connect ke database
                             </thead>
                             <tbody>
                             <?php
-                            $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi WHERE waktu_transaksi.id_cabang = '$idcabang'");
+                            $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi, panjang_antrian, gerbang WHERE waktu_transaksi.id_cabang = '$idcabang' AND panjang_antrian.id_gerbang=gerbang.id_gerbang");
+                            $nomor = 1;
                             while($data_waktu_transaksi = mysqli_fetch_array($rata_waktu_transaksi)){
 
 								$idgerbanglist = $data_waktu_transaksi['id_gerbang'];
@@ -162,9 +167,10 @@ include ('connect.php'); //connect ke database
                 $data_gerbang_terbuka_gto = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM waktu_transaksi, jenis_subgardu WHERE waktu_transaksi.id_gerbang = '$idgerbanglist' AND waktu_transaksi.id_subgardu = '4' AND jenis_subgardu.id_jenisgardu='2'"));
 								$data_gerbang_masuk_gto = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM waktu_transaksi, jenis_subgardu WHERE waktu_transaksi.id_gerbang = '$idgerbanglist' AND waktu_transaksi.id_subgardu = '5' AND jenis_subgardu.id_jenisgardu='2'"));
                 $data_gerbang_keluar_gto = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM waktu_transaksi, jenis_subgardu WHERE waktu_transaksi.id_gerbang = '$idgerbanglist' AND waktu_transaksi.id_subgardu = '6' AND jenis_subgardu.id_jenisgardu='2'"));
+                $data_panjang_antrian = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM panjang_antrian WHERE id_gerbang = '$idgerbanglist'"));
                             ?>
                               <tr>
-                                <td>x</td>
+                                <td><?php echo $nomor; $nomor++?></td>
                                 <td><?php echo $data_gerbang['nama_gerbang'] ?></td>
                                 <td><?php echo $data_gerbang_terbuka['nilai']?></td>
                                 <td><?php echo $data_gerbang_masuk['nilai'] ?></td>
@@ -172,7 +178,7 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo   $data_gerbang_terbuka_gto['nilai'] ?></td>
                                 <td><?php echo $data_gerbang_masuk_gto['nilai'] ?></td>
 								                <td><?php echo $data_gerbang_keluar_gto['nilai'] ?></td>
-                                <td>-</td>
+                                <td><?php echo $data_panjang_antrian['panjang_antrian']?></td>
 								                <td><button type="button" class="btn btn-round btn-primary">Primary</button></td>
                               </tr>
                               <?php } ?>
@@ -251,6 +257,7 @@ include ('connect.php'); //connect ke database
                       <option></option>
                       <?php
                                       $gerbang= mysqli_query($connect, "SELECT * FROM gerbang WHERE id_cabang ='$idcabang'");
+                                      $idgerbang = ['id_gerbang'];
                                       while($datagerbang = mysqli_fetch_array($gerbang)){
                                   ?>
                   <option  value="<?php echo $datagerbang['id_gerbang'];?>"><?php echo $datagerbang['nama_gerbang'];?></option>
