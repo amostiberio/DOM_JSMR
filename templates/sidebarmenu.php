@@ -64,8 +64,8 @@
                           <li><a href="waktu_transaksi1.php">Waktu Transaksi 1</a></li>
                           <li><a href="waktu_transaksi2.php">Waktu Transaksi 2 SPM</a></li>
                         </ul>
-                        <li><a>Jumlah Gardu</a></li>
-                        <li><a>Jumlah SDM</a></li>
+                        <li><a href="jumlah_gardu.php">Jumlah Gardu</a></li>
+                        <li><a href="jumlah_sdm.php">Jumlah SDM</a></li>
                         <li><a>Lalin Jam-jaman</a></li>
                       </ul>
                     </li>
