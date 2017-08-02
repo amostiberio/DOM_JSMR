@@ -59,8 +59,14 @@
                   <ul class="nav side-menu">
                     <li><a><i class="fa fa-book"></i> Laporan KPI <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                        <li><a>Referensi File</a></li>
-                        <li><a>Realisasi</a></li>
+                        <li><a>Waktu Transaksi<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="waktu_transaksi1.php">Waktu Transaksi 1</a></li>
+                          <li><a>Waktu Transaksi 2 SPM</a></li>
+                        </ul>
+                        <li><a>Jumlah Gardu</a></li>
+                        <li><a>Jumlah SDM</a></li>
+                        <li><a>Lalin Jam-jaman</a></li>
                       </ul>
                     </li>
                   </ul>

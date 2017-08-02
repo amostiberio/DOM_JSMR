@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 01 Agu 2017 pada 03.49
--- Versi Server: 10.1.16-MariaDB
--- PHP Version: 7.0.9
+-- Generation Time: Aug 02, 2017 at 12:01 PM
+-- Server version: 10.1.10-MariaDB
+-- PHP Version: 7.0.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `beban_realisasi`
+-- Table structure for table `beban_realisasi`
 --
 
 CREATE TABLE `beban_realisasi` (
@@ -37,7 +37,7 @@ CREATE TABLE `beban_realisasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `beban_realisasi`
+-- Dumping data for table `beban_realisasi`
 --
 
 INSERT INTO `beban_realisasi` (`id_twrl`, `id_sp`, `tahun`, `stat_twrl`, `stat_akhir`, `realisasi`, `jenis`) VALUES
@@ -52,7 +52,7 @@ INSERT INTO `beban_realisasi` (`id_twrl`, `id_sp`, `tahun`, `stat_twrl`, `stat_a
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `beban_rencana`
+-- Table structure for table `beban_rencana`
 --
 
 CREATE TABLE `beban_rencana` (
@@ -65,7 +65,7 @@ CREATE TABLE `beban_rencana` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `beban_rencana`
+-- Dumping data for table `beban_rencana`
 --
 
 INSERT INTO `beban_rencana` (`id_twrc`, `id_sp`, `tahun`, `stat_twrc`, `rkap`, `jenis`) VALUES
@@ -92,12 +92,16 @@ INSERT INTO `beban_rencana` (`id_twrc`, `id_sp`, `tahun`, `stat_twrc`, `rkap`, `
 (105, 20, 2018, 1, '123', 'bpt'),
 (106, 20, 2018, 2, '123', 'bpt'),
 (107, 20, 2018, 3, '123', 'bpt'),
-(108, 20, 2018, 4, '123', 'bpt');
+(108, 20, 2018, 4, '123', 'bpt'),
+(109, 0, 0, 1, '0', ''),
+(110, 0, 0, 2, '0', ''),
+(111, 0, 0, 3, '0', ''),
+(112, 0, 0, 4, '0', '');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `cabang`
+-- Table structure for table `cabang`
 --
 
 CREATE TABLE `cabang` (
@@ -106,7 +110,7 @@ CREATE TABLE `cabang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `cabang`
+-- Dumping data for table `cabang`
 --
 
 INSERT INTO `cabang` (`id_cabang`, `nama_cabang`) VALUES
@@ -117,7 +121,7 @@ INSERT INTO `cabang` (`id_cabang`, `nama_cabang`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `capex_realisasi`
+-- Table structure for table `capex_realisasi`
 --
 
 CREATE TABLE `capex_realisasi` (
@@ -133,7 +137,7 @@ CREATE TABLE `capex_realisasi` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `capex_rencana`
+-- Table structure for table `capex_rencana`
 --
 
 CREATE TABLE `capex_rencana` (
@@ -148,7 +152,7 @@ CREATE TABLE `capex_rencana` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `gerbang`
+-- Table structure for table `gerbang`
 --
 
 CREATE TABLE `gerbang` (
@@ -157,10 +161,18 @@ CREATE TABLE `gerbang` (
   `id_cabang` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `gerbang`
+--
+
+INSERT INTO `gerbang` (`id_gerbang`, `nama_gerbang`, `id_cabang`) VALUES
+(1, 'Gerbang A', 1),
+(3, 'Gerbang B', 1);
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jenis_gardu`
+-- Table structure for table `jenis_gardu`
 --
 
 CREATE TABLE `jenis_gardu` (
@@ -169,7 +181,7 @@ CREATE TABLE `jenis_gardu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `jenis_gardu`
+-- Dumping data for table `jenis_gardu`
 --
 
 INSERT INTO `jenis_gardu` (`id_jenisgardu`, `nama_gardu`) VALUES
@@ -180,7 +192,7 @@ INSERT INTO `jenis_gardu` (`id_jenisgardu`, `nama_gardu`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jenis_subgardu`
+-- Table structure for table `jenis_subgardu`
 --
 
 CREATE TABLE `jenis_subgardu` (
@@ -190,7 +202,7 @@ CREATE TABLE `jenis_subgardu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `jenis_subgardu`
+-- Dumping data for table `jenis_subgardu`
 --
 
 INSERT INTO `jenis_subgardu` (`id_subgardu`, `nama_subgardu`, `id_jenisgardu`) VALUES
@@ -199,15 +211,12 @@ INSERT INTO `jenis_subgardu` (`id_subgardu`, `nama_subgardu`, `id_jenisgardu`) V
 (3, 'gardu_keluar', 1),
 (4, 'gardu_terbuka', 2),
 (5, 'gardu_masuk', 2),
-(6, 'gardu_keluar', 2),
-(7, 'gardu_terbuka', 3),
-(8, 'gardu_masuk', 3),
-(9, 'gardu_keluar', 3);
+(6, 'gardu_keluar', 2);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `laporan_lock`
+-- Table structure for table `laporan_lock`
 --
 
 CREATE TABLE `laporan_lock` (
@@ -220,7 +229,7 @@ CREATE TABLE `laporan_lock` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `panjang_antrian`
+-- Table structure for table `panjang_antrian`
 --
 
 CREATE TABLE `panjang_antrian` (
@@ -229,10 +238,17 @@ CREATE TABLE `panjang_antrian` (
   `id_gerbang` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `panjang_antrian`
+--
+
+INSERT INTO `panjang_antrian` (`id_pa`, `panjang_antrian`, `id_gerbang`) VALUES
+(4, 7, 3);
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `program_kerja`
+-- Table structure for table `program_kerja`
 --
 
 CREATE TABLE `program_kerja` (
@@ -244,7 +260,7 @@ CREATE TABLE `program_kerja` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `program_kerja`
+-- Dumping data for table `program_kerja`
 --
 
 INSERT INTO `program_kerja` (`id_pk`, `MA`, `nama_pk`, `id_cabang`, `jenis`) VALUES
@@ -260,7 +276,7 @@ INSERT INTO `program_kerja` (`id_pk`, `MA`, `nama_pk`, `id_cabang`, `jenis`) VAL
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `realisasi_laporan`
+-- Table structure for table `realisasi_laporan`
 --
 
 CREATE TABLE `realisasi_laporan` (
@@ -273,7 +289,7 @@ CREATE TABLE `realisasi_laporan` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `referensi_file`
+-- Table structure for table `referensi_file`
 --
 
 CREATE TABLE `referensi_file` (
@@ -287,7 +303,7 @@ CREATE TABLE `referensi_file` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sub_program`
+-- Table structure for table `sub_program`
 --
 
 CREATE TABLE `sub_program` (
@@ -299,7 +315,7 @@ CREATE TABLE `sub_program` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `sub_program`
+-- Dumping data for table `sub_program`
 --
 
 INSERT INTO `sub_program` (`id_sp`, `nama_sp`, `id_pk`, `id_cabang`, `jenis`) VALUES
@@ -321,7 +337,7 @@ INSERT INTO `sub_program` (`id_sp`, `nama_sp`, `id_pk`, `id_cabang`, `jenis`) VA
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaksi_tinggi`
+-- Table structure for table `transaksi_tinggi`
 --
 
 CREATE TABLE `transaksi_tinggi` (
@@ -334,7 +350,7 @@ CREATE TABLE `transaksi_tinggi` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -346,7 +362,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `id_role`, `id_cabang`) VALUES
@@ -357,7 +373,7 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `id_role`, `id_cabang`) V
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user_role`
+-- Table structure for table `user_role`
 --
 
 CREATE TABLE `user_role` (
@@ -366,7 +382,7 @@ CREATE TABLE `user_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user_role`
+-- Dumping data for table `user_role`
 --
 
 INSERT INTO `user_role` (`id_role`, `role`) VALUES
@@ -376,15 +392,28 @@ INSERT INTO `user_role` (`id_role`, `role`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `waktu_transaksi`
+-- Table structure for table `waktu_transaksi`
 --
 
 CREATE TABLE `waktu_transaksi` (
   `id_waktutrans` int(11) NOT NULL,
   `nilai` int(25) NOT NULL,
   `id_gerbang` int(25) NOT NULL,
-  `id_subgardu` int(25) NOT NULL
+  `id_subgardu` int(25) NOT NULL,
+  `id_cabang` int(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `waktu_transaksi`
+--
+
+INSERT INTO `waktu_transaksi` (`id_waktutrans`, `nilai`, `id_gerbang`, `id_subgardu`, `id_cabang`) VALUES
+(31, 2, 3, 1, 1),
+(32, 3, 3, 2, 1),
+(33, 4, 3, 3, 1),
+(34, 1, 3, 4, 1),
+(35, 2, 3, 5, 1),
+(36, 3, 3, 6, 1);
 
 --
 -- Indexes for dumped tables
@@ -505,7 +534,7 @@ ALTER TABLE `beban_realisasi`
 -- AUTO_INCREMENT for table `beban_rencana`
 --
 ALTER TABLE `beban_rencana`
-  MODIFY `id_twrc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id_twrc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 --
 -- AUTO_INCREMENT for table `cabang`
 --
@@ -525,12 +554,12 @@ ALTER TABLE `capex_rencana`
 -- AUTO_INCREMENT for table `gerbang`
 --
 ALTER TABLE `gerbang`
-  MODIFY `id_gerbang` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_gerbang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `panjang_antrian`
 --
 ALTER TABLE `panjang_antrian`
-  MODIFY `id_pa` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `program_kerja`
 --
@@ -561,6 +590,11 @@ ALTER TABLE `transaksi_tinggi`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `waktu_transaksi`
+--
+ALTER TABLE `waktu_transaksi`
+  MODIFY `id_waktutrans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
