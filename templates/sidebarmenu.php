@@ -62,7 +62,7 @@
                         <li><a>Waktu Transaksi<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                           <li><a href="waktu_transaksi1.php">Waktu Transaksi 1</a></li>
-                          <li><a>Waktu Transaksi 2 SPM</a></li>
+                          <li><a href="waktu_transaksi2.php">Waktu Transaksi 2 SPM</a></li>
                         </ul>
                         <li><a>Jumlah Gardu</a></li>
                         <li><a>Jumlah SDM</a></li>
