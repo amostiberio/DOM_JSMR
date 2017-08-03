@@ -151,7 +151,7 @@ include ('connect.php'); //connect ke database
                             </thead>
                             <tbody>
                             <?php
-                            $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi, panjang_antrian, gerbang WHERE waktu_transaksi.id_cabang = '$idcabang' AND panjang_antrian.id_gerbang=gerbang.id_gerbang");
+                            $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang=panjang_antrian.id_gerbang WHERE waktu_transaksi.id_cabang = '$idcabang' group by waktu_transaksi.id_gerbang");
                             $nomor = 1;
                             while($data_waktu_transaksi = mysqli_fetch_array($rata_waktu_transaksi)){
 
