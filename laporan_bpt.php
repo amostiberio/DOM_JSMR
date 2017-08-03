@@ -119,14 +119,7 @@ if(isset($_GET['triwulan'])){
                         </div>
 	                    </ul>
 	                    </div>
-<!--
-<script type="text/javascript">
- var urlmenu = document.getElementById( 'dropDownListTW' );
-    urlmenu.onchange = function() {
-      window.open( this.options[ this.selectedIndex ].value, '_self');
-    };
-</script>
--->
+
                       </div>
                     </div>
                    </div>

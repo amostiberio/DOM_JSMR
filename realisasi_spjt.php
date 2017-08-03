@@ -121,6 +121,8 @@ include ('connect.php'); //connect ke database
 							<th colspan="2">TW 2</th>
 							<th colspan="2">TW 3</th>
 							<th colspan="2">TW 4</th>
+							<th rowspan="2">Aksi</th>
+
 						  </tr>
 						  <tr>
 							<th >Status Akhir</th>
@@ -169,6 +171,20 @@ include ('connect.php'); //connect ke database
 							<td><?php echo $datatwreal3['realisasi'] ?></td>
 							<td><?php echo $datatwreal4['stat_akhir'] ?></td>
 							<td><?php echo $datatwreal4['realisasi'] ?></td>
+							<td>
+							<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal" 
+							data-id-twrl1="<?php echo $datatwreal1['id_twrl'] ?>" data-id-twrl2="<?php echo $datatwreal2['id_twrl'] ?>" 
+							data-id-twrl3="<?php echo $datatwreal3['id_twrl'] ?>" data-id-twrl4="<?php echo $datatwreal4['id_twrl'] ?>">
+							 Edit
+							 </button>																 
+							 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
+							 data-id-twrl1="<?php echo $datatwreal1['id_twrl'] ?>" 
+							 data-id-twrl2="<?php echo $datatwreal2['id_twrl'] ?>" 
+							 data-id-twrl3="<?php echo $datatwreal3['id_twrl'] ?>" 
+							 data-id-twrl4="<?php echo $datatwreal4['id_twrl'] ?>">
+								 Delete
+							</button>
+							</td>
 						  </tr>
 						<?php }?>
 						</tbody>
@@ -190,6 +206,101 @@ include ('connect.php'); //connect ke database
         <!-- /page content -->
 
 		<div class="x_content">
+		<!-- Modal Delete Rencana -->
+ 				<div class="modal fade bs-delete-modal" id="modal_deleterealisasi" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                          </button>
+                          <h4 class="modal-title" id="myModalLabel">Delete Realisasi</h4>
+                        </div>
+                        <div class="modal-body text-center">
+                        <form action="editdatacapex.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" ">
+                         <div class="alert alert-danger" role="alert">
+		 				 <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
+								  
+								  <h4> Anda yakin untuk menghapus data rencana ini? </h4>
+						</div>
+                          <h2 style="color:red;"></h2>
+                          <form action="editrencanabeban.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+						  <input name ="editidtwrl1" type="text" id="jenis" value="" hidden>						
+						  <input name ="editidtwrl2" type="text" id="jenis" value="" hidden>
+					      <input name ="editidtwrl3" type="text" id="jenis" value="" hidden>
+					      <input name ="editidtwrl4" type="text" id="jenis" value="" hidden>
+						 
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-danger" name ="deleterealisasicapex" >Delete</button>
+                        </div>
+						</form>
+                      </div>
+                    </div>
+                  </div>
+			<!-- Modal Edit Realisasi -->
+			 <div class="modal fade bs-edit-modal" id="modal_editrealisasi" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                          </button>
+                          <h4 class="modal-title" id="myModalLabel">Edit Realisasi</h4>
+                        </div>
+                        <div class="modal-body">
+                        <form action="editdatacapex.php" method="POST" id="demo-form2"  class="form-horizontal form-label-left">	<input name ="editidtwrl1" type="text" id="jenis" value="" hidden>						
+							<input name ="editidtwrl2" type="text" id="jenis" value="" hidden>
+						    <input name ="editidtwrl3" type="text" id="jenis" value="" hidden>
+						    <input name ="editidtwrl4" type="text" id="jenis" value="" hidden>				   
+						  <div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="sttwrl">Triwulan</label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+							
+							 <div class="radio">
+								<label>
+								  <input type="radio" value="1" name="sttwrl"> TW 1
+								</label>
+							  </div>
+							  <div class="radio">
+								<label>
+								  <input type="radio" value="2" name="sttwrl"> TW 2
+								</label>
+							  </div>
+							  <div class="radio">
+								<label>
+								  <input type="radio" value="3" name="sttwrl"> TW 3
+								</label>
+							  </div>
+							  <div class="radio">
+								<label>
+								  <input type="radio" value="4" name="sttwrl"> TW 4
+								</label>
+							  </div>
+							</div>
+						  </div>
+						  <div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="status_akhir">Status Akhir</label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+							  <input name="stakhir" type="number" min="0" id="status_akhir" required="required" class="form-control col-md-7 col-xs-12">
+							</div>
+						  </div>
+						  <div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="realisasi">Realisasi</label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+							  <input name="realisasi" type="number" min="0" id="realisasi" required="required" class="form-control col-md-7 col-xs-12">
+							</div>
+						  </div>
+						</div>
+						<div class="modal-footer">
+						  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+						  <button type="submit" class="btn btn-primary" name="editrealisasicapex">Simpan</button>
+						</div>
+					</form>
+                      </div>
+                    </div>
+                  </div>
 			<!-- Modal Tambah Realisasi -->
 			<div class="modal fade bs-realisasi" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog modal-lg">

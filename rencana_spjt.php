@@ -114,7 +114,7 @@ include ('connect.php'); //connect ke database
                    </div>
                   <div class="x_content">
 
-                      <table id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
+                      <table id="datatable-keytable"  class="table table-striped table-bordered text-center">
                             <thead >
                               <tr >
                                 <th rowspan="2">Program Kerja</th>
@@ -122,15 +122,17 @@ include ('connect.php'); //connect ke database
                                 <th rowspan="2">Total RKAP</th>
                                 <th rowspan="2">Tahun</th>
                                 <th colspan="1">TW 1</th>
-								<th colspan="1">TW 2</th>
-								<th colspan="1">TW 3</th>
-								<th colspan="1">TW 4</th>
+                								<th colspan="1">TW 2</th>
+                								<th colspan="1">TW 3</th>
+                								<th colspan="1">TW 4</th>                								
+                								<th rowspan="2">Aksi</th>
+
                               </tr>
                               <tr>
                                 <th>RKAP</th>
-								<th>RKAP</th>
-								<th>RKAP</th>
-								<th>RKAP</th>
+                								<th>RKAP</th>
+                								<th>RKAP</th>
+                								<th>RKAP</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -160,7 +162,24 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo $datatwrc1['rkap'] ?></td>
                                 <td><?php echo $datatwrc2['rkap'] ?></td>
                                 <td><?php echo $datatwrc3['rkap'] ?></td>
-								<td><?php echo $datatwrc4['rkap'] ?></td>
+                								<td><?php echo $datatwrc4['rkap'] ?></td>
+                								<td>
+                								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal" 
+                								 data-id-twrc1 ="<?php echo $datatwrc1['id_twrc'];?>" 
+                								 data-id-twrc2 ="<?php echo $datatwrc2['id_twrc'];?>" 
+                								 data-id-twrc3 ="<?php echo $datatwrc3['id_twrc'];?>" 
+                								 data-id-twrc4 ="<?php echo $datatwrc4['id_twrc'];?>"
+                								 data-twrc1="<?php echo $datatwrc1['rkap'] ?>" data-twrc2="<?php echo $datatwrc2['rkap'] ?>" data-twrc3="<?php echo $datatwrc3['rkap'] ?>" data-twrc4="<?php echo $datatwrc1['rkap'] ?>">
+                								 Edit
+                								 </button>																 
+                								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
+                								 data-id-twrc1 ="<?php echo $datatwrc1['id_twrc'];?>" 
+                								 data-id-twrc2 ="<?php echo $datatwrc2['id_twrc'];?>" 
+                								 data-id-twrc3 ="<?php echo $datatwrc3['id_twrc'];?>" 
+                								 data-id-twrc4 ="<?php echo $datatwrc4['id_twrc'];?>">
+                								 Delete
+                								 </button>
+                								 </td>
                               </tr>
                               <?php } ?>
                             </tbody>
@@ -184,6 +203,105 @@ include ('connect.php'); //connect ke database
         <!-- /page content -->
 
 		<div class="x_content">
+		<!-- Modal Delete Rencana -->
+ 				<div class="modal fade bs-delete-modal" id="modal_deleterencana" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                          </button>
+                          <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
+                        </div>
+                        <div class="modal-body">
+                        <form action="editdatacapex.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" ">
+                         <div class="alert alert-danger" role="alert">
+		 				 <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
+								  
+								  <h4> Anda yakin untuk menghapus data rencana ini? </h4>
+						</div>
+                          <h2 style="color:red;"></h2>
+                          <form action="editrencanabeban.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+          						    <input name ="editidtwrc1" type="text" id="jenis" value="" hidden>						
+          						    <input name ="editidtwrc2" type="text" id="jenis" value="" hidden>
+          					      <input name ="editidtwrc3" type="text" id="jenis" value="" hidden>
+          					      <input name ="editidtwrc4" type="text" id="jenis" value="" hidden>
+						 
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-danger" name ="deleterencanacapex" >Delete</button>
+                        </div>
+					           	</form>
+                      </div>
+                    </div>
+                  </div>
+			<!-- Modal Edit Rencana -->
+			 <div class="modal fade bs-edit-modal" id="modal_editrencana" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                          </button>
+                          <h4 class="modal-title" id="myModalLabel">Edit Rencana</h4>
+                        </div>
+                        <div class="modal-body">
+                        <form action="editdatacapex.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                          
+                          <h4>Rencana Hanya bisa diedit jika Data Realisasi belum di isi.</h4>
+                          <form action="editrencanabeban.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+            						  <input name ="editidtwrc1" type="text" id="jenis" value="" hidden >
+            						  <input name ="editidtwrc2" type="text" id="jenis" value="" hidden>
+            					      <input name ="editidtwrc3" type="text" id="jenis" value="" hidden>
+            					      <input name ="editidtwrc4" type="text" id="jenis" value="" hidden>
+
+
+            						  <div class="col-md-6">
+            							  <h4>Triwulan 1</h4>
+            							  <div class="form-group">
+            								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
+            								<div class="col-md-6 col-sm-6 col-xs-12">
+            								  <input value ="" name= "edittwrc1" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
+            								</div>
+            							  </div>
+            						  </div>
+            						  <div class="col-md-6">
+            							  <h4>Triwulan 2</h4>
+            							  <div class="form-group">
+            								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
+            								<div class="col-md-6 col-sm-6 col-xs-12">
+            								  <input value ="" name= "edittwrc2" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
+            								</div>
+            							  </div>
+            						  </div>
+            						  <div class="col-md-6">
+            							  <h4>Triwulan 3</h4>
+            							  <div class="form-group">
+            								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
+            								<div class="col-md-6 col-sm-6 col-xs-12">
+            								  <input value ="" name= "edittwrc3" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
+            								</div>
+            							  </div>
+            						  </div>
+            						  <div class="col-md-6">
+            							  <h4>Triwulan 4</h4>
+            							  <div class="form-group">
+            								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
+            								<div class="col-md-6 col-sm-6 col-xs-12">
+            								  <input value ="" name= "edittwrc4" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
+            								</div>
+            							  </div>
+            						  </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-primary" name ="editrencanacapex" >Save changes</button>
+                        </div>
+						          </form>
+                      </div>
+                    </div>
+                  </div>
 			<!-- Modal Tambah Program -->
 			<div class="modal fade bs-program" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog modal-lg">
