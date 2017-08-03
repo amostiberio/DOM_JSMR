@@ -221,7 +221,7 @@ include ('connect.php'); //connect ke database
 								  <h4> Anda yakin untuk menghapus data rencana ini? </h4>
 						</div>
                           <h2 style="color:red;"></h2>
-                          <form action="editrencanabeban.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                          <form action="editdatacapex.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
           						    <input name ="editidtwrc1" type="text" id="jenis" value="" hidden>						
           						    <input name ="editidtwrc2" type="text" id="jenis" value="" hidden>
           					      <input name ="editidtwrc3" type="text" id="jenis" value="" hidden>
