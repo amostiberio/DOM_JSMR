@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 03, 2017 at 05:04 AM
+-- Generation Time: Aug 03, 2017 at 10:44 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -188,6 +188,31 @@ INSERT INTO `jenis_gardu` (`id_jenisgardu`, `nama_gardu`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `jenis_karyawan`
+--
+
+CREATE TABLE `jenis_karyawan` (
+  `id_karyawan` int(11) NOT NULL,
+  `nama` varchar(25) NOT NULL,
+  `kode` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jenis_karyawan`
+--
+
+INSERT INTO `jenis_karyawan` (`id_karyawan`, `nama`, `kode`) VALUES
+(1, 'Karyawan Jasamarga', 1),
+(2, 'Karyawan JLJ', 2),
+(3, 'Karyawan JLO', 3),
+(4, 'Sakit Permanen', 4),
+(5, 'Kepala Gerbang Tol', 5),
+(6, 'KSPT', 6),
+(7, 'TUGT', 7);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jenis_subgardu`
 --
 
@@ -207,7 +232,44 @@ INSERT INTO `jenis_subgardu` (`id_subgardu`, `nama_subgardu`, `id_jenisgardu`) V
 (3, 'gardu_keluar', 1),
 (4, 'gardu_terbuka', 2),
 (5, 'gardu_masuk', 2),
-(6, 'gardu_keluar', 2);
+(6, 'gardu_keluar', 2),
+(7, 'epass_lalintinggi', 3),
+(8, 'epass_jmltersedia', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jml_gardutersedia`
+--
+
+CREATE TABLE `jml_gardutersedia` (
+  `id_gardutersedia` int(11) NOT NULL,
+  `nilai` int(11) NOT NULL,
+  `id_subgardu` int(11) NOT NULL,
+  `id_gerbang` int(11) NOT NULL,
+  `id_cabang` int(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jml_gardutersedia`
+--
+
+INSERT INTO `jml_gardutersedia` (`id_gardutersedia`, `nilai`, `id_subgardu`, `id_gerbang`, `id_cabang`) VALUES
+(1, 34, 1, 1, 1),
+(2, 45, 2, 1, 1),
+(3, 65, 3, 1, 1),
+(4, 76, 8, 1, 1),
+(5, 32, 4, 1, 1),
+(6, 343, 5, 1, 1),
+(7, 234, 6, 1, 1),
+(8, 76, 8, 1, 1),
+(9, 1400, 1, 3, 1),
+(10, 300, 2, 3, 1),
+(11, 540, 3, 3, 1),
+(12, 250, 4, 3, 1),
+(13, 300, 5, 3, 1),
+(14, 500, 6, 3, 1),
+(15, 1900, 8, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -242,6 +304,40 @@ INSERT INTO `panjang_antrian` (`id_pa`, `panjang_antrian`, `id_gerbang`) VALUES
 (4, 7, 3),
 (5, 11, 1),
 (6, 6, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pengumpul_tol`
+--
+
+CREATE TABLE `pengumpul_tol` (
+  `id_pt` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `id_karyawan` int(25) NOT NULL,
+  `id_gerbang` int(11) NOT NULL,
+  `id_cabang` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pengumpul_tol`
+--
+
+INSERT INTO `pengumpul_tol` (`id_pt`, `jumlah`, `id_karyawan`, `id_gerbang`, `id_cabang`) VALUES
+(1, 43, 5, 1, 1),
+(2, 34, 6, 1, 1),
+(3, 54, 1, 1, 1),
+(4, 0, 0, 1, 1),
+(5, 51, 3, 1, 1),
+(6, 12, 0, 1, 1),
+(7, 11, 7, 1, 1),
+(8, 2, 5, 3, 1),
+(9, 3, 6, 3, 1),
+(10, 4, 1, 3, 1),
+(11, 2, 2, 3, 1),
+(12, 2, 3, 3, 1),
+(13, 1, 4, 3, 1),
+(14, 11, 7, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -346,8 +442,30 @@ CREATE TABLE `transaksi_tinggi` (
   `id_transaksi` int(11) NOT NULL,
   `nilai` int(11) NOT NULL,
   `id_subgardu` int(11) NOT NULL,
-  `id_gerbang` int(11) NOT NULL
+  `id_gerbang` int(11) NOT NULL,
+  `id_cabang` int(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transaksi_tinggi`
+--
+
+INSERT INTO `transaksi_tinggi` (`id_transaksi`, `nilai`, `id_subgardu`, `id_gerbang`, `id_cabang`) VALUES
+(57, 100, 1, 1, 1),
+(58, 90, 2, 1, 1),
+(59, 76, 3, 1, 1),
+(60, 40, 7, 1, 1),
+(61, 190, 4, 1, 1),
+(62, 69, 5, 1, 1),
+(63, 65, 6, 1, 1),
+(64, 40, 7, 1, 1),
+(65, 2000, 1, 3, 1),
+(66, 1500, 2, 3, 1),
+(67, 1000, 3, 3, 1),
+(68, 1900, 4, 3, 1),
+(69, 2000, 5, 3, 1),
+(70, 2300, 6, 3, 1),
+(71, 450, 7, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -476,16 +594,34 @@ ALTER TABLE `jenis_gardu`
   ADD PRIMARY KEY (`id_jenisgardu`);
 
 --
+-- Indexes for table `jenis_karyawan`
+--
+ALTER TABLE `jenis_karyawan`
+  ADD PRIMARY KEY (`id_karyawan`);
+
+--
 -- Indexes for table `jenis_subgardu`
 --
 ALTER TABLE `jenis_subgardu`
   ADD PRIMARY KEY (`id_subgardu`);
 
 --
+-- Indexes for table `jml_gardutersedia`
+--
+ALTER TABLE `jml_gardutersedia`
+  ADD PRIMARY KEY (`id_gardutersedia`);
+
+--
 -- Indexes for table `panjang_antrian`
 --
 ALTER TABLE `panjang_antrian`
   ADD PRIMARY KEY (`id_pa`);
+
+--
+-- Indexes for table `pengumpul_tol`
+--
+ALTER TABLE `pengumpul_tol`
+  ADD PRIMARY KEY (`id_pt`);
 
 --
 -- Indexes for table `program_kerja`
@@ -570,10 +706,20 @@ ALTER TABLE `capex_rencana`
 ALTER TABLE `gerbang`
   MODIFY `id_gerbang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
+-- AUTO_INCREMENT for table `jml_gardutersedia`
+--
+ALTER TABLE `jml_gardutersedia`
+  MODIFY `id_gardutersedia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+--
 -- AUTO_INCREMENT for table `panjang_antrian`
 --
 ALTER TABLE `panjang_antrian`
   MODIFY `id_pa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `pengumpul_tol`
+--
+ALTER TABLE `pengumpul_tol`
+  MODIFY `id_pt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `program_kerja`
 --
@@ -598,7 +744,7 @@ ALTER TABLE `sub_program`
 -- AUTO_INCREMENT for table `transaksi_tinggi`
 --
 ALTER TABLE `transaksi_tinggi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 --
 -- AUTO_INCREMENT for table `user`
 --
