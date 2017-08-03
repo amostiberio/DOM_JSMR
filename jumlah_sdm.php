@@ -140,7 +140,7 @@ include ('connect.php'); //connect ke database
                                 $nomor = 1;
                                 while($data_jumlahsdm = mysqli_fetch_array($jumlah_sdm)){
                                   $idgerbanglist = $data_jumlahsdm['id_gerbang'];
-
+                                  $total = 0;
                                   $data_gerbang = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM gerbang WHERE id_gerbang = '$idgerbanglist'"));
                                   $data_kepalagerbangtol = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM pengumpul_tol, jenis_karyawan WHERE pengumpul_tol.id_gerbang = '$idgerbanglist' AND pengumpul_tol.id_karyawan = '5'"));
                                   $data_kspt = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM pengumpul_tol, jenis_karyawan WHERE pengumpul_tol.id_gerbang = '$idgerbanglist' AND pengumpul_tol.id_karyawan = '6'"));
@@ -149,7 +149,6 @@ include ('connect.php'); //connect ke database
                                   $data_kryjlo= mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM pengumpul_tol, jenis_karyawan WHERE pengumpul_tol.id_gerbang = '$idgerbanglist' AND pengumpul_tol.id_karyawan = '3'"));
                                   $data_sakitpermanen = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM pengumpul_tol, jenis_karyawan WHERE pengumpul_tol.id_gerbang = '$idgerbanglist' AND pengumpul_tol.id_karyawan = '4'"));
                                   $data_tugt = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM pengumpul_tol, jenis_karyawan WHERE pengumpul_tol.id_gerbang = '$idgerbanglist' AND pengumpul_tol.id_karyawan = '7'"));
-
                                   ?>
                               <tr>
 								                <td><?php echo $nomor; $nomor++ ?></td>
@@ -160,7 +159,7 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo  $data_kryjlj['jumlah']?></td>
                                 <td><?php echo  $data_kryjlo['jumlah']?></td>
                                 <td><?php echo  $data_sakitpermanen['jumlah']?></td>
-                                <td></td>    
+                                <td><?php echo $total+=($data_kryjasamarga['jumlah']+$data_kryjlj['jumlah']+ $data_kryjlo['jumlah']+$data_sakitpermanen['jumlah']);?></td>
                                 <td><?php echo  $data_tugt['jumlah']?></td>
 								                <td><button type="button" class="btn btn-round btn-primary">Primary</button></td>
                               </tr>
