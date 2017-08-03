@@ -55,6 +55,12 @@
     <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
 
+
+    <!-- Buat Print Table -->
+    <script type="text/javascript" src="vendors/jspdf/libs/js-xlsx/xlsx.core.min.js"></script>
+    <script type="text/javascript" src="vendors/jspdf/libs/html2canvas/html2canvas.min.js"></script>
+    <script type="text/javascript" src="vendors/jspdf/tableExport.js"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="build/js/custom.min.js"></script>
 
@@ -196,4 +202,75 @@
         
         });
         </script>
+
+        <script type="text/javaScript">
+
+    function doExport(selector, params) {
+      var options = {
+        //ignoreRow: [1,11,12,-2],
+        //ignoreColumn: [0,-1],
+        //pdfmake: {enabled: true},
+        tableName: 'Laporan',
+        worksheetName: 'Laporan Data Monitoring '
+      };
+
+      $.extend(true, options, params);
+
+      $(selector).tableExport(options);
+    }
+
+    function DoOnCellHtmlData(cell, row, col, data) {
+      var result = "";
+      if (data != "") {
+        var html = $.parseHTML( data );
+
+        $.each( html, function() {
+          if ( typeof $(this).html() === 'undefined' )
+            result += $(this).text();
+          else if ( $(this).is("input") )
+            result += $('#'+$(this).attr('id')).val();
+          else if ( $(this).is("select") )
+            result += $('#'+$(this).attr('id')+" option:selected").text();
+          else if ( $(this).hasClass('no_export') !== true )
+            result += $(this).html();
+        });
+      }
+      return result;
+    }
+
+    function DoOnMsoNumberFormat(cell, row, col) {
+      var result = "";
+      if (row > 0 && col == 0)
+        result = "\\@";
+      return result;
+    }
+
+  </script>
+  <style>
+.table th {
+   vertical-align: middle ; text-align: center ;"
+}
+.buttonleft {
+  width:60%;
+  display:inline;
+  overflow: auto;
+  white-space: nowrap;
+  margin:0px auto;
+}
+.buttonleftfloat {
+  float:left;
+  margin-right: 10px;
+}
+.buttonright {
+  width:60%;
+  display:inline;
+  overflow: auto;
+  white-space: nowrap;
+  margin:0px auto;
+}
+.buttonrightfloat {
+  float:right;
+  margin-right: 10px;
+}
+</style>
     <?php ?>

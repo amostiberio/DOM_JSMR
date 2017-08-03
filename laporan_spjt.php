@@ -102,8 +102,8 @@ if(isset($_GET['triwulan'])){
                
                   <div class="title_right">
                     <div class="col-md-12 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
-                      <div class="input-group buttonright" >
-                      <div class="btn-group  buttonrightfloat " >
+                      <div class="input-group buttonleft" >
+                      <div class="btn-group  buttonleftfloat " >
 	                    <h5 class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Triwulan</h5>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <form action="dropdownproses.php" method="POST">
@@ -119,6 +119,22 @@ if(isset($_GET['triwulan'])){
                         </div>
 	                    </ul>
 	                    </div>
+
+                      </div>
+                    </div>
+                   </div>
+                    <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
+                      <div class="input-group buttonright" >
+                      <div class="btn-group  buttonrightfloat text-center" >
+                      <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
+                      </button>
+                      <ul role="menu" class="dropdown-menu pull-right">
+                        <li><a href="#" onClick="doExport('#datatable-keytable', {type: 'xlsx'});" ><img src='xls.png' alt="XLSX" style="width:20px"> Excels</a>
+                        </li>
+
+                      </ul>
+                      </div>
 
                       </div>
                     </div>

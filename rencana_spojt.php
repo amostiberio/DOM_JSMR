@@ -515,10 +515,6 @@ include ('connect.php'); //connect ke database
 <!-- scripts -->
 <?php include 'templates/scripts.php' ?>
 
-
-
-
-
 <!-- /scripts -->
   </body>
 </html>
