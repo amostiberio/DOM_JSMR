@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2017 at 12:01 PM
--- Server version: 10.1.10-MariaDB
--- PHP Version: 7.0.4
+-- Generation Time: Aug 03, 2017 at 03:38 AM
+-- Server version: 10.1.9-MariaDB
+-- PHP Version: 5.6.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -283,7 +283,11 @@ CREATE TABLE `realisasi_laporan` (
   `id_realisasi` int(11) NOT NULL,
   `nama_file` varchar(25) NOT NULL,
   `type_file` varchar(25) NOT NULL,
-  `id_user` int(11) NOT NULL
+  `content` mediumblob NOT NULL,
+  `size_file` int(11) NOT NULL,
+  `tahun` year(4) NOT NULL,
+  `waktu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id_cabang` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

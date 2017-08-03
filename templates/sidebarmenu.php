@@ -52,7 +52,7 @@
                   </ul>
               <!-- Menu Laporan Bulanan -->
                   <ul class="nav side-menu">
-                    <li><a><i class="fa fa-book"></i> Laporan Bulanan <span class="fa"></span></a>
+                    <li><a href="laporanbulanan.php"><i class="fa fa-book"></i> Laporan Bulanan <span class="fa"></span></a>
                     </li>
                   </ul>
               <!-- Menu Laporan KPI -->
