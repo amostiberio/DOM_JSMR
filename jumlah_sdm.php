@@ -160,7 +160,8 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo  $data_kryjlj['jumlah']?></td>
                                 <td><?php echo  $data_kryjlo['jumlah']?></td>
                                 <td><?php echo  $data_sakitpermanen['jumlah']?></td>
-                                <td><?php echo  $data_tugt['jumlah']?></td>                      
+                                <td></td>    
+                                <td><?php echo  $data_tugt['jumlah']?></td>
 								                <td><button type="button" class="btn btn-round btn-primary">Primary</button></td>
                               </tr>
                               <?php }?>
