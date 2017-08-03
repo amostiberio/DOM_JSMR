@@ -119,14 +119,7 @@ if(isset($_GET['triwulan'])){
                         </div>
 	                    </ul>
 	                    </div>
-<!--
-<script type="text/javascript">
- var urlmenu = document.getElementById( 'dropDownListTW' );
-    urlmenu.onchange = function() {
-      window.open( this.options[ this.selectedIndex ].value, '_self');
-    };
-</script>
--->
+
                       </div>
                     </div>
                    </div>
@@ -137,6 +130,7 @@ if(isset($_GET['triwulan'])){
                           <tr>
                             <th rowspan="2">Program Kerja</th>
                             <th rowspan="2">Sub Program Kerja</th>
+                            <th rowspan="2">Total RKAP </th>
                             <th rowspan="2">Total Status Akhir s.d TW 
                                 <?php if($nilaiTriwulan > 0 ){echo $nilaiTriwulan;}else {?> 4 <?php }?></th>
                             <th rowspan="2">TOTAL Realisasi s.d TW <?php if($nilaiTriwulan > 0 ){echo $nilaiTriwulan;}else {?> 4 <?php }?></th>
@@ -197,12 +191,61 @@ if(isset($_GET['triwulan'])){
 								$tahun= $datalistTW['tahun'];
 								$jmlstakhir = mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun'");
 								$jmlrealisasi = mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun'");
-								$qty1 = 0;
-								$qty2 = 0;
-								while ($num = mysqli_fetch_array($jmlstakhir)) {
-									$qty1 += $num['stat_akhir'];}
-								while ($num = mysqli_fetch_array($jmlrealisasi)) {
-									$qty2 += $num['realisasi'];}
+								  $qty1 = 0; 
+                  $qty2 = 0;
+
+                  if($nilaiTriwulan > 0){
+                    $loop1 = 0;
+                    $loop2 =0;
+
+                    while ($num = mysqli_fetch_array($jmlstakhir)) {
+                       if($loop1 < $nilaiTriwulan){
+                        $qty1 += $num['stat_akhir'];
+                        $loop1++;
+                       }
+                    }
+                    while ($num = mysqli_fetch_array($jmlrealisasi)) {
+                      if($loop2 < $nilaiTriwulan){
+                        $qty2 += $num['realisasi'];}
+                        $loop2++;
+                       }
+                       
+                  }else {
+
+                    while ($num = mysqli_fetch_array($jmlstakhir)) {                       
+                        $qty1 += $num['stat_akhir'];                       
+                    }
+                    while ($num = mysqli_fetch_array($jmlrealisasi)) {                      
+                        $qty2 += $num['realisasi'];                       
+                    }
+                  }
+
+                  if($nilaiTriwulan > 0){
+                    $loop1 = 0;
+                    $loop2 =0;
+
+                    while ($num = mysqli_fetch_array($jmlstakhir)) {
+                       if($loop1 < $nilaiTriwulan){
+                        $qty1 += $num['stat_akhir'];
+                        $loop1++;
+                       }
+                    }
+                    while ($num = mysqli_fetch_array($jmlrealisasi)) {
+                      if($loop2 < $nilaiTriwulan){
+                        $qty2 += $num['realisasi'];}
+                        $loop2++;
+                       }
+                       
+                  }else {
+
+                    while ($num = mysqli_fetch_array($jmlstakhir)) {                       
+                        $qty1 += $num['stat_akhir'];                       
+                    }
+                    while ($num = mysqli_fetch_array($jmlrealisasi)) {                      
+                        $qty2 += $num['realisasi'];                       
+                    }
+                  }
+								
 								$dataprogramkerja = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM program_kerja WHERE id_pk = '$idpklist'"));
 								$datasubprogramkerja= mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM sub_program WHERE id_sp = '$idspklist'"));
                                 //realisasi
@@ -215,10 +258,28 @@ if(isset($_GET['triwulan'])){
 								$datatwrc2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '2' AND jenis ='bpll'"));
 								$datatwrc3 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '3' AND jenis ='bpll'"));
 								$datatwrc4 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '4' AND jenis ='bpll'"));
+                $totalrkap = 0;
+                  if($nilaiTriwulan > 0){
+                      if($nilaiTriwulan >= 1){
+                        $totalrkap += $datatwrc1['rkap'];
+                        if($nilaiTriwulan >= 2){
+                          $totalrkap += $datatwrc2['rkap'];
+                          if($nilaiTriwulan >= 3){
+                            $totalrkap += $datatwrc3['rkap'];
+                            if($nilaiTriwulan >= 4){
+                              $totalrkap += $datatwrc4['rkap'];
+                            }
+                          }
+                        }
+                      }
+                  }else{
+                    $totalrkap = $datatwrc1['rkap']+ $datatwrc2['rkap'] + $totalrkap += $datatwrc3['rkap'] + $datatwrc4['rkap'];
+                  }
 							?>
                               <tr>
                                 <td><?php echo $dataprogramkerja['nama_pk'] ?></td>
                                 <td><?php echo $datasubprogramkerja['nama_sp'] ?></td>
+                                <td><?php echo $totalrkap; ?></td>
                                 <td><?php echo $qty1;?></td>
                                 <td><?php echo $qty2;?></td>
                                 <td><?php echo $datalistTW['tahun'] ?></td>
