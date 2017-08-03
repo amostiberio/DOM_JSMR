@@ -117,36 +117,7 @@ include ('connect.php'); //connect ke database
 
                       <table id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
                             <thead >
-                                <?php
-                                  $lalin_transaksitinggi = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join jml_gardutersedia join gerbang on gerbang.id_gerbang=transaksi_tinggi.id_gerbang=jml_gardutersedia.id_gerbang WHERE transaksi_tinggi.id_cabang = '$idcabang' AND jml_gardutersedia.id_cabang='$idcabang' group by transaksi_tinggi.id_gerbang AND jml_gardutersedia.id_gerbang");
-                                  $nomor = 1;
-                                  while($data_lalintransaksi = mysqli_fetch_array($lalin_transaksitinggi)){
-                                     $idgerbanglist = $data_lalintransaksi['id_gerbang'];
-                                     $idsubgardulist = $data_lalintransaksi['id_subgardu'];
 
-                                     //fething data dari tabel gerbang
-                                     $data_gerbang = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM gerbang WHERE id_gerbang = '$idgerbanglist'"));
-
-                                    //fetching data untuk tabel bagian lalin transaksi tinggi
-                                     $data_gerbang_terbuka_lalin = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM transaksi_tinggi, jenis_subgardu WHERE transaksi_tinggi.id_gerbang = '$idgerbanglist' AND transaksi_tinggi.id_subgardu = '1' AND jenis_subgardu.id_jenisgardu='1'"));
-                                     $data_gerbang_masuk_lalin = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM transaksi_tinggi, jenis_subgardu WHERE transaksi_tinggi.id_gerbang = '$idgerbanglist' AND transaksi_tinggi.id_subgardu = '2' AND jenis_subgardu.id_jenisgardu='1'"));
-                                     $data_gerbang_keluar_lalin = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM transaksi_tinggi, jenis_subgardu WHERE transaksi_tinggi.id_gerbang = '$idgerbanglist' AND transaksi_tinggi.id_subgardu = '3' AND jenis_subgardu.id_jenisgardu='1'"));
-                                     $data_gerbang_terbuka_gto_lalin = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM transaksi_tinggi, jenis_subgardu WHERE transaksi_tinggi.id_gerbang = '$idgerbanglist' AND transaksi_tinggi.id_subgardu = '4' AND jenis_subgardu.id_jenisgardu='2'"));
-                                     $data_gerbang_masuk_gto_lalin = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM transaksi_tinggi, jenis_subgardu WHERE transaksi_tinggi.id_gerbang = '$idgerbanglist' AND transaksi_tinggi.id_subgardu = '5' AND jenis_subgardu.id_jenisgardu='2'"));
-                                     $data_gerbang_keluar_gto_lalin = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM transaksi_tinggi, jenis_subgardu WHERE transaksi_tinggi.id_gerbang = '$idgerbanglist' AND transaksi_tinggi.id_subgardu = '6' AND jenis_subgardu.id_jenisgardu='2'"));
-                                     $data_epass_lalin = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM transaksi_tinggi, jenis_subgardu WHERE transaksi_tinggi.id_gerbang = '$idgerbanglist' AND transaksi_tinggi.id_subgardu = '7' AND jenis_subgardu.id_jenisgardu='3'"));
-
-                                    //fetching data untuk tabel bagian jumlah gardu tersedia
-                                    $data_gerbang_terbuka_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '1' AND jenis_subgardu.id_jenisgardu='1'"));
-
-                                    $data_gerbang_masuk_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '2' AND jenis_subgardu.id_jenisgardu='1'"));
-                                    $data_gerbang_keluar_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '3' AND jenis_subgardu.id_jenisgardu='1'"));
-                                    $data_gerbang_terbuka_gto_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '4' AND jenis_subgardu.id_jenisgardu='2'"));
-                                    $data_gerbang_masuk_gto_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '5' AND jenis_subgardu.id_jenisgardu='2'"));
-                                    $data_gerbang_keluar_gto_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '6' AND jenis_subgardu.id_jenisgardu='2'"));
-                                    $data_epass_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '8' AND jenis_subgardu.id_jenisgardu='3'"));
-
-                              ?>
                               <tr >
                                 <th rowspan="3">No</th>
                                 <th rowspan="3">Cabang/Gerbang</th>
@@ -177,10 +148,39 @@ include ('connect.php'); //connect ke database
                                 <th rowspan="1">Gardu Masuk</th>
                                 <th colspan="1">Gardu Terbuka</th>
                               </tr>
-                              <?php }?>
+
                             </thead>
                             <tbody>
+                              <?php
+                                $lalin_transaksitinggi = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join jml_gardutersedia join gerbang on gerbang.id_gerbang=transaksi_tinggi.id_gerbang=jml_gardutersedia.id_gerbang WHERE transaksi_tinggi.id_cabang = '$idcabang' AND jml_gardutersedia.id_cabang='$idcabang' group by transaksi_tinggi.id_gerbang");
+                                $nomor = 1;
+                                while($data_lalintransaksi = mysqli_fetch_array($lalin_transaksitinggi)){
+                                   $idgerbanglist = $data_lalintransaksi['id_gerbang'];
+                                   $idsubgardulist = $data_lalintransaksi['id_subgardu'];
 
+                                   //fething data dari tabel gerbang
+                                   $data_gerbang = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM gerbang WHERE id_gerbang = '$idgerbanglist'"));
+
+                                  //fetching data untuk tabel bagian lalin transaksi tinggi
+                                   $data_gerbang_terbuka_lalin = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM transaksi_tinggi, jenis_subgardu WHERE transaksi_tinggi.id_gerbang = '$idgerbanglist' AND transaksi_tinggi.id_subgardu = '1' AND jenis_subgardu.id_jenisgardu='1'"));
+                                   $data_gerbang_masuk_lalin = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM transaksi_tinggi, jenis_subgardu WHERE transaksi_tinggi.id_gerbang = '$idgerbanglist' AND transaksi_tinggi.id_subgardu = '2' AND jenis_subgardu.id_jenisgardu='1'"));
+                                   $data_gerbang_keluar_lalin = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM transaksi_tinggi, jenis_subgardu WHERE transaksi_tinggi.id_gerbang = '$idgerbanglist' AND transaksi_tinggi.id_subgardu = '3' AND jenis_subgardu.id_jenisgardu='1'"));
+                                   $data_gerbang_terbuka_gto_lalin = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM transaksi_tinggi, jenis_subgardu WHERE transaksi_tinggi.id_gerbang = '$idgerbanglist' AND transaksi_tinggi.id_subgardu = '4' AND jenis_subgardu.id_jenisgardu='2'"));
+                                   $data_gerbang_masuk_gto_lalin = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM transaksi_tinggi, jenis_subgardu WHERE transaksi_tinggi.id_gerbang = '$idgerbanglist' AND transaksi_tinggi.id_subgardu = '5' AND jenis_subgardu.id_jenisgardu='2'"));
+                                   $data_gerbang_keluar_gto_lalin = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM transaksi_tinggi, jenis_subgardu WHERE transaksi_tinggi.id_gerbang = '$idgerbanglist' AND transaksi_tinggi.id_subgardu = '6' AND jenis_subgardu.id_jenisgardu='2'"));
+                                   $data_epass_lalin = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM transaksi_tinggi, jenis_subgardu WHERE transaksi_tinggi.id_gerbang = '$idgerbanglist' AND transaksi_tinggi.id_subgardu = '7' AND jenis_subgardu.id_jenisgardu='3'"));
+
+                                  //fetching data untuk tabel bagian jumlah gardu tersedia
+                                  $data_gerbang_terbuka_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '1' AND jenis_subgardu.id_jenisgardu='1'"));
+
+                                  $data_gerbang_masuk_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '2' AND jenis_subgardu.id_jenisgardu='1'"));
+                                  $data_gerbang_keluar_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '3' AND jenis_subgardu.id_jenisgardu='1'"));
+                                  $data_gerbang_terbuka_gto_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '4' AND jenis_subgardu.id_jenisgardu='2'"));
+                                  $data_gerbang_masuk_gto_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '5' AND jenis_subgardu.id_jenisgardu='2'"));
+                                  $data_gerbang_keluar_gto_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '6' AND jenis_subgardu.id_jenisgardu='2'"));
+                                  $data_epass_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '8' AND jenis_subgardu.id_jenisgardu='3'"));
+
+                            ?>
                               <tr>
                                 <td><?php echo $nomor; $nomor++?></td>
                                 <td><?php echo $data_gerbang['nama_gerbang']?></td>
@@ -200,7 +200,7 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo $data_epass_tersedia['nilai']?></td>
 								                <td><button type="button" class="btn btn-round btn-primary">Primary</button></td>
                               </tr>
-
+                              <?php }?>
                             </tbody>
                           </table>
 

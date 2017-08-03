@@ -105,6 +105,7 @@ include ('connect.php'); //connect ke database
 	                    </button>
 	                    <ul role="menu" class="dropdown-menu pull-right">
                             <li><a data-toggle="modal" data-target=".bs-gerbang" >Tambah Gerbang</a></li>
+                            <li><a data-toggle="modal" data-target=".bs-pengumpultol" >Tambah Jumlah Pulantol</a></li>
                     </ul>
 	                    </div>
 
@@ -134,20 +135,35 @@ include ('connect.php'); //connect ke database
                             </thead>
                             <tbody>
 
+                              <?php
+                                $jumlah_sdm = mysqli_query($connect, "SELECT * FROM pengumpul_tol join jenis_karyawan join gerbang on gerbang.id_gerbang=pengumpul_tol.id_gerbang WHERE pengumpul_tol.id_cabang = '$idcabang' group by pengumpul_tol.id_gerbang");
+                                $nomor = 1;
+                                while($data_jumlahsdm = mysqli_fetch_array($jumlah_sdm)){
+                                  $idgerbanglist = $data_jumlahsdm['id_gerbang'];
+
+                                  $data_gerbang = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM gerbang WHERE id_gerbang = '$idgerbanglist'"));
+                                  $data_kepalagerbangtol = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM pengumpul_tol, jenis_karyawan WHERE pengumpul_tol.id_gerbang = '$idgerbanglist' AND pengumpul_tol.id_karyawan = '5'"));
+                                  $data_kspt = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM pengumpul_tol, jenis_karyawan WHERE pengumpul_tol.id_gerbang = '$idgerbanglist' AND pengumpul_tol.id_karyawan = '6'"));
+                                  $data_kryjasamarga = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM pengumpul_tol, jenis_karyawan WHERE pengumpul_tol.id_gerbang = '$idgerbanglist' AND pengumpul_tol.id_karyawan = '1'"));
+                                  $data_kryjlj = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM pengumpul_tol, jenis_karyawan WHERE pengumpul_tol.id_gerbang = '$idgerbanglist' AND pengumpul_tol.id_karyawan = '2'"));
+                                  $data_kryjlo= mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM pengumpul_tol, jenis_karyawan WHERE pengumpul_tol.id_gerbang = '$idgerbanglist' AND pengumpul_tol.id_karyawan = '3'"));
+                                  $data_sakitpermanen = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM pengumpul_tol, jenis_karyawan WHERE pengumpul_tol.id_gerbang = '$idgerbanglist' AND pengumpul_tol.id_karyawan = '4'"));
+                                  $data_tugt = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM pengumpul_tol, jenis_karyawan WHERE pengumpul_tol.id_gerbang = '$idgerbanglist' AND pengumpul_tol.id_karyawan = '7'"));
+
+                                  ?>
                               <tr>
-								                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+								                <td><?php echo $nomor; $nomor++ ?></td>
+                                <td><?php echo $data_gerbang['nama_gerbang']?></td>
+                                <td><?php echo  $data_kepalagerbangtol['jumlah']?></td>
+                                <td><?php echo  $data_kspt['jumlah']?></td>
+                                <td><?php echo  $data_kryjasamarga['jumlah']?></td>
+                                <td><?php echo  $data_kryjlj['jumlah']?></td>
+                                <td><?php echo  $data_kryjlo['jumlah']?></td>
+                                <td><?php echo  $data_sakitpermanen['jumlah']?></td>
+                                <td><?php echo  $data_tugt['jumlah']?></td>                      
 								                <td><button type="button" class="btn btn-round btn-primary">Primary</button></td>
                               </tr>
-
+                              <?php }?>
                             </tbody>
                           </table>
 
@@ -177,6 +193,7 @@ include ('connect.php'); //connect ke database
 					  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 					  </button>
 					  <h4 class="modal-title" id="myModalLabel">Tambah Gerbang</h4>
+
 					</div>
 
 					<div class="modal-body">
@@ -204,7 +221,99 @@ include ('connect.php'); //connect ke database
 			</div>
   <!-- End of Modal Tambah Gerbang -->
 
+  <!-- Modal Tambah Pengumpul Tol-->
+  <div class="modal fade bs-pengumpultol" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Tambah Jumlah Pulantol</h4>
+      </div>
+      <div class="modal-body">
+          <form action="tambah_jumlahsdm.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gerbang">Gerbang</label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <select name ="idgerbang" class="select2_single form-control" tabindex="-1" required="required">
+                  <option></option>
+                  <?php
+                                  $gerbang= mysqli_query($connect, "SELECT * FROM gerbang WHERE id_cabang ='$idcabang'");
+                                  $idgerbang = ['id_gerbang'];
+                                  while($datagerbang = mysqli_fetch_array($gerbang)){
+                              ?>
+              <option  value="<?php echo $datagerbang['id_gerbang'];?>"><?php echo $datagerbang['nama_gerbang'];?></option>
+
+              <?php }?>
+                              <input name ="idcabang" type="text" id="idcabang" value="<?php echo $idcabang; ?>" hidden>
+
+              </select>
+            </div>
+             </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kpl_gerbangtol">Kepala Gerbang Tol</label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input name= "idkpl_gerbangtol" type="text" value="5" hidden>
+                <input name= "kpl_gerbangtol" type="number" min="0" id="kpl_gerbangtol" required="required" class="form-control col-md-7 col-xs-12">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kspt">KSPT</label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input name= "idkspt" type="text" value="6" hidden>
+                <input name= "kspt" type="number" min="0" id="kspt" required="required" class="form-control col-md-7 col-xs-12">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kry_jasamarga">Karyawan Jasamarga</label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input name= "idkry_jasamarga" type="text" value="1" hidden>
+                <input name= "kry_jasamarga" type="number" min="0" id="kry_jasamarga" required="required" class="form-control col-md-7 col-xs-12">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kry_jlj">Karyawan JLJ</label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input name= "idkry_jlj" type="text" value="2" hidden>
+                <input name= "kry_jlj" type="number" min="0" id="kry_jlj" required="required" class="form-control col-md-7 col-xs-12">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kry_jlo">Karyawan JLO</label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input name= "idkry_jlo" type="text" value="3" hidden>
+                <input name= "kry_jlo" type="number" min="0" id="kry_jlo" required="required" class="form-control col-md-7 col-xs-12">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sakit_permanen">Sakit Permanen</label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input name= "idsakit_permanen" type="text" value="4" hidden>
+                <input name= "sakit_permanen" type="number" min="0" id="sakit_permanen" required="required" class="form-control col-md-7 col-xs-12">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tugt">TUGT</label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input name= "idtugt" type="text" value="7" hidden>
+                <input name= "tugt" type="number" min="0" id="tugt" required="required" class="form-control col-md-7 col-xs-12">
+              </div>
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  <!-- End of Modal Tambah Pengumpul Tol-->
 
 		</div>
 
