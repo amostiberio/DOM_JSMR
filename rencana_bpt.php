@@ -404,7 +404,7 @@ include ('connect.php'); //connect ke database
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Program Kerja</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<select required="required" name="programkerja" id="program-list1" class="select2_single form-control" tabindex="-1">
-                                    <option value="">Pilih Program Kerja</option>
+                                    <option value="" selected>Pilih Program Kerja</option>
                                     <?php
                                     if ($resultuntukrencana->num_rows > 0) {
                                         // output data of each row
