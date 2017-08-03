@@ -13,14 +13,14 @@
 		if(mysqli_num_rows($cekma) > 0){
 ?>
 				<script> window.alert('Nomor MA Sudah Ada') </script>
-				<script>document.location.href="javascript:history.back()";</script>
+				 <script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 		
 <?php }
 		
 		elseif(mysqli_num_rows($ceknama_pk) > 0){
 ?>
 				<script> window.alert('Nama Program Kerja Sudah Ada') </script>
-				<script>document.location.href="javascript:history.back()";</script>
+				 <script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 		
 <?php }
 
@@ -28,11 +28,11 @@
 		else $insert= mysqli_query($connect,"INSERT INTO program_kerja VALUES ('','$ma','$nama_pk','$idcabang','$jenis')");
 		if($insert){
 ?>		 		<script> window.alert('Data berhasil Ditambah') </script>
-				<script>document.location.href="javascript:history.back()";</script>
+				 <script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 <?php		
 		}else{ ?>
 			<script> window.alert('Data Gagal Ditambahkan') </script>
-			<script>document.location.href="javascript:history.back()";</script>
+			 <script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 <?php 		 }
 		}
 ?>

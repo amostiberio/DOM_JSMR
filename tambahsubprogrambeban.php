@@ -6,7 +6,7 @@
 		 	$id_pk= $_POST['idprogramkerja'];
 			$nama_subpk = $_POST['subprogramkerja'];
 		    $idcabang = $_POST['idcabang'];
-           
+            echo 
 		//cek inputan double di database
 
 
@@ -30,14 +30,14 @@
 					if($insert){
 ?>		 				
                     <script> window.alert('Data berhasil Ditambah') </script>
-                    <script>document.location.href="javascript:history.back()";</script>
+                    <script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 <?php		
 					}
                     else{ 
 ?>
 						<script> window.alert('Data Gagal Ditambahkan') </script>
-						<script>document.location.href="javascript:history.back()";</script>
-<?php 		 		}
+					 <script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
+ <?php 		 		}
 			}
 		}
 ?>

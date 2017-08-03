@@ -19,7 +19,7 @@
 		if($data[0] > 0){ ?>
 
 			<script> window.alert('Data Telah Tersedia') </script>
-			<script>document.location.href="javascript:history.back()";</script>
+			 <script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 
 <?php 		 
 				
@@ -34,12 +34,12 @@
 			if($insert){
 ?>		 		
 				<script> window.alert('Data berhasil Ditambah') </script>
-				<script>document.location.href="javascript:history.back()";</script>
+				 <script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 <?php		
 			}else{ 
 ?>
 				<script> window.alert('Data Gagal Ditambahkan') </script>
-				<script>document.location.href="javascript:history.back()";</script>
+				 <script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 <?php 		 
 			}
 		}

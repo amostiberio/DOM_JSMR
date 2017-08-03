@@ -20,7 +20,7 @@
 				
 ?>
 				<script>window.alert('Nama Sub Program Kerja Sudah Ada Pada Program Kerja') </script>
-				<script>document.location.href="javascript:history.back()";</script>
+				 <script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 <?php		
             }          
             else{
@@ -30,13 +30,13 @@
 					if($insert){
 ?>		 				
                     <script> window.alert('Data berhasil Ditambah') </script>
-                    <script>document.location.href="javascript:history.back()";</script>
+                     <script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 <?php		
 					}
                     else{ 
 ?>
 						<script> window.alert('Data Gagal Ditambahkan') </script>
-						<script>document.location.href="javascript:history.back()";</script>
+						 <script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 <?php 		 		}
 			}
 		}
