@@ -55,14 +55,20 @@
                     <li><a><i class="fa fa-book"></i> Laporan Bulanan <span class="fa"></span></a>
                     </li>
                   </ul>
-              <!-- Menu Laporan KPI -->
-                  <ul class="nav side-menu">
-                    <li><a><i class="fa fa-book"></i> Laporan KPI <span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu">
-                        <li><a>Referensi File</a></li>
-                        <li><a>Realisasi</a></li>
-                      </ul>
-                    </li>
-                  </ul>
+                  <!-- Menu Laporan KPI -->
+                        <ul class="nav side-menu">
+                          <li><a><i class="fa fa-book"></i> Laporan KPI <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                              <li><a>Waktu Transaksi<span class="fa fa-chevron-down"></span></a>
+                              <ul class="nav child_menu">
+                                <li><a href="waktu_transaksi1.php">Waktu Transaksi 1</a></li>
+                                <li><a href="waktu_transaksi2.php">Waktu Transaksi 2 SPM</a></li>
+                              </ul>
+                              <li><a href="jumlah_gardu.php">Jumlah Gardu</a></li>
+                              <li><a href="jumlah_sdm.php">Jumlah SDM</a></li>
+                              <li><a>Lalin Jam-jaman</a></li>
+                            </ul>
+                          </li>
+                        </ul>
       </div>
 </div>
