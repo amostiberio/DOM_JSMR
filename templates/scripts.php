@@ -99,4 +99,101 @@
         });
     });
     </script>
+    <script>
+        $('#modal_editrencana').on('show.bs.modal', function(e) {
+
+        var idtwrc1 = $(e.relatedTarget).data('id-twrc1');
+        $(e.currentTarget).find('input[name="editidtwrc1"]').val(idtwrc1);
+        
+        var idtwrc2 = $(e.relatedTarget).data('id-twrc2');
+        $(e.currentTarget).find('input[name="editidtwrc2"]').val(idtwrc2);
+        
+        var idtwrc3 = $(e.relatedTarget).data('id-twrc3');
+        $(e.currentTarget).find('input[name="editidtwrc3"]').val(idtwrc3);
+        
+        var idtwrc4 = $(e.relatedTarget).data('id-twrc4');
+        $(e.currentTarget).find('input[name="editidtwrc4"]').val(idtwrc4);
+        
+
+        var twrc1 = $(e.relatedTarget).data('twrc1');
+        $(e.currentTarget).find('input[name="edittwrc1"]').val(twrc1);
+        var twrc2 = $(e.relatedTarget).data('twrc2');
+        $(e.currentTarget).find('input[name="edittwrc2"]').val(twrc2);
+        var twrc3 = $(e.relatedTarget).data('twrc3');
+        $(e.currentTarget).find('input[name="edittwrc3"]').val(twrc3);
+        var twrc4 = $(e.relatedTarget).data('twrc4');
+        $(e.currentTarget).find('input[name="edittwrc4"]').val(twrc4);
+        
+        
+        
+        });
+
+         $('#modal_deleterencana').on('show.bs.modal', function(e) {
+
+        var idtwrc1 = $(e.relatedTarget).data('id-twrc1');
+        $(e.currentTarget).find('input[name="editidtwrc1"]').val(idtwrc1);
+        
+        var idtwrc2 = $(e.relatedTarget).data('id-twrc2');
+        $(e.currentTarget).find('input[name="editidtwrc2"]').val(idtwrc2);
+        
+        var idtwrc3 = $(e.relatedTarget).data('id-twrc3');
+        $(e.currentTarget).find('input[name="editidtwrc3"]').val(idtwrc3);
+        
+        var idtwrc4 = $(e.relatedTarget).data('id-twrc4');
+        $(e.currentTarget).find('input[name="editidtwrc4"]').val(idtwrc4);
+        
+
+        var twrc1 = $(e.relatedTarget).data('twrc1');
+        $(e.currentTarget).find('input[name="edittwrc1"]').val(twrc1);
+        var twrc2 = $(e.relatedTarget).data('twrc2');
+        $(e.currentTarget).find('input[name="edittwrc2"]').val(twrc2);
+        var twrc3 = $(e.relatedTarget).data('twrc3');
+        $(e.currentTarget).find('input[name="edittwrc3"]').val(twrc3);
+        var twrc4 = $(e.relatedTarget).data('twrc4');
+        $(e.currentTarget).find('input[name="edittwrc4"]').val(twrc4);
+        
+        
+        
+        });
+
+         $('#modal_editrealisasi').on('show.bs.modal', function(e) {
+
+        
+        var idtwrl1 = $(e.relatedTarget).data('id-twrl1');
+        $(e.currentTarget).find('input[name="editidtwrl1"]').val(idtwrl1);
+        
+        var idtwrl2 = $(e.relatedTarget).data('id-twrl2');
+        $(e.currentTarget).find('input[name="editidtwrl2"]').val(idtwrl2);
+        
+        var idtwrl3 = $(e.relatedTarget).data('id-twrl3');
+        $(e.currentTarget).find('input[name="editidtwrl3"]').val(idtwrl3);
+        
+        var idtwrl4 = $(e.relatedTarget).data('id-twrl4');
+        $(e.currentTarget).find('input[name="editidtwrl4"]').val(idtwrl4);
+        
+        
+        
+        });
+
+
+
+         $('#modal_deleterealisasi').on('show.bs.modal', function(e) {
+
+        var idtwrl1 = $(e.relatedTarget).data('id-twrl1');
+        $(e.currentTarget).find('input[name="editidtwrl1"]').val(idtwrl1);
+        
+        var idtwrl2 = $(e.relatedTarget).data('id-twrl2');
+        $(e.currentTarget).find('input[name="editidtwrl2"]').val(idtwrl2);
+        
+        var idtwrl3 = $(e.relatedTarget).data('id-twrl3');
+        $(e.currentTarget).find('input[name="editidtwrl3"]').val(idtwrl3);
+        
+        var idtwrl4 = $(e.relatedTarget).data('id-twrl4');
+        $(e.currentTarget).find('input[name="editidtwrl4"]').val(idtwrl4);
+        
+        
+        
+        
+        });
+        </script>
     <?php ?>
