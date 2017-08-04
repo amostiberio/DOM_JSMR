@@ -13,7 +13,7 @@ include ('connect.php'); //connect ke database
   $cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT nama_cabang FROM cabang WHERE id_cabang = '$idcabang'"));
   $namacabang = $cabang['nama_cabang'];
 
-  $resultuntukrealisasi = $connect-> query("SELECT * FROM program_kerja WHERE id_cabang = '$idcabang' AND jenis = 'spojt' ");
+  $resultuntukrealisasi = $connect-> query("SELECT * FROM program_kerja WHERE jenis = 'spojt' ");
 
 ?>
 <!DOCTYPE html>
@@ -109,9 +109,10 @@ include ('connect.php'); //connect ke database
                     </div>
                    </div>
                   <div class="x_content">
-					  <table id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
+					  <table id="datatable-keytable"  class="table table-striped table-bordered text-center">
 						<thead>
 						  <tr>
+						    <th rowspan="2">Cabang</th>
 							<th rowspan="2">Program Kerja</th>
 							<th rowspan="2">Sub Program Kerja</th>
 							<th rowspan="2">Total Status Akhir s.d TW 4</th>
@@ -137,7 +138,7 @@ include ('connect.php'); //connect ke database
 						</thead>
 						<tbody>
 							<?php
-							$listTW = mysqli_query($connect, "SELECT * FROM capex_realisasi, sub_program WHERE sub_program.id_sp = capex_realisasi.id_sp AND stat_twrl ='1'  AND sub_program.id_cabang = '$idcabang' AND capex_realisasi.jenis ='spojt' AND sub_program.jenis='capex' ");
+							$listTW = mysqli_query($connect, "SELECT * FROM capex_realisasi, sub_program WHERE sub_program.id_sp = capex_realisasi.id_sp AND stat_twrl ='1' AND capex_realisasi.jenis ='spojt' AND sub_program.jenis='capex' ");
 							while($datalistTW = mysqli_fetch_array($listTW)){
 								$idpklist= $datalistTW['id_pk'];
 								$idspklist= $datalistTW['id_sp'];
@@ -152,12 +153,16 @@ include ('connect.php'); //connect ke database
 									$qty2 += $num['realisasi'];}
 								$dataprogramkerja = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM program_kerja WHERE id_pk = '$idpklist'"));
 								$datasubprogramkerja= mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM sub_program WHERE id_sp = '$idspklist'"));
+
+								$idcabang= $dataprogramkerja['id_cabang'];
+                                $cabang = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM cabang WHERE id_cabang ='$idcabang'"));
 								$datatwreal1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM capex_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '1'"));
 								$datatwreal2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM capex_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '2'"));
 								$datatwreal3 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM capex_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '3'"));
 								$datatwreal4 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM capex_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '4'"));
 							?>
 						  <tr>
+						    <td><?php echo $cabang['nama_cabang']?></td>
 							<td><?php echo $dataprogramkerja['nama_pk'] ?></td>
 							<td><?php echo $datasubprogramkerja['nama_sp'] ?></td>
 							<td><?php echo $qty1;?></td>
@@ -311,32 +316,50 @@ include ('connect.php'); //connect ke database
 					  <h4 class="modal-title" id="myModalLabel">Tambah Realisasi</h4>
 					</div>
 					<div class="modal-body">
-					  <form action="tambahrealisasicapex.php" method="POST" id="demo-form2"  class="form-horizontal form-label-left">
+					  <form action="tambahrealisasicapex.php" method="POST" id="demo-form2"  class="form-horizontal form-label-left">	
+
+							 <div class="form-group">
+		                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Nama Cabang</label>
+		                          <div class="col-md-6 col-sm-6 col-xs-12">
+
+		                            <select name ="idcabang" id="list-cabangspojt2" class="select2_single form-control" tabindex="-1" required="required">
+
+		                            <option value=""> Pilih Cabang</option>
+		                            <?php
+		                                  $dataCabang = mysqli_query($connect, "SELECT * FROM cabang");
+		                                   while($ambilDataCabang = mysqli_fetch_array($dataCabang)){
+		                                            ?>
+		                                           <option  value="<?php echo $ambilDataCabang['id_cabang'];?>"><?php echo $ambilDataCabang['nama_cabang'];?>                                             
+		                                           </option>
+
+		                            <?php }?>
+		                                      
+
+		                            </select>
+		                          </div>
+                          	</div>
 						   <div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Program Kerja</label>
-							<input name ="idcabang" type="text" id="idcabang" value="<?php echo $idcabang; ?>" hidden>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<select required="required" name="programkerja" id="program-list2" class="select2_single form-control" tabindex="-1">
-										<option value="">Pilih Program Kerja</option>
-										<?php
-										if ($resultuntukrealisasi->num_rows > 0) {
-											// output data of each row
-											while($row = $resultuntukrealisasi -> fetch_assoc()) {
-										?>
-											<option value="<?php echo $row["id_pk"]; ?>"><?php echo $row["nama_pk"]; ?></option>
-										<?php
-										}}?>
-								</select>
-							</div>
-						   </div>
-						  <div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="subProgram">Subprogram Kerja</label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<select required="required" name="subprogram" id="subprogram-list2" class="select2_single form-control" tabindex="-1">
-									<option>Pilih Subprogram Kerja</option>
-								</select>
-							</div>
-						  </div>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Program Kerja</label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                <select name ="programkerja" id="program-listsemua2" class="select2_single form-control" tabindex="-1" required="required">
+
+                                 <option>Pilih Program Kerja</option>
+                                
+
+                                </select>
+                             </div>
+                           </div>
+						  	<div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="subProgram">Subprogram Kerja</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                 
+                                    
+                                  <select required="required" name="subprogram" id="subprogram-list" class="select2_single form-control" tabindex="-1">
+                                    <option>Pilih Subprogram Kerja</option>
+                                  </select>
+                                </div>
+                        	</div>
 						  <input name ="jenis" type="text" id="jenis" value="spojt" hidden>
 
 						  <div class="form-group">

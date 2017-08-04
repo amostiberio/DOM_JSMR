@@ -145,6 +145,7 @@ if(isset($_GET['triwulan'])){
                       <table id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
                         <thead>
                           <tr>
+                            <th rowspan="2">Cabang</th>
                             <th rowspan="2">Program Kerja</th>
                             <th rowspan="2">Sub Program Kerja</th>
                             <th rowspan="2">Total RKAP </th>
@@ -201,70 +202,73 @@ if(isset($_GET['triwulan'])){
                         </thead>
                             <tbody>
                             <?php
-							$listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1'  AND sub_program.id_cabang = '$idcabang' AND beban_realisasi.jenis ='bpll' AND sub_program.jenis='beban' ");
-							while($datalistTW = mysqli_fetch_array($listTW)){
-								$idpklist= $datalistTW['id_pk'];
-								$idspklist= $datalistTW['id_sp'];
-								$tahun= $datalistTW['tahun'];
-								$jmlstakhir = mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun'");
-								$jmlrealisasi = mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun'");
-								  $qty1 = 0; 
-                  $qty2 = 0;
+                  							$listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1' AND beban_realisasi.jenis ='bpll' AND sub_program.jenis='beban' ");
+                  							while($datalistTW = mysqli_fetch_array($listTW)){
+                  								$idpklist= $datalistTW['id_pk'];
+                  								$idspklist= $datalistTW['id_sp'];
+                  								$tahun= $datalistTW['tahun'];
+                  								$jmlstakhir = mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun'");
+                  								$jmlrealisasi = mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun'");
+                  								  $qty1 = 0; 
+                                    $qty2 = 0;
 
-                  if($nilaiTriwulan > 0){
-                    $loop1 = 0;
-                    $loop2 =0;
+                                    if($nilaiTriwulan > 0){
+                                      $loop1 = 0;
+                                      $loop2 =0;
 
-                    while ($num = mysqli_fetch_array($jmlstakhir)) {
-                       if($loop1 < $nilaiTriwulan){
-                        $qty1 += $num['stat_akhir'];
-                        $loop1++;
-                       }
-                    }
-                    while ($num = mysqli_fetch_array($jmlrealisasi)) {
-                      if($loop2 < $nilaiTriwulan){
-                        $qty2 += $num['realisasi'];}
-                        $loop2++;
-                       }
-                       
-                  }else {
+                                      while ($num = mysqli_fetch_array($jmlstakhir)) {
+                                         if($loop1 < $nilaiTriwulan){
+                                          $qty1 += $num['stat_akhir'];
+                                          $loop1++;
+                                         }
+                                      }
+                                      while ($num = mysqli_fetch_array($jmlrealisasi)) {
+                                        if($loop2 < $nilaiTriwulan){
+                                          $qty2 += $num['realisasi'];}
+                                          $loop2++;
+                                         }
+                                         
+                                    }else {
 
-                    while ($num = mysqli_fetch_array($jmlstakhir)) {                       
-                        $qty1 += $num['stat_akhir'];                       
-                    }
-                    while ($num = mysqli_fetch_array($jmlrealisasi)) {                      
-                        $qty2 += $num['realisasi'];                       
-                    }
-                  }
+                                      while ($num = mysqli_fetch_array($jmlstakhir)) {                       
+                                          $qty1 += $num['stat_akhir'];                       
+                                      }
+                                      while ($num = mysqli_fetch_array($jmlrealisasi)) {                      
+                                          $qty2 += $num['realisasi'];                       
+                                      }
+                                    }
 
-                  if($nilaiTriwulan > 0){
-                    $loop1 = 0;
-                    $loop2 =0;
+                                    if($nilaiTriwulan > 0){
+                                      $loop1 = 0;
+                                      $loop2 =0;
 
-                    while ($num = mysqli_fetch_array($jmlstakhir)) {
-                       if($loop1 < $nilaiTriwulan){
-                        $qty1 += $num['stat_akhir'];
-                        $loop1++;
-                       }
-                    }
-                    while ($num = mysqli_fetch_array($jmlrealisasi)) {
-                      if($loop2 < $nilaiTriwulan){
-                        $qty2 += $num['realisasi'];}
-                        $loop2++;
-                       }
-                       
-                  }else {
+                                      while ($num = mysqli_fetch_array($jmlstakhir)) {
+                                         if($loop1 < $nilaiTriwulan){
+                                          $qty1 += $num['stat_akhir'];
+                                          $loop1++;
+                                         }
+                                      }
+                                      while ($num = mysqli_fetch_array($jmlrealisasi)) {
+                                        if($loop2 < $nilaiTriwulan){
+                                          $qty2 += $num['realisasi'];}
+                                          $loop2++;
+                                         }
+                                         
+                                    }else {
 
-                    while ($num = mysqli_fetch_array($jmlstakhir)) {                       
-                        $qty1 += $num['stat_akhir'];                       
-                    }
-                    while ($num = mysqli_fetch_array($jmlrealisasi)) {                      
-                        $qty2 += $num['realisasi'];                       
-                    }
-                  }
+                                      while ($num = mysqli_fetch_array($jmlstakhir)) {                       
+                                          $qty1 += $num['stat_akhir'];                       
+                                      }
+                                      while ($num = mysqli_fetch_array($jmlrealisasi)) {                      
+                                          $qty2 += $num['realisasi'];                       
+                                      }
+                                    }
 								
 								$dataprogramkerja = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM program_kerja WHERE id_pk = '$idpklist'"));
 								$datasubprogramkerja= mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM sub_program WHERE id_sp = '$idspklist'"));
+                 $idcabang= $dataprogramkerja['id_cabang'];
+                $cabang = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM cabang WHERE id_cabang ='$idcabang'"));
+
                                 //realisasi
 								$datatwreal1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '1' AND jenis ='bpll'"));
 								$datatwreal2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '2' AND jenis ='bpll'"));
@@ -294,6 +298,7 @@ if(isset($_GET['triwulan'])){
                   }
 							?>
                               <tr>
+                                <td><?php echo $cabang['nama_cabang']?> </td>
                                 <td><?php echo $dataprogramkerja['nama_pk'] ?></td>
                                 <td><?php echo $datasubprogramkerja['nama_sp'] ?></td>
                                 <td><?php echo $totalrkap; ?></td>
@@ -323,6 +328,7 @@ if(isset($_GET['triwulan'])){
                                     <td><?php echo $datatwreal4['realisasi'] ?></td>
                                 <?php }}else {
                                   ?>
+
                                 <td><?php echo $datatwrc1['rkap'] ?></td>
                                 <td><?php echo $datatwreal1['stat_akhir'] ?></td>
                                 <td><?php echo $datatwreal1['realisasi'] ?></td>                                  

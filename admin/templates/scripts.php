@@ -169,6 +169,92 @@
     </script>
 
 
+    <!--Menu SPOJT-->
+     <script>
+    $('#list-cabangspojt1').on('change', function(){
+        var id_cabang = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_programspojt.php",
+            data:'id_cabang='+id_cabang,
+            success: function(result){
+                $("#program-listsemua1").html(result);
+            }
+        });
+    });
+    </script>
+
+     <script>
+    $('#list-cabangspojt2').on('change', function(){
+        var id_cabang = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_programspojt.php",
+            data:'id_cabang='+id_cabang,
+            success: function(result){
+                $("#program-listsemua2").html(result);
+            }
+        });
+    });
+    </script>
+
+    <script>
+    $('#program-listsemua2').on('change', function(){
+        var id_pk = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_subprogramspojt.php",
+            data:'id_pk='+id_pk,
+            success: function(result){
+                $("#subprogram-list").html(result);
+            }
+        });
+    });
+    </script>
+    <!--Menu SPJT-->
+     <script>
+    $('#list-cabangspjt1').on('change', function(){
+        var id_cabang = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_programspjt.php",
+            data:'id_cabang='+id_cabang,
+            success: function(result){
+                $("#program-listsemua1").html(result);
+            }
+        });
+    });
+    </script>
+
+     <script>
+    $('#list-cabangspjt2').on('change', function(){
+        var id_cabang = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_programspjt.php",
+            data:'id_cabang='+id_cabang,
+            success: function(result){
+                $("#program-listsemua2").html(result);
+            }
+        });
+    });
+    </script>
+
+    <script>
+    $('#program-listsemua2').on('change', function(){
+        var id_pk = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_subprogramspjt.php",
+            data:'id_pk='+id_pk,
+            success: function(result){
+                $("#subprogram-list").html(result);
+            }
+        });
+    });
+    </script>
+
+
 <!-- User -->
      <script>
     $('#program-list1').on('change', function(){

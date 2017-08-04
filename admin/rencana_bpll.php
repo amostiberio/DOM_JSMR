@@ -225,7 +225,7 @@ include ('connect.php'); //connect ke database
 								           <h4> Anda yakin untuk menghapus data rencana ini? </h4>
 						              </div>
                           <h2 style="color:red;"></h2>
-                          <form action="editdatabeban.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                          form-horizontal form-label-left">
             						  <input name ="editidtwrc1" type="text" id="jenis" value="" hidden>						
             						  <input name ="editidtwrc2" type="text" id="jenis" value="" hidden>
             					    <input name ="editidtwrc3" type="text" id="jenis" value="" hidden>
@@ -325,7 +325,7 @@ include ('connect.php'); //connect ke database
                 <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Program Kerja</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-
+                    <input name ="jenis" type="text" id="jenis" value="bpll" hidden>
                     <select name ="idcabang" class="select2_single form-control" tabindex="-1" required="required">
 
                     <option></option>
@@ -378,6 +378,7 @@ include ('connect.php'); //connect ke database
 					</div>
 					<div class="modal-body">
 					  <form action="tambahsubprogrambeban.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+            
                   <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Nama Cabang</label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
@@ -440,7 +441,7 @@ include ('connect.php'); //connect ke database
 					</div>
 					<div class="modal-body">
 					  <form action="tambahrencanabeban.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-            <div class="form-group">
+                <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Nama Cabang</label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
 
@@ -459,92 +460,92 @@ include ('connect.php'); //connect ke database
 
                             </select>
                           </div>
-              </div>
-						   <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Program Kerja</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                          </div>
+          						   <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Program Kerja</label>
+                                      <div class="col-md-6 col-sm-6 col-xs-12">
 
-                              <select name ="programkerja" id="program-listsemua2" class="select2_single form-control" tabindex="-1" required="required">
+                                        <select name ="programkerja" id="program-listsemua2" class="select2_single form-control" tabindex="-1" required="required">
 
-                               <option>Pilih Program Kerja</option>
-                              
+                                         <option>Pilih Program Kerja</option>
+                                        
 
-                              </select>
-                           </div>
-                         </div>
-                         
-						  <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="subProgram">Subprogram Kerja</label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input name ="jenis" type="text" id="jenis" value="bpt" hidden>
-                          
-                        <select required="required" name="subprogram" id="subprogram-list" class="select2_single form-control" tabindex="-1">
-                          <option>Pilih Subprogram Kerja</option>
-                        </select>
-                      </div>
-              </div>
+                                        </select>
+                                     </div>
+                                   </div>
+                                   
+          						  <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="subProgram">Subprogram Kerja</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                 
+                                    
+                                  <select required="required" name="subprogram" id="subprogram-list" class="select2_single form-control" tabindex="-1">
+                                    <option>Pilih Subprogram Kerja</option>
+                                  </select>
+                                </div>
+                        </div>
 
-						  <input name ="jenis" type="text" id="jenis" value="bpll" hidden>
+          						  <input name ="jenis" type="text" id="jenis" value="bpll" hidden>
 
-						  
-					      <div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-							  <select required="required" name= "tahun" class="select2_single form-control" tabindex="-1">
-							    <option value="">Pilih Tahun</option>
-								<option value="2015">2015</option>
-								<option value="2016">2016</option>
-								<option value="2017">2017</option>
-								<option value="2018">2018</option>
-							  </select>
-							</div>
-						  </div><br>
-						  <div class="col-md-6">
-							  <h4>Triwulan 1</h4>
-							  <div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-								  <input name= "rkap1" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
-								</div>
-							  </div>
-						  </div>
-						  <div class="col-md-6">
-							  <h4>Triwulan 2</h4>
-							  <div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-								  <input name= "rkap2" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
-								</div>
-							  </div>
-						  </div>
-						  <div class="col-md-6">
-							  <h4>Triwulan 3</h4>
-							  <div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-								  <input name= "rkap3" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
-								</div>
-							  </div>
-						  </div>
-						  <div class="col-md-6">
-							  <h4>Triwulan 4</h4>
-							  <div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-								  <input name= "rkap4" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
-								</div>
-							  </div>
-						  </div>
-						</div>
-						<div class="modal-footer">
-						  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-						  <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
-						</div>
-					</form>
-				  </div>
-				</div>
-			</div>
-		</div>
+          						  
+          					      <div class="form-group">
+          							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
+          							<div class="col-md-6 col-sm-6 col-xs-12">
+          							  <select required="required" name= "tahun" class="select2_single form-control" tabindex="-1">
+          							    <option value="">Pilih Tahun</option>
+          								<option value="2015">2015</option>
+          								<option value="2016">2016</option>
+          								<option value="2017">2017</option>
+          								<option value="2018">2018</option>
+          							  </select>
+          							</div>
+          						  </div><br>
+          						  <div class="col-md-6">
+          							  <h4>Triwulan 1</h4>
+          							  <div class="form-group">
+          								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
+          								<div class="col-md-6 col-sm-6 col-xs-12">
+          								  <input name= "rkap1" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
+          								</div>
+          							  </div>
+          						  </div>
+          						  <div class="col-md-6">
+          							  <h4>Triwulan 2</h4>
+          							  <div class="form-group">
+          								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
+          								<div class="col-md-6 col-sm-6 col-xs-12">
+          								  <input name= "rkap2" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
+          								</div>
+          							  </div>
+          						  </div>
+          						  <div class="col-md-6">
+          							  <h4>Triwulan 3</h4>
+          							  <div class="form-group">
+          								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
+          								<div class="col-md-6 col-sm-6 col-xs-12">
+          								  <input name= "rkap3" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
+          								</div>
+          							  </div>
+          						  </div>
+          						  <div class="col-md-6">
+          							  <h4>Triwulan 4</h4>
+          							  <div class="form-group">
+          								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
+          								<div class="col-md-6 col-sm-6 col-xs-12">
+          								  <input name= "rkap4" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
+          								</div>
+          							  </div>
+          						  </div>
+          						</div>
+          						<div class="modal-footer">
+          						  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+          						  <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
+          						</div>
+          					</form>
+          				  </div>
+          				</div>
+          			</div>
+          		</div>
 
 <style>
 .table th {
