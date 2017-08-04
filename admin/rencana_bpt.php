@@ -166,24 +166,24 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo $datatwrc1['rkap'] ?></td>
                                 <td><?php echo $datatwrc2['rkap'] ?></td>
                                 <td><?php echo $datatwrc3['rkap'] ?></td>
-                								<td><?php echo $datatwrc4['rkap'] ?></td>
-                								<td>
-                								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal" 
-                								 data-id-twrc1 ="<?php echo $datatwrc1['id_twrc'];?>" 
-                								 data-id-twrc2 ="<?php echo $datatwrc2['id_twrc'];?>" 
-                								 data-id-twrc3 ="<?php echo $datatwrc3['id_twrc'];?>" 
-                								 data-id-twrc4 ="<?php echo $datatwrc4['id_twrc'];?>"
-                								 data-twrc1="<?php echo $datatwrc1['rkap'] ?>" data-twrc2="<?php echo $datatwrc2['rkap'] ?>" data-twrc3="<?php echo $datatwrc3['rkap'] ?>" data-twrc4="<?php echo $datatwrc1['rkap'] ?>">
-                								 Edit
-                								 </button>																 
-                								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
-                								 data-id-twrc1 ="<?php echo $datatwrc1['id_twrc'];?>" 
-                								 data-id-twrc2 ="<?php echo $datatwrc2['id_twrc'];?>" 
-                								 data-id-twrc3 ="<?php echo $datatwrc3['id_twrc'];?>" 
-                								 data-id-twrc4 ="<?php echo $datatwrc4['id_twrc'];?>">
-                								 Delete
-                								 </button>
-                								 </td>
+								<td><?php echo $datatwrc4['rkap'] ?></td>
+								<td>
+								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal" 
+								 data-id-twrc1 ="<?php echo $datatwrc1['id_twrc'];?>" 
+								 data-id-twrc2 ="<?php echo $datatwrc2['id_twrc'];?>" 
+								 data-id-twrc3 ="<?php echo $datatwrc3['id_twrc'];?>" 
+								 data-id-twrc4 ="<?php echo $datatwrc4['id_twrc'];?>"
+								 data-twrc1="<?php echo $datatwrc1['rkap'] ?>" data-twrc2="<?php echo $datatwrc2['rkap'] ?>" data-twrc3="<?php echo $datatwrc3['rkap'] ?>" data-twrc4="<?php echo $datatwrc1['rkap'] ?>">
+								 Edit
+								 </button>																 
+								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
+								 data-id-twrc1 ="<?php echo $datatwrc1['id_twrc'];?>" 
+								 data-id-twrc2 ="<?php echo $datatwrc2['id_twrc'];?>" 
+								 data-id-twrc3 ="<?php echo $datatwrc3['id_twrc'];?>" 
+								 data-id-twrc4 ="<?php echo $datatwrc4['id_twrc'];?>">
+								 Delete
+								 </button>
+								 </td>
                               </tr>
                               <?php 
                                   } 

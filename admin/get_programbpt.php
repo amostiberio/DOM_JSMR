@@ -8,6 +8,7 @@ if($id_cabang !='')
 	$options = "<option value=''>---Pilih Program Kerja---</option>";
 	while($row = $program_result->fetch_assoc()) {
 	$options .= "<option value='".$row['id_pk']."'>".$row['nama_pk']."</option>";
+	
 	}
 	echo $options;
 }
