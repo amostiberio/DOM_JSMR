@@ -320,6 +320,7 @@ include ('connect.php'); //connect ke database
 
 				    <div class="modal-body">
 					       <form action="tambahprogrambeban.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">                       
+                 
                         <input name ="jenis" type="text" id="jenis" value="bpt" hidden>
                         <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Program Kerja</label>

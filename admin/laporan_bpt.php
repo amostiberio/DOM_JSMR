@@ -147,6 +147,7 @@ if(isset($_GET['triwulan'])){
                       <table id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
                         <thead>
                           <tr>
+                            <th rowspan="2">Cabang</th>
                             <th rowspan="2">Program Kerja</th>
                             <th rowspan="2">Sub Program Kerja</th>
                             <th rowspan="2">Total RKAP </th>
@@ -204,7 +205,7 @@ if(isset($_GET['triwulan'])){
                         </thead>
                             <tbody>
                             <?php
-							$listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1'  AND sub_program.id_cabang = '$idcabang' AND beban_realisasi.jenis ='bpt' AND sub_program.jenis='beban' ");
+							$listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1' AND beban_realisasi.jenis ='bpt' AND sub_program.jenis='beban' ");
 							while($datalistTW = mysqli_fetch_array($listTW)){
   								$idpklist= $datalistTW['id_pk'];
   								$idspklist= $datalistTW['id_sp'];
@@ -268,6 +269,9 @@ if(isset($_GET['triwulan'])){
                  
   								$dataprogramkerja = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM program_kerja WHERE id_pk = '$idpklist'"));
   								$datasubprogramkerja= mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM sub_program WHERE id_sp = '$idspklist'"));
+                  $idcabang= $dataprogramkerja['id_cabang'];
+                  $cabang = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM cabang WHERE id_cabang ='$idcabang'"));
+
                                   //realisasi
   								$datatwreal1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '1' AND jenis ='bpt'"));
   								$datatwreal2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '2' AND jenis ='bpt'"));
@@ -298,6 +302,7 @@ if(isset($_GET['triwulan'])){
                   }
   							?>
                               <tr>
+                                  <td><?php echo $cabang['nama_cabang']?> </td>
                                   <td><?php echo $dataprogramkerja['nama_pk'] ?></td>
                                   <td><?php echo $datasubprogramkerja['nama_sp'] ?></td>
                                   <td><?php echo $totalrkap; ?></td>

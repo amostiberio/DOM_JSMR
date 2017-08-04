@@ -2,9 +2,9 @@
 	include 'connect.php';
         
 		if(isset($_POST['tambah'])){
+			$idcabang = $_POST['idcabang'];
 			$ma=$_POST['nomorMA'];
 		 	$nama_pk=$_POST['programKerja'];
-			$idcabang = $_POST['idcabang'];
 			$jenis = $_POST['jenis'];
 					 //cek input double
 		$cekma = mysqli_query($connect, "SELECT MA FROM program_kerja WHERE MA = '$ma' AND jenis ='$jenis'");

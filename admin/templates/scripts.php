@@ -125,7 +125,48 @@
     });
     </script>
 
+    <!--Menu BPLL-->
+     <script>
+    $('#list-cabangbpll1').on('change', function(){
+        var id_cabang = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_programbpll.php",
+            data:'id_cabang='+id_cabang,
+            success: function(result){
+                $("#program-listsemua1").html(result);
+            }
+        });
+    });
+    </script>
 
+     <script>
+    $('#list-cabangbpll2').on('change', function(){
+        var id_cabang = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_programbpll.php",
+            data:'id_cabang='+id_cabang,
+            success: function(result){
+                $("#program-listsemua2").html(result);
+            }
+        });
+    });
+    </script>
+
+    <script>
+    $('#program-listsemua2').on('change', function(){
+        var id_pk = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_subprogrambpll.php",
+            data:'id_pk='+id_pk,
+            success: function(result){
+                $("#subprogram-list").html(result);
+            }
+        });
+    });
+    </script>
 
 
 <!-- User -->
