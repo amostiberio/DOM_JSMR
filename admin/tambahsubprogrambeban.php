@@ -2,10 +2,10 @@
 	include 'connect.php';
 
 		if(isset($_POST['tambah'])){
-			
+			$idcabang = $_POST['idcabang'];
 		 	$id_pk= $_POST['idprogramkerja'];
 			$nama_subpk = $_POST['subprogramkerja'];
-		    $idcabang = $_POST['idcabang'];
+		    
              
 		//cek inputan double di database
 

@@ -125,9 +125,136 @@
     });
     </script>
 
+    <!--Menu BPLL-->
+     <script>
+    $('#list-cabangbpll1').on('change', function(){
+        var id_cabang = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_programbpll.php",
+            data:'id_cabang='+id_cabang,
+            success: function(result){
+                $("#program-listsemua1").html(result);
+            }
+        });
+    });
+    </script>
+
+     <script>
+    $('#list-cabangbpll2').on('change', function(){
+        var id_cabang = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_programbpll.php",
+            data:'id_cabang='+id_cabang,
+            success: function(result){
+                $("#program-listsemua2").html(result);
+            }
+        });
+    });
+    </script>
+
+    <script>
+    $('#program-listsemua2').on('change', function(){
+        var id_pk = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_subprogrambpll.php",
+            data:'id_pk='+id_pk,
+            success: function(result){
+                $("#subprogram-list").html(result);
+            }
+        });
+    });
+    </script>
 
 
+    <!--Menu SPOJT-->
+     <script>
+    $('#list-cabangspojt1').on('change', function(){
+        var id_cabang = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_programspojt.php",
+            data:'id_cabang='+id_cabang,
+            success: function(result){
+                $("#program-listsemua1").html(result);
+            }
+        });
+    });
+    </script>
 
+     <script>
+    $('#list-cabangspojt2').on('change', function(){
+        var id_cabang = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_programspojt.php",
+            data:'id_cabang='+id_cabang,
+            success: function(result){
+                $("#program-listsemua2").html(result);
+            }
+        });
+    });
+    </script>
+
+    <script>
+    $('#program-listsemua2').on('change', function(){
+        var id_pk = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_subprogramspojt.php",
+            data:'id_pk='+id_pk,
+            success: function(result){
+                $("#subprogram-list").html(result);
+            }
+        });
+    });
+    </script>
+    <!--Menu SPJT-->
+     <script>
+    $('#list-cabangspjt1').on('change', function(){
+        var id_cabang = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_programspjt.php",
+            data:'id_cabang='+id_cabang,
+            success: function(result){
+                $("#program-listsemua1").html(result);
+            }
+        });
+    });
+    </script>
+
+     <script>
+    $('#list-cabangspjt2').on('change', function(){
+        var id_cabang = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_programspjt.php",
+            data:'id_cabang='+id_cabang,
+            success: function(result){
+                $("#program-listsemua2").html(result);
+            }
+        });
+    });
+    </script>
+
+    <script>
+    $('#program-listsemua2').on('change', function(){
+        var id_pk = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_subprogramspjt.php",
+            data:'id_pk='+id_pk,
+            success: function(result){
+                $("#subprogram-list").html(result);
+            }
+        });
+    });
+    </script>
+
+    
 <!-- User -->
      <script>
     $('#program-list1').on('change', function(){
@@ -252,6 +379,29 @@
         
         
         });
+
+         $('#modal_EditUser').on('show.bs.modal', function(e) {
+
+        var username = $(e.relatedTarget).data('username');
+        $(e.currentTarget).find('input[name="Username"]').val(username);
+        
+        var password = $(e.relatedTarget).data('password');
+        $(e.currentTarget).find('input[name="Password"]').val(password);
+        
+      
+        
+        
+        });
+
+        $('#modal_deleteUser').on('show.bs.modal', function(e) {
+
+        var iduser = $(e.relatedTarget).data('id-user');
+        $(e.currentTarget).find('input[name="idUserCabang"]').val(iduser);
+     
+        
+        
+        });
+
         </script>
 
         <script type="text/javaScript">
