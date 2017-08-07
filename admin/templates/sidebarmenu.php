@@ -28,7 +28,7 @@
               							</li>
                           </ul>
                         </li>
-						            <li><a>Capex<span class="fa fa-chevron-down"></span></a>
+						<li><a>Capex<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
                             <li><a>SPOJT<span class="fa fa-chevron-down"></span></a>
               							  <ul class="nav child_menu">
@@ -67,6 +67,15 @@
                         <li><a href="jumlah_gardu.php">Jumlah Gardu</a></li>
                         <li><a href="jumlah_sdm.php">Jumlah SDM</a></li>
                         <li><a>Lalin Jam-jaman</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+              <!-- Menu Management -->
+                  <ul class="nav side-menu">
+                    <li><a><i class="fa fa-gear"></i>Management<span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">                       
+                        <li><a href="manage_user.php">User</a></li>  
+                                                  
                       </ul>
                     </li>
                   </ul>

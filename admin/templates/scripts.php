@@ -254,7 +254,7 @@
     });
     </script>
 
-
+    
 <!-- User -->
      <script>
     $('#program-list1').on('change', function(){
@@ -379,6 +379,29 @@
         
         
         });
+
+         $('#modal_EditUser').on('show.bs.modal', function(e) {
+
+        var username = $(e.relatedTarget).data('username');
+        $(e.currentTarget).find('input[name="Username"]').val(username);
+        
+        var password = $(e.relatedTarget).data('password');
+        $(e.currentTarget).find('input[name="Password"]').val(password);
+        
+      
+        
+        
+        });
+
+        $('#modal_deleteUser').on('show.bs.modal', function(e) {
+
+        var iduser = $(e.relatedTarget).data('id-user');
+        $(e.currentTarget).find('input[name="idUserCabang"]').val(iduser);
+     
+        
+        
+        });
+
         </script>
 
         <script type="text/javaScript">
