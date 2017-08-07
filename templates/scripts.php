@@ -105,6 +105,107 @@
         });
     });
     </script>
+	 <script>
+		$('#modal_deletefile').on('show.bs.modal', function(e) {
+			 
+		var id_realisasidelete = $(e.relatedTarget).data('id-realisasi');
+		$(e.currentTarget).find('input[name="id_realisasi"]').val(id_realisasidelete);
+		
+        });
+		$('#modal_deletelalin').on('show.bs.modal', function(e) {
+			 
+		var id_gerbangl = $(e.relatedTarget).data('id-gerbang');
+		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbangl);
+		var id_tahunl = $(e.relatedTarget).data('tahun');
+		$(e.currentTarget).find('input[name="tahun"]').val(id_tahunl);
+		
+        });
+		$('#modal_editlalin').on('show.bs.modal', function(e) {
+			 
+		var id_gerbangl = $(e.relatedTarget).data('id-gerbang');
+		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbangl);
+		var id_tahunl = $(e.relatedTarget).data('tahun');
+		$(e.currentTarget).find('input[name="tahun"]').val(id_tahunl);
+		
+		var lldata1 = $(e.relatedTarget).data('data1');
+        $(e.currentTarget).find('input[name="gardu_terbuka_lalin"]').val(lldata1);
+        var lldata2 = $(e.relatedTarget).data('data2');
+        $(e.currentTarget).find('input[name="gardu_masuk_lalin"]').val(lldata2);
+        var lldata3 = $(e.relatedTarget).data('data3');
+        $(e.currentTarget).find('input[name="gardu_keluar_lalin"]').val(lldata3);
+        var lldata4 = $(e.relatedTarget).data('data4');
+        $(e.currentTarget).find('input[name="gardu_terbuka_gto_lalin"]').val(lldata4);
+		var lldata5 = $(e.relatedTarget).data('data5');
+        $(e.currentTarget).find('input[name="gardu_masuk_gto_lalin"]').val(lldata5);
+        var lldata6 = $(e.relatedTarget).data('data6');
+        $(e.currentTarget).find('input[name="gardu_keluar_gto_lalin"]').val(lldata6);
+        var lldata7 = $(e.relatedTarget).data('data7');
+        $(e.currentTarget).find('input[name="epass_lalin"]').val(lldata7);
+		
+        });
+		$('#modal_deletejmlgardu').on('show.bs.modal', function(e) {
+			 
+		var id_gerbang = $(e.relatedTarget).data('id-gerbang');
+		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbang);
+		var id_tahun = $(e.relatedTarget).data('tahun');
+		$(e.currentTarget).find('input[name="tahun"]').val(id_tahun);
+		
+        });
+		$('#modal_editjmlgardu').on('show.bs.modal', function(e) {
+			 
+		var id_gerbang = $(e.relatedTarget).data('id-gerbang');
+		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbang);
+		var id_tahun = $(e.relatedTarget).data('tahun');
+		$(e.currentTarget).find('input[name="tahun"]').val(id_tahun);
+		
+		var data1 = $(e.relatedTarget).data('data1');
+        $(e.currentTarget).find('input[name="gardu_terbuka_tersedia"]').val(data1);
+        var data2 = $(e.relatedTarget).data('data2');
+        $(e.currentTarget).find('input[name="gardu_masuk_tersedia"]').val(data2);
+        var data3 = $(e.relatedTarget).data('data3');
+        $(e.currentTarget).find('input[name="gardu_keluar_tersedia"]').val(data3);
+        var data4 = $(e.relatedTarget).data('data4');
+        $(e.currentTarget).find('input[name="gardu_terbuka_gto_tersedia"]').val(data4);
+		var data5 = $(e.relatedTarget).data('data5');
+        $(e.currentTarget).find('input[name="gardu_masuk_gto_tersedia"]').val(data5);
+        var data6 = $(e.relatedTarget).data('data6');
+        $(e.currentTarget).find('input[name="gardu_keluar_gto_tersedia"]').val(data6);
+        var data7 = $(e.relatedTarget).data('data7');
+        $(e.currentTarget).find('input[name="epass_tersedia"]').val(data7);
+		
+        });
+		$('#modal_deletejmlsdm').on('show.bs.modal', function(e) {
+			 
+		var id_gerbangs = $(e.relatedTarget).data('id-gerbang');
+		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbangs);
+		var id_tahuns = $(e.relatedTarget).data('tahun');
+		$(e.currentTarget).find('input[name="tahun"]').val(id_tahuns);
+		
+        });
+		$('#modal_editjmlsdm').on('show.bs.modal', function(e) {
+			 
+		var id_gerbangs = $(e.relatedTarget).data('id-gerbang');
+		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbangs);
+		var id_tahuns = $(e.relatedTarget).data('tahun');
+		$(e.currentTarget).find('input[name="tahun"]').val(id_tahuns);
+		
+		var sdata1 = $(e.relatedTarget).data('data1');
+        $(e.currentTarget).find('input[name="kpl_gerbangtol"]').val(sdata1);
+        var sdata2 = $(e.relatedTarget).data('data2');
+        $(e.currentTarget).find('input[name="kspt"]').val(sdata2);
+        var sdata3 = $(e.relatedTarget).data('data3');
+        $(e.currentTarget).find('input[name="kry_jasamarga"]').val(sdata3);
+        var sdata4 = $(e.relatedTarget).data('data4');
+        $(e.currentTarget).find('input[name="kry_jlj"]').val(sdata4);
+		var sdata5 = $(e.relatedTarget).data('data5');
+        $(e.currentTarget).find('input[name="kry_jlo"]').val(sdata5);
+        var sdata6 = $(e.relatedTarget).data('data6');
+        $(e.currentTarget).find('input[name="sakit_permanen"]').val(sdata6);
+        var sdata7 = $(e.relatedTarget).data('data7');
+        $(e.currentTarget).find('input[name="tugt"]').val(sdata7);
+		
+        });
+	 </script>
     <script>
         $('#modal_editrencana').on('show.bs.modal', function(e) {
 

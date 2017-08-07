@@ -4,6 +4,7 @@
 		if(isset($_POST['tambah'])){
 			$idcabang = $_POST['idcabang'];
 		 	$idgerbang= $_POST['idgerbang'];
+			$tahun= $_POST['tahun'];
 
 			$idkpl_gerbangtol = $_POST['idkpl_gerbangtol'];
       $kpl_gerbangtol = $_POST['kpl_gerbangtol'];
@@ -32,13 +33,13 @@
 
 			//insert data
 			$insert_jumlahsdm = mysqli_query($connect,"INSERT INTO pengumpul_tol VALUES
-      ('','$kpl_gerbangtol','$idkpl_gerbangtol','$idgerbang', '$idcabang'),
-			('','$kspt', '$idkspt', '$idgerbang','$idcabang'),
-      ('','$kry_jasamarga', '$idkry_jasamarga', '$idgerbang','$idcabang'),
-			('','$kry_jlj','$idkry_jlj', '$idgerbang', '$idcabang'),
-      ('','$kry_jlo', '$idkry_jlo', '$idgerbang', '$idcabang'),
-      ('','$sakit_permanen', '$idsakit_permanen','$idgerbang', '$idcabang'),
-      ('','$tugt','$idtugt', '$idgerbang', '$idcabang')");
+      ('','$tahun','$kpl_gerbangtol','$idkpl_gerbangtol','$idgerbang', '$idcabang'),
+	  ('','$tahun','$kspt', '$idkspt', '$idgerbang','$idcabang'),
+      ('','$tahun','$kry_jasamarga', '$idkry_jasamarga', '$idgerbang','$idcabang'),
+	  ('','$tahun','$kry_jlj','$idkry_jlj', '$idgerbang', '$idcabang'),
+      ('','$tahun','$kry_jlo', '$idkry_jlo', '$idgerbang', '$idcabang'),
+      ('','$tahun','$sakit_permanen', '$idsakit_permanen','$idgerbang', '$idcabang'),
+      ('','$tahun','$tugt','$idtugt', '$idgerbang', '$idcabang')");
 
 
 			if($insert_jumlahsdm){
