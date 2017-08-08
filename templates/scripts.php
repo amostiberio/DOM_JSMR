@@ -344,7 +344,7 @@
                });
 
         //untuk modal delete waktu transaksi semester 1
-               $('#modal_deletewaktutransaksi').on('show.bs.modal', function(e) {
+               $('#modal_deletewaktutransaksis1').on('show.bs.modal', function(e) {
              //untuk id nya
               var idgerbang = $(e.relatedTarget).data('id-gerbang');
               $(e.currentTarget).find('input[name="edit_idgerbang"]').val(idgerbang);
@@ -355,7 +355,7 @@
               });
 
         //untuk modal edit waktu transaksi semester 2
-              $('#modal_editwaktutransaksi2').on('show.bs.modal', function(e) {
+              $('#modal_editwaktutransaksis2').on('show.bs.modal', function(e) {
             //untuk id nya
              var idgerbangterbukas2 = $(e.relatedTarget).data('id-gerbangterbuka-s2');
              $(e.currentTarget).find('input[name="edit_idgerbangterbukas2"]').val(idgerbangterbukas2);
@@ -395,8 +395,8 @@
              $(e.currentTarget).find('input[name="edit_panjang_antrians2"]').val(panjangantrians2);
              });
 
-        //untuk modal delete waktu transaksi semester 1
-            $('#modal_deletewaktutransaksi2').on('show.bs.modal', function(e) {
+        //untuk modal delete waktu transaksi semester 2
+            $('#modal_deletewaktutransaksis2').on('show.bs.modal', function(e) {
             //untuk id nya
             var idgerbang = $(e.relatedTarget).data('id-gerbang2');
             $(e.currentTarget).find('input[name="edit_idgerbang"]').val(idgerbang);

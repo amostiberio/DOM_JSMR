@@ -97,22 +97,7 @@ include ('connect.php'); //connect ke database
                     <div class="clearfix"></div>
                   </div>
 
-                  <div class="title_right">
-                    <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
-                      <div class="input-group buttonright" >
-                      <div class="btn-group  buttonrightfloat " >
-	                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Tambah <span class="caret"></span>
-	                    </button>
-	                    <ul role="menu" class="dropdown-menu pull-right">
-                            <li><a data-toggle="modal" data-target=".bs-gerbang" >Tambah Gerbang</a></li>
-						                <li><a data-toggle="modal" data-target=".bs-rencana" >Tambah Waktu Transaksi</a></li>
 
-	                    </ul>
-	                    </div>
-
-                      </div>
-                    </div>
-                   </div>
                   <div class="x_content">
 
                       <table id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
@@ -122,7 +107,6 @@ include ('connect.php'); //connect ke database
                                 <th rowspan="4">Uraian</th>
                                 <th rowspan="4">Keterangan</th>
                                 <th colspan="6">2017</th>
-                                <th rowspan="4">Aksi</th>
                               </tr>
                               <tr>
                                 <th colspan="2">Rencana</th>
@@ -150,7 +134,7 @@ include ('connect.php'); //connect ke database
 
                             </thead>
                             <tbody>
-                            
+
                               <tr>
                                 <td></td>
                                 <td></td>
@@ -161,7 +145,6 @@ include ('connect.php'); //connect ke database
                                 <td></td>
 								                <td></td>
                                 <td></td>
-								                <td><button type="button" class="btn btn-round btn-primary">Primary</button></td>
                               </tr>
 
                             </tbody>
@@ -183,151 +166,6 @@ include ('connect.php'); //connect ke database
           <div class="clearfix"></div>
         </div>
         <!-- /page content -->
-
-		<div class="x_content">
-
-      <div class="modal fade bs-gerbang" tabindex="-1" role="dialog" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
-				  <div class="modal-content">
-					<div class="modal-header">
-					  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-					  </button>
-					  <h4 class="modal-title" id="myModalLabel">Tambah Gerbang</h4>
-					</div>
-
-					<div class="modal-body">
-					<form action="tambah_gerbang.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                        <input name ="idcabang" type="text" id="idcabang" value="<?php echo $idcabang; ?>" hidden>
-                        <input name ="jenis" type="text" id="jenis" value="spojt" hidden>
-
-						  <div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="ma">Nama Gerbang</label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-							  <input name ="gerbang"type="text" id="gerbang" required="required" class="form-control col-md-7 col-xs-12">
-							</div>
-						  </div>
-
-
-					</div>
-					<div class="modal-footer">
-					  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-					  <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
-					</div>
-					 </form>
-				  </div>
-
-				</div>
-			</div>
-
-
-			<!-- Modal Tambah Waktu Transaksi-->
-			<div class="modal fade bs-rencana" tabindex="-1" role="dialog" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
-				  <div class="modal-content">
-					<div class="modal-header">
-					  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-					  </button>
-					  <h4 class="modal-title" id="myModalLabel">Tambah Waktu Transaksi</h4>
-					</div>
-					<div class="modal-body">
-              <form action="tambah_waktutransaksi1.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gerbang">Gerbang</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select name ="idgerbang" class="select2_single form-control" tabindex="-1" required="required">
-                      <option></option>
-                      <?php
-                                      $gerbang= mysqli_query($connect, "SELECT * FROM gerbang WHERE id_cabang ='$idcabang'");
-                                      $idgerbang = ['id_gerbang'];
-                                      while($datagerbang = mysqli_fetch_array($gerbang)){
-                                  ?>
-                  <option  value="<?php echo $datagerbang['id_gerbang'];?>"><?php echo $datagerbang['nama_gerbang'];?></option>
-
-                  <?php }?>
-                                  <input name ="idcabang" type="text" id="idcabang" value="<?php echo $idcabang; ?>" hidden>
-
-                  </select>
-                </div>
-                 </div>
-
-
-                <div>
-                    <h4><b>Gardu Reguler</b></h4>
-                </div>
-
-							  <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka">Gardu Terbuka</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-
-                    <input name= "idgardu_terbuka" type="text" value="1" hidden>
-                    <input name= "gardu_terbuka" type="number" min="0" id="gardu_terbuka" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <h5 class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_tertutup"><b>Gardu Tertutup</b></h5>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka">Gardu Masuk</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_masuk" type="text" value="2" hidden>
-                    <input name= "gardu_masuk" type="number" min="0" id="gardu_masuk" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar">Gardu Keluar</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_keluar" type="text" value="3" hidden>
-                    <input name= "gardu_keluar" type="number" min="0" id="gardu_keluar" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-
-                <div>
-                    <h4><b>Gardu GTO</b></h4>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto">Gardu Terbuka</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_terbuka_gto" type="text" value="4" hidden>
-                    <input name= "gardu_terbuka_gto" type="number" min="0" id="gardu_terbuka_gto" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <h5 class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_tertutup_gto"><b>Gardu Tertutup</b></h5>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto">Gardu Masuk</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_masuk_gto" type="text" value="5" hidden>
-                    <input name= "gardu_masuk_gto" type="number" min="0" id="gardu_masuk_gto" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar_gto">Gardu Keluar</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_keluar_gto" type="text" value="6" hidden>
-                    <input name= "gardu_keluar_gto" type="number" min="0" id="gardu_keluar_gto" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div><br>
-
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="panjang_antrian">Panjang Antrian</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "panjang_antrian" type="text" min="0" id="panjang_antrian" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-
-
-						</div>
-						<div class="modal-footer">
-						  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-						  <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
-						</div>
-					</form>
-				  </div>
-				</div>
-			</div>
-		</div>
 
 <style>
 .table th {
