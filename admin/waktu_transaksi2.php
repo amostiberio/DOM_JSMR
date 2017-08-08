@@ -4,22 +4,6 @@ include ('connect.php'); //connect ke database
 
 
   $iduser = $_SESSION['id_user'];
-
-  //ambil informasi user id dan cabang id dari table user
-  $user = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM user WHERE id_user = '$iduser' "));
-  $idcabang = $user['id_cabang'];
-
-  //ambil informasi user id dan cabang id dari table cabang
-  $cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT nama_cabang FROM cabang WHERE id_cabang = '$idcabang'"));
-  $namacabang = $cabang['nama_cabang'];
-
-  $resultuntukrencana = $connect-> query("SELECT * FROM program_kerja WHERE id_cabang = '$idcabang' AND jenis = 'bpt' ");
-
-  //ambil informasi jenis sub gardu
-  $gardu = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM jenis_subgardu"));
-
-  $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM gerbang"));
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,32 +81,16 @@ include ('connect.php'); //connect ke database
                     <div class="clearfix"></div>
                   </div>
 
-                  <div class="title_right">
-                    <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
-                      <div class="input-group buttonright" >
-                      <div class="btn-group  buttonrightfloat " >
-	                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Tambah <span class="caret"></span>
-	                    </button>
-	                    <ul role="menu" class="dropdown-menu pull-right">
-                            <li><a data-toggle="modal" data-target=".bs-gerbang" >Tambah Gerbang</a></li>
-						                <li><a data-toggle="modal" data-target=".bs-rencana" >Tambah Waktu Transaksi</a></li>
 
-	                    </ul>
-	                    </div>
-
-                      </div>
-                    </div>
-                   </div>
                   <div class="x_content">
 
                       <table id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
                             <thead >
                               <tr >
                                 <th rowspan="4">No</th>
-                                <th rowspan="4">Uraian</th>
+                                <th rowspan="4">Cabang</th>
                                 <th rowspan="4">Keterangan</th>
                                 <th colspan="6">2017</th>
-                                <th rowspan="4">Aksi</th>
                               </tr>
                               <tr>
                                 <th colspan="2">Rencana</th>
@@ -150,20 +118,174 @@ include ('connect.php'); //connect ke database
 
                             </thead>
                             <tbody>
-                            
-                              <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-								                <td></td>
-                                <td></td>
-								                <td><button type="button" class="btn btn-round btn-primary">Primary</button></td>
-                              </tr>
+                              <?php
+                              $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join wt_rencana join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_semester=semester.id_semester AND waktu_transaksi.id_subgardu=wt_rencana.id_subgardu AND semester.id_semester=panjang_antrian.id_semester GROUP BY waktu_transaksi.id_cabang");
+                              $nomor = 1;
+                              while($data_waktu_transaksi = mysqli_fetch_array($rata_waktu_transaksi)){
 
+                  $idcabanglist = $data_waktu_transaksi['id_cabang'];
+                  $idsemesterlist = $data_waktu_transaksi['id_semester'];
+
+                  $data_cabang = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM cabang WHERE id_cabang = '$idcabanglist'"));
+                  $data_semester1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM semester WHERE id_semester = '1'"));
+                  $data_semester2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM semester WHERE id_semester = '2'"));
+
+                  $data_tahun= mysqli_fetch_array(mysqli_query($connect, "SELECT tahun from waktu_transaksi where id_cabang = '$idcabanglist'"));
+
+                //ambil data semester 1
+                  //Total Data Gardu Masuk Sistem Tertutup Semester 1
+                  $data_gerbang_masuk = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='2' AND id_semester='1'");
+                  $hasil_data_gerbang_masuk = mysqli_fetch_assoc($data_gerbang_masuk);
+                  $total_data_gerbang_masuk = $hasil_data_gerbang_masuk['nilai_total'];
+                //Total Data Gardu Keluar Sistem Tertutup Semester 1
+                  $data_gerbang_keluar = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='3' AND id_semester='1'");
+                  $hasil_data_gerbang_keluar = mysqli_fetch_assoc($data_gerbang_keluar);
+                  $total_data_gerbang_keluar = $hasil_data_gerbang_keluar['nilai_total'];
+                //Total Data Gardu Terbuka Semester 1
+                  $data_gerbang_terbuka = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='1' AND id_semester='1'");
+                  $hasil_data_gerbang_terbuka = mysqli_fetch_assoc($data_gerbang_terbuka);
+                  $total_data_gerbang_terbuka = $hasil_data_gerbang_terbuka['nilai_total'];
+                //Total Data Gardu GTO Masuk Semester 1
+                  $data_gerbang_masuk_gto = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='5' AND id_semester='1'");
+                  $hasil_data_gerbang_masuk_gto = mysqli_fetch_assoc($data_gerbang_masuk_gto);
+                  $total_data_gerbang_masuk_gto = $hasil_data_gerbang_masuk_gto['nilai_total'];
+                //Total Data Gardu Terbuka GTO Semester 1
+                  $data_gerbang_terbuka_gto = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='4' AND id_semester='1'");
+                  $hasil_data_gerbang_terbuka_gto = mysqli_fetch_assoc($data_gerbang_terbuka_gto);
+                  $total_data_gerbang_terbuka_gto = $hasil_data_gerbang_terbuka_gto['nilai_total'];
+                //Total Data Gardu GTO Keluar Semester 1
+                  $data_gerbang_keluar_gto = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='6' AND id_semester='1'");
+                  $hasil_data_gerbang_keluar_gto = mysqli_fetch_assoc($data_gerbang_keluar_gto);
+                  $total_data_gerbang_keluar_gto = $hasil_data_gerbang_keluar_gto['nilai_total'];
+                //Total Data Panjang Antrian Semester 1
+                  $data_panjang_antrian = mysqli_query($connect, "SELECT SUM(panjang_antrian) AS nilai_total FROM panjang_antrian WHERE id_cabang='$idcabanglist' AND id_semester='1'");
+                  $hasil_data_panjang_antrian = mysqli_fetch_assoc($data_panjang_antrian);
+                  $total_data_panjang_antrian = $hasil_data_panjang_antrian['nilai_total'];
+
+                //ambil data semester 2
+                  //Total Data Gardu Masuk Semester 2
+                  $data_gerbang_masuk2 = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='2' AND id_semester='2'");
+                  $hasil_data_gerbang_masuk2 = mysqli_fetch_assoc($data_gerbang_masuk2);
+                  $total_data_gerbang_masuk2 = $hasil_data_gerbang_masuk2['nilai_total'];
+                  //Total Data Gardu Keluar Semester 2
+                  $data_gerbang_keluar2 = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='3' AND id_semester='2'");
+                  $hasil_data_gerbang_keluar2 = mysqli_fetch_assoc($data_gerbang_keluar2);
+                  $total_data_gerbang_keluar2 = $hasil_data_gerbang_keluar2['nilai_total'];
+                  //Total Data Gardu Terbuka Semester 2
+                  $data_gerbang_terbuka2 = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='1' AND id_semester='2'");
+                  $hasil_data_gerbang_terbuka2 = mysqli_fetch_assoc($data_gerbang_terbuka2);
+                  $total_data_gerbang_terbuka2 = $hasil_data_gerbang_terbuka2['nilai_total'];
+                  //Total Data Gardu Terbuka GTO Semester 2
+                  $data_gerbang_terbuka_gto2 = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='4' AND id_semester='2'");
+                  $hasil_data_gerbang_terbuka_gto2= mysqli_fetch_assoc($data_gerbang_terbuka_gto2);
+                  $total_data_gerbang_terbuka_gto2= $hasil_data_gerbang_terbuka_gto2['nilai_total'];
+                  //Total Data Gardu GTO Masuk Semester 2
+                  $data_gerbang_masuk_gto2 = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='5' AND id_semester='2'");
+                  $hasil_data_gerbang_masuk_gto2 = mysqli_fetch_assoc($data_gerbang_masuk_gto2);
+                  $total_data_gerbang_masuk_gto2 = $hasil_data_gerbang_masuk_gto2['nilai_total'];
+                  //Total Data Gardu GTO Keluar Semester 2
+                  $data_gerbang_keluar_gto2 = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='6' AND id_semester='2'");
+                  $hasil_data_gerbang_keluar_gto2 = mysqli_fetch_assoc($data_gerbang_keluar_gto2);
+                  $total_data_gerbang_keluar_gto2 = $hasil_data_gerbang_keluar_gto2['nilai_total'];
+                  //Total Data Panjang Antrian Semester 2
+                  $data_panjang_antrian2 = mysqli_query($connect, "SELECT SUM(panjang_antrian) AS nilai_total FROM panjang_antrian WHERE id_cabang='$idcabanglist' AND id_semester='2'");
+                  $hasil_data_panjang_antrian2 = mysqli_fetch_assoc($data_panjang_antrian2);
+                  $total_data_panjang_antrian2 = $hasil_data_panjang_antrian2['nilai_total'];
+
+
+
+                    //Hitung nilai Realisasi Gardu Tol transaksi Semester 1
+                     $array = array($total_data_gerbang_keluar_gto,$total_data_gerbang_terbuka_gto);
+                     $data_gardutol_transaksi = ( array_sum($array) / count($array) );
+                    //Hitung nilai Realisasi Gardu Tol Transaksi Semester 2
+                     $array2 = array($total_data_gerbang_keluar_gto2,$total_data_gerbang_terbuka_gto2);
+                     $data_gardutol_transaksi2 = ( array_sum($array2) / count($array2) );
+
+                    //ambil data Rencana
+                      $datarencana_gardu_terbuka = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '1' AND jenis_subgardu.id_jenisgardu='1'"));
+                      $datarencana_gardu_masuk_tertutup = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '2' AND jenis_subgardu.id_jenisgardu='1'"));
+                      $datarencana_gardu_keluar_tertutup = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '3' AND jenis_subgardu.id_jenisgardu='1'"));
+                      $datarencana_gardu_tol_ambil_kartu = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '5' AND jenis_subgardu.id_jenisgardu='2'"));
+                      $datarencana_gardutol_transaksi = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '4' AND jenis_subgardu.id_jenisgardu='2'"));
+                      $datarencana_antrian_kendaraan = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '9' AND jenis_subgardu.id_jenisgardu='3'"));
+
+                    //Hitung nilai Realisasi Capaian Semester 1
+                     $array3 = array(($datarencana_gardu_masuk_tertutup['nilai']/$total_data_gerbang_masuk),
+                                     ($datarencana_gardu_keluar_tertutup['nilai']/$total_data_gerbang_keluar),
+                                     ($datarencana_gardu_terbuka['nilai']/$total_data_gerbang_terbuka),
+                                     ($datarencana_gardu_tol_ambil_kartu['nilai']/$total_data_gerbang_masuk_gto),
+                                     ($datarencana_gardutol_transaksi['nilai']/$data_gardutol_transaksi),
+                                     ($datarencana_antrian_kendaraan['nilai']/$total_data_panjang_antrian)
+                                   );
+                            $data_capaian_semester1= (array_sum($array3)/count($array3));
+                            $persen_capaian_semester1 = number_format( $data_capaian_semester1 * 100, 2 ) . '%'; //2 angka dibelakang koma
+
+                    //Hitung nilai Realisasi Capaian Semester 1
+                    $array3 = array(($datarencana_gardu_masuk_tertutup['nilai']/$total_data_gerbang_masuk2),
+                                    ($datarencana_gardu_keluar_tertutup['nilai']/$total_data_gerbang_keluar2),
+                                    ($datarencana_gardu_terbuka['nilai']/$total_data_gerbang_terbuka2),
+                                    ($datarencana_gardu_tol_ambil_kartu['nilai']/$total_data_gerbang_masuk_gto2),
+                                    ($datarencana_gardutol_transaksi['nilai']/$data_gardutol_transaksi2),
+                                    ($datarencana_antrian_kendaraan['nilai']/$total_data_panjang_antrian2)
+                                    );
+                              $data_capaian_semester2= (array_sum($array3)/count($array3));
+                              $persen_capaian_semester2 = number_format( $data_capaian_semester2 * 100, 2 ) . '%'; //2 angka dibelakang koma
+
+
+
+                              ?>
+                              <tr rowspan="6">
+                                <td rowspan="6"><?php echo $nomor; $nomor++;?></td>
+                                <td rowspan="6"><?php echo $data_cabang['nama_cabang'] ?></td>
+                                <td><?php echo "Gardu Masuk Sistem Tertutup"?></td>
+                                <td><?php echo $datarencana_gardu_masuk_tertutup['nilai'];?></td>
+                                <td><?php echo $datarencana_gardu_masuk_tertutup['nilai'];?></td>
+                                <td><?php echo $total_data_gerbang_masuk;?></td>
+                                <td><?php echo $total_data_gerbang_masuk2;?></td>
+								                <td rowspan="6"><?php echo $persen_capaian_semester1?></td>
+                                <td rowspan="6"><?php echo $persen_capaian_semester2?></td>
+                              </tr>
+                              <tr>
+                                <td><?php echo "Gardu Keluar Sistem Tertutup"?></td>
+                                <td><?php echo $datarencana_gardu_keluar_tertutup['nilai'];?></td>
+                                <td><?php echo $datarencana_gardu_keluar_tertutup['nilai'];?></td>
+                                <td><?php echo $total_data_gerbang_keluar;?></td>
+                                <td><?php echo $total_data_gerbang_keluar2;?></td>
+
+                              </tr>
+                              <tr>
+                                <td><?php echo "Gardu Sistem Terbuka"?></td>
+                                <td><?php echo $datarencana_gardu_terbuka['nilai'];?></td>
+                                <td><?php echo $datarencana_gardu_terbuka['nilai'];?></td>
+                                <td><?php echo $total_data_gerbang_terbuka;?></td>
+                                <td><?php echo $total_data_gerbang_terbuka2;?></td>
+
+                              </tr>
+                              <tr>
+                                <td><?php echo "Gardu Tol Ambil Kartu"?></td>
+                                <td><?php echo $datarencana_gardu_tol_ambil_kartu['nilai']?></td>
+                                <td><?php echo $datarencana_gardu_tol_ambil_kartu['nilai']?></td>
+                                <td><?php echo $total_data_gerbang_masuk_gto;?></td>
+                                <td><?php echo $total_data_gerbang_masuk_gto2;?></td>
+
+                              </tr>
+                              <tr>
+                                <td><?php echo "Gardu Tol Transaksi"?></td>
+                                <td><?php echo $datarencana_gardutol_transaksi['nilai']?></td>
+                                <td><?php echo $datarencana_gardutol_transaksi['nilai']?></td>
+                                <td><?php echo $data_gardutol_transaksi;?></td>
+                                <td><?php echo $data_gardutol_transaksi2;?></td>
+
+                              </tr>
+                              <tr>
+                                <td><?php echo "Jumlah Antrian Kendaraan"?></td>
+                                <td><?php echo $datarencana_antrian_kendaraan['nilai'];?></td>
+                                <td><?php echo $datarencana_antrian_kendaraan['nilai'];?></td>
+                                <td><?php echo $total_data_panjang_antrian;?></td>
+                                <td><?php echo $total_data_panjang_antrian2;?></td>
+
+                              </tr>
+                              <?php }?>
                             </tbody>
                           </table>
 
@@ -183,151 +305,6 @@ include ('connect.php'); //connect ke database
           <div class="clearfix"></div>
         </div>
         <!-- /page content -->
-
-		<div class="x_content">
-
-      <div class="modal fade bs-gerbang" tabindex="-1" role="dialog" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
-				  <div class="modal-content">
-					<div class="modal-header">
-					  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-					  </button>
-					  <h4 class="modal-title" id="myModalLabel">Tambah Gerbang</h4>
-					</div>
-
-					<div class="modal-body">
-					<form action="tambah_gerbang.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                        <input name ="idcabang" type="text" id="idcabang" value="<?php echo $idcabang; ?>" hidden>
-                        <input name ="jenis" type="text" id="jenis" value="spojt" hidden>
-
-						  <div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="ma">Nama Gerbang</label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-							  <input name ="gerbang"type="text" id="gerbang" required="required" class="form-control col-md-7 col-xs-12">
-							</div>
-						  </div>
-
-
-					</div>
-					<div class="modal-footer">
-					  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-					  <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
-					</div>
-					 </form>
-				  </div>
-
-				</div>
-			</div>
-
-
-			<!-- Modal Tambah Waktu Transaksi-->
-			<div class="modal fade bs-rencana" tabindex="-1" role="dialog" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
-				  <div class="modal-content">
-					<div class="modal-header">
-					  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-					  </button>
-					  <h4 class="modal-title" id="myModalLabel">Tambah Waktu Transaksi</h4>
-					</div>
-					<div class="modal-body">
-              <form action="tambah_waktutransaksi1.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gerbang">Gerbang</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select name ="idgerbang" class="select2_single form-control" tabindex="-1" required="required">
-                      <option></option>
-                      <?php
-                                      $gerbang= mysqli_query($connect, "SELECT * FROM gerbang WHERE id_cabang ='$idcabang'");
-                                      $idgerbang = ['id_gerbang'];
-                                      while($datagerbang = mysqli_fetch_array($gerbang)){
-                                  ?>
-                  <option  value="<?php echo $datagerbang['id_gerbang'];?>"><?php echo $datagerbang['nama_gerbang'];?></option>
-
-                  <?php }?>
-                                  <input name ="idcabang" type="text" id="idcabang" value="<?php echo $idcabang; ?>" hidden>
-
-                  </select>
-                </div>
-                 </div>
-
-
-                <div>
-                    <h4><b>Gardu Reguler</b></h4>
-                </div>
-
-							  <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka">Gardu Terbuka</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-
-                    <input name= "idgardu_terbuka" type="text" value="1" hidden>
-                    <input name= "gardu_terbuka" type="number" min="0" id="gardu_terbuka" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <h5 class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_tertutup"><b>Gardu Tertutup</b></h5>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka">Gardu Masuk</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_masuk" type="text" value="2" hidden>
-                    <input name= "gardu_masuk" type="number" min="0" id="gardu_masuk" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar">Gardu Keluar</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_keluar" type="text" value="3" hidden>
-                    <input name= "gardu_keluar" type="number" min="0" id="gardu_keluar" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-
-                <div>
-                    <h4><b>Gardu GTO</b></h4>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto">Gardu Terbuka</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_terbuka_gto" type="text" value="4" hidden>
-                    <input name= "gardu_terbuka_gto" type="number" min="0" id="gardu_terbuka_gto" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <h5 class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_tertutup_gto"><b>Gardu Tertutup</b></h5>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto">Gardu Masuk</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_masuk_gto" type="text" value="5" hidden>
-                    <input name= "gardu_masuk_gto" type="number" min="0" id="gardu_masuk_gto" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar_gto">Gardu Keluar</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_keluar_gto" type="text" value="6" hidden>
-                    <input name= "gardu_keluar_gto" type="number" min="0" id="gardu_keluar_gto" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div><br>
-
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="panjang_antrian">Panjang Antrian</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "panjang_antrian" type="text" min="0" id="panjang_antrian" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-
-
-						</div>
-						<div class="modal-footer">
-						  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-						  <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
-						</div>
-					</form>
-				  </div>
-				</div>
-			</div>
-		</div>
 
 <style>
 .table th {

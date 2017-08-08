@@ -41,7 +41,7 @@
       ('','$gardu_masuk_gto', '$tahun', '$idgerbang','$idgardu_masuk_gto', '$idcabang', '$idsemester'),
       ('','$gardu_keluar_gto', '$tahun', '$idgerbang','$idgardu_keluar_gto', '$idcabang', '$idsemester')");
 
-      $insert_panjangantrian= mysqli_query($connect,"INSERT INTO panjang_antrian VALUES ('','$panjang_antrian', '$tahun', '$idgerbang', '$idsemester')");
+      $insert_panjangantrian= mysqli_query($connect,"INSERT INTO panjang_antrian VALUES ('','$panjang_antrian', '$tahun', '$idgerbang', '$idsemester','$idcabang')");
 
 			if($insert_waktutransaksi AND $insert_panjangantrian){
 ?>
