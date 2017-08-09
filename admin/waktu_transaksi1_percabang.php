@@ -2,10 +2,20 @@
 include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 
+  $id_cabang = $_GET['id'];
+  $cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM cabang WHERE id_cabang = '$id_cabang'"));
+  $resultjs = $connect-> query("SELECT * FROM cabang");
+  $namacabang = $cabang['nama_cabang'];
 
   $iduser = $_SESSION['id_user'];
 
+  //ambil informasi user id dan cabang id dari table cabang
 
+
+  //ambil informasi jenis sub gardu
+  $gardu = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM jenis_subgardu"));
+
+  $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM gerbang"));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,12 +88,25 @@ include ('connect.php'); //connect ke database
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Data Waktu Transaksi </small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small>Data Waktu Transaksi Cabang <?php echo $namacabang; ?> </small></h2>
 
                     <div class="clearfix"></div>
                   </div>
 
+                  <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
+                      <div class="input-group buttonright" >
+                      <div class="btn-group  buttonrightfloat " >
+	                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Tambah <span class="caret"></span>
+	                    </button>
+	                    <ul role="menu" class="dropdown-menu pull-right">
+						                <li><a data-toggle="modal" data-target=".bs-rencana" >Tambah Waktu Transaksi</a></li>
+	                    </ul>
+	                    </div>
 
+                      </div>
+                    </div>
+                   </div>
                   <div class="x_content">
 
                       <table id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
@@ -124,112 +147,110 @@ include ('connect.php'); //connect ke database
                             </thead>
                             <tbody>
                             <?php
-                            $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_semester=semester.id_semester AND semester.id_semester=panjang_antrian.id_semester GROUP BY waktu_transaksi.id_cabang");
+                            $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_semester=semester.id_semester AND semester.id_semester=panjang_antrian.id_semester WHERE waktu_transaksi.id_cabang = '$id_cabang' group by waktu_transaksi.id_gerbang");
                             $nomor = 1;
                             while($data_waktu_transaksi = mysqli_fetch_array($rata_waktu_transaksi)){
 
-								$idcabanglist = $data_waktu_transaksi['id_cabang'];
+								$idgerbanglist = $data_waktu_transaksi['id_gerbang'];
+								$idsubgardulist = $data_waktu_transaksi['id_subgardu'];
                 $idsemesterlist = $data_waktu_transaksi['id_semester'];
 
-								$data_cabang = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM cabang WHERE id_cabang = '$idcabanglist'"));
+								$data_gerbang = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM gerbang WHERE id_gerbang = '$idgerbanglist'"));
                 $data_semester1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM semester WHERE id_semester = '1'"));
                 $data_semester2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM semester WHERE id_semester = '2'"));
 
-                $data_tahun= mysqli_fetch_array(mysqli_query($connect, "SELECT tahun from waktu_transaksi where id_cabang = '$idcabanglist'"));
+                $data_tahun= mysqli_fetch_array(mysqli_query($connect, "SELECT tahun from waktu_transaksi where id_gerbang = '$idgerbanglist'"));
 
-              //ambil data semester 1
-                // Total Data Gardu Terbuka Semester 1
-                  $data_gerbang_terbuka = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='1' AND id_semester='1'");
-                  $hasil_data_gerbang_terbuka = mysqli_fetch_assoc($data_gerbang_terbuka);
-                  $total_data_gerbang_terbuka = $hasil_data_gerbang_terbuka['nilai_total'];
-                //Total Data Gardu Masuk Semester 1
-                  $data_gerbang_masuk = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='2' AND id_semester='1'");
-                  $hasil_data_gerbang_masuk = mysqli_fetch_assoc($data_gerbang_masuk);
-                  $total_data_gerbang_masuk = $hasil_data_gerbang_masuk['nilai_total'];
-                //Total Data Gardu Keluar Semester 1
-                  $data_gerbang_keluar = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='3' AND id_semester='1'");
-                  $hasil_data_gerbang_keluar = mysqli_fetch_assoc($data_gerbang_keluar);
-                  $total_data_gerbang_keluar = $hasil_data_gerbang_keluar['nilai_total'];
-                //Total Data Gardu Terbuka GTO Semester 1
-                  $data_gerbang_terbuka_gto = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='4' AND id_semester='1'");
-                  $hasil_data_gerbang_terbuka_gto = mysqli_fetch_assoc($data_gerbang_terbuka_gto);
-                  $total_data_gerbang_terbuka_gto = $hasil_data_gerbang_terbuka_gto['nilai_total'];
-                //Total Data Gardu GTO Masuk Semester 1
-                  $data_gerbang_masuk_gto = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='5' AND id_semester='1'");
-                  $hasil_data_gerbang_masuk_gto = mysqli_fetch_assoc($data_gerbang_masuk_gto);
-                  $total_data_gerbang_masuk_gto = $hasil_data_gerbang_masuk_gto['nilai_total'];
-                //Total Data Gardu GTO Keluar Semester 1
-                  $data_gerbang_keluar_gto = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='6' AND id_semester='1'");
-                  $hasil_data_gerbang_keluar_gto = mysqli_fetch_assoc($data_gerbang_keluar_gto);
-                  $total_data_gerbang_keluar_gto = $hasil_data_gerbang_keluar_gto['nilai_total'];
-                //Total Data Panjang Antrian Semester 1
-                  $data_panjang_antrian = mysqli_query($connect, "SELECT SUM(panjang_antrian) AS nilai_total FROM panjang_antrian WHERE id_cabang='$idcabanglist' AND id_semester='1'");
-                  $hasil_data_panjang_antrian = mysqli_fetch_assoc($data_panjang_antrian);
-                  $total_data_panjang_antrian = $hasil_data_panjang_antrian['nilai_total'];
+                //ambil data semester 1
+								$data_gerbang_terbuka = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM waktu_transaksi, jenis_subgardu WHERE waktu_transaksi.id_gerbang = '$idgerbanglist' AND waktu_transaksi.id_semester='1' AND waktu_transaksi.id_subgardu = '1' AND jenis_subgardu.id_jenisgardu='1'"));
+                $data_gerbang_masuk = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM waktu_transaksi, jenis_subgardu WHERE waktu_transaksi.id_gerbang = '$idgerbanglist' AND waktu_transaksi.id_semester='1' AND waktu_transaksi.id_subgardu = '2' AND jenis_subgardu.id_jenisgardu='1'"));
+                $data_gerbang_keluar = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM waktu_transaksi, jenis_subgardu WHERE waktu_transaksi.id_gerbang = '$idgerbanglist' AND waktu_transaksi.id_semester='1' AND waktu_transaksi.id_subgardu = '3' AND jenis_subgardu.id_jenisgardu='1'"));
+                $data_gerbang_terbuka_gto = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM waktu_transaksi, jenis_subgardu WHERE waktu_transaksi.id_gerbang = '$idgerbanglist' AND waktu_transaksi.id_semester='1' AND waktu_transaksi.id_subgardu = '4' AND jenis_subgardu.id_jenisgardu='2'"));
+								$data_gerbang_masuk_gto = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM waktu_transaksi, jenis_subgardu WHERE waktu_transaksi.id_gerbang = '$idgerbanglist' AND waktu_transaksi.id_semester='1' AND waktu_transaksi.id_subgardu = '5' AND jenis_subgardu.id_jenisgardu='2'"));
+                $data_gerbang_keluar_gto = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM waktu_transaksi, jenis_subgardu WHERE waktu_transaksi.id_gerbang = '$idgerbanglist' AND waktu_transaksi.id_semester='1' AND waktu_transaksi.id_subgardu = '6' AND jenis_subgardu.id_jenisgardu='2'"));
+                $data_panjang_antrian = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM panjang_antrian WHERE id_gerbang = '$idgerbanglist' AND id_semester='1'"));
 
-
-            //ambil data semester 2
-                // Total Data Gardu Terbuka Semester 2
-                  $data_gerbang_terbuka2 = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='1' AND id_semester='2'");
-                  $hasil_data_gerbang_terbuka2 = mysqli_fetch_assoc($data_gerbang_terbuka2);
-                  $total_data_gerbang_terbuka2 = $hasil_data_gerbang_terbuka2['nilai_total'];
-                // Total Data Gardu Masuk Semester 2
-                  $data_gerbang_masuk2 = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='2' AND id_semester='2'");
-                  $hasil_data_gerbang_masuk2 = mysqli_fetch_assoc($data_gerbang_masuk2);
-                  $total_data_gerbang_masuk2 = $hasil_data_gerbang_masuk2['nilai_total'];
-                //Total Data Gardu Keluar Semester 2
-                  $data_gerbang_keluar2 = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='3' AND id_semester='2'");
-                  $hasil_data_gerbang_keluar2 = mysqli_fetch_assoc($data_gerbang_keluar2);
-                  $total_data_gerbang_keluar2 = $hasil_data_gerbang_keluar2['nilai_total'];
-                //Total Data Gardu Terbuka GTO Semester 2
-                  $data_gerbang_terbuka_gto2 = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='4' AND id_semester='2'");
-                  $hasil_data_gerbang_terbuka_gto2= mysqli_fetch_assoc($data_gerbang_terbuka_gto2);
-                  $total_data_gerbang_terbuka_gto2= $hasil_data_gerbang_terbuka_gto2['nilai_total'];
-                //Total Data Gardu GTO Masuk Semester 2
-                  $data_gerbang_masuk_gto2 = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='5' AND id_semester='2'");
-                  $hasil_data_gerbang_masuk_gto2 = mysqli_fetch_assoc($data_gerbang_masuk_gto2);
-                  $total_data_gerbang_masuk_gto2 = $hasil_data_gerbang_masuk_gto2['nilai_total'];
-                //Total Data Gardu GTO Keluar Semester 2
-                  $data_gerbang_keluar_gto2 = mysqli_query($connect, "SELECT SUM(nilai) AS nilai_total FROM waktu_transaksi WHERE id_cabang='$idcabanglist' AND id_subgardu='6' AND id_semester='2'");
-                  $hasil_data_gerbang_keluar_gto2 = mysqli_fetch_assoc($data_gerbang_keluar_gto2);
-                  $total_data_gerbang_keluar_gto2 = $hasil_data_gerbang_keluar_gto2['nilai_total'];
-                //Total Data Panjang Antrian Semester 2
-                  $data_panjang_antrian2 = mysqli_query($connect, "SELECT SUM(panjang_antrian) AS nilai_total FROM panjang_antrian WHERE id_cabang='$idcabanglist' AND id_semester='2'");
-                  $hasil_data_panjang_antrian2 = mysqli_fetch_assoc($data_panjang_antrian2);
-                  $total_data_panjang_antrian2 = $hasil_data_panjang_antrian2['nilai_total'];
-
+                //ambil semester 2
+                $data_gerbang_masuk2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM waktu_transaksi, jenis_subgardu WHERE waktu_transaksi.id_gerbang = '$idgerbanglist' AND waktu_transaksi.id_semester='2'  AND waktu_transaksi.id_subgardu = '2' AND jenis_subgardu.id_jenisgardu='1'"));
+                $data_gerbang_terbuka2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM waktu_transaksi, jenis_subgardu WHERE waktu_transaksi.id_gerbang = '$idgerbanglist' AND waktu_transaksi.id_semester='2' AND waktu_transaksi.id_subgardu = '1' AND jenis_subgardu.id_jenisgardu='1'"));
+                $data_gerbang_keluar2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM waktu_transaksi, jenis_subgardu WHERE waktu_transaksi.id_gerbang = '$idgerbanglist' AND waktu_transaksi.id_semester='2'  AND waktu_transaksi.id_subgardu = '3' AND jenis_subgardu.id_jenisgardu='1'"));
+                $data_gerbang_terbuka_gto2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM waktu_transaksi, jenis_subgardu WHERE waktu_transaksi.id_gerbang = '$idgerbanglist' AND waktu_transaksi.id_semester='2'  AND waktu_transaksi.id_subgardu = '4' AND jenis_subgardu.id_jenisgardu='2'"));
+								$data_gerbang_masuk_gto2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM waktu_transaksi, jenis_subgardu WHERE waktu_transaksi.id_gerbang = '$idgerbanglist' AND waktu_transaksi.id_semester='2'  AND waktu_transaksi.id_subgardu = '5' AND jenis_subgardu.id_jenisgardu='2'"));
+                $data_gerbang_keluar_gto2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM waktu_transaksi, jenis_subgardu WHERE waktu_transaksi.id_gerbang = '$idgerbanglist' AND waktu_transaksi.id_semester='2' AND waktu_transaksi.id_subgardu = '6' AND jenis_subgardu.id_jenisgardu='2'"));
+                $data_panjang_antrian2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM panjang_antrian WHERE id_gerbang = '$idgerbanglist' AND id_semester='2' "));
 
                             ?>
                               <tr rowspan="2">
                                 <td rowspan="2"><?php echo $nomor; $nomor++?></td>
-                                <td rowspan="2"><?php echo $data_cabang['nama_cabang'] ?></td>
+                                <td rowspan="2"><?php echo $data_gerbang['nama_gerbang'] ?></td>
                                 <td rowspan="2"><?php echo $data_tahun['tahun']?></td>
                                 <td><?php echo $data_semester1['semester']?></td>
-                                <td><?php echo $total_data_gerbang_terbuka;?></td>
-                                <td><?php echo $total_data_gerbang_masuk;?></td>
-                                <td><?php echo $total_data_gerbang_keluar;?></td>
-                                <td><?php echo $total_data_gerbang_terbuka_gto;?></td>
-                                <td><?php echo $total_data_gerbang_masuk_gto;?></td>
-								                <td><?php echo $total_data_gerbang_keluar_gto;?></td>
-                                <td><?php echo $total_data_panjang_antrian;?></td>
-                                <td rowspan="2">
-                                  <button type="button" class="btn btn-round btn-info" class="btn btn-primary"><a href="waktu_transaksi1_percabang.php?id=<?php echo $data_waktu_transaksi['id_cabang'];?>">
-
-                  								 Ubah
-                                 </a></button>
+                                <td><?php echo $data_gerbang_terbuka['nilai']?></td>
+                                <td><?php echo $data_gerbang_masuk['nilai'] ?></td>
+                                <td><?php echo $data_gerbang_keluar['nilai'] ?></td>
+                                <td><?php echo $data_gerbang_terbuka_gto['nilai'] ?></td>
+                                <td><?php echo $data_gerbang_masuk_gto['nilai'] ?></td>
+								                <td><?php echo $data_gerbang_keluar_gto['nilai'] ?></td>
+                                <td><?php echo $data_panjang_antrian['panjang_antrian']?></td>
+                                <td>
+                                  <button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal"
+                  								 data-id-gerbangterbuka-s1 ="<?php echo $data_gerbang_terbuka['id_waktutrans'];?>"
+                  								 data-id-gerbangmasuk-s1 ="<?php echo $data_gerbang_masuk['id_waktutrans'];?>"
+                  								 data-id-gerbangkeluar-s1 ="<?php echo $data_gerbang_keluar['id_waktutrans'];?>"
+                  								 data-id-gerbangterbukagto-s1 ="<?php echo $data_gerbang_terbuka_gto['id_waktutrans'];?>"
+                                   data-id-gerbangmasukgto-s1 ="<?php echo $data_gerbang_masuk_gto['id_waktutrans'];?>"
+                                   data-id-gerbangkeluargto-s1 ="<?php echo $data_gerbang_keluar_gto['id_waktutrans'];?>"
+                                   data-id-panjangantrian-s1 ="<?php echo $data_panjang_antrian['id_pa'];?>"
+                  								 data-gerbangterbuka-s1 ="<?php echo $data_gerbang_terbuka['nilai']; ?>"
+                                   data-gerbangmasuk-s1 ="<?php echo $data_gerbang_masuk['nilai'];?>"
+                                   data-gerbangkeluar-s1 ="<?php echo $data_gerbang_keluar['nilai'];?>"
+                                   data-gerbangterbukagto-s1 ="<?php echo $data_gerbang_terbuka_gto['nilai'];?>"
+                                   data-gerbangmasukgto-s1 ="<?php echo $data_gerbang_masuk_gto['nilai'];?>"
+                                   data-gerbangkeluargto-s1 ="<?php echo $data_gerbang_keluar_gto['nilai'];?>"
+                                   data-panjangantrian-s1 ="<?php echo $data_panjang_antrian['panjang_antrian'];?>" >
+                  								 Edit
+                  								 </button>
+                                  <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal"
+                                    data-id-gerbang ="<?php echo $data_gerbang['id_gerbang'];?>"
+                                    data-id-semester ="<?php echo $data_semester1['id_semester'];?>">
+                                    Delete
+                                  </button>
                 							  </td>
                               </tr>
 
                               <tr>
                                 <td><?php echo $data_semester2['semester']?></td>
-                                <td><?php echo $total_data_gerbang_terbuka2;?></td>
-                                <td><?php echo $total_data_gerbang_masuk2;?></td>
-                                <td><?php echo $total_data_gerbang_keluar2;?></td>
-                                <td><?php echo $total_data_gerbang_terbuka_gto2;?></td>
-                                <td><?php echo $total_data_gerbang_masuk_gto2;?></td>
-								                <td><?php echo $total_data_gerbang_keluar_gto2;?></td>
-                                <td><?php echo $total_data_panjang_antrian2;?></td>
-
+                                <td><?php echo $data_gerbang_terbuka2['nilai']?></td>
+                                <td><?php echo $data_gerbang_masuk2['nilai'] ?></td>
+                                <td><?php echo $data_gerbang_keluar2['nilai'] ?></td>
+                                <td><?php echo $data_gerbang_terbuka_gto2['nilai'] ?></td>
+                                <td><?php echo $data_gerbang_masuk_gto2['nilai'] ?></td>
+								                <td><?php echo $data_gerbang_keluar_gto2['nilai'] ?></td>
+                                <td><?php echo $data_panjang_antrian2['panjang_antrian']?></td>
+                                <td>
+                                  <button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal2"
+                                  data-id-gerbangterbuka-s2 ="<?php echo $data_gerbang_terbuka2['id_waktutrans'];?>"
+                                  data-id-gerbangmasuk-s2 ="<?php echo $data_gerbang_masuk2['id_waktutrans'];?>"
+                                  data-id-gerbangkeluar-s2 ="<?php echo $data_gerbang_keluar2['id_waktutrans'];?>"
+                                  data-id-gerbangterbukagto-s2 ="<?php echo $data_gerbang_terbuka_gto2['id_waktutrans'];?>"
+                                  data-id-gerbangmasukgto-s2 ="<?php echo $data_gerbang_masuk_gto2['id_waktutrans'];?>"
+                                  data-id-gerbangkeluargto-s2 ="<?php echo $data_gerbang_keluar_gto2['id_waktutrans'];?>"
+                                  data-id-panjangantrian-s2 ="<?php echo $data_panjang_antrian2['id_pa'];?>"
+                                  data-gerbangterbuka-s2 ="<?php echo $data_gerbang_terbuka2['nilai']; ?>"
+                                  data-gerbangmasuk-s2 ="<?php echo $data_gerbang_masuk2['nilai'];?>"
+                                  data-gerbangkeluar-s2 ="<?php echo $data_gerbang_keluar2['nilai'];?>"
+                                  data-gerbangterbukagto-s2 ="<?php echo $data_gerbang_terbuka_gto2['nilai'];?>"
+                                  data-gerbangmasukgto-s2 ="<?php echo $data_gerbang_masuk_gto2['nilai'];?>"
+                                  data-gerbangkeluargto-s2 ="<?php echo $data_gerbang_keluar_gto2['nilai'];?>"
+                                  data-panjangantrian-s2 ="<?php echo $data_panjang_antrian2['panjang_antrian'];?>">
+                                    Edit
+                                  </button>
+                                  <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal2"
+                                    data-id-gerbang2 ="<?php echo $data_gerbang['id_gerbang'];?>"
+                                    data-id-semester2 ="<?php echo $data_semester2['id_semester'];?>">
+                                    Delete
+                                  </button>
+                								 </td>
                               </tr>
 
                               <?php } ?>
@@ -256,7 +277,7 @@ include ('connect.php'); //connect ke database
     <!-- Modal Content -->
 		<div class="x_content">
       <!-- Modal Delete Waktu Transaksi -->
-      <div class="modal fade bs-delete-modal" id="modal_deletewaktutransaksis1" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal fade bs-delete-modal" id="modal_deletewaktutransaksis1admin" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
@@ -264,13 +285,13 @@ include ('connect.php'); //connect ke database
               <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
             </div>
             <div class="modal-body">
-              <form action="editwaktutransaksi1.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
+              <form action="editwaktutransaksi1_admin.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
                 <div class="alert alert-danger" role="alert">
                   <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
                   <h4> Anda yakin untuk menghapus data rencana ini? </h4>
                 </div>
                 <h2 style="color:red;"></h2>
-                <form action="editwaktutransaksi.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                <form action="editwaktutransaksi1_admin.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                   <input name ="edit_idgerbang" type="text" id="waktutransaksi1" value="" hidden>
                   <input name ="edit_idsemester1" type="text" id="waktutransaksi1" value="" hidden>
                 </div>
@@ -285,7 +306,7 @@ include ('connect.php'); //connect ke database
         <!--End of Modal Delete Waktu Transaksi -->
 
         <!-- Modal Modal Edit Waktu Transaksi Semester 1 -->
-  			 <div class="modal fade bs-edit-modal" id="modal_editwaktutransaksis1" tabindex="-1" role="dialog" aria-hidden="true">
+  			 <div class="modal fade bs-edit-modal" id="modal_editwaktutransaksis1admin" tabindex="-1" role="dialog" aria-hidden="true">
            <div class="modal-dialog modal-lg">
              <div class="modal-content">
                <div class="modal-header">
@@ -293,7 +314,7 @@ include ('connect.php'); //connect ke database
                  <h4 class="modal-title" id="myModalLabel">Edit Rencana</h4>
                </div>
                <div class="modal-body">
-                 <form action="editwaktutransaksi1.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                 <form action="editwaktutransaksi1_admin.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                    <input name ="edit_idgerbangterbukas1" type="number" id="waktutransaksi1" value="" hidden>
                    <input name ="edit_idgerbangmasuks1" type="number" id="waktutransaksi1" value="" hidden>
                    <input name ="edit_idgerbangkeluars1" type="number" id="waktutransaksi1" value="" hidden>
@@ -376,7 +397,7 @@ include ('connect.php'); //connect ke database
           <!-- End of Modal Edit Waktu Transaksi Semester 1-->
 
           <!-- Modal Delete Waktu Transaksi Semester 2-->
-          <div class="modal fade bs-delete-modal2" id="modal_deletewaktutransaksis2" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal fade bs-delete-modal2" id="modal_deletewaktutransaksis2admin" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
@@ -384,7 +405,7 @@ include ('connect.php'); //connect ke database
                   <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
                 </div>
                 <div class="modal-body">
-                  <form action="editwaktutransaksi1.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
+                  <form action="editwaktutransaksi1_admin.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
                     <div class="alert alert-danger" role="alert">
                       <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
                       <h4> Anda yakin untuk menghapus data rencana ini? </h4>
@@ -405,7 +426,7 @@ include ('connect.php'); //connect ke database
             <!--End of Modal Delete Waktu Transaksi Semester 2-->
 
             <!-- Modal Modal Edit Waktu Transaksi Semester 1 -->
-      			 <div class="modal fade bs-edit-modal2" id="modal_editwaktutransaksis2" tabindex="-1" role="dialog" aria-hidden="true">
+      			 <div class="modal fade bs-edit-modal2" id="modal_editwaktutransaksis2admin" tabindex="-1" role="dialog" aria-hidden="true">
                <div class="modal-dialog modal-lg">
                  <div class="modal-content">
                    <div class="modal-header">
@@ -413,7 +434,7 @@ include ('connect.php'); //connect ke database
                      <h4 class="modal-title" id="myModalLabel">Edit Rencana</h4>
                    </div>
                    <div class="modal-body">
-                     <form action="editwaktutransaksi1.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                     <form action="editwaktutransaksi1_admin.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                        <input name ="edit_idgerbangterbukas2" type="number" id="waktutransaksi1" value="" hidden>
                        <input name ="edit_idgerbangmasuks2" type="number" id="waktutransaksi1" value="" hidden>
                        <input name ="edit_idgerbangkeluars2" type="number" id="waktutransaksi1" value="" hidden>
@@ -514,7 +535,7 @@ include ('connect.php'); //connect ke database
                     <select name ="idgerbang" class="select2_single form-control" tabindex="-1" required="required">
                       <option></option>
                       <?php
-                          $gerbang= mysqli_query($connect, "SELECT * FROM gerbang WHERE id_cabang ='$idcabang'");
+                          $gerbang= mysqli_query($connect, "SELECT * FROM gerbang WHERE id_cabang ='$id_cabang'");
                           $idgerbang = ['id_gerbang'];
                           while($datagerbang = mysqli_fetch_array($gerbang)){
                       ?>
