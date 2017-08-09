@@ -225,13 +225,10 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo $total_data_gerbang_masuk_gto;?></td>
 								                <td><?php echo $total_data_gerbang_keluar_gto;?></td>
                                 <td><?php echo $total_data_panjang_antrian;?></td>
-                                <td>
+                                <td rowspan="2">
                                   <button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal">
-                  								 Edit
+                  								 Ubah
                   								 </button>
-                                  <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal">
-                                    Delete
-                                  </button>
                 							  </td>
                               </tr>
 
@@ -244,14 +241,7 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo $total_data_gerbang_masuk_gto2;?></td>
 								                <td><?php echo $total_data_gerbang_keluar_gto2;?></td>
                                 <td><?php echo $total_data_panjang_antrian2;?></td>
-                                <td>
-                                  <button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal2">
-                                    Edit
-                                  </button>
-                                  <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal2">
-                                    Delete
-                                  </button>
-                								 </td>
+
                               </tr>
 
                               <?php } ?>

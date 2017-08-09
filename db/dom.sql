@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 08, 2017 at 09:21 AM
+-- Generation Time: Aug 09, 2017 at 03:24 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -160,7 +160,7 @@ CREATE TABLE `capex_rencana` (
 
 CREATE TABLE `gerbang` (
   `id_gerbang` int(11) NOT NULL,
-  `nama_gerbang` varchar(25) NOT NULL,
+  `nama_gerbang` varchar(59) NOT NULL,
   `id_cabang` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -183,7 +183,21 @@ INSERT INTO `gerbang` (`id_gerbang`, `nama_gerbang`, `id_cabang`) VALUES
 (19, 'Gerbang Sentul', 1),
 (20, 'Gerbang Sentul Selatan', 1),
 (21, 'Gerbang Bogor', 1),
-(22, 'Gerbang Ciawi', 1);
+(22, 'Gerbang Ciawi', 1),
+(23, 'Garbang Halim', 2),
+(24, 'Gerbang Ramp Pondok Gede Barat', 2),
+(25, 'Gerbang Ramp Pondok Gede Timur', 2),
+(26, 'Gerbang Cikunir', 2),
+(27, 'Gerbang Bekasi Barat', 2),
+(28, 'Gerbang Bekasi Timur', 2),
+(29, 'Gerbang Tambun', 2),
+(30, 'Gerbang Cibitung', 2),
+(31, 'Gerbang Cikarang Timur', 2),
+(32, 'Gerbang Cikarang Barat', 2),
+(33, 'Gerbang Karawang Barat', 2),
+(34, 'Gerbang Karawang Timur', 2),
+(35, 'Gerbang Cikampek', 2),
+(36, 'Gerbang Cikopo', 2);
 
 -- --------------------------------------------------------
 
@@ -323,26 +337,23 @@ CREATE TABLE `panjang_antrian` (
   `panjang_antrian` int(11) NOT NULL,
   `tahun` int(11) NOT NULL,
   `id_gerbang` int(11) NOT NULL,
-  `id_semester` int(11) NOT NULL
+  `id_semester` int(11) NOT NULL,
+  `id_cabang` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `panjang_antrian`
 --
 
-INSERT INTO `panjang_antrian` (`id_pa`, `panjang_antrian`, `tahun`, `id_gerbang`, `id_semester`) VALUES
-(38, 7, 2017, 1, 1),
-(39, 7, 2017, 1, 1),
-(40, 7, 2017, 1, 1),
-(41, 7, 2017, 1, 1),
-(42, 7, 2017, 1, 1),
-(43, 7, 2017, 1, 1),
-(45, 8, 2015, 4, 1),
-(49, 71, 2018, 6, 1),
-(51, 4, 2017, 8, 1),
-(52, 3, 2017, 8, 2),
-(53, 1, 2016, 9, 1),
-(54, 3, 2016, 9, 2);
+INSERT INTO `panjang_antrian` (`id_pa`, `panjang_antrian`, `tahun`, `id_gerbang`, `id_semester`, `id_cabang`) VALUES
+(60, 7, 2017, 8, 1, 1),
+(61, 3, 2017, 8, 2, 1),
+(62, 3, 2017, 21, 1, 1),
+(63, 5, 2017, 21, 2, 1),
+(64, 2, 2017, 23, 1, 2),
+(65, 5, 2017, 23, 2, 2),
+(66, 4, 2017, 30, 2, 2),
+(67, 3, 2017, 30, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -554,7 +565,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id_user`, `username`, `password`, `id_role`, `id_cabang`) VALUES
 (1, 'selfiq', '123456', 2, 1),
 (2, 'rachel', '12345', 2, 2),
-(3, 'amostiberio', 'amos123', 2, 3);
+(3, 'amostiberio', 'amos123', 2, 3),
+(4, 'admin', '1234', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -596,36 +608,54 @@ CREATE TABLE `waktu_transaksi` (
 --
 
 INSERT INTO `waktu_transaksi` (`id_waktutrans`, `nilai`, `tahun`, `id_gerbang`, `id_subgardu`, `id_cabang`, `id_semester`) VALUES
-(260, 43, 2018, 6, 1, 1, 1),
-(261, 232, 2018, 6, 2, 1, 1),
-(262, 33, 2018, 6, 3, 1, 1),
-(263, 441, 2018, 6, 4, 1, 1),
-(264, 521, 2018, 6, 5, 1, 1),
-(265, 6124, 2018, 6, 6, 1, 1),
-(272, 1, 2017, 8, 1, 1, 1),
-(273, 2, 2017, 8, 2, 1, 1),
-(274, 3, 2017, 8, 3, 1, 1),
-(275, 4, 2017, 8, 4, 1, 1),
-(276, 5, 2017, 8, 5, 1, 1),
-(277, 3, 2017, 8, 6, 1, 1),
-(278, 4, 2017, 8, 1, 1, 2),
-(279, 3, 2017, 8, 2, 1, 2),
-(280, 4, 2017, 8, 3, 1, 2),
-(281, 3, 2017, 8, 4, 1, 2),
-(282, 5, 2017, 8, 5, 1, 2),
-(283, 5, 2017, 8, 6, 1, 2),
-(284, 2, 2016, 9, 1, 1, 1),
-(285, 4, 2016, 9, 2, 1, 1),
-(286, 5, 2016, 9, 3, 1, 1),
-(287, 3, 2016, 9, 4, 1, 1),
-(288, 3, 2016, 9, 5, 1, 1),
-(289, 2, 2016, 9, 6, 1, 1),
-(290, 3, 2016, 9, 1, 1, 2),
-(291, 5, 2016, 9, 2, 1, 2),
-(292, 3, 2016, 9, 3, 1, 2),
-(293, 2, 2016, 9, 4, 1, 2),
-(294, 1, 2016, 9, 5, 1, 2),
-(295, 5, 2016, 9, 6, 1, 2);
+(326, 1, 2017, 8, 1, 1, 1),
+(327, 2, 2017, 8, 2, 1, 1),
+(328, 3, 2017, 8, 3, 1, 1),
+(329, 4, 2017, 8, 4, 1, 1),
+(330, 5, 2017, 8, 5, 1, 1),
+(331, 6, 2017, 8, 6, 1, 1),
+(332, 6, 2017, 8, 1, 1, 2),
+(333, 3, 2017, 8, 2, 1, 2),
+(334, 2, 2017, 8, 3, 1, 2),
+(335, 4, 2017, 8, 4, 1, 2),
+(336, 3, 2017, 8, 5, 1, 2),
+(337, 1, 2017, 8, 6, 1, 2),
+(338, 3, 2017, 21, 1, 1, 1),
+(339, 5, 2017, 21, 2, 1, 1),
+(340, 4, 2017, 21, 3, 1, 1),
+(341, 3, 2017, 21, 4, 1, 1),
+(342, 5, 2017, 21, 5, 1, 1),
+(343, 6, 2017, 21, 6, 1, 1),
+(344, 2, 2017, 21, 1, 1, 2),
+(345, 4, 2017, 21, 2, 1, 2),
+(346, 3, 2017, 21, 3, 1, 2),
+(347, 3, 2017, 21, 4, 1, 2),
+(348, 6, 2017, 21, 5, 1, 2),
+(349, 6, 2017, 21, 6, 1, 2),
+(350, 2, 2017, 23, 1, 2, 1),
+(351, 3, 2017, 23, 2, 2, 1),
+(352, 4, 2017, 23, 3, 2, 1),
+(353, 5, 2017, 23, 4, 2, 1),
+(354, 3, 2017, 23, 5, 2, 1),
+(355, 4, 2017, 23, 6, 2, 1),
+(356, 2, 2017, 23, 1, 2, 2),
+(357, 4, 2017, 23, 2, 2, 2),
+(358, 5, 2017, 23, 3, 2, 2),
+(359, 4, 2017, 23, 4, 2, 2),
+(360, 3, 2017, 23, 5, 2, 2),
+(361, 5, 2017, 23, 6, 2, 2),
+(362, 2, 2017, 30, 1, 2, 2),
+(363, 5, 2017, 30, 2, 2, 2),
+(364, 4, 2017, 30, 3, 2, 2),
+(365, 4, 2017, 30, 4, 2, 2),
+(366, 3, 2017, 30, 5, 2, 2),
+(367, 2, 2017, 30, 6, 2, 2),
+(368, 4, 2017, 30, 1, 2, 1),
+(369, 3, 2017, 30, 2, 2, 1),
+(370, 5, 2017, 30, 3, 2, 1),
+(371, 2, 2017, 30, 4, 2, 1),
+(372, 4, 2017, 30, 5, 2, 1),
+(373, 5, 2017, 30, 6, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -820,7 +850,7 @@ ALTER TABLE `capex_rencana`
 -- AUTO_INCREMENT for table `gerbang`
 --
 ALTER TABLE `gerbang`
-  MODIFY `id_gerbang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_gerbang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `jml_gardutersedia`
 --
@@ -830,7 +860,7 @@ ALTER TABLE `jml_gardutersedia`
 -- AUTO_INCREMENT for table `panjang_antrian`
 --
 ALTER TABLE `panjang_antrian`
-  MODIFY `id_pa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id_pa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 --
 -- AUTO_INCREMENT for table `pengumpul_tol`
 --
@@ -865,12 +895,12 @@ ALTER TABLE `transaksi_tinggi`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `waktu_transaksi`
 --
 ALTER TABLE `waktu_transaksi`
-  MODIFY `id_waktutrans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=296;
+  MODIFY `id_waktutrans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=374;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
