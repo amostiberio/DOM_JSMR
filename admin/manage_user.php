@@ -341,7 +341,7 @@ include ('connect.php'); //connect ke database
 
 			
 
-			<!-- Modal Tambah Rencana -->
+			<!-- Modal Tambah Cabang -->
       <div class="modal fade bs-cabang" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">

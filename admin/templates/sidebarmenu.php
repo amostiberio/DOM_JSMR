@@ -28,7 +28,7 @@
               							</li>
                           </ul>
                         </li>
-						            <li><a>Capex<span class="fa fa-chevron-down"></span></a>
+						<li><a>Capex<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
                             <li><a>SPOJT<span class="fa fa-chevron-down"></span></a>
               							  <ul class="nav child_menu">
@@ -51,8 +51,20 @@
 				           </li>
                   </ul>
               <!-- Menu Laporan Bulanan -->
-                  <ul class="nav side-menu">
-                    <li><a href="laporanbulanan.php"><i class="fa fa-book"></i> Laporan Bulanan <span class="fa"></span></a>
+                   <ul class="nav side-menu">
+
+                    <li><a><i class="fa fa-book"></i> Laporan Bulanan <span class="fa fa-chevron-down"></span></a>
+                     <ul class="nav child_menu">
+                        <li><a>Referensi File<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="referensifilerkap.php">RKAP</a></li>
+                          <li><a href="referensifilerevisirkap.php">Revisi RKAP</a></li>                          
+                          <li><a href="referensifilepencapaian.php">Pencapaian</a></li>
+                        </ul>
+                        </li>
+                        <li><a href="laporanrealisasi.php">Management Laporan Realisasi <span class="fa"></span></a>
+                      </ul>
+                   
                     </li>
                   </ul>
               <!-- Menu Laporan KPI -->
@@ -60,15 +72,22 @@
                     <li><a><i class="fa fa-book"></i> Laporan KPI <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                         <li><a>Waktu Transaksi<span class="fa fa-chevron-down"></span></a>
-							<ul class="nav child_menu">
-							  <li><a href="waktu_transaksi1.php">Waktu Transaksi 1</a></li>
-							  <li><a href="waktu_transaksi2.php">Waktu Transaksi 2 SPM</a></li>
-							</ul>
-						</li>
-					    <li><a href="lalin_jj.php">Lalin Jam-jaman</a></li>
-					    <li><a href="jml_gardu.php">Jumlah Gardu</a></li>
-						<li><a href="vc_ratio.php">VC Ratio</a></li>
+                        <ul class="nav child_menu">
+                          <li><a href="waktu_transaksi1.php">Waktu Transaksi 1</a></li>
+                          <li><a href="waktu_transaksi2.php">Waktu Transaksi 2 SPM</a></li>
+                        </ul>
+                        <li><a href="jumlah_gardu.php">Jumlah Gardu</a></li>
                         <li><a href="jumlah_sdm.php">Jumlah SDM</a></li>
+                        <li><a>Lalin Jam-jaman</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+              <!-- Menu Management -->
+                  <ul class="nav side-menu">
+                    <li><a><i class="fa fa-gear"></i>Management<span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">                       
+                        <li><a href="manage_user.php">User</a></li>  
+                                                  
                       </ul>
                     </li>
                   </ul>
