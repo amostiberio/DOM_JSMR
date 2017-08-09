@@ -78,6 +78,101 @@
             });
         });
     </script>
+	 <script>
+		$('#modal_deletelalin').on('show.bs.modal', function(e) {
+			 
+		var id_gerbangl = $(e.relatedTarget).data('id-gerbang');
+		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbangl);
+		var id_tahunl = $(e.relatedTarget).data('tahun');
+		$(e.currentTarget).find('input[name="tahun"]').val(id_tahunl);
+		
+        });
+		$('#modal_editlalin').on('show.bs.modal', function(e) {
+			 
+		var id_gerbangl = $(e.relatedTarget).data('id-gerbang');
+		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbangl);
+		var id_tahunl = $(e.relatedTarget).data('tahun');
+		$(e.currentTarget).find('input[name="tahun"]').val(id_tahunl);
+		
+		var lldata1 = $(e.relatedTarget).data('data1');
+        $(e.currentTarget).find('input[name="gardu_terbuka_lalin"]').val(lldata1);
+        var lldata2 = $(e.relatedTarget).data('data2');
+        $(e.currentTarget).find('input[name="gardu_masuk_lalin"]').val(lldata2);
+        var lldata3 = $(e.relatedTarget).data('data3');
+        $(e.currentTarget).find('input[name="gardu_keluar_lalin"]').val(lldata3);
+        var lldata4 = $(e.relatedTarget).data('data4');
+        $(e.currentTarget).find('input[name="gardu_terbuka_gto_lalin"]').val(lldata4);
+		var lldata5 = $(e.relatedTarget).data('data5');
+        $(e.currentTarget).find('input[name="gardu_masuk_gto_lalin"]').val(lldata5);
+        var lldata6 = $(e.relatedTarget).data('data6');
+        $(e.currentTarget).find('input[name="gardu_keluar_gto_lalin"]').val(lldata6);
+        var lldata7 = $(e.relatedTarget).data('data7');
+        $(e.currentTarget).find('input[name="epass_lalin"]').val(lldata7);
+		
+        });
+		$('#modal_deletejmlgardu').on('show.bs.modal', function(e) {
+			 
+		var id_gerbang = $(e.relatedTarget).data('id-gerbang');
+		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbang);
+		var id_tahun = $(e.relatedTarget).data('tahun');
+		$(e.currentTarget).find('input[name="tahun"]').val(id_tahun);
+		
+        });
+		$('#modal_editjmlgardu').on('show.bs.modal', function(e) {
+			 
+		var id_gerbang = $(e.relatedTarget).data('id-gerbang');
+		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbang);
+		var id_tahun = $(e.relatedTarget).data('tahun');
+		$(e.currentTarget).find('input[name="tahun"]').val(id_tahun);
+		
+		var data1 = $(e.relatedTarget).data('data1');
+        $(e.currentTarget).find('input[name="gardu_terbuka_tersedia"]').val(data1);
+        var data2 = $(e.relatedTarget).data('data2');
+        $(e.currentTarget).find('input[name="gardu_masuk_tersedia"]').val(data2);
+        var data3 = $(e.relatedTarget).data('data3');
+        $(e.currentTarget).find('input[name="gardu_keluar_tersedia"]').val(data3);
+        var data4 = $(e.relatedTarget).data('data4');
+        $(e.currentTarget).find('input[name="gardu_terbuka_gto_tersedia"]').val(data4);
+		var data5 = $(e.relatedTarget).data('data5');
+        $(e.currentTarget).find('input[name="gardu_masuk_gto_tersedia"]').val(data5);
+        var data6 = $(e.relatedTarget).data('data6');
+        $(e.currentTarget).find('input[name="gardu_keluar_gto_tersedia"]').val(data6);
+        var data7 = $(e.relatedTarget).data('data7');
+        $(e.currentTarget).find('input[name="epass_tersedia"]').val(data7);
+		
+        });
+		$('#modal_deletejmlsdm').on('show.bs.modal', function(e) {
+			 
+		var id_gerbangs = $(e.relatedTarget).data('id-gerbang');
+		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbangs);
+		var id_tahuns = $(e.relatedTarget).data('tahun');
+		$(e.currentTarget).find('input[name="tahun"]').val(id_tahuns);
+		
+        });
+		$('#modal_editjmlsdm').on('show.bs.modal', function(e) {
+			 
+		var id_gerbangs = $(e.relatedTarget).data('id-gerbang');
+		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbangs);
+		var id_tahuns = $(e.relatedTarget).data('tahun');
+		$(e.currentTarget).find('input[name="tahun"]').val(id_tahuns);
+		
+		var sdata1 = $(e.relatedTarget).data('data1');
+        $(e.currentTarget).find('input[name="kpl_gerbangtol"]').val(sdata1);
+        var sdata2 = $(e.relatedTarget).data('data2');
+        $(e.currentTarget).find('input[name="kspt"]').val(sdata2);
+        var sdata3 = $(e.relatedTarget).data('data3');
+        $(e.currentTarget).find('input[name="kry_jasamarga"]').val(sdata3);
+        var sdata4 = $(e.relatedTarget).data('data4');
+        $(e.currentTarget).find('input[name="kry_jlj"]').val(sdata4);
+		var sdata5 = $(e.relatedTarget).data('data5');
+        $(e.currentTarget).find('input[name="kry_jlo"]').val(sdata5);
+        var sdata6 = $(e.relatedTarget).data('data6');
+        $(e.currentTarget).find('input[name="sakit_permanen"]').val(sdata6);
+        var sdata7 = $(e.relatedTarget).data('data7');
+        $(e.currentTarget).find('input[name="tugt"]').val(sdata7);
+		
+        });
+	 </script>
 
 
 
@@ -124,137 +219,27 @@
         });
     });
     </script>
-
-    <!--Menu BPLL-->
-     <script>
-    $('#list-cabangbpll1').on('change', function(){
+	
+	<script>
+    $('#cabang-list').on('change', function(){
         var id_cabang = this.value;
         $.ajax({
             type: "POST",
-            url: "get_programbpll.php",
+            url: "get_gerbang.php",
             data:'id_cabang='+id_cabang,
             success: function(result){
-                $("#program-listsemua1").html(result);
+                $("#gerbang-list").html(result);
             }
         });
     });
     </script>
-
-     <script>
-    $('#list-cabangbpll2').on('change', function(){
-        var id_cabang = this.value;
-        $.ajax({
-            type: "POST",
-            url: "get_programbpll.php",
-            data:'id_cabang='+id_cabang,
-            success: function(result){
-                $("#program-listsemua2").html(result);
-            }
-        });
-    });
-    </script>
-
-    <script>
-    $('#program-listsemua2').on('change', function(){
-        var id_pk = this.value;
-        $.ajax({
-            type: "POST",
-            url: "get_subprogrambpll.php",
-            data:'id_pk='+id_pk,
-            success: function(result){
-                $("#subprogram-list").html(result);
-            }
-        });
-    });
-    </script>
+	
+	
 
 
-    <!--Menu SPOJT-->
-     <script>
-    $('#list-cabangspojt1').on('change', function(){
-        var id_cabang = this.value;
-        $.ajax({
-            type: "POST",
-            url: "get_programspojt.php",
-            data:'id_cabang='+id_cabang,
-            success: function(result){
-                $("#program-listsemua1").html(result);
-            }
-        });
-    });
-    </script>
 
-     <script>
-    $('#list-cabangspojt2').on('change', function(){
-        var id_cabang = this.value;
-        $.ajax({
-            type: "POST",
-            url: "get_programspojt.php",
-            data:'id_cabang='+id_cabang,
-            success: function(result){
-                $("#program-listsemua2").html(result);
-            }
-        });
-    });
-    </script>
 
-    <script>
-    $('#program-listsemua2').on('change', function(){
-        var id_pk = this.value;
-        $.ajax({
-            type: "POST",
-            url: "get_subprogramspojt.php",
-            data:'id_pk='+id_pk,
-            success: function(result){
-                $("#subprogram-list").html(result);
-            }
-        });
-    });
-    </script>
-    <!--Menu SPJT-->
-     <script>
-    $('#list-cabangspjt1').on('change', function(){
-        var id_cabang = this.value;
-        $.ajax({
-            type: "POST",
-            url: "get_programspjt.php",
-            data:'id_cabang='+id_cabang,
-            success: function(result){
-                $("#program-listsemua1").html(result);
-            }
-        });
-    });
-    </script>
 
-     <script>
-    $('#list-cabangspjt2').on('change', function(){
-        var id_cabang = this.value;
-        $.ajax({
-            type: "POST",
-            url: "get_programspjt.php",
-            data:'id_cabang='+id_cabang,
-            success: function(result){
-                $("#program-listsemua2").html(result);
-            }
-        });
-    });
-    </script>
-
-    <script>
-    $('#program-listsemua2').on('change', function(){
-        var id_pk = this.value;
-        $.ajax({
-            type: "POST",
-            url: "get_subprogramspjt.php",
-            data:'id_pk='+id_pk,
-            success: function(result){
-                $("#subprogram-list").html(result);
-            }
-        });
-    });
-    </script>
-
-    
 <!-- User -->
      <script>
     $('#program-list1').on('change', function(){
@@ -379,29 +364,6 @@
         
         
         });
-
-         $('#modal_EditUser').on('show.bs.modal', function(e) {
-
-        var username = $(e.relatedTarget).data('username');
-        $(e.currentTarget).find('input[name="Username"]').val(username);
-        
-        var password = $(e.relatedTarget).data('password');
-        $(e.currentTarget).find('input[name="Password"]').val(password);
-        
-      
-        
-        
-        });
-
-        $('#modal_deleteUser').on('show.bs.modal', function(e) {
-
-        var iduser = $(e.relatedTarget).data('id-user');
-        $(e.currentTarget).find('input[name="idUserCabang"]').val(iduser);
-     
-        
-        
-        });
-
         </script>
 
         <script type="text/javaScript">

@@ -2,24 +2,16 @@
 include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 
-
+  $getidcabang = $_GET['id_cabang'];
+  $cabang =  mysqli_query($connect,"SELECT * FROM cabang WHERE id_cabang = '$getidcabang'");
+  $data_cabang = mysqli_fetch_array($cabang);
   $iduser = $_SESSION['id_user'];
-
-  //ambil informasi user id dan cabang id dari table user
-  $user = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM user WHERE id_user = '$iduser' "));
-  $idcabang = $user['id_cabang'];
-
-  //ambil informasi user id dan cabang id dari table cabang
-  $cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT nama_cabang FROM cabang WHERE id_cabang = '$idcabang'"));
-  $namacabang = $cabang['nama_cabang'];
-
-  $resultuntukrencana = $connect-> query("SELECT * FROM program_kerja WHERE id_cabang = '$idcabang' AND jenis = 'bpt' ");
 
   //ambil informasi jenis sub gardu
   $gardu = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM jenis_subgardu"));
 
   $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM gerbang"));
-
+	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,22 +84,13 @@ include ('connect.php'); //connect ke database
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Data Jumlah SDM Cabang <?php echo $namacabang; ?></small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small>Data Jumlah SDM Cabang <?php echo $data_cabang['nama_cabang']?></small></h2>
 
                     <div class="clearfix"></div>
                   </div>
 
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
-                      <div class="input-group buttonright" >
-                      <div class="btn-group  buttonrightfloat " >
-	                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Tambah <span class="caret"></span>
-	                    </button>
-	                    <ul role="menu" class="dropdown-menu pull-right">
-                            <li><a data-toggle="modal" data-target=".bs-pengumpultol" >Tambah Jumlah Pulantol</a></li>
-                    </ul>
-	                    </div>
-                      </div>
                     </div>
                    </div>
                   <div class="x_content">
@@ -134,7 +117,7 @@ include ('connect.php'); //connect ke database
                             <tbody>
 
                               <?php
-                                $jumlah_sdm = mysqli_query($connect, "SELECT * FROM pengumpul_tol join jenis_karyawan join gerbang on gerbang.id_gerbang=pengumpul_tol.id_gerbang WHERE pengumpul_tol.id_cabang = '$idcabang' group by pengumpul_tol.tahun, pengumpul_tol.id_gerbang");
+                                $jumlah_sdm = mysqli_query($connect, "SELECT * FROM pengumpul_tol join jenis_karyawan join gerbang on gerbang.id_gerbang=pengumpul_tol.id_gerbang WHERE pengumpul_tol.id_cabang = '$getidcabang' group by pengumpul_tol.tahun, pengumpul_tol.id_gerbang");
                                 $nomor = 1;
                                 while($data_jumlahsdm = mysqli_fetch_array($jumlah_sdm)){
                                   $idgerbanglist = $data_jumlahsdm['id_gerbang'];
@@ -287,105 +270,6 @@ include ('connect.php'); //connect ke database
 		  </div>
 		</div>
 	  </div>
-		
-    <!-- Modal Tambah Pengumpul Tol-->
-  <div class="modal fade bs-pengumpultol" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Tambah Jumlah Pulantol</h4>
-      </div>
-      <div class="modal-body">
-          <form action="tambah_jumlahsdm.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gerbang">Gerbang</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <select name ="idgerbang" class="select2_single form-control" tabindex="-1" required="required">
-                  <option></option>
-                  <?php
-					  $gerbang= mysqli_query($connect, "SELECT * FROM gerbang WHERE id_cabang ='$idcabang'");
-					  $idgerbang = ['id_gerbang'];
-					  while($datagerbang = mysqli_fetch_array($gerbang)){
-				  ?>
-              <option  value="<?php echo $datagerbang['id_gerbang'];?>"><?php echo $datagerbang['nama_gerbang'];?></option>
-              <?php }?>
-                <input name ="idcabang" type="text" id="idcabang" value="<?php echo $idcabang; ?>" hidden>
-              </select>
-            </div>
-             </div>
-
-			<div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name= "tahun" type="number" id="tahun" required="required" class="form-control col-md-7 col-xs-12">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kpl_gerbangtol">Kepala Gerbang Tol</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name= "idkpl_gerbangtol" type="text" value="5" hidden>
-                <input name= "kpl_gerbangtol" type="number" min="0" id="kpl_gerbangtol" required="required" class="form-control col-md-7 col-xs-12">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kspt">KSPT</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name= "idkspt" type="text" value="6" hidden>
-                <input name= "kspt" type="number" min="0" id="kspt" required="required" class="form-control col-md-7 col-xs-12">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kry_jasamarga">Karyawan Jasamarga</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name= "idkry_jasamarga" type="text" value="1" hidden>
-                <input name= "kry_jasamarga" type="number" min="0" id="kry_jasamarga" required="required" class="form-control col-md-7 col-xs-12">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kry_jlj">Karyawan JLJ</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name= "idkry_jlj" type="text" value="2" hidden>
-                <input name= "kry_jlj" type="number" min="0" id="kry_jlj" required="required" class="form-control col-md-7 col-xs-12">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kry_jlo">Karyawan JLO</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name= "idkry_jlo" type="text" value="3" hidden>
-                <input name= "kry_jlo" type="number" min="0" id="kry_jlo" required="required" class="form-control col-md-7 col-xs-12">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="sakit_permanen">Sakit Permanen</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name= "idsakit_permanen" type="text" value="4" hidden>
-                <input name= "sakit_permanen" type="number" min="0" id="sakit_permanen" required="required" class="form-control col-md-7 col-xs-12">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tugt">TUGT</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name= "idtugt" type="text" value="7" hidden>
-                <input name= "tugt" type="number" min="0" id="tugt" required="required" class="form-control col-md-7 col-xs-12">
-              </div>
-            </div>
-
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
-        </div>
-      </form>
-      </div>
-    </div>
-  </div>
-  <!-- End of Modal Tambah Pengumpul Tol-->
-
 		</div>
 
 <style>

@@ -2,18 +2,9 @@
 include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 
-
   $iduser = $_SESSION['id_user'];
 
-  //ambil informasi user id dan cabang id dari table user
-  $user = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM user WHERE id_user = '$iduser' "));
-  $idcabang = $user['id_cabang'];
-
-  //ambil informasi user id dan cabang id dari table cabang
-  $cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT nama_cabang FROM cabang WHERE id_cabang = '$idcabang'"));
-  $namacabang = $cabang['nama_cabang'];
-
-  $resultuntukrencana = $connect-> query("SELECT * FROM program_kerja WHERE id_cabang = '$idcabang' AND jenis = 'bpt' ");
+  $resultjs = $connect-> query("SELECT * FROM cabang");
 
   //ambil informasi jenis sub gardu
   $gardu = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM jenis_subgardu"));
@@ -92,7 +83,7 @@ include ('connect.php'); //connect ke database
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Jumlah Gardu Tersedia Cabang <?php echo $namacabang; ?></small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small>Jumlah Gardu Tersedia</small></h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -121,7 +112,6 @@ include ('connect.php'); //connect ke database
                                 <th rowspan="3">Cabang/Gerbang</th>
 								<th rowspan="3">Tahun</th>
                                 <th colspan="7">Jumlah Gardu Tersedia</th>
-                                <th rowspan="3">Aksi</th>
                               </tr>
                               <tr>
                                 <th colspan="3">Reguler</th>
@@ -141,52 +131,54 @@ include ('connect.php'); //connect ke database
                             </thead>
                             <tbody>
                               <?php
-                                $jmlgardu = mysqli_query($connect, "SELECT * FROM jml_gardutersedia join gerbang on gerbang.id_gerbang=jml_gardutersedia.id_gerbang WHERE jml_gardutersedia.id_cabang='$idcabang' group by jml_gardutersedia.tahun, jml_gardutersedia.id_gerbang");
+                                $jmlgardu = mysqli_query($connect, "SELECT * FROM jml_gardutersedia join cabang on cabang.id_cabang=jml_gardutersedia.id_cabang group by jml_gardutersedia.tahun, jml_gardutersedia.id_cabang");
                                 $nomor = 1;
                                 while($data_jmlgardu = mysqli_fetch_array($jmlgardu)){
-                                   $idgerbanglist = $data_jmlgardu['id_gerbang'];
-                                   $idsubgardulist = $data_jmlgardu['id_subgardu'];
+                                   $idcabang = $data_jmlgardu['id_cabang'];
 								   $tahun = $data_jmlgardu['tahun'];
 
-                                   //fething data dari tabel gerbang
-                                   $data_gerbang = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM gerbang WHERE id_gerbang = '$idgerbanglist'"));
-
                                   //fetching data untuk tabel bagian jumlah gardu tersedia
-                                  $data_gerbang_terbuka_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE tahun='$tahun' AND jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '1' AND jenis_subgardu.id_jenisgardu='1'"));
-                                  $data_gerbang_masuk_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE tahun='$tahun' AND jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '2' AND jenis_subgardu.id_jenisgardu='1'"));
-                                  $data_gerbang_keluar_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE tahun='$tahun' AND jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '3' AND jenis_subgardu.id_jenisgardu='1'"));
-                                  $data_gerbang_terbuka_gto_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE tahun='$tahun' AND jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '4' AND jenis_subgardu.id_jenisgardu='2'"));
-                                  $data_gerbang_masuk_gto_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE tahun='$tahun' AND jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '5' AND jenis_subgardu.id_jenisgardu='2'"));
-                                  $data_gerbang_keluar_gto_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE tahun='$tahun' AND jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '6' AND jenis_subgardu.id_jenisgardu='2'"));
-                                  $data_epass_tersedia = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM jml_gardutersedia, jenis_subgardu WHERE tahun='$tahun' AND jml_gardutersedia.id_gerbang = '$idgerbanglist' AND jml_gardutersedia.id_subgardu = '8' AND jenis_subgardu.id_jenisgardu='3'"));
+                                  $data_gerbang_terbuka_tersedia = mysqli_query($connect, "SELECT * FROM jml_gardutersedia WHERE tahun='$tahun' AND id_cabang = '$idcabang' AND id_subgardu = '1'");
+                                  $total_gerbang_terbuka_tersedia = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_terbuka_tersedia)) {
+								  $total_gerbang_terbuka_tersedia += $num['nilai'];}
+                                  $data_gerbang_masuk_tersedia = mysqli_query($connect, "SELECT * FROM jml_gardutersedia WHERE tahun='$tahun' AND id_cabang = '$idcabang' AND id_subgardu = '2'");
+                                  $total_gerbang_masuk_tersedia = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_masuk_tersedia)) {
+								  $total_gerbang_masuk_tersedia += $num['nilai'];}
+                                  $data_gerbang_keluar_tersedia = mysqli_query($connect, "SELECT * FROM jml_gardutersedia WHERE tahun='$tahun' AND id_cabang = '$idcabang' AND id_subgardu = '3'");
+                                  $total_gerbang_keluar_tersedia = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_keluar_tersedia)) {
+								  $total_gerbang_keluar_tersedia += $num['nilai'];}
+                                  $data_gerbang_terbuka_gto_tersedia = mysqli_query($connect, "SELECT * FROM jml_gardutersedia WHERE tahun='$tahun' AND id_cabang = '$idcabang' AND id_subgardu = '4'");
+                                  $total_gerbang_terbuka_gto_tersedia = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_terbuka_gto_tersedia)) {
+								  $total_gerbang_terbuka_gto_tersedia += $num['nilai'];}
+                                  $data_gerbang_masuk_gto_tersedia = mysqli_query($connect, "SELECT * FROM jml_gardutersedia WHERE tahun='$tahun' AND id_cabang = '$idcabang' AND id_subgardu = '5'");
+                                  $total_gerbang_masuk_gto_tersedia = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_masuk_gto_tersedia)) {
+								  $total_gerbang_masuk_gto_tersedia += $num['nilai'];}
+                                  $data_gerbang_keluar_gto_tersedia = mysqli_query($connect, "SELECT * FROM jml_gardutersedia WHERE tahun='$tahun' AND id_cabang = '$idcabang' AND id_subgardu = '6'");
+                                  $total_gerbang_keluar_gto_tersedia = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_keluar_gto_tersedia)) {
+								  $total_gerbang_keluar_gto_tersedia += $num['nilai'];}
+                                  $data_epass_tersedia = mysqli_query($connect, "SELECT * FROM jml_gardutersedia WHERE tahun='$tahun' AND id_cabang = '$idcabang' AND id_subgardu = '8'");
+                                  $total_epass_tersedia = 0;
+								  while ($num = mysqli_fetch_array($data_epass_tersedia)) {
+								  $total_epass_tersedia += $num['nilai'];}
 
                             ?>
                               <tr>
                                 <td><?php echo $nomor; $nomor++?></td>
-                                <td><?php echo $data_gerbang['nama_gerbang']?></td>
+                                <td><a href="cabang_jmlgardu.php?id_cabang=<?php echo $data_jmlgardu['id_cabang'];?>"><font color="#337ab7"><?php echo $data_jmlgardu['nama_cabang']?></font></a></td>
 								<td><?php echo $data_jmlgardu['tahun'];?></td>
-                                <td><?php echo $data_gerbang_keluar_tersedia['nilai']?></td>
-                                <td><?php echo $data_gerbang_masuk_tersedia['nilai']?></td>
-                                <td><?php echo $data_gerbang_terbuka_tersedia['nilai']?></td>
-                                <td><?php echo $data_gerbang_keluar_gto_tersedia['nilai']?></td>
-                                <td><?php echo $data_gerbang_masuk_gto_tersedia['nilai']?></td>
-								<td><?php echo $data_gerbang_terbuka_gto_tersedia['nilai']?></td>
-                                <td><?php echo $data_epass_tersedia['nilai']?></td>
-								<td>
-								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal" 
-								 data-id-gerbang ="<?php echo $data_gerbang['id_gerbang']?>"
-								 data-tahun ="<?php echo $data_jmlgardu['tahun']?>"
-								 data-data1="<?php echo $data_gerbang_terbuka_tersedia['nilai']?>"
-                                 data-data2="<?php echo $data_gerbang_masuk_tersedia['nilai']?>"
-                                 data-data3="<?php echo $data_gerbang_keluar_tersedia['nilai']?>"
-                                 data-data4="<?php echo $data_gerbang_terbuka_gto_tersedia['nilai']?>"
-                                 data-data5="<?php echo $data_gerbang_masuk_gto_tersedia['nilai']?>"
-								 data-data6="<?php echo $data_gerbang_keluar_gto_tersedia['nilai']?>"
-                                 data-data7="<?php echo $data_epass_tersedia['nilai']?>">Edit</button>																 
-								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
-								 data-id-gerbang ="<?php echo $data_gerbang['id_gerbang']?>"
-								 data-tahun ="<?php echo $data_jmlgardu['tahun']?>">Delete</button>	
-								 </td>
+                                <td><?php echo $total_gerbang_keluar_tersedia?></td>
+                                <td><?php echo $total_gerbang_masuk_tersedia?></td>
+                                <td><?php echo $total_gerbang_terbuka_tersedia?></td>
+                                <td><?php echo $total_gerbang_keluar_gto_tersedia?></td>
+                                <td><?php echo $total_gerbang_masuk_gto_tersedia?></td>
+								<td><?php echo $total_gerbang_terbuka_gto_tersedia?></td>
+                                <td><?php echo $total_epass_tersedia?></td>
                               </tr>
                               <?php }?>
                             </tbody>
@@ -317,33 +309,36 @@ include ('connect.php'); //connect ke database
           </div>
           <div class="modal-body">
               <form action="tambah_gardutersedia.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gerbang">Gerbang</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select name ="idgerbang" class="select2_single form-control" tabindex="-1" required="required">
-                      <option></option>
-                      <?php
-                                      $gerbang= mysqli_query($connect, "SELECT * FROM gerbang WHERE id_cabang ='$idcabang'");
-                                      $idgerbang = ['id_gerbang'];
-                                      while($datagerbang = mysqli_fetch_array($gerbang)){
-                                  ?>
-                  <option  value="<?php echo $datagerbang['id_gerbang'];?>"><?php echo $datagerbang['nama_gerbang'];?></option>
-
-                  <?php }?>
-                                  <input name ="idcabang" type="text" id="idcabang" value="<?php echo $idcabang; ?>" hidden>
-
-                  </select>
-                </div>
-                 </div>
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="cabang">Cabang</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<select required="required" name="cabang" id="cabang-list" class="select2_single form-control" tabindex="-1">
+						<option value="">---Pilih Cabang---</option>
+						<?php
+						if ($resultjs->num_rows > 0) {
+							// output data of each row
+							while($row = $resultjs -> fetch_assoc()) {
+						?>
+							<option value="<?php echo $row["id_cabang"]; ?>"><?php echo $row["nama_cabang"]; ?> </option>
+						<?php
+						}}?>
+					</select>
+				</div>
+			   </div>
+			  <div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="gerbang">Gerbang</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<select required="required" name="gerbang" id="gerbang-list" class="select2_single form-control" tabindex="-1">
+						<option>---Pilih Gerbang---</option>
+					</select>
+				</div>
+			  </div>
 				 <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
 					<input name ="tahun" type="number" id="tahun" required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
-
-
                 <div>
                     <h4><b>Gardu Reguler</b></h4>
                 </div>
@@ -413,7 +408,7 @@ include ('connect.php'); //connect ke database
           </div>
         </div>
       </div>
-      <!--End of Modal Tambah Lalin Transaksi Tingg-->
+      <!--End of Modal Tambah Lalin Transaksi Tinggi-->
 
 		</div>
 

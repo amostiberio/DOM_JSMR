@@ -2,24 +2,16 @@
 include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 
-
+  $getidcabang = $_GET['id_cabang'];
+  $cabang =  mysqli_query($connect,"SELECT * FROM cabang WHERE id_cabang = '$getidcabang'");
+  $data_cabang = mysqli_fetch_array($cabang);
   $iduser = $_SESSION['id_user'];
-
-  //ambil informasi user id dan cabang id dari table user
-  $user = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM user WHERE id_user = '$iduser' "));
-  $idcabang = $user['id_cabang'];
-
-  //ambil informasi user id dan cabang id dari table cabang
-  $cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT nama_cabang FROM cabang WHERE id_cabang = '$idcabang'"));
-  $namacabang = $cabang['nama_cabang'];
-
-  $resultuntukrencana = $connect-> query("SELECT * FROM program_kerja WHERE id_cabang = '$idcabang' AND jenis = 'bpt' ");
 
   //ambil informasi jenis sub gardu
   $gardu = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM jenis_subgardu"));
 
   $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM gerbang"));
-
+	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,7 +75,6 @@ include ('connect.php'); //connect ke database
                 <h3>Laporan KPI</h3>
               </div>
 
-
             </div>
 
             <div class="clearfix"></div>
@@ -92,23 +83,13 @@ include ('connect.php'); //connect ke database
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Jumlah Gardu Tersedia Cabang <?php echo $namacabang; ?></small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small>Jumlah Gardu Tersedia Cabang <?php echo $data_cabang['nama_cabang']?></small></h2>
 
                     <div class="clearfix"></div>
                   </div>
 
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
-                      <div class="input-group buttonright" >
-                      <div class="btn-group  buttonrightfloat " >
-	                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Tambah <span class="caret"></span>
-	                    </button>
-	                    <ul role="menu" class="dropdown-menu pull-right">
-                           <li><a data-toggle="modal" data-target=".bs-jmlgardutersedia" >Tambah Jumlah Gardu Tersedia</a></li>
-                    </ul>
-	                    </div>
-
-                      </div>
                     </div>
                    </div>
                   <div class="x_content">
@@ -141,7 +122,7 @@ include ('connect.php'); //connect ke database
                             </thead>
                             <tbody>
                               <?php
-                                $jmlgardu = mysqli_query($connect, "SELECT * FROM jml_gardutersedia join gerbang on gerbang.id_gerbang=jml_gardutersedia.id_gerbang WHERE jml_gardutersedia.id_cabang='$idcabang' group by jml_gardutersedia.tahun, jml_gardutersedia.id_gerbang");
+                                $jmlgardu = mysqli_query($connect, "SELECT * FROM jml_gardutersedia join gerbang on gerbang.id_gerbang=jml_gardutersedia.id_gerbang WHERE jml_gardutersedia.id_cabang='$getidcabang' group by jml_gardutersedia.tahun, jml_gardutersedia.id_gerbang");
                                 $nomor = 1;
                                 while($data_jmlgardu = mysqli_fetch_array($jmlgardu)){
                                    $idgerbanglist = $data_jmlgardu['id_gerbang'];
@@ -305,117 +286,7 @@ include ('connect.php'); //connect ke database
                       </div>
                     </div>
                   </div>
-	
-      <!-- Modal Tambah Jumlah Gardu Tersedia-->
-      <div class="modal fade bs-jmlgardutersedia" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">Tambah Jumlah Gardu Tersedia</h4>
-          </div>
-          <div class="modal-body">
-              <form action="tambah_gardutersedia.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gerbang">Gerbang</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select name ="idgerbang" class="select2_single form-control" tabindex="-1" required="required">
-                      <option></option>
-                      <?php
-                                      $gerbang= mysqli_query($connect, "SELECT * FROM gerbang WHERE id_cabang ='$idcabang'");
-                                      $idgerbang = ['id_gerbang'];
-                                      while($datagerbang = mysqli_fetch_array($gerbang)){
-                                  ?>
-                  <option  value="<?php echo $datagerbang['id_gerbang'];?>"><?php echo $datagerbang['nama_gerbang'];?></option>
-
-                  <?php }?>
-                                  <input name ="idcabang" type="text" id="idcabang" value="<?php echo $idcabang; ?>" hidden>
-
-                  </select>
-                </div>
-                 </div>
-				 <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
-				<div class="col-md-6 col-sm-6 col-xs-12">
-					<input name ="tahun" type="number" id="tahun" required="required" class="form-control col-md-7 col-xs-12">
-				</div>
-			  </div>
-
-
-                <div>
-                    <h4><b>Gardu Reguler</b></h4>
-                </div>
-
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_tersedia">Gardu Terbuka</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_terbuka_tersedia" type="text" value="1" hidden>
-                    <input name= "gardu_terbuka_tersedia" type="number" min="0" id="gardu_terbuka_tersedia" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_masuk_tersedia">Gardu Masuk</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_masuk_tersedia" type="text" value="2" hidden>
-                    <input name= "gardu_masuk_tersedia" type="number" min="0" id="gardu_masuk_tersedia" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar_tersedia">Gardu Keluar</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_keluar_tersedia" type="text" value="3" hidden>
-                    <input name= "gardu_keluar_tersedia" type="number" min="0" id="gardu_keluar_tersedia" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-
-                <div>
-                    <h4><b>Gardu GTO</b></h4>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto_tersedia">Gardu Terbuka</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_terbuka_gto_tersedia" type="text" value="4" hidden>
-                    <input name= "gardu_terbuka_gto_tersedia" type="number" min="0" id="gardu_terbuka_gto_tersedia" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto_tersedia">Gardu Masuk</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_masuk_gto_tersedia" type="text" value="5" hidden>
-                    <input name= "gardu_masuk_gto_tersedia" type="number" min="0" id="gardu_masuk_gto_tersedia" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar_gto">Gardu Keluar</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_keluar_gto_tersedia" type="text" value="6" hidden>
-                    <input name= "gardu_keluar_gto_tersedia" type="number" min="0" id="gardu_keluar_gto_tersedia" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div><br>
-
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="epass_gto_tersedia">E-Pass</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idepass_tersedia" type="text" value="8" hidden>
-                    <input name= "epass_tersedia" type="text" min="0" id="epass_gto_tersedia" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-
-
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-              <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
-            </div>
-          </form>
-          </div>
-        </div>
-      </div>
-      <!--End of Modal Tambah Lalin Transaksi Tingg-->
-
-		</div>
+	      		</div>
 
 <style>
 .table th {
@@ -439,7 +310,7 @@ include ('connect.php'); //connect ke database
       </div>
     </div>
 <!-- scripts -->
-<?php include 'templates/scripts.php' ?>
+	<?php include 'templates/scripts.php' ?>
 
 
 
