@@ -4,7 +4,8 @@
 		if(isset($_POST['tambah'])){
 			$idcabang = $_POST['idcabang'];
 		 	$idgerbang= $_POST['idgerbang'];
-
+			$idsemester= $_POST['idsemester'];
+			$tahun = $_POST['tahun'];
 			$idgardu_terbuka = $_POST['idgardu_terbuka'];
       $gardu_terbuka = $_POST['gardu_terbuka'];
 
@@ -32,14 +33,14 @@
 
 			//insert data
 			$insert_waktutransaksi= mysqli_query($connect,"INSERT INTO waktu_transaksi VALUES
-      ('','$gardu_terbuka','$idgerbang','$idgardu_terbuka', '$idcabang'),
-			('','$gardu_masuk','$idgerbang','$idgardu_masuk', '$idcabang'),
-      ('','$gardu_keluar','$idgerbang','$idgardu_keluar', '$idcabang'),
-			('','$gardu_terbuka_gto','$idgerbang','$idgardu_terbuka_gto', '$idcabang'),
-      ('','$gardu_masuk_gto','$idgerbang','$idgardu_masuk_gto', '$idcabang'),
-      ('','$gardu_keluar_gto','$idgerbang','$idgardu_keluar_gto', '$idcabang')");
+      ('','$gardu_terbuka', '$tahun', '$idgerbang','$idgardu_terbuka', '$idcabang', '$idsemester'),
+			('','$gardu_masuk', '$tahun' ,'$idgerbang','$idgardu_masuk', '$idcabang', '$idsemester'),
+      ('','$gardu_keluar', '$tahun' ,'$idgerbang','$idgardu_keluar', '$idcabang', '$idsemester'),
+			('','$gardu_terbuka_gto', '$tahun' ,'$idgerbang','$idgardu_terbuka_gto', '$idcabang', '$idsemester'),
+      ('','$gardu_masuk_gto', '$tahun' ,'$idgerbang','$idgardu_masuk_gto', '$idcabang', '$idsemester'),
+      ('','$gardu_keluar_gto','$tahun', '$idgerbang','$idgardu_keluar_gto', '$idcabang','$idsemester')");
 
-      $insert_panjangantrian= mysqli_query($connect,"INSERT INTO panjang_antrian VALUES ('','$panjang_antrian','$idgerbang')");
+      $insert_panjangantrian= mysqli_query($connect,"INSERT INTO panjang_antrian VALUES ('','$panjang_antrian','$tahun', '$idgerbang', '$idsemester', '$idcabang')");
 
 			if($insert_waktutransaksi AND $insert_panjangantrian){
 ?>

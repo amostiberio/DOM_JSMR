@@ -112,8 +112,8 @@ include ('connect.php'); //connect ke database
 								                <th colspan="1">(2)</th>
                                 <th colspan="1">(3)</th>
 								                <th colspan="1">(4)</th>
-                                <th colspan="1"></th>
-                                <th colspan="1"></th>
+                                <th colspan="1">x</th>
+                                <th colspan="1">x</th>
                               </tr>
 
                             </thead>
@@ -234,7 +234,7 @@ include ('connect.php'); //connect ke database
 
 
                               ?>
-                              <tr rowspan="6">
+                              <tr>
                                 <td rowspan="6"><?php echo $nomor; $nomor++;?></td>
                                 <td rowspan="6"><?php echo $data_cabang['nama_cabang'] ?></td>
                                 <td><?php echo "Gardu Masuk Sistem Tertutup"?></td>
