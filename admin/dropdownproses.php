@@ -57,4 +57,18 @@ if(isset($_POST['dropdownTWSPJT'])){
 
 
 
+        if(isset($_POST['dropdownTahun'])){
+            $tahun = $_POST['tahun'];
+         
+            if($tahun > 0 ){
+?>
+
+                <script>document.location.href="csi.php?tahun=<?php echo $tahun;?>";</script>
+<?php       }
+            else 
+?>               
+                <script>document.location.href="csi.php";</script>
+<?php       
+}
+
 ?>

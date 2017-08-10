@@ -29,7 +29,7 @@
 <?php		
 		}else{ ?>
 			<script> window.alert('Data Gagal Ditambahkan') </script>
-			<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
+			<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script> 
 			 
 <?php 		 }
 		}

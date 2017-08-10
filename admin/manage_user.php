@@ -202,7 +202,7 @@ include ('connect.php'); //connect ke database
                           </button>
                           <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body text-center">
                         <form action="editdataUser.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" ">
                          <div class="alert alert-danger" role="alert">
 		 				               <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>

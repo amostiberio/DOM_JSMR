@@ -12,7 +12,7 @@ include 'connect.php';
             else 
 ?>               
                 <script>document.location.href="laporan_bpt.php";</script>
-<?php        }
+<?php       }
 
 if(isset($_POST['dropdownTWBPLL'])){
 			$triwulan = $_POST['dropDownListTW'];
@@ -55,6 +55,18 @@ if(isset($_POST['dropdownTWSPJT'])){
 <?php        }
 
 
+        if(isset($_POST['dropdownTahun'])){
+            $tahun = $_POST['tahun'];
+         
+            if($tahun > 0 ){
+?>
 
+                <script>document.location.href="csi.php?tahun=<?php echo $tahun;?>";</script>
+<?php       }
+            else 
+?>               
+                <script>document.location.href="csi.php";</script>
+<?php       
+}
 
 ?>

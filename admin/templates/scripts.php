@@ -618,6 +618,43 @@
             var idsemester2= $(e.relatedTarget).data('id-semester2');
             $(e.currentTarget).find('input[name="edit_idsemester2"]').val(idsemester2);
              });
+
+
+            $('#modal_editcsi').on('show.bs.modal', function(e) {
+            //untuk id nya
+            var rencanasms1 = $(e.relatedTarget).data('id-rencanasms1');
+            $(e.currentTarget).find('input[name="idrencanasms1"]').val(rencanasms1);
+
+             var rencanasms2 = $(e.relatedTarget).data('id-rencanasms2');
+            $(e.currentTarget).find('input[name="idrencanasms2"]').val(rencanasms2);
+            
+            var realisasisms1 = $(e.relatedTarget).data('id-realisasisms1');
+            $(e.currentTarget).find('input[name="idrealisasisms1"]').val(realisasisms1);
+            
+            var realisasisms2 = $(e.relatedTarget).data('id-realisasisms2');
+            $(e.currentTarget).find('input[name="idrealisasisms2"]').val(realisasisms2);
+
+            
+
+            var nilairencanasms1 = $(e.relatedTarget).data('nilai-rencanasms1');
+            $(e.currentTarget).find('input[name="nilaiRencanaSms1"]').val(nilairencanasms1);
+      
+            var nilairencanasms2 = $(e.relatedTarget).data('nilai-rencanasms2');
+            $(e.currentTarget).find('input[name="nilaiRencanaSms2"]').val(nilairencanasms2);
+            
+            var nilairealisasisms1 = $(e.relatedTarget).data('nilai-realisasisms1');
+            $(e.currentTarget).find('input[name="nilaiRealisasiSms1"]').val(nilairealisasisms1);
+            
+
+            var nilairealisasisms2 = $(e.relatedTarget).data('nilai-realisasisms2');
+            $(e.currentTarget).find('input[name="nilaiRealisasiSms2"]').val(nilairealisasisms2);
+      
+            
+             });
+
+
+       
+            
 </script>
         <script type="text/javaScript">
 
