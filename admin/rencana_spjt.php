@@ -480,17 +480,19 @@ include ('connect.php'); //connect ke database
 
 						  
 					      <div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-							  <select required="required" name= "tahun" class="select2_single form-control" tabindex="-1">
-							    <option value="">Pilih Tahun</option>
-								<option value="2015">2015</option>
-								<option value="2016">2016</option>
-								<option value="2017">2017</option>
-								<option value="2018">2018</option>
-							  </select>
-							</div>
-						  </div><br>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
+                               <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class='input-group date' id='myDatepickerFormMonitoring'>
+                                    <input type='text' class="form-control" name= "tahun"  />
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                                </div>
+                          </div>
+
+
+                          <br>
 						  <div class="col-md-6">
 							  <h4>Triwulan 1</h4>
 							  <div class="form-group">

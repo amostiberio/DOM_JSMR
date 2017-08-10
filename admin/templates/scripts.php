@@ -712,6 +712,9 @@
     $('#myDatepickerFormRealisasiCSI').datetimepicker({
         format: 'YYYY'
     });
+     $('#myDatepickerFormMonitoring').datetimepicker({
+        format: 'YYYY'
+    });
 
 
 
