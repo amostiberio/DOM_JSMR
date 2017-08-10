@@ -72,14 +72,15 @@
                     <li><a><i class="fa fa-book"></i> Laporan KPI <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                         <li><a>Waktu Transaksi<span class="fa fa-chevron-down"></span></a>
-							<ul class="nav child_menu">
-							  <li><a href="waktu_transaksi1.php">Waktu Transaksi 1</a></li>
-							  <li><a href="waktu_transaksi2.php">Waktu Transaksi 2 SPM</a></li>
-							</ul>
-						</li>
-					    <li><a href="lalin_jj.php">Lalin Jam-jaman</a></li>
-					    <li><a href="jml_gardu.php">Jumlah Gardu</a></li>
-						<li><a href="vc_ratio.php">VC Ratio</a></li>
+        							<ul class="nav child_menu">
+        							  <li><a href="waktu_transaksi1.php">Waktu Transaksi 1</a></li>
+        							  <li><a href="waktu_transaksi2.php">Waktu Transaksi 2 SPM</a></li>
+        							</ul>
+						          </li>
+          					    <li><a href="lalin_jj.php">Lalin Jam-jaman</a></li>
+          					    <li><a href="jml_gardu.php">Jumlah Gardu</a></li>
+          						  <li><a href="vc_ratio.php">VC Ratio</a></li>
+                        <li><a href="csi.php">Customer Satisfication Index</a></li>
                         <li><a href="jumlah_sdm.php">Jumlah SDM</a></li>
                       </ul>
                     </li>
