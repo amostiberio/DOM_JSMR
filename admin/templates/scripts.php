@@ -61,6 +61,10 @@
     <script type="text/javascript" src="../vendors/jspdf/libs/html2canvas/html2canvas.min.js"></script>
     <script type="text/javascript" src="../vendors/jspdf/tableExport.js"></script>
 
+     <!-- bootstrap-datetimepicker -->    
+    <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
 
@@ -697,6 +701,19 @@
         result = "\\@";
       return result;
     }
+
+    $('#myDatepickerFilter').datetimepicker({
+        format: 'YYYY'
+    });
+
+    $('#myDatepickerFormRencanaCSI').datetimepicker({
+        format: 'YYYY'
+    });
+    $('#myDatepickerFormRealisasiCSI').datetimepicker({
+        format: 'YYYY'
+    });
+
+
 
   </script>
   <style>

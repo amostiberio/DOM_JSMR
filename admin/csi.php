@@ -99,30 +99,21 @@ if(isset($_GET['tahun'])){
                     <div class="clearfix"></div>
                   </div>
 
-
-                   <div class="title_right">
-                    <div class="col-md-12 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
-                      <div class="input-group buttonleft" >
-                      <div class="btn-group  buttonleftfloat " >
-                      <h5 class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</h5>
-                        <div class="col-md-8 col-sm-9 col-xs-12">
-                          <form action="dropdownproses.php" method="POST">
-                            <select name= "tahun" class="select2_single form-control" tabindex="-1">
-                                    <option value="0">Pilih Tahun</option>                            
-                                    <option value="2015" <?php if ($nilaiTahun =='2015') echo 'selected'?>>2015</option>
-                                    <option value="2016" <?php if ($nilaiTahun == '2016') echo 'selected'?>>2016</option>
-                                    <option value="2017" <?php if ($nilaiTahun == '2017') echo 'selected'?>>2017</option>
-                                    <option value="2018" <?php if ($nilaiTahun == '2018') echo 'selected'?>>2018</option>                                                    
-                            </select>
-                            <button type="submit" class="btn btn-primary" name="dropdownTahun">Lihat</button>
-                          </form>
+                  <form action="dropdownproses.php" method="POST">
+                  <div class='col-sm-2'>                    
+                    <div class="form-group">
+                        <div class='input-group date' id='myDatepickerFilter'>
+                            <input type='text' class="form-control" name= "tahun"  />
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
                         </div>
-                      
-                      </div>
-
-                      </div>
                     </div>
-                   </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary" name="dropdownTahun">Lihat</button>
+                  </form>
+
+                  
                    <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
                       <div class="input-group buttonright" >
@@ -277,19 +268,18 @@ if(isset($_GET['tahun'])){
                 <!-- End of Dropdown list Gerbang -->
 
                 <!-- Dropdown list Tahun -->
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select  name= "tahun" required="required" class="select2_single form-control" tabindex="-1">
-                      <option value="">Pilih Tahun</option>
-                      <option value="2015">2015</option>
-                      <option value="2016">2016</option>
-                      <option value="2017">2017</option>
-                      <option value="2018">2018</option>
-                      <option value="2019">2019</option>
-                    </select>
+                  <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
+                       <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class='input-group date' id='myDatepickerFormRencanaCSI'>
+                            <input type='text' class="form-control" name= "tahun"  />
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        </div>
                   </div>
-                </div>
+                
                   <!-- Dropdown list Tahun -->
 
                 <!-- Dropdown list Semester -->
@@ -370,19 +360,18 @@ if(isset($_GET['tahun'])){
                 <!-- End of Dropdown list Gerbang -->
 
                 <!-- Dropdown list Tahun -->
+              
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select  name= "tahun" required="required" class="select2_single form-control" tabindex="-1">
-                      <option value="">Pilih Tahun</option>
-                      <option value="2015">2015</option>
-                      <option value="2016">2016</option>
-                      <option value="2017">2017</option>
-                      <option value="2018">2018</option>
-                      <option value="2019">2019</option>
-                    </select>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
+                       <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class='input-group date' id='myDatepickerFormRealisasiCSI'>
+                            <input type='text' class="form-control" name= "tahun"  />
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        </div>
                   </div>
-                </div>
                   <!-- Dropdown list Tahun -->
 
                 <!-- Dropdown list Semester -->
