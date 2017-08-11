@@ -90,7 +90,7 @@ include ('connect.php'); //connect ke database
                             <thead >
                               <tr >
                                 <th rowspan="4">No</th>
-                                <th rowspan="4">Gerbang</th>
+                                <th rowspan="4">Cabang</th>
                                 <th rowspan="4">Tahun</th>
                                 <th rowspan="4">Semester</th>
                                 <!-- Gardu REGULER -->
@@ -219,7 +219,6 @@ include ('connect.php'); //connect ke database
                                  </a></button>
                                 </td>
                               </tr>
-
                               <tr>
                                 <td><?php echo $data_semester2['semester'];?></td>
                                 <td><?php echo $total_data_gerbang_terbuka2;?></td>
@@ -229,8 +228,8 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo $total_data_gerbang_masuk_gto2;?></td>
                                 <td><?php echo $total_data_gerbang_keluar_gto2;?></td>
                                 <td><?php echo $total_data_panjang_antrian2;?></td>
-
                               </tr>
+
 
                                 <?php } ?>
                             </tbody>

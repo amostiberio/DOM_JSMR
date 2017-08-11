@@ -2,20 +2,22 @@
 include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 
-  $id_cabang = $_GET['id'];
-  $cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM cabang WHERE id_cabang = '$id_cabang'"));
+$iduser = $_SESSION['id_user'];
 
-  $namacabang = $cabang['nama_cabang'];
+//ambil informasi user id dan cabang id dari table user
+$user = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM user WHERE id_user = '$iduser' "));
+$idcabang = $user['id_cabang'];
 
-  $iduser = $_SESSION['id_user'];
+//ambil informasi user id dan cabang id dari table cabang
+$cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT nama_cabang FROM cabang WHERE id_cabang = '$idcabang'"));
+$namacabang = $cabang['nama_cabang'];
 
-  //ambil informasi user id dan cabang id dari table cabang
+$resultuntukrencana = $connect-> query("SELECT * FROM program_kerja WHERE id_cabang = '$idcabang' AND jenis = 'bpt' ");
 
+//ambil informasi jenis sub gardu
+$gardu = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM jenis_subgardu"));
 
-  //ambil informasi jenis sub gardu
-  $gardu = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM jenis_subgardu"));
-
-  $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM gerbang"));
+$idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM gerbang"));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -149,7 +151,7 @@ include ('connect.php'); //connect ke database
                             <tbody>
                             <?php
                             $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join triwulan join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND triwulan.id_tw=waktu_transaksi.id_tw  AND triwulan.id_tw=panjang_antrian.id_tw
-                                                                            AND waktu_transaksi.id_semester=semester.id_semester AND semester.id_semester=panjang_antrian.id_semester WHERE waktu_transaksi.id_cabang = '$id_cabang' group by waktu_transaksi.id_gerbang");
+                                                                            AND waktu_transaksi.id_semester=semester.id_semester AND semester.id_semester=panjang_antrian.id_semester WHERE waktu_transaksi.id_cabang = '$idcabang' group by waktu_transaksi.id_gerbang");
                             $nomor = 1;
                             while($data_waktu_transaksi = mysqli_fetch_array($rata_waktu_transaksi)){
 
@@ -381,7 +383,7 @@ include ('connect.php'); //connect ke database
 
     <!-- Modal Content -->
 		<div class="x_content">
-      <!-- Modal Delete Waktu Transaksi Semester 1 TW 1 -->
+      <!-- Modal Delete Waktu Transaksi Semester 1 TW 1 Dan TW 2-->
       <div class="modal fade bs-delete-modals1tw1" id="modal_deletewaktutransaksis1tw1admin" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -390,13 +392,13 @@ include ('connect.php'); //connect ke database
               <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
             </div>
             <div class="modal-body">
-              <form action="editwaktutransaksi1_admin.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
+              <form action="editwaktutransaksi1.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
                 <div class="alert alert-danger" role="alert">
                   <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
                   <h4> Anda yakin untuk menghapus data rencana ini? </h4>
                 </div>
                 <h2 style="color:red;"></h2>
-                <form action="editwaktutransaksi1_admin.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                <form action="editwaktutransaksi1.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                   <input name ="edit_idgerbang" type="text" id="waktutransaksi1" value="" hidden>
                   <input name ="edit_idsemester1" type="text" id="waktutransaksi1" value="" hidden>
                   <input name ="edit_idtws1" type="text" id="waktutransaksi1" value="" hidden>
@@ -409,9 +411,9 @@ include ('connect.php'); //connect ke database
               </div>
             </div>
           </div>
-        <!--End of Modal Delete Waktu Transaksi Semester 1 TW 1 -->
+        <!--End of Modal Delete Waktu Transaksi Semester 1 TW 1 Dan TW 2 -->
 
-        <!-- Modal Modal Edit Waktu Transaksi Semester 1 TW 1 -->
+        <!-- Modal Modal Edit Waktu Transaksi Semester 1 TW 1 Dan TW 2 -->
   			 <div class="modal fade bs-edit-modals1tw1" id="modal_editwaktutransaksis1tw1admin" tabindex="-1" role="dialog" aria-hidden="true">
            <div class="modal-dialog modal-lg">
              <div class="modal-content">
@@ -420,7 +422,7 @@ include ('connect.php'); //connect ke database
                  <h4 class="modal-title" id="myModalLabel">Edit Rencana</h4>
                </div>
                <div class="modal-body">
-                 <form action="editwaktutransaksi1_admin.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                 <form action="editwaktutransaksi1.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                    <input name ="edit_idgerbangterbukas1" type="number" id="waktutransaksi1" value="" hidden>
                    <input name ="edit_idgerbangmasuks1" type="number" id="waktutransaksi1" value="" hidden>
                    <input name ="edit_idgerbangkeluars1" type="number" id="waktutransaksi1" value="" hidden>
@@ -500,7 +502,9 @@ include ('connect.php'); //connect ke database
               </div>
             </div>
           </div>
-          <!-- End of Modal Edit Waktu Transaksi Semester 1 TW 1-->
+          <!-- End of Modal Edit Waktu Transaksi Semester 1 TW 1 Dan TW 2-->
+
+
 
           <!-- Modal Delete Waktu Transaksi Semester 2 TW 3-->
           <div class="modal fade bs-delete-modals2tw3" id="modal_deletewaktutransaksis2tw3admin" tabindex="-1" role="dialog" aria-hidden="true">
@@ -511,7 +515,7 @@ include ('connect.php'); //connect ke database
                   <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
                 </div>
                 <div class="modal-body">
-                  <form action="editwaktutransaksi1_admin.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
+                  <form action="editwaktutransaksi1.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
                     <div class="alert alert-danger" role="alert">
                       <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
                       <h4> Anda yakin untuk menghapus data rencana ini? </h4>
@@ -541,7 +545,7 @@ include ('connect.php'); //connect ke database
                      <h4 class="modal-title" id="myModalLabel">Edit Rencana</h4>
                    </div>
                    <div class="modal-body">
-                     <form action="editwaktutransaksi1_admin.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                     <form action="editwaktutransaksi1.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                        <input name ="edit_idgerbangterbukas2" type="number" id="waktutransaksi1" value="" hidden>
                        <input name ="edit_idgerbangmasuks2" type="number" id="waktutransaksi1" value="" hidden>
                        <input name ="edit_idgerbangkeluars2" type="number" id="waktutransaksi1" value="" hidden>
@@ -623,7 +627,6 @@ include ('connect.php'); //connect ke database
               </div>
               <!-- End of Modal Edit Waktu Transaksi Semester 2 TW 3-->
 
-
 			<!-- Modal Tambah Waktu Transaksi-->
 			<div class="modal fade bs-rencana" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog modal-lg">
@@ -643,7 +646,7 @@ include ('connect.php'); //connect ke database
                     <select name ="idgerbang" class="select2_single form-control" tabindex="-1" required="required">
                       <option></option>
                       <?php
-                          $gerbang= mysqli_query($connect, "SELECT * FROM gerbang WHERE id_cabang ='$id_cabang'");
+                          $gerbang= mysqli_query($connect, "SELECT * FROM gerbang WHERE id_cabang ='$idcabang'");
                           $idgerbang = ['id_gerbang'];
                           while($datagerbang = mysqli_fetch_array($gerbang)){
                       ?>
@@ -688,7 +691,7 @@ include ('connect.php'); //connect ke database
                        <?php
                           }
                         ?>
-                        <input name ="idcabang" type="text" id="idcabang" value="<?php echo $id_cabang; ?>" hidden>
+                        <input name ="idcabang" type="text" id="idcabang" value="<?php echo $idcabang; ?>" hidden>
                       </select>
                     </div>
                   </div>

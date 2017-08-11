@@ -61,7 +61,7 @@
     <script type="text/javascript" src="../vendors/jspdf/libs/html2canvas/html2canvas.min.js"></script>
     <script type="text/javascript" src="../vendors/jspdf/tableExport.js"></script>
 
-     <!-- bootstrap-datetimepicker -->    
+     <!-- bootstrap-datetimepicker -->
     <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
 
@@ -519,8 +519,8 @@
 
 
         });
-        //untuk modal edit waktu transaksi admin semester 1
-                $('#modal_editwaktutransaksis1admin').on('show.bs.modal', function(e) {
+        //untuk modal edit waktu transaksi admin semester 1 tw1 dan 2
+                $('#modal_editwaktutransaksis1tw1admin').on('show.bs.modal', function(e) {
               //untuk id nya
                var idgerbangterbukas1 = $(e.relatedTarget).data('id-gerbangterbuka-s1');
                $(e.currentTarget).find('input[name="edit_idgerbangterbukas1"]').val(idgerbangterbukas1);
@@ -562,8 +562,8 @@
 
                });
 
-        //untuk modal delete waktu transaksi admin semester 1
-               $('#modal_deletewaktutransaksis1admin').on('show.bs.modal', function(e) {
+        //untuk modal delete waktu transaksi admin semester 1 tw 1 dan 2
+               $('#modal_deletewaktutransaksis1tw1admin').on('show.bs.modal', function(e) {
              //untuk id nya
               var idgerbang = $(e.relatedTarget).data('id-gerbang');
               $(e.currentTarget).find('input[name="edit_idgerbang"]').val(idgerbang);
@@ -571,10 +571,17 @@
               var idsemester1= $(e.relatedTarget).data('id-semester');
               $(e.currentTarget).find('input[name="edit_idsemester1"]').val(idsemester1);
 
+              var idtws1 = $(e.relatedTarget).data('id-tw');
+              $(e.currentTarget).find('input[name="edit_idtws1"]').val(idtws1);
+
               });
 
-        //untuk modal edit waktu transaksi admin semester 2
-              $('#modal_editwaktutransaksis2admin').on('show.bs.modal', function(e) {
+
+
+
+
+        //untuk modal edit waktu transaksi admin semester 2 tw 3 dan 4
+              $('#modal_editwaktutransaksis2tw3admin').on('show.bs.modal', function(e) {
             //untuk id nya
              var idgerbangterbukas2 = $(e.relatedTarget).data('id-gerbangterbuka-s2');
              $(e.currentTarget).find('input[name="edit_idgerbangterbukas2"]').val(idgerbangterbukas2);
@@ -614,14 +621,17 @@
              $(e.currentTarget).find('input[name="edit_panjang_antrians2"]').val(panjangantrians2);
              });
 
-        //untuk modal delete waktu transaksi admin semester 2
-            $('#modal_deletewaktutransaksis2admin').on('show.bs.modal', function(e) {
+        //untuk modal delete waktu transaksi admin semester 2 tw 3 dan 4
+            $('#modal_deletewaktutransaksis2tw3admin').on('show.bs.modal', function(e) {
             //untuk id nya
             var idgerbang = $(e.relatedTarget).data('id-gerbang2');
             $(e.currentTarget).find('input[name="edit_idgerbang"]').val(idgerbang);
 
             var idsemester2= $(e.relatedTarget).data('id-semester2');
             $(e.currentTarget).find('input[name="edit_idsemester2"]').val(idsemester2);
+
+            var idtws2 = $(e.relatedTarget).data('id-tw');
+            $(e.currentTarget).find('input[name="edit_idtws2"]').val(idtws2);
              });
 
 
@@ -634,38 +644,38 @@
             var rencanasms21 = $(e.relatedTarget).data('id-rencanasms21');
             $(e.currentTarget).find('input[name="idrencanasms21"]').val(rencanasms21);
             var rencanasms22 = $(e.relatedTarget).data('id-rencanasms22');
-            $(e.currentTarget).find('input[name="idrencanasms22"]').val(rencanasms22);            
+            $(e.currentTarget).find('input[name="idrencanasms22"]').val(rencanasms22);
 
             var realisasisms11 = $(e.relatedTarget).data('id-realisasisms11');
             $(e.currentTarget).find('input[name="idrealisasisms11"]').val(realisasisms11);
             var realisasisms12 = $(e.relatedTarget).data('id-realisasisms12');
-            $(e.currentTarget).find('input[name="idrealisasisms12"]').val(realisasisms12);            
+            $(e.currentTarget).find('input[name="idrealisasisms12"]').val(realisasisms12);
             var realisasisms21= $(e.relatedTarget).data('id-realisasisms21');
-            $(e.currentTarget).find('input[name="idrealisasisms21"]').val(realisasisms21);          
+            $(e.currentTarget).find('input[name="idrealisasisms21"]').val(realisasisms21);
             var realisasisms22 = $(e.relatedTarget).data('id-realisasisms22');
             $(e.currentTarget).find('input[name="idrealisasisms22"]').val(realisasisms22);
 
-            
+
 
             var nilairencanasms11 = $(e.relatedTarget).data('nilai-rencanasms11');
             $(e.currentTarget).find('input[name="nilaiRencanaSms11"]').val(nilairencanasms11);
             var nilairencanasms12 = $(e.relatedTarget).data('nilai-rencanasms12');
-            $(e.currentTarget).find('input[name="nilaiRencanaSms12"]').val(nilairencanasms12);  
+            $(e.currentTarget).find('input[name="nilaiRencanaSms12"]').val(nilairencanasms12);
             var nilairencanasms21 = $(e.relatedTarget).data('nilai-rencanasms21');
-            $(e.currentTarget).find('input[name="nilaiRencanaSms21"]').val(nilairencanasms21);    
+            $(e.currentTarget).find('input[name="nilaiRencanaSms21"]').val(nilairencanasms21);
             var nilairencanasms22 = $(e.relatedTarget).data('nilai-rencanasms22');
-            $(e.currentTarget).find('input[name="nilaiRencanaSms22"]').val(nilairencanasms22);  
+            $(e.currentTarget).find('input[name="nilaiRencanaSms22"]').val(nilairencanasms22);
 
             var nilairealisasisms11 = $(e.relatedTarget).data('nilai-realisasisms11');
-            $(e.currentTarget).find('input[name="nilaiRealisasiSms11"]').val(nilairealisasisms11);                    
+            $(e.currentTarget).find('input[name="nilaiRealisasiSms11"]').val(nilairealisasisms11);
             var nilairealisasisms12 = $(e.relatedTarget).data('nilai-realisasisms12');
-            $(e.currentTarget).find('input[name="nilaiRealisasiSms12"]').val(nilairealisasisms12);  
+            $(e.currentTarget).find('input[name="nilaiRealisasiSms12"]').val(nilairealisasisms12);
             var nilairealisasisms21 = $(e.relatedTarget).data('nilai-realisasisms21');
-            $(e.currentTarget).find('input[name="nilaiRealisasiSms21"]').val(nilairealisasisms21);           
+            $(e.currentTarget).find('input[name="nilaiRealisasiSms21"]').val(nilairealisasisms21);
             var nilairealisasisms22 = $(e.relatedTarget).data('nilai-realisasisms22');
             $(e.currentTarget).find('input[name="nilaiRealisasiSms22"]').val(nilairealisasisms22);
-      
-            
+
+
              });
 
     $('#modal_EditCabang').on('show.bs.modal', function(e) {
@@ -673,12 +683,12 @@
         var namacabang = $(e.relatedTarget).data('namacabang');
         $(e.currentTarget).find('input[name="namaCabang"]').val(namacabang);
 
-      
+
 
 
         });
-       
-            
+
+
 </script>
         <script type="text/javaScript">
 

@@ -47,9 +47,10 @@
 		if(isset($_POST['deletewaktutransaksi'])){
 			$idgerbang = $_POST['edit_idgerbang'];
 			$idsemester1 = $_POST['edit_idsemester1'];
+			$idtws1 = $_POST['edit_idtws1'];
 
-			$deletewaktutransaksi = mysqli_query($connect,"DELETE FROM waktu_transaksi WHERE id_gerbang='$idgerbang' AND id_semester='$idsemester1'");
-			$deletepanjangantrian = mysqli_query($connect,"DELETE FROM panjang_antrian WHERE id_gerbang='$idgerbang' AND id_semester='$idsemester1'");
+			$deletewaktutransaksi = mysqli_query($connect,"DELETE FROM waktu_transaksi WHERE id_gerbang='$idgerbang' AND id_semester='$idsemester1' AND id_tw='$idtws1'");
+			$deletepanjangantrian = mysqli_query($connect,"DELETE FROM panjang_antrian WHERE id_gerbang='$idgerbang' AND id_semester='$idsemester1' AND id_tw='$idtws1'");
 			if($deletewaktutransaksi AND $deletepanjangantrian){
 
 ?>
@@ -113,10 +114,11 @@
 		if(isset($_POST['deletewaktutransaksis2'])){
 			$idgerbang = $_POST['edit_idgerbang'];
 			$idsemester2 = $_POST['edit_idsemester2'];
+			$idtws2 = $_POST['edit_idtws2'];
 
 
-			$deletewaktutransaksi = mysqli_query($connect,"DELETE FROM waktu_transaksi WHERE id_gerbang='$idgerbang' AND id_semester='$idsemester2'");
-			$deletepanjangantrian = mysqli_query($connect,"DELETE FROM panjang_antrian WHERE id_gerbang='$idgerbang' AND id_semester='$idsemester2'");
+			$deletewaktutransaksi = mysqli_query($connect,"DELETE FROM waktu_transaksi WHERE id_gerbang='$idgerbang' AND id_semester='$idsemester2' AND id_tw='$idtws2'");
+			$deletepanjangantrian = mysqli_query($connect,"DELETE FROM panjang_antrian WHERE id_gerbang='$idgerbang' AND id_semester='$idsemester2' AND id_tw='$idtws2'");
 			if($deletewaktutransaksi AND $deletepanjangantrian){
 ?>
 				<script> window.alert('Penghapusan Nilai Rencana Berhasil') </script>

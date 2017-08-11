@@ -37,7 +37,7 @@
     <!-- bootstrap-daterangepicker -->
     <script src="vendors/moment/min/moment.min.js"></script>
     <script src="vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-     <!-- bootstrap-datetimepicker -->    
+     <!-- bootstrap-datetimepicker -->
     <script src="vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
     <!-- Datatables -->
@@ -303,109 +303,158 @@
         });
 
         //untuk modal edit waktu transaksi semester 1
-                $('#modal_editwaktutransaksis1').on('show.bs.modal', function(e) {
-              //untuk id nya
-               var idgerbangterbukas1 = $(e.relatedTarget).data('id-gerbangterbuka-s1');
-               $(e.currentTarget).find('input[name="edit_idgerbangterbukas1"]').val(idgerbangterbukas1);
+                  $('#modal_editwaktutransaksis1').on('show.bs.modal', function(e) {
+                //untuk id nya
+                 var idgerbangterbukas1 = $(e.relatedTarget).data('id-gerbangterbuka-s1');
+                 $(e.currentTarget).find('input[name="edit_idgerbangterbukas1"]').val(idgerbangterbukas1);
 
-               var idgerbangmasuks1 = $(e.relatedTarget).data('id-gerbangmasuk-s1');
-               $(e.currentTarget).find('input[name="edit_idgerbangmasuks1"]').val(idgerbangmasuks1);
+                 var idgerbangmasuks1 = $(e.relatedTarget).data('id-gerbangmasuk-s1');
+                 $(e.currentTarget).find('input[name="edit_idgerbangmasuks1"]').val(idgerbangmasuks1);
 
-               var idgerbangkeluars1 = $(e.relatedTarget).data('id-gerbangkeluar-s1');
-               $(e.currentTarget).find('input[name="edit_idgerbangkeluars1"]').val(idgerbangkeluars1);
+                 var idgerbangkeluars1 = $(e.relatedTarget).data('id-gerbangkeluar-s1');
+                 $(e.currentTarget).find('input[name="edit_idgerbangkeluars1"]').val(idgerbangkeluars1);
 
-               var idgerbangterbukagtos1 = $(e.relatedTarget).data('id-gerbangterbukagto-s1');
-               $(e.currentTarget).find('input[name="edit_idgerbang_gto_terbukas1"]').val(idgerbangterbukagtos1);
+                 var idgerbangterbukagtos1 = $(e.relatedTarget).data('id-gerbangterbukagto-s1');
+                 $(e.currentTarget).find('input[name="edit_idgerbang_gto_terbukas1"]').val(idgerbangterbukagtos1);
 
-               var idgerbangmasukgtos1 = $(e.relatedTarget).data('id-gerbangmasukgto-s1');
-               $(e.currentTarget).find('input[name="edit_iderbang_gto_masuks1"]').val(idgerbangmasukgtos1);
+                 var idgerbangmasukgtos1 = $(e.relatedTarget).data('id-gerbangmasukgto-s1');
+                 $(e.currentTarget).find('input[name="edit_iderbang_gto_masuks1"]').val(idgerbangmasukgtos1);
 
-               var idgerbangkeluargtos1 = $(e.relatedTarget).data('id-gerbangkeluargto-s1');
-               $(e.currentTarget).find('input[name="edit_idgerbang_gto_keluars1"]').val(idgerbangkeluargtos1);
+                 var idgerbangkeluargtos1 = $(e.relatedTarget).data('id-gerbangkeluargto-s1');
+                 $(e.currentTarget).find('input[name="edit_idgerbang_gto_keluars1"]').val(idgerbangkeluargtos1);
 
-               var idpanjangantrians1 = $(e.relatedTarget).data('id-panjangantrian-s1');
-               $(e.currentTarget).find('input[name="edit_idpanjang_antrians1"]').val(idpanjangantrians1);
+                 var idpanjangantrians1 = $(e.relatedTarget).data('id-panjangantrian-s1');
+                 $(e.currentTarget).find('input[name="edit_idpanjang_antrians1"]').val(idpanjangantrians1);
 
-               //untuk nilainya
-               var gerbangterbukas1 = $(e.relatedTarget).data('gerbangterbuka-s1');
-               $(e.currentTarget).find('input[name="edit_gerbangterbukas1"]').val(gerbangterbukas1);
-               var gerbangmasuks1 = $(e.relatedTarget).data('gerbangmasuk-s1');
-               $(e.currentTarget).find('input[name="edit_gerbangmasuks1"]').val(gerbangmasuks1);
-               var gerbangkeluars1 = $(e.relatedTarget).data('gerbangkeluar-s1');
-               $(e.currentTarget).find('input[name="edit_gerbangkeluars1"]').val(gerbangkeluars1);
-               var gerbangterbukagtos1 = $(e.relatedTarget).data('gerbangterbukagto-s1');
-               $(e.currentTarget).find('input[name="edit_gerbang_gto_terbukas1"]').val(gerbangterbukagtos1);
-               var gerbangmasukgtos1 = $(e.relatedTarget).data('gerbangmasukgto-s1');
-               $(e.currentTarget).find('input[name="edit_gerbang_gto_masuks1"]').val(gerbangmasukgtos1);
-               var gerbangkeluargtos1 = $(e.relatedTarget).data('gerbangkeluargto-s1');
-               $(e.currentTarget).find('input[name="edit_gerbang_gto_keluars1"]').val(gerbangkeluargtos1);
-               var panjangantrians1 = $(e.relatedTarget).data('panjangantrian-s1');
-               $(e.currentTarget).find('input[name="edit_panjang_antrians1"]').val(panjangantrians1);
+                 //untuk nilainya
+                 var gerbangterbukas1 = $(e.relatedTarget).data('gerbangterbuka-s1');
+                 $(e.currentTarget).find('input[name="edit_gerbangterbukas1"]').val(gerbangterbukas1);
+                 var gerbangmasuks1 = $(e.relatedTarget).data('gerbangmasuk-s1');
+                 $(e.currentTarget).find('input[name="edit_gerbangmasuks1"]').val(gerbangmasuks1);
+                 var gerbangkeluars1 = $(e.relatedTarget).data('gerbangkeluar-s1');
+                 $(e.currentTarget).find('input[name="edit_gerbangkeluars1"]').val(gerbangkeluars1);
+                 var gerbangterbukagtos1 = $(e.relatedTarget).data('gerbangterbukagto-s1');
+                 $(e.currentTarget).find('input[name="edit_gerbang_gto_terbukas1"]').val(gerbangterbukagtos1);
+                 var gerbangmasukgtos1 = $(e.relatedTarget).data('gerbangmasukgto-s1');
+                 $(e.currentTarget).find('input[name="edit_gerbang_gto_masuks1"]').val(gerbangmasukgtos1);
+                 var gerbangkeluargtos1 = $(e.relatedTarget).data('gerbangkeluargto-s1');
+                 $(e.currentTarget).find('input[name="edit_gerbang_gto_keluars1"]').val(gerbangkeluargtos1);
+                 var panjangantrians1 = $(e.relatedTarget).data('panjangantrian-s1');
+                 $(e.currentTarget).find('input[name="edit_panjang_antrians1"]').val(panjangantrians1);
 
 
-               });
+                 });
 
-        //untuk modal delete waktu transaksi semester 1
-               $('#modal_deletewaktutransaksis1').on('show.bs.modal', function(e) {
-             //untuk id nya
-              var idgerbang = $(e.relatedTarget).data('id-gerbang');
-              $(e.currentTarget).find('input[name="edit_idgerbang"]').val(idgerbang);
+                 //untuk modal edit waktu transaksi admin semester 1 tw1 dan tw2
+                         $('#modal_editwaktutransaksis1tw1admin').on('show.bs.modal', function(e) {
+                       //untuk id nya
+                        var idgerbangterbukas1 = $(e.relatedTarget).data('id-gerbangterbuka-s1');
+                        $(e.currentTarget).find('input[name="edit_idgerbangterbukas1"]').val(idgerbangterbukas1);
 
-              var idsemester1= $(e.relatedTarget).data('id-semester');
-              $(e.currentTarget).find('input[name="edit_idsemester1"]').val(idsemester1);
+                        var idgerbangmasuks1 = $(e.relatedTarget).data('id-gerbangmasuk-s1');
+                        $(e.currentTarget).find('input[name="edit_idgerbangmasuks1"]').val(idgerbangmasuks1);
 
-              });
+                        var idgerbangkeluars1 = $(e.relatedTarget).data('id-gerbangkeluar-s1');
+                        $(e.currentTarget).find('input[name="edit_idgerbangkeluars1"]').val(idgerbangkeluars1);
 
-        //untuk modal edit waktu transaksi semester 2
-              $('#modal_editwaktutransaksis2').on('show.bs.modal', function(e) {
-            //untuk id nya
-             var idgerbangterbukas2 = $(e.relatedTarget).data('id-gerbangterbuka-s2');
-             $(e.currentTarget).find('input[name="edit_idgerbangterbukas2"]').val(idgerbangterbukas2);
+                        var idgerbangterbukagtos1 = $(e.relatedTarget).data('id-gerbangterbukagto-s1');
+                        $(e.currentTarget).find('input[name="edit_idgerbang_gto_terbukas1"]').val(idgerbangterbukagtos1);
 
-             var idgerbangmasuks2 = $(e.relatedTarget).data('id-gerbangmasuk-s2');
-             $(e.currentTarget).find('input[name="edit_idgerbangmasuks2"]').val(idgerbangmasuks2);
+                        var idgerbangmasukgtos1 = $(e.relatedTarget).data('id-gerbangmasukgto-s1');
+                        $(e.currentTarget).find('input[name="edit_iderbang_gto_masuks1"]').val(idgerbangmasukgtos1);
 
-             var idgerbangkeluars2 = $(e.relatedTarget).data('id-gerbangkeluar-s2');
-             $(e.currentTarget).find('input[name="edit_idgerbangkeluars2"]').val(idgerbangkeluars2);
+                        var idgerbangkeluargtos1 = $(e.relatedTarget).data('id-gerbangkeluargto-s1');
+                        $(e.currentTarget).find('input[name="edit_idgerbang_gto_keluars1"]').val(idgerbangkeluargtos1);
 
-             var idgerbangterbukagtos2 = $(e.relatedTarget).data('id-gerbangterbukagto-s2');
-             $(e.currentTarget).find('input[name="edit_idgerbang_gto_terbukas2"]').val(idgerbangterbukagtos2);
+                        var idpanjangantrians1 = $(e.relatedTarget).data('id-panjangantrian-s1');
+                        $(e.currentTarget).find('input[name="edit_idpanjang_antrians1"]').val(idpanjangantrians1);
 
-             var idgerbangmasukgtos2 = $(e.relatedTarget).data('id-gerbangmasukgto-s2');
-             $(e.currentTarget).find('input[name="edit_iderbang_gto_masuks2"]').val(idgerbangmasukgtos2);
+                        //untuk nilainya
+                        var gerbangterbukas1 = $(e.relatedTarget).data('gerbangterbuka-s1');
+                        $(e.currentTarget).find('input[name="edit_gerbangterbukas1"]').val(gerbangterbukas1);
+                        var gerbangmasuks1 = $(e.relatedTarget).data('gerbangmasuk-s1');
+                        $(e.currentTarget).find('input[name="edit_gerbangmasuks1"]').val(gerbangmasuks1);
+                        var gerbangkeluars1 = $(e.relatedTarget).data('gerbangkeluar-s1');
+                        $(e.currentTarget).find('input[name="edit_gerbangkeluars1"]').val(gerbangkeluars1);
+                        var gerbangterbukagtos1 = $(e.relatedTarget).data('gerbangterbukagto-s1');
+                        $(e.currentTarget).find('input[name="edit_gerbang_gto_terbukas1"]').val(gerbangterbukagtos1);
+                        var gerbangmasukgtos1 = $(e.relatedTarget).data('gerbangmasukgto-s1');
+                        $(e.currentTarget).find('input[name="edit_gerbang_gto_masuks1"]').val(gerbangmasukgtos1);
+                        var gerbangkeluargtos1 = $(e.relatedTarget).data('gerbangkeluargto-s1');
+                        $(e.currentTarget).find('input[name="edit_gerbang_gto_keluars1"]').val(gerbangkeluargtos1);
+                        var panjangantrians1 = $(e.relatedTarget).data('panjangantrian-s1');
+                        $(e.currentTarget).find('input[name="edit_panjang_antrians1"]').val(panjangantrians1);
 
-             var idgerbangkeluargtos2 = $(e.relatedTarget).data('id-gerbangkeluargto-s2');
-             $(e.currentTarget).find('input[name="edit_idgerbang_gto_keluars2"]').val(idgerbangkeluargtos2);
 
-             var idpanjangantrians2 = $(e.relatedTarget).data('id-panjangantrian-s2');
-             $(e.currentTarget).find('input[name="edit_idpanjang_antrians2"]').val(idpanjangantrians2);
+                        });
 
-             //untuk nilainya
-             var gerbangterbukas2 = $(e.relatedTarget).data('gerbangterbuka-s2');
-             $(e.currentTarget).find('input[name="edit_gerbangterbukas2"]').val(gerbangterbukas2);
-             var gerbangmasuks2 = $(e.relatedTarget).data('gerbangmasuk-s2');
-             $(e.currentTarget).find('input[name="edit_gerbangmasuks2"]').val(gerbangmasuks2);
-             var gerbangkeluars2 = $(e.relatedTarget).data('gerbangkeluar-s2');
-             $(e.currentTarget).find('input[name="edit_gerbangkeluars2"]').val(gerbangkeluars2);
-             var gerbangterbukagtos2 = $(e.relatedTarget).data('gerbangterbukagto-s2');
-             $(e.currentTarget).find('input[name="edit_gerbang_gto_terbukas2"]').val(gerbangterbukagtos2);
-             var gerbangmasukgtos2 = $(e.relatedTarget).data('gerbangmasukgto-s2');
-             $(e.currentTarget).find('input[name="edit_gerbang_gto_masuks2"]').val(gerbangmasukgtos2);
-             var gerbangkeluargtos2 = $(e.relatedTarget).data('gerbangkeluargto-s2');
-             $(e.currentTarget).find('input[name="edit_gerbang_gto_keluars2"]').val(gerbangkeluargtos2);
-             var panjangantrians2 = $(e.relatedTarget).data('panjangantrian-s2');
-             $(e.currentTarget).find('input[name="edit_panjang_antrians2"]').val(panjangantrians2);
-             });
+                 //untuk modal delete waktu transaksi admin semester 1 tw 1 dan 2
+                        $('#modal_deletewaktutransaksis1tw1admin').on('show.bs.modal', function(e) {
+                      //untuk id nya
+                       var idgerbang = $(e.relatedTarget).data('id-gerbang');
+                       $(e.currentTarget).find('input[name="edit_idgerbang"]').val(idgerbang);
 
-        //untuk modal delete waktu transaksi semester 2
-            $('#modal_deletewaktutransaksis2').on('show.bs.modal', function(e) {
-            //untuk id nya
-            var idgerbang = $(e.relatedTarget).data('id-gerbang2');
-            $(e.currentTarget).find('input[name="edit_idgerbang"]').val(idgerbang);
+                       var idsemester1= $(e.relatedTarget).data('id-semester');
+                       $(e.currentTarget).find('input[name="edit_idsemester1"]').val(idsemester1);
 
-            var idsemester2= $(e.relatedTarget).data('id-semester2');
-            $(e.currentTarget).find('input[name="edit_idsemester2"]').val(idsemester2);
-             });
+                       var idtws1 = $(e.relatedTarget).data('id-tw');
+                       $(e.currentTarget).find('input[name="edit_idtws1"]').val(idtws1);
+
+                       });
+
+                 //untuk modal edit waktu transaksi admin semester 2 tw 3 dan 4
+                       $('#modal_editwaktutransaksis2tw3admin').on('show.bs.modal', function(e) {
+                     //untuk id nya
+                      var idgerbangterbukas2 = $(e.relatedTarget).data('id-gerbangterbuka-s2');
+                      $(e.currentTarget).find('input[name="edit_idgerbangterbukas2"]').val(idgerbangterbukas2);
+
+                      var idgerbangmasuks2 = $(e.relatedTarget).data('id-gerbangmasuk-s2');
+                      $(e.currentTarget).find('input[name="edit_idgerbangmasuks2"]').val(idgerbangmasuks2);
+
+                      var idgerbangkeluars2 = $(e.relatedTarget).data('id-gerbangkeluar-s2');
+                      $(e.currentTarget).find('input[name="edit_idgerbangkeluars2"]').val(idgerbangkeluars2);
+
+                      var idgerbangterbukagtos2 = $(e.relatedTarget).data('id-gerbangterbukagto-s2');
+                      $(e.currentTarget).find('input[name="edit_idgerbang_gto_terbukas2"]').val(idgerbangterbukagtos2);
+
+                      var idgerbangmasukgtos2 = $(e.relatedTarget).data('id-gerbangmasukgto-s2');
+                      $(e.currentTarget).find('input[name="edit_iderbang_gto_masuks2"]').val(idgerbangmasukgtos2);
+
+                      var idgerbangkeluargtos2 = $(e.relatedTarget).data('id-gerbangkeluargto-s2');
+                      $(e.currentTarget).find('input[name="edit_idgerbang_gto_keluars2"]').val(idgerbangkeluargtos2);
+
+                      var idpanjangantrians2 = $(e.relatedTarget).data('id-panjangantrian-s2');
+                      $(e.currentTarget).find('input[name="edit_idpanjang_antrians2"]').val(idpanjangantrians2);
+
+                      //untuk nilainya
+                      var gerbangterbukas2 = $(e.relatedTarget).data('gerbangterbuka-s2');
+                      $(e.currentTarget).find('input[name="edit_gerbangterbukas2"]').val(gerbangterbukas2);
+                      var gerbangmasuks2 = $(e.relatedTarget).data('gerbangmasuk-s2');
+                      $(e.currentTarget).find('input[name="edit_gerbangmasuks2"]').val(gerbangmasuks2);
+                      var gerbangkeluars2 = $(e.relatedTarget).data('gerbangkeluar-s2');
+                      $(e.currentTarget).find('input[name="edit_gerbangkeluars2"]').val(gerbangkeluars2);
+                      var gerbangterbukagtos2 = $(e.relatedTarget).data('gerbangterbukagto-s2');
+                      $(e.currentTarget).find('input[name="edit_gerbang_gto_terbukas2"]').val(gerbangterbukagtos2);
+                      var gerbangmasukgtos2 = $(e.relatedTarget).data('gerbangmasukgto-s2');
+                      $(e.currentTarget).find('input[name="edit_gerbang_gto_masuks2"]').val(gerbangmasukgtos2);
+                      var gerbangkeluargtos2 = $(e.relatedTarget).data('gerbangkeluargto-s2');
+                      $(e.currentTarget).find('input[name="edit_gerbang_gto_keluars2"]').val(gerbangkeluargtos2);
+                      var panjangantrians2 = $(e.relatedTarget).data('panjangantrian-s2');
+                      $(e.currentTarget).find('input[name="edit_panjang_antrians2"]').val(panjangantrians2);
+                      });
+
+                 //untuk modal delete waktu transaksi admin semester 2 tw 3 dan 4
+                     $('#modal_deletewaktutransaksis2tw3admin').on('show.bs.modal', function(e) {
+                     //untuk id nya
+                     var idgerbang = $(e.relatedTarget).data('id-gerbang2');
+                     $(e.currentTarget).find('input[name="edit_idgerbang"]').val(idgerbang);
+
+                     var idsemester2= $(e.relatedTarget).data('id-semester2');
+                     $(e.currentTarget).find('input[name="edit_idsemester2"]').val(idsemester2);
+
+                     var idtws2 = $(e.relatedTarget).data('id-tw');
+                     $(e.currentTarget).find('input[name="edit_idtws2"]').val(idtws2);
+                      });
         </script>
 
         <script type="text/javaScript">

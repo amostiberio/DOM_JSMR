@@ -6,6 +6,7 @@
 		 	$idgerbang= $_POST['idgerbang'];
 			$idsemester= $_POST['idsemester'];
 			$tahun = $_POST['tahun'];
+			$idtw = $_POST['triwulan'];
 			$idgardu_terbuka = $_POST['idgardu_terbuka'];
       $gardu_terbuka = $_POST['gardu_terbuka'];
 
@@ -27,20 +28,27 @@
 
       $panjang_antrian = $_POST['panjang_antrian'];
 
+			//cek input double
+			$cek_waktutransaksi= mysqli_query($connect, "SELECT * FROM waktu_transaksi WHERE id_gerbang = '$idgerbang' AND tahun ='$tahun' AND id_tw='$idtw'");
+			$data = mysqli_fetch_array($cek_waktutransaksi,MYSQLI_NUM);
+			if($data[0] > 0){ ?>
 
-
+				<script> window.alert('Gagal, Data Telah Tersedia') </script>
+				<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
+<?php
 		}
+		else {
 
 			//insert data
 			$insert_waktutransaksi= mysqli_query($connect,"INSERT INTO waktu_transaksi VALUES
-      ('','$gardu_terbuka', '$tahun', '$idgerbang','$idgardu_terbuka', '$idcabang', '$idsemester'),
-			('','$gardu_masuk', '$tahun' ,'$idgerbang','$idgardu_masuk', '$idcabang', '$idsemester'),
-      ('','$gardu_keluar', '$tahun' ,'$idgerbang','$idgardu_keluar', '$idcabang', '$idsemester'),
-			('','$gardu_terbuka_gto', '$tahun' ,'$idgerbang','$idgardu_terbuka_gto', '$idcabang', '$idsemester'),
-      ('','$gardu_masuk_gto', '$tahun' ,'$idgerbang','$idgardu_masuk_gto', '$idcabang', '$idsemester'),
-      ('','$gardu_keluar_gto','$tahun', '$idgerbang','$idgardu_keluar_gto', '$idcabang','$idsemester')");
+      ('','$gardu_terbuka', '$tahun', '$idgerbang','$idgardu_terbuka', '$idcabang', '$idsemester', '$idtw'),
+			('','$gardu_masuk', '$tahun' ,'$idgerbang','$idgardu_masuk', '$idcabang', '$idsemester', '$idtw'),
+      ('','$gardu_keluar', '$tahun' ,'$idgerbang','$idgardu_keluar', '$idcabang', '$idsemester', '$idtw'),
+			('','$gardu_terbuka_gto', '$tahun' ,'$idgerbang','$idgardu_terbuka_gto', '$idcabang', '$idsemester','$idtw'),
+      ('','$gardu_masuk_gto', '$tahun' ,'$idgerbang','$idgardu_masuk_gto', '$idcabang', '$idsemester', '$idtw'),
+      ('','$gardu_keluar_gto','$tahun', '$idgerbang','$idgardu_keluar_gto', '$idcabang','$idsemester', '$idtw')");
 
-      $insert_panjangantrian= mysqli_query($connect,"INSERT INTO panjang_antrian VALUES ('','$panjang_antrian','$tahun', '$idgerbang', '$idsemester', '$idcabang')");
+      $insert_panjangantrian= mysqli_query($connect,"INSERT INTO panjang_antrian VALUES ('','$panjang_antrian','$tahun', '$idgerbang', '$idsemester', '$idcabang', '$idtw')");
 
 			if($insert_waktutransaksi AND $insert_panjangantrian){
 ?>
@@ -53,5 +61,6 @@
         <script>document.location.href="javascript:history.back()";</script>
 <?php
 			}
-
+		}
+	}
 ?>
