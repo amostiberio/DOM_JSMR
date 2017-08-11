@@ -193,15 +193,15 @@ include ('connect.php'); //connect ke database
                   $endRealDate = $monthEnd."/".$dateEnd."/".$yearEnd;
 
             ?>
-                            <div class="control-group">
-                              <div class="controls">
-                                <div class="input-prepend input-group">
-                                  <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-                                  <input type="text" style="" name="tanggallocker" id="reservation" class="form-control" value="<?php echo $startRealDate ;?> - <?php echo $endRealDate;?> " />
-                                </div>
-                              </div>
-                            </div>
-               		 </fieldset>
+            <div class="control-group">
+              <div class="controls">
+                <div class="input-prepend input-group">
+                  <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                  <input type="text" style="" name="tanggallocker" id="reservation" class="form-control" value="<?php echo $startRealDate ;?> - <?php echo $endRealDate;?> " />
+                </div>
+              </div>
+            </div>
+             </fieldset>
 				</div>
 			  </div>
 			  

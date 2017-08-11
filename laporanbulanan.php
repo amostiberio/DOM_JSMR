@@ -162,12 +162,17 @@ include ('connect.php'); //connect ke database
 					</select>
 				</div>
 			  </div>
-			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
-				<div class="col-md-6 col-sm-6 col-xs-12">
-					<input name ="tahun" type="text" id="tahun" required="required" class="form-control col-md-7 col-xs-12">
-				</div>
-			  </div>
+			   <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
+                       <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class='input-group date' id='myDatepickerFormMonitoring'>
+                            <input type='text' class="form-control" name= "tahun"  />
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        </div>
+                  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="file">Pilih File</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">

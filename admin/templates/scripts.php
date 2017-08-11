@@ -626,32 +626,43 @@
 
             $('#modal_editcsi').on('show.bs.modal', function(e) {
             //untuk id nya
-            var rencanasms1 = $(e.relatedTarget).data('id-rencanasms1');
-            $(e.currentTarget).find('input[name="idrencanasms1"]').val(rencanasms1);
+            var rencanasms11 = $(e.relatedTarget).data('id-rencanasms11');
+            $(e.currentTarget).find('input[name="idrencanasms11"]').val(rencanasms11);
+            var rencanasms12 = $(e.relatedTarget).data('id-rencanasms12');
+            $(e.currentTarget).find('input[name="idrencanasms12"]').val(rencanasms12);
+            var rencanasms21 = $(e.relatedTarget).data('id-rencanasms21');
+            $(e.currentTarget).find('input[name="idrencanasms21"]').val(rencanasms21);
+            var rencanasms22 = $(e.relatedTarget).data('id-rencanasms22');
+            $(e.currentTarget).find('input[name="idrencanasms22"]').val(rencanasms22);            
 
-             var rencanasms2 = $(e.relatedTarget).data('id-rencanasms2');
-            $(e.currentTarget).find('input[name="idrencanasms2"]').val(rencanasms2);
-            
-            var realisasisms1 = $(e.relatedTarget).data('id-realisasisms1');
-            $(e.currentTarget).find('input[name="idrealisasisms1"]').val(realisasisms1);
-            
-            var realisasisms2 = $(e.relatedTarget).data('id-realisasisms2');
-            $(e.currentTarget).find('input[name="idrealisasisms2"]').val(realisasisms2);
+            var realisasisms11 = $(e.relatedTarget).data('id-realisasisms11');
+            $(e.currentTarget).find('input[name="idrealisasisms11"]').val(realisasisms11);
+            var realisasisms12 = $(e.relatedTarget).data('id-realisasisms12');
+            $(e.currentTarget).find('input[name="idrealisasisms12"]').val(realisasisms12);            
+            var realisasisms21= $(e.relatedTarget).data('id-realisasisms21');
+            $(e.currentTarget).find('input[name="idrealisasisms21"]').val(realisasisms21);          
+            var realisasisms22 = $(e.relatedTarget).data('id-realisasisms22');
+            $(e.currentTarget).find('input[name="idrealisasisms22"]').val(realisasisms22);
 
-            
-
-            var nilairencanasms1 = $(e.relatedTarget).data('nilai-rencanasms1');
-            $(e.currentTarget).find('input[name="nilaiRencanaSms1"]').val(nilairencanasms1);
-      
-            var nilairencanasms2 = $(e.relatedTarget).data('nilai-rencanasms2');
-            $(e.currentTarget).find('input[name="nilaiRencanaSms2"]').val(nilairencanasms2);
-            
-            var nilairealisasisms1 = $(e.relatedTarget).data('nilai-realisasisms1');
-            $(e.currentTarget).find('input[name="nilaiRealisasiSms1"]').val(nilairealisasisms1);
             
 
-            var nilairealisasisms2 = $(e.relatedTarget).data('nilai-realisasisms2');
-            $(e.currentTarget).find('input[name="nilaiRealisasiSms2"]').val(nilairealisasisms2);
+            var nilairencanasms11 = $(e.relatedTarget).data('nilai-rencanasms11');
+            $(e.currentTarget).find('input[name="nilaiRencanaSms11"]').val(nilairencanasms11);
+            var nilairencanasms12 = $(e.relatedTarget).data('nilai-rencanasms12');
+            $(e.currentTarget).find('input[name="nilaiRencanaSms12"]').val(nilairencanasms12);  
+            var nilairencanasms21 = $(e.relatedTarget).data('nilai-rencanasms21');
+            $(e.currentTarget).find('input[name="nilaiRencanaSms21"]').val(nilairencanasms21);    
+            var nilairencanasms22 = $(e.relatedTarget).data('nilai-rencanasms22');
+            $(e.currentTarget).find('input[name="nilaiRencanaSms22"]').val(nilairencanasms22);  
+
+            var nilairealisasisms11 = $(e.relatedTarget).data('nilai-realisasisms11');
+            $(e.currentTarget).find('input[name="nilaiRealisasiSms11"]').val(nilairealisasisms11);                    
+            var nilairealisasisms12 = $(e.relatedTarget).data('nilai-realisasisms12');
+            $(e.currentTarget).find('input[name="nilaiRealisasiSms12"]').val(nilairealisasisms12);  
+            var nilairealisasisms21 = $(e.relatedTarget).data('nilai-realisasisms21');
+            $(e.currentTarget).find('input[name="nilaiRealisasiSms21"]').val(nilairealisasisms21);           
+            var nilairealisasisms22 = $(e.relatedTarget).data('nilai-realisasisms22');
+            $(e.currentTarget).find('input[name="nilaiRealisasiSms22"]').val(nilairealisasisms22);
       
             
              });
@@ -714,6 +725,10 @@
     });
      $('#myDatepickerFormMonitoring').datetimepicker({
         format: 'YYYY'
+    });
+
+     $('#myDatepickerFormPencapaian').datetimepicker({
+        format: 'MM-YYYY'
     });
 
 

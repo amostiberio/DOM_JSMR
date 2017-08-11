@@ -37,6 +37,8 @@
     <!-- bootstrap-daterangepicker -->
     <script src="vendors/moment/min/moment.min.js"></script>
     <script src="vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+     <!-- bootstrap-datetimepicker -->    
+    <script src="vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
     <!-- Datatables -->
     <script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -448,6 +450,23 @@
       return result;
     }
 
+     $('#myDatepickerFilter').datetimepicker({
+        format: 'YYYY'
+    });
+
+    $('#myDatepickerFormRencanaCSI').datetimepicker({
+        format: 'YYYY'
+    });
+    $('#myDatepickerFormRealisasiCSI').datetimepicker({
+        format: 'YYYY'
+    });
+     $('#myDatepickerFormMonitoring').datetimepicker({
+        format: 'YYYY'
+    });
+
+     $('#myDatepickerFormPencapaian').datetimepicker({
+        format: 'MM-YYYY'
+    });
   </script>
   <style>
 .table th {

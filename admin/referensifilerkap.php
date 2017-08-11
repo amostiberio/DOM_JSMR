@@ -73,7 +73,7 @@ include ('connect.php'); //connect ke database
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Referensi File Revisi RKAP</h3>
+                <h3>Referensi File RKAP</h3>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -81,7 +81,7 @@ include ('connect.php'); //connect ke database
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Data Beban Cabang <?php echo $namacabang; ?> </small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small>Data RKAP <?php echo $namacabang; ?> </small></h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="title_right">
@@ -192,12 +192,17 @@ include ('connect.php'); //connect ke database
 					</select>
 				</div>
 			  </div>
-			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
-				<div class="col-md-6 col-sm-6 col-xs-12">
-					<input name ="tahun" type="number" id="tahun" required="required" class="form-control col-md-7 col-xs-12">
-				</div>
-			  </div>
+			   <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
+                               <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class='input-group date' id='myDatepickerFormMonitoring'>
+                                    <input type='text' class="form-control" name= "tahun"  />
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                                </div>
+                          </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="file">Pilih File</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">

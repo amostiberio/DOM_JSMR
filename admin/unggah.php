@@ -53,7 +53,7 @@ include 'connect.php';
 		$nama = addslashes($nama);
 	}
 	
-	$insert= mysqli_query($connect,"INSERT INTO referensi_file VALUES ('','$nama','$tipe','$content','$size','$tahun',now(),'$role')");
+	$insert= mysqli_query($connect,"INSERT INTO referensi_file VALUES ('','$nama','$tipe','$content','$size','$tahun','',now(),'$role')");
 		if($insert){
 ?>		 		<script> window.alert('Data berhasil Ditambah') </script>
 				<script>document.location.href="javascript:history.back()";</script>
@@ -84,7 +84,7 @@ include 'connect.php';
 		$nama = addslashes($nama);
 	}
 	
-	$insert= mysqli_query($connect,"INSERT INTO referensi_file VALUES ('','$nama','$tipe','$content','$size','$tahun',now(),'$role')");
+	$insert= mysqli_query($connect,"INSERT INTO referensi_file VALUES ('','$nama','$tipe','$content','$size','$tahun','',now(),'$role')");
 		if($insert){
 ?>		 		<script> window.alert('Data berhasil Ditambah') </script>
 				<script>document.location.href="javascript:history.back()";</script>
@@ -101,7 +101,11 @@ include 'connect.php';
 		$role = $_POST['refenresiRole'];
 		$nama = $_POST['nama'];
 		$tipe = $_POST['tipe'];
-		$tahun = $_POST['tahun'];
+		$ambilTanggal = $_POST['tahun'];
+
+		list($month,$year) = explode('-',$ambilTanggal);
+
+
 		$tmpName = $_FILES['file']['tmp_name'];
 		$size = $_FILES['file']['size'];
 		
@@ -115,7 +119,7 @@ include 'connect.php';
 		$nama = addslashes($nama);
 	}
 	
-	$insert= mysqli_query($connect,"INSERT INTO referensi_file VALUES ('','$nama','$tipe','$content','$size','$tahun',now(),'$role')");
+	$insert= mysqli_query($connect,"INSERT INTO referensi_file VALUES ('','$nama','$tipe','$content','$size','$year','$month',now(),'$role')");
 		if($insert){
 ?>		 		<script> window.alert('Data berhasil Ditambah') </script>
 				<script>document.location.href="javascript:history.back()";</script>

@@ -103,7 +103,7 @@ if(isset($_GET['tahun'])){
                   <div class='col-sm-2'>                    
                     <div class="form-group">
                         <div class='input-group date' id='myDatepickerFilter'>
-                            <input type='text' class="form-control" name= "tahun"  />
+                            <input type='text' class="form-control" name= "tahun" <?php if(isset($_GET['tahun'])){ ?> value="<?php echo $nilaiTahun ;?>" <?php } ?>/>
                             <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -118,14 +118,15 @@ if(isset($_GET['tahun'])){
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
                       <div class="input-group buttonright" >
                         <div class="btn-group  buttonrightfloat " >                      
-                        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">Tambah<span class="caret"></span>
+                        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">Options <span class="caret"></span>
                         </button>
                         <ul role="menu" class="dropdown-menu pull-right">
                           <li><a data-toggle="modal" data-target=".bs-tambahrencanacsi" >Tambah Rencana CSI</a>
                           </li>
                           <li><a data-toggle="modal" data-target=".bs-tambahrealisasicsi" >Tambah Realisasi CSI</a>
                           </li>
-                          
+                          <li><a href="downloadexcelcsi.php?tahun=<?php echo $nilaiTahun;?>"" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                          </li>
                         </ul>
                        </div>
                       </div>
@@ -135,7 +136,7 @@ if(isset($_GET['tahun'])){
                   <div class="x_content">
                       <?php if ($nilaiTahun != '0') {
                         ?>
-                      <table id="datatable-keytable"  class="table table-striped table-bordered text-center">
+                      <table border="1"  id ="tableCSI" class="table table-striped table-bordered text-center">
                             <thead >
                               <tr >
                                 <th rowspan="4">No</th>
@@ -172,40 +173,110 @@ if(isset($_GET['tahun'])){
                             <tbody>
                               <?php
                                   $listCabang = mysqli_query($connect, "SELECT * FROM cabang");
-                                  $noIterasi= 1;
-                                  while($ambilListCabang = mysqli_fetch_array($listCabang)){
+                                  $noIterasi = 1;
+                                  $iterasiRencanaSms1 = 0;
+                                  $iterasiRencanaSms2= 0;
+                                  $iterasiRealisasiSms1 = 0;
+                                  $iterasiRealisasiSms2 = 0;
+                                  $totalAVGRencanaSms1 = 0;
+                                  $totalAVGRencanaSms2 = 0;
+                                  $totalAVGRealisasiSms1 = 0;
+                                  $totalAVGRealisasiSms2= 0;
+                                  while($ambilListCabang = mysqli_fetch_array($listCabang)) {
                                     
-                                      $ambilIDCabang = $ambilListCabang['id_cabang'];
+                                       $ambilIDCabang = $ambilListCabang['id_cabang'];
 
 
-                                      $selectRencanaSms1 = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '1' AND jenis = 'Rencana' AND tahun = '$nilaiTahun'"));
 
-                                      $selectRencanaSms2 = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '2' AND jenis = 'Rencana' AND tahun = '$nilaiTahun'"));
+                                      
+ 
+                                       $selectRencanaSms11 = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '1' AND stat_twrl ='1' AND jenis = 'Rencana' AND tahun = '$nilaiTahun'"));
+                                       $selectRencanaSms12 = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '1' AND stat_twrl ='2' AND jenis = 'Rencana' AND tahun = '$nilaiTahun'"));
 
-                                      $selectRealisasiSms1 = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '1' AND jenis = 'Realisasi' AND tahun = '$nilaiTahun'"));
+                                        
+                                       $selectRencanaSms21 = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '2' AND stat_twrl ='1'  AND jenis = 'Rencana' AND tahun = '$nilaiTahun'"));
+                                       $selectRencanaSms22 = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '2' AND stat_twrl ='2' AND jenis = 'Rencana' AND tahun = '$nilaiTahun'"));
 
-                                      $selectRealisasiSms2 = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '2' AND jenis = 'Realisasi' AND tahun = '$nilaiTahun'"));
+
+                                       $selectRealisasiSms11 = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '1' AND stat_twrl ='1'  AND jenis = 'Realisasi' AND tahun = '$nilaiTahun'"));
+                                       $selectRealisasiSms12 = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '1' AND stat_twrl ='2' AND jenis = 'Realisasi' AND tahun = '$nilaiTahun'"));
+                                     
+
+                                       $selectRealisasiSms21 = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '2' AND stat_twrl ='1'  AND jenis = 'Realisasi' AND tahun = '$nilaiTahun'"));
+                                       $selectRealisasiSms22 = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '2' AND stat_twrl ='2' AND jenis = 'Realisasi' AND tahun = '$nilaiTahun'"));
 
                                      
-                              ?>
+                                     
+                              ?><!-- Pembacaan Sms12 = semester 1 triwulan 2 -->
                               <tr>
                                 <td><?php echo $noIterasi++; ?> </td>
                                 <td><?php echo $ambilListCabang['nama_cabang'];?> </td>
-                                <td><?php echo $selectRencanaSms1['nilai_csi'];?></td>
-                                <td><?php echo $selectRencanaSms2['nilai_csi'];?></td>
-                                <td><?php echo $selectRealisasiSms1['nilai_csi'];?></td>
-                                <td><?php echo $selectRealisasiSms2['nilai_csi']; ?></td>
+
+                                <td>
+                                <?php $totalRencanaSms1=$selectRencanaSms11['nilai_csi']+$selectRencanaSms12['nilai_csi'];
+
+                                    if($totalRencanaSms1 != 0 ){
+                                      echo $totalRencanaSms1;
+                                      $iterasiRencanaSms1++;
+                                    }
+                                ?>
+                                </td>
+                                <td>
+                                <?php $totalRencanaSms2 = $selectRencanaSms21['nilai_csi']+$selectRencanaSms22['nilai_csi'];
+
+                                if($totalRencanaSms2 != 0 ){
+                                      echo $totalRencanaSms2;
+                                      $iterasiRencanaSms2++;
+                                    }
+
+                                ?>                                  
+                                </td>
+                                <td>
+                                <?php $totalRealisasiSms1 = $selectRealisasiSms11['nilai_csi']+$selectRealisasiSms12['nilai_csi'];
+
+
+                                if($totalRealisasiSms1 != 0){
+                                  echo $totalRealisasiSms1;
+                                  $iterasiRealisasiSms1++;
+                                }
+
+                                ?>
+                                  
+                                </td>
+                                <td>
+                                <?php $totalRealisasiSms2 = $selectRealisasiSms21['nilai_csi']+$selectRealisasiSms22['nilai_csi'];
+
+
+                                if($totalRealisasiSms2 != 0){
+                                  echo $totalRealisasiSms2;
+                                   $iterasiRealisasiSms2++;
+                                }
+
+                                ?>
+                                  
+                                </td>
+                               
                                 <td>
                                 <button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-csi" 
-                               data-id-rencanasms1="<?php echo $selectRencanaSms1['id_csi'] ?>"
-                               data-id-rencanasms2="<?php echo $selectRencanaSms2['id_csi'] ?>" 
-                               data-id-realisasisms1="<?php echo $selectRealisasiSms1['id_csi'] ?>" 
-                               data-id-realisasisms2="<?php echo $selectRealisasiSms2['id_csi'] ?>" 
+                                 data-id-rencanasms11="<?php echo $selectRencanaSms11['id_csi'] ?>"                                
+                                 data-id-rencanasms12="<?php echo $selectRencanaSms12['id_csi'] ?>"
+                                 data-id-rencanasms21="<?php echo $selectRencanaSms21['id_csi'] ?>"
+                                 data-id-rencanasms22="<?php echo $selectRencanaSms22['id_csi'] ?>" 
+                                 data-id-realisasisms11="<?php echo $selectRealisasiSms11['id_csi'] ?>"
+                                 data-id-realisasisms12="<?php echo $selectRealisasiSms12['id_csi'] ?>"  
+                                 data-id-realisasisms21="<?php echo $selectRealisasiSms21['id_csi'] ?>"                                 
+                                 data-id-realisasisms22="<?php echo $selectRealisasiSms22['id_csi'] ?>"
 
-                               data-nilai-rencanasms1="<?php echo $selectRencanaSms1['nilai_csi']?>"
-                               data-nilai-rencanasms2="<?php echo $selectRencanaSms2['nilai_csi']?>"
-                               data-nilai-realisasisms1="<?php echo $selectRealisasiSms1['nilai_csi']?>" 
-                               data-nilai-realisasisms2="<?php echo $selectRealisasiSms2['nilai_csi']?>"                                   
+
+                                 data-nilai-rencanasms11="<?php echo $selectRencanaSms11['nilai_csi']?>"                                
+                                 data-nilai-rencanasms12="<?php echo $selectRencanaSms12['nilai_csi']?>"
+                                 data-nilai-rencanasms21="<?php echo $selectRencanaSms21['nilai_csi']?>"
+                                 data-nilai-rencanasms22="<?php echo $selectRencanaSms22['nilai_csi']?>"
+
+                                 data-nilai-realisasisms11="<?php echo $selectRealisasiSms11['nilai_csi']?>"
+                                 data-nilai-realisasisms12="<?php echo $selectRealisasiSms12['nilai_csi']?>"
+                                 data-nilai-realisasisms21="<?php echo $selectRealisasiSms21['nilai_csi']?>" 
+                                 data-nilai-realisasisms22="<?php echo $selectRealisasiSms22['nilai_csi']?>"                                   
                                >
                                   Edit
                                </button>  
@@ -215,7 +286,8 @@ if(isset($_GET['tahun'])){
                                 </td>
                               </tr>
                               
-                              <?php }?>
+                              <?php }
+                              ?>
                             </tbody>
                           </table>
 
@@ -272,7 +344,7 @@ if(isset($_GET['tahun'])){
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
                        <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class='input-group date' id='myDatepickerFormRencanaCSI'>
-                            <input type='text' class="form-control" name= "tahun"  />
+                            <input type='text' class="form-control" name= "tahun" placeholder="Pilih Tahun"  />
                             <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -302,12 +374,24 @@ if(isset($_GET['tahun'])){
                   </div>
                   <!-- Dropdown list Semester -->
 
-                <!-- field Jenis Gardu Reguluer-->
+              <!-- Dropdown list Triwulan -->
+               <div class="form-group">
+                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="semester">Triwulan</label>
+                   <div class="col-md-6 col-sm-6 col-xs-12">
+                     <select name ="triwulan" class="select2_single form-control" tabindex="-1" required="required">
+                       <option value="">Pilih Triwulan</option>
+                       
+                       <option  value="1">Triwulan Pertama</option>
+                       <option  value="2">Triwulan Kedua</option>
+                     
+                      </select>
+                    </div>
+                  </div>
                
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka">Nilai Rencana</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "nilai" type="number"  step="any" min="0" id="gardu_terbuka" required="required" class="form-control col-md-7 col-xs-12">
+                    <input name= "nilai" type="number"   placeholder="Isi Nilai Rencana"  step="any" min="0" id="gardu_terbuka" required="required" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
                 
@@ -333,7 +417,7 @@ if(isset($_GET['tahun'])){
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title" id="myModalLabel">Tambah Data Nilai Rencana CSI</h4>
+            <h4 class="modal-title" id="myModalLabel">Tambah Data Nilai Realisasi CSI</h4>
           </div>
           <div class="modal-body">
               <form action="process_csi.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
@@ -394,7 +478,21 @@ if(isset($_GET['tahun'])){
                   </div>
                   <!-- Dropdown list Semester -->
 
-               
+                   <!-- Dropdown list Triwulan -->
+               <div class="form-group">
+                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="semester">Triwulan</label>
+                   <div class="col-md-6 col-sm-6 col-xs-12">
+                     <select name ="triwulan" class="select2_single form-control" tabindex="-1" required="required">
+                       <option value="">Pilih Triwulan</option>
+                       
+                       <option  value="1">Triwulan Pertama</option>
+                       <option  value="2">Triwulan Kedua</option>
+                     
+                      </select>
+                    </div>
+                  </div>
+
+
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka">Nilai Realisasi</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
@@ -434,43 +532,84 @@ if(isset($_GET['tahun'])){
                         <div class="modal-body">
                         <form action="editdatacsi.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                           
-                            <input name ="idrencanasms1" type="number"  value=""  hidden>
-                            <input name ="idrencanasms2" type="number"  value="" hidden>
-                            <input name ="idrealisasisms1" type="number"  value="" hidden>
-                            <input name ="idrealisasisms2" type="text"  value="" hidden>
+                            <input name ="idrencanasms11" type="number"  value="" hidden >                            
+                            <input name ="idrencanasms12" type="number"  value="" hidden >
+                            <input name ="idrencanasms21" type="number"  value="" hidden>
+                            <input name ="idrencanasms22" type="number"  value="" hidden>
+                            <input name ="idrealisasisms11" type="number"  value="" hidden>
+                            <input name ="idrealisasisms12" type="number"  value="" hidden>
+                            <input name ="idrealisasisms21" type="number"  value="" hidden>
+                            <input name ="idrealisasisms22" type="number"  value="" hidden>
 
 
                             <div class="col-md-6">
                               <h4>Rencana</h4>
+                              <h6 style="margin-left:30px;">Semester 1</h6>
                               <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">Semester 1</label>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">Triwulan 1</label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input value ="" name= "nilaiRencanaSms1" type="number" step="any" min="0" id="rkap" class="form-control col-md-7 col-xs-12">
+                                <input value ="" name= "nilaiRencanaSms11" type="number" step="any" min="0" id="rkap" class="form-control col-md-7 col-xs-12">
                               </div>
                               </div>
                             </div>
                             <div class="col-md-6">
                               <h4>Realisasi</h4>
+                              <h6 style="margin-left:30px;">Semester 1</h6>
                               <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">Semester 1</label>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">Triwulan 1</label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input value ="" name= "nilaiRealisasiSms1" type="number" step="any" min="0" id="rkap"  class="form-control col-md-7 col-xs-12">
+                                <input value ="" name= "nilaiRealisasiSms11" type="number" step="any" min="0" id="rkap"  class="form-control col-md-7 col-xs-12">
                               </div>
                               </div>
                             </div>
                             <div class="col-md-6">                             
                               <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">Semester 2</label>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">Triwulan 2</label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input value ="" name= "nilaiRencanaSms2" type="number" step="any" min="0" id="rkap"  class="form-control col-md-7 col-xs-12">
+                                <input value ="" name= "nilaiRencanaSms12" type="number" step="any" min="0" id="rkap"  class="form-control col-md-7 col-xs-12">
                               </div>
                               </div>
                             </div>
                             <div class="col-md-6">                             
                               <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">Semester 2</label>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">Triwulan 2</label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input value ="" name= "nilaiRealisasiSms2" type="number" step="any" min="0" id="rkap"  class="form-control col-md-7 col-xs-12">
+                                <input value ="" name= "nilaiRealisasiSms12" type="number" step="any" min="0" id="rkap"  class="form-control col-md-7 col-xs-12">
+                              </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                            <h6 style="margin-left:30px;">Semester 2</h6>                             
+                              <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">Triwulan 1</label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input value ="" name= "nilaiRencanaSms21" type="number" step="any" min="0" id="rkap"  class="form-control col-md-7 col-xs-12">
+                              </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                            <h6 style="margin-left:30px;">Semester 2</h6>                             
+                              <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">Triwulan 1</label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input value ="" name= "nilaiRealisasiSms21" type="number" step="any" min="0" id="rkap"  class="form-control col-md-7 col-xs-12">
+                              </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+
+                              <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">Triwulan 2</label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input value ="" name= "nilaiRencanaSms22" type="number" step="any" min="0" id="rkap"  class="form-control col-md-7 col-xs-12">
+                              </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">                             
+                              <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">Triwulan 2</label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input value ="" name= "nilaiRealisasiSms22" type="number" step="any" min="0" id="rkap"  class="form-control col-md-7 col-xs-12">
                               </div>
                               </div>
                             </div>

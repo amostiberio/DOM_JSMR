@@ -73,7 +73,7 @@ include ('connect.php'); //connect ke database
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Referensi File RKAP</h3>
+                <h3>Referensi File Pencapaian</h3>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -81,7 +81,7 @@ include ('connect.php'); //connect ke database
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Data Beban Cabang <?php echo $namacabang; ?> </small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small>Data Pencapaian <?php echo $namacabang; ?> </small></h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="title_right">
@@ -98,7 +98,7 @@ include ('connect.php'); //connect ke database
 						<thead >
 						  <tr>
 							<th>Nama File</th>
-							<th>Tahun</th>
+							<th>Tanggal</th>
 							<th>Tipe File</th>
 							<th>Waktu Unggah</th>
 							<th>Unduh File</th>
@@ -110,10 +110,49 @@ include ('connect.php'); //connect ke database
 						$idRoleReferensi = $rolereferensi['id_referensirole'];
 						$referensi = mysqli_query($connect, "SELECT * FROM referensi_file WHERE id_referensirole ='$idRoleReferensi' ");
 						while($datareferensi = mysqli_fetch_array($referensi)){
+							$ambilBulan= $datareferensi['bulan'];
+							if($ambilBulan=='1'){
+								$bulan= 'Januari';
+							}
+							if($ambilBulan=='2'){
+								$bulan= 'Februari';
+							}
+							if($ambilBulan=='3'){
+								$bulan= 'Maret';
+							}
+							if($ambilBulan=='4'){
+								$bulan= 'April';
+							}
+							if($ambilBulan=='5'){
+								$bulan= 'Mei';
+							}
+							if($ambilBulan=='6'){
+								$bulan= 'Juni';
+							}
+							if($ambilBulan=='7'){
+								$bulan= 'Juli';
+							}
+							if($ambilBulan=='8'){
+								$bulan= 'Agustus';
+							}
+							if($ambilBulan=='9'){
+								$bulan= 'September';
+							}
+							if($ambilBulan=='10'){
+								$bulan= 'Oktober';
+							}
+							if($ambilBulan=='11'){
+								$bulan= 'November';
+							}
+							if($ambilBulan=='12'){
+								$bulan= 'Desember';
+							}
+							
+
 						?>
 						  <tr>
 							<td><?php echo $datareferensi['nama_file']?></td>
-							<td><?php echo $datareferensi['tahun']?></td>
+							<td><?php echo $bulan;?> <?php echo $datareferensi['tahun']?></td>
 							<td><?php echo $datareferensi['type_file']?></td>
 							<td><?php echo $datareferensi['waktu']?></td>
 							<td><a href="unduh.php?id_referensi=<?php echo $datareferensi['id_referensi'];?>"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button></a>
@@ -194,12 +233,17 @@ include ('connect.php'); //connect ke database
 					</select>
 				</div>
 			  </div>
-			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
-				<div class="col-md-6 col-sm-6 col-xs-12">
-					<input name ="tahun" type="number" id="tahun" required="required" class="form-control col-md-7 col-xs-12">
-				</div>
-			  </div>
+			   <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tanggal</label>
+                               <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class='input-group date' id='myDatepickerFormPencapaian'>
+                                    <input type='text' class="form-control" name= "tahun"  />
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                                </div>
+                </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="file">Pilih File</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
