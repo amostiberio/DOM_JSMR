@@ -2,7 +2,11 @@
 include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 
-
+if(isset($_GET['tahun'])){
+    $nilaiTahun = $_GET['tahun'];
+  
+  }else $nilaiTahun = '0';
+    
 if(isset($_GET['triwulan'])){
     $nilaiTriwulan = $_GET['triwulan'];
 	
@@ -97,6 +101,26 @@ if(isset($_GET['triwulan'])){
 
                     <div class="clearfix"></div>
                   </div>
+
+                  <form action="dropdownproses.php" method="POST">
+                  <div class='col-sm-2'>                    
+                    <div class="form-group">
+                    <h5 class="control-label col-md-4 col-sm-3 col-xs-12" for="tahun">Tahun</h5>
+                        <div class='input-group date ' id='myDatepickerFilter'>
+
+                            <input type='text' class="form-control" name= "tahun" <?php if(isset($_GET['tahun'])){ ?> value="<?php echo $nilaiTahun ;?>" <?php } ?>/>
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        <?php if(isset($_GET['triwulan'])){
+                              ?> <input type='text' name="triwulan" value="<?php echo $nilaiTriwulan; ?>" hidden>
+  
+                          <?php  }?>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary" name="dropdownTahunLaporanbpt">Lihat</button>
+                  </form>
                 
                         
                
@@ -114,6 +138,10 @@ if(isset($_GET['triwulan'])){
                                     <option value="3" <?php if ($nilaiTriwulan == '3') echo 'selected'?>>Triwulan 3</option>
                                     <option value="4" <?php if ($nilaiTriwulan == '4') echo 'selected'?>>Triwulan 4</option>                                                    
                             </select>
+                            <?php if(isset($_GET['tahun'])){
+                              ?> <input type='text' name="tahun" value="<?php echo $nilaiTahun; ?>" hidden>
+  
+                          <?php  }?>
                             <button type="submit" class="btn btn-primary" name="dropdownTW">Lihat</button>
                           </form>
                         </div>
@@ -131,8 +159,8 @@ if(isset($_GET['triwulan'])){
                       <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
                       </button>
                       <ul role="menu" class="dropdown-menu pull-right">
-                        <li><a href="#" onClick="doExport('#datatable-keytable', {type: 'xlsx'});" ><img src='xls.png' alt="XLSX" style="width:20px"> Excels</a>
-                        </li>
+                       <li><a href="downloadlaporanbpt.php?triwulan=<?php echo $nilaiTriwulan;?>"" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                       </li>
 
                       </ul>
                       </div>
@@ -144,7 +172,7 @@ if(isset($_GET['triwulan'])){
                    
                   <div class="x_content">
 
-                      <table id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
+                      <table id="datatable-keytable"  class="table table-striped table-bordered text-center">
                         <thead>
                           <tr>
                             <th rowspan="2">Cabang</th>
@@ -205,7 +233,7 @@ if(isset($_GET['triwulan'])){
                         </thead>
                             <tbody>
                             <?php
-							$listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1' AND beban_realisasi.jenis ='bpt' AND sub_program.jenis='beban' ");
+							$listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1' AND beban_realisasi.jenis ='bpt' AND sub_program.jenis='beban' AND tahun='$nilaiTahun'");
 							while($datalistTW = mysqli_fetch_array($listTW)){
   								$idpklist= $datalistTW['id_pk'];
   								$idspklist= $datalistTW['id_sp'];

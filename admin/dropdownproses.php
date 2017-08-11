@@ -3,7 +3,14 @@ include 'connect.php';
 
 		if(isset($_POST['dropdownTW'])){
 			$triwulan = $_POST['dropDownListTW'];
-		 
+            if(isset($_POST['tahun'])){
+                $tahun =$_POST['tahun'];
+		     if($tahun >0 && $triwulan >0){ ?>
+                <script>document.location.href="laporan_bpt.php?tahun=<?php echo $tahun;?>&triwulan=<?php echo $triwulan;?>";</script>
+
+           <?php }
+
+            }else{
             if($triwulan > 0 ){
 ?>
 
@@ -13,6 +20,7 @@ include 'connect.php';
 ?>               
                 <script>document.location.href="laporan_bpt.php";</script>
 <?php        }
+}
 
 if(isset($_POST['dropdownTWBPLL'])){
 			$triwulan = $_POST['dropDownListTW'];
@@ -71,4 +79,25 @@ if(isset($_POST['dropdownTWSPJT'])){
 <?php       
 }
 
+if(isset($_POST['dropdownTahunLaporanbpt'])){
+            $tahun = $_POST['tahun'];
+            if(isset($_POST['triwulan'])){
+                $triwulan = $_POST['triwulan'];
+                if($tahun >0 && $triwulan >0){ ?>
+                <script>document.location.href="laporan_bpt.php?tahun=<?php echo $tahun;?>&triwulan=<?php echo $triwulan;?>";</script>
+
+           <?php }
+
+            }else{
+            if($tahun > 0 ){
+?>
+
+                <script>document.location.href="laporan_bpt.php?tahun=<?php echo $tahun;?>";</script>
+<?php       }
+            else 
+?>               
+                <script>document.location.href="laporan_bpt.php";</script>
+<?php       
+}
+}
 ?>
