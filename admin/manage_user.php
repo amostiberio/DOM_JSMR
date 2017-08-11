@@ -101,8 +101,7 @@ include ('connect.php'); //connect ke database
 	                    <ul role="menu" class="dropdown-menu pull-right">
                         <li><a data-toggle="modal" data-target=".bs-user" >Tambah User</a>
                         </li>   
-	                      <li><a data-toggle="modal" data-target=".bs-cabang">Tambah Cabang</a>
-	                      </li>
+	                     
 	                     		             
 
 	                    </ul>

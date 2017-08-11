@@ -13,7 +13,7 @@ include ('connect.php'); //connect ke database
   $cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT nama_cabang FROM cabang WHERE id_cabang = '$idcabang'"));
   $namacabang = $cabang['nama_cabang'];
 
-  $resultuntukrencana = $connect-> query("SELECT * FROM program_kerja WHERE jenis = 'bpt' ");
+  
 
 ?>
 <!DOCTYPE html>
@@ -75,7 +75,7 @@ include ('connect.php'); //connect ke database
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Monitoring Beban</h3>
+                <h3>Management User Cabang</h3>
               </div>
 
 
@@ -87,7 +87,7 @@ include ('connect.php'); //connect ke database
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Data Beban Semua Cabang </small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small>Data User dari Semua Cabang </small></h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -99,8 +99,7 @@ include ('connect.php'); //connect ke database
 	                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Tambah <span class="caret"></span>
 	                    </button>
 	                    <ul role="menu" class="dropdown-menu pull-right">
-                        <li><a data-toggle="modal" data-target=".bs-user" >Tambah User</a>
-                        </li>   
+                           
 	                      <li><a data-toggle="modal" data-target=".bs-cabang">Tambah Cabang</a>
 	                      </li>
 	                     		             
@@ -115,57 +114,40 @@ include ('connect.php'); //connect ke database
 
                       <table id="datatable-keytable"  class="table table-striped table-bordered text-center" >
                             <thead >
-                            
+                                <th>No</th>
                                 <th>Cabang</th>
-                                <th>Username</th>
-                                <th>Password</th>
-                                <th>Role</th>
-                                <th>Jumlah Program Kerja</th>                                
+                                <th>Jumlah User</th>                                
                 								<th>Aksi</th>
 
                              
                             </thead>
                             <tbody>
                             <?php
-                            $listUser = mysqli_query($connect, "SELECT * FROM user ");
-                            while($dataListUser = mysqli_fetch_array($listUser)){
-                                $idUserCabang = $dataListUser['id_user'];
-                                $idUserRole = $dataListUser['id_role'];
-                                $idCabangUser = $dataListUser['id_cabang'];
+                            $listCabang = mysqli_query($connect, "SELECT * FROM cabang ");
+                            $qty=1;
+                            while($dataListCabang = mysqli_fetch_array($listCabang)){
+                                $idCabang = $dataListCabang['id_cabang'];
+                                $namaCabang = $dataListCabang['nama_cabang'];
+                                
+                                $userDataCabang = mysqli_query($connect, "SELECT * FROM user WHERE id_cabang = '$idCabang'");
+                                $hitungUser = mysqli_fetch_array($userDataCabang,MYSQLI_NUM);
 
-                                $userDataCabang = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM cabang WHERE id_cabang = '$idCabangUser'"));
-
-                								$namaCabangUser = $userDataCabang['nama_cabang'];
-                                if(!isset($namaCabangUser)){
-                                    $namaCabangUser = 'All';
-                                }
-                                $userName = $dataListUser['username'];
-                                $password = $dataListUser['password'];
-
-                                $userRole = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM user_role WHERE id_role ='$idUserRole' "));
-                                $totalPK = mysqli_fetch_row(mysqli_query($connect,"SELECT * FROM program_kerja WHERE id_cabang ='$idCabangUser'"));
-                                if(!isset($totalPK)){
-                                    $totalPK = '0';
-                                }
                                 ?>
                               <tr >
-                                <td><?php echo $namaCabangUser; ?></td>
-                                <td><?php echo $userName; ?></td>
-                                <td><?php echo $password; ?></td>
-                                <td><?php echo $userRole['role']; ?></td> 
-                                <td><?php echo $totalPK[0]; ?></td>                              
+                                <td><?php echo $qty++; ?></td>
+                                <td><?php echo $namaCabang; ?></td>
+                                <td><?php echo $hitungUser[0]; ?></td>                            
                 								<td>
                 								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal" 
-                								data-username ="<?php echo $userName; ?>" 
-                							  data-password ="<?php echo $password; ?>" 
+                								data-namacabang ="<?php echo $namaCabang; ?>" 
                 								 >
                 								 Edit
                 								 </button>																 
-                								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
+                								 <!-- <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
                                  data-id-user = "<?php echo $idUserCabang;?>"
                 								>
                 								 Delete 
-                								 </button>
+                								 </button> -->
                 								 </td>
                               </tr>
                               <?php 
@@ -202,7 +184,7 @@ include ('connect.php'); //connect ke database
                           </button>
                           <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body text-center">
                         <form action="editdataUser.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" ">
                          <div class="alert alert-danger" role="alert">
 		 				               <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
@@ -223,32 +205,26 @@ include ('connect.php'); //connect ke database
                     </div>
                   </div>
 			<!-- Modal Edit User -->
-			 <div class="modal fade bs-edit-modal" id="modal_EditUser" tabindex="-1" role="dialog" aria-hidden="true">
+			 <div class="modal fade bs-edit-modal" id="modal_EditCabang" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
 
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title" id="myModalLabel">Edit Rencana</h4>
+                          <h4 class="modal-title" id="myModalLabel">Edit Cabang</h4>
                         </div>
                         <div class="modal-body">
                         <form action="editdataUser.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                          
                         <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ma">Username</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ma">Nama Cabang</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input name ="Username" type="text" required="required" class="form-control col-md-7 col-xs-12">
+                          <input name ="namaCabang" type="text" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
 
                         </div>
-                        <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Password</label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input name ="Password" type="text"  required="required" class="form-control col-md-7 col-xs-12">
-                          </div>
-                        </div>
-                          
+                        
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -341,7 +317,7 @@ include ('connect.php'); //connect ke database
 
 			
 
-			<!-- Modal Tambah Rencana -->
+			<!-- Modal Tambah Cabang -->
       <div class="modal fade bs-cabang" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">

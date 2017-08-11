@@ -3,7 +3,7 @@
         <h3>General</h3>
             <!-- Menu Monitoring Beban dan Capex -->
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Beranda </a>
+                  <li><a href="home.php"><i class="fa fa-home"></i> Beranda </a>
                   </li>
                 </ul>
               <!-- Menu Monitoring Beban dan Capex -->
@@ -90,6 +90,7 @@
                     <li><a><i class="fa fa-gear"></i>Management<span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">                       
                         <li><a href="manage_user.php">User</a></li>  
+                        <li><a href="manage_cabang.php">Cabang</a></li>  
                                                   
                       </ul>
                     </li>

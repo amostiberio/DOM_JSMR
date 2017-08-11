@@ -3,7 +3,7 @@
         <h3>General</h3>
             <!-- Menu Monitoring Beban dan Capex -->
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Beranda </a>
+                  <li><a href="home.php"><i class="fa fa-home"></i> Beranda </a>
                   </li>
                 </ul>
               <!-- Menu Monitoring Beban dan Capex -->

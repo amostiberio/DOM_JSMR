@@ -491,6 +491,7 @@
 
         });
 
+
         $('#modal_deleteUser').on('show.bs.modal', function(e) {
 
         var iduser = $(e.relatedTarget).data('id-user');
@@ -667,7 +668,15 @@
             
              });
 
+    $('#modal_EditCabang').on('show.bs.modal', function(e) {
 
+        var namacabang = $(e.relatedTarget).data('namacabang');
+        $(e.currentTarget).find('input[name="namaCabang"]').val(namacabang);
+
+      
+
+
+        });
        
             
 </script>
