@@ -84,20 +84,24 @@
     </script>
 	 <script>
 		$('#modal_deletelalin').on('show.bs.modal', function(e) {
-
+			 
 		var id_gerbangl = $(e.relatedTarget).data('id-gerbang');
 		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbangl);
 		var id_tahunl = $(e.relatedTarget).data('tahun');
 		$(e.currentTarget).find('input[name="tahun"]').val(id_tahunl);
-
+		var id_twl = $(e.relatedTarget).data('tw');
+		$(e.currentTarget).find('input[name="tw"]').val(id_twl);
+		
         });
 		$('#modal_editlalin').on('show.bs.modal', function(e) {
-
+			 
 		var id_gerbangl = $(e.relatedTarget).data('id-gerbang');
 		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbangl);
 		var id_tahunl = $(e.relatedTarget).data('tahun');
 		$(e.currentTarget).find('input[name="tahun"]').val(id_tahunl);
-
+		var id_twl = $(e.relatedTarget).data('tw');
+		$(e.currentTarget).find('input[name="tw"]').val(id_twl);
+		
 		var lldata1 = $(e.relatedTarget).data('data1');
         $(e.currentTarget).find('input[name="gardu_terbuka_lalin"]').val(lldata1);
         var lldata2 = $(e.relatedTarget).data('data2');
@@ -112,23 +116,27 @@
         $(e.currentTarget).find('input[name="gardu_keluar_gto_lalin"]').val(lldata6);
         var lldata7 = $(e.relatedTarget).data('data7');
         $(e.currentTarget).find('input[name="epass_lalin"]').val(lldata7);
-
+		
         });
 		$('#modal_deletejmlgardu').on('show.bs.modal', function(e) {
-
+			 
 		var id_gerbang = $(e.relatedTarget).data('id-gerbang');
 		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbang);
 		var id_tahun = $(e.relatedTarget).data('tahun');
 		$(e.currentTarget).find('input[name="tahun"]').val(id_tahun);
-
+		var id_tw = $(e.relatedTarget).data('tw');
+		$(e.currentTarget).find('input[name="tw"]').val(id_tw);
+		
         });
 		$('#modal_editjmlgardu').on('show.bs.modal', function(e) {
-
+			 
 		var id_gerbang = $(e.relatedTarget).data('id-gerbang');
 		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbang);
 		var id_tahun = $(e.relatedTarget).data('tahun');
 		$(e.currentTarget).find('input[name="tahun"]').val(id_tahun);
-
+		var id_tw = $(e.relatedTarget).data('tw');
+		$(e.currentTarget).find('input[name="tw"]').val(id_tw);
+		
 		var data1 = $(e.relatedTarget).data('data1');
         $(e.currentTarget).find('input[name="gardu_terbuka_tersedia"]').val(data1);
         var data2 = $(e.relatedTarget).data('data2');
@@ -143,23 +151,23 @@
         $(e.currentTarget).find('input[name="gardu_keluar_gto_tersedia"]').val(data6);
         var data7 = $(e.relatedTarget).data('data7');
         $(e.currentTarget).find('input[name="epass_tersedia"]').val(data7);
-
+		
         });
 		$('#modal_deletejmlsdm').on('show.bs.modal', function(e) {
-
+			 
 		var id_gerbangs = $(e.relatedTarget).data('id-gerbang');
 		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbangs);
 		var id_tahuns = $(e.relatedTarget).data('tahun');
 		$(e.currentTarget).find('input[name="tahun"]').val(id_tahuns);
-
+		
         });
 		$('#modal_editjmlsdm').on('show.bs.modal', function(e) {
-
+			 
 		var id_gerbangs = $(e.relatedTarget).data('id-gerbang');
 		$(e.currentTarget).find('input[name="idgerbang"]').val(id_gerbangs);
 		var id_tahuns = $(e.relatedTarget).data('tahun');
 		$(e.currentTarget).find('input[name="tahun"]').val(id_tahuns);
-
+		
 		var sdata1 = $(e.relatedTarget).data('data1');
         $(e.currentTarget).find('input[name="kpl_gerbangtol"]').val(sdata1);
         var sdata2 = $(e.relatedTarget).data('data2');
@@ -174,9 +182,22 @@
         $(e.currentTarget).find('input[name="sakit_permanen"]').val(sdata6);
         var sdata7 = $(e.relatedTarget).data('data7');
         $(e.currentTarget).find('input[name="tugt"]').val(sdata7);
-
+		
         });
 	 </script>
+	<script>
+    $('#cabang-list').on('change', function(){
+        var id_cabang = this.value;
+        $.ajax({
+            type: "POST",
+            url: "get_gerbang.php",
+            data:'id_cabang='+id_cabang,
+            success: function(result){
+                $("#gerbang-list").html(result);
+            }
+        });
+    });
+    </script>
 
 
 

@@ -71,7 +71,7 @@ include ('connect.php'); //connect ke database
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Laporan KPI</h3>
+                <h3>Jumlah SDM</h3>
               </div>
 
 
@@ -83,7 +83,7 @@ include ('connect.php'); //connect ke database
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Data Jumlah SDM</small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small></small></h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -172,7 +172,51 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo $total+=($total_kryjasamarga+$total_kryjlj+ $total_kryjlo+$total_sakitpermanen);?></td>
                                 <td><?php echo $total_tugt?></td>
 							 </tr>
-                              <?php }?>
+                              <?php }
+                                $jumlah_sdm = mysqli_query($connect, "SELECT * FROM pengumpul_tol join jenis_karyawan join cabang on cabang.id_cabang=pengumpul_tol.id_cabang group by pengumpul_tol.tahun, pengumpul_tol.id_cabang");
+                                while($data_jumlahsdm = mysqli_fetch_array($jumlah_sdm)){
+								  $data_kepalagerbangtol = mysqli_query($connect, "SELECT * FROM pengumpul_tol WHERE id_karyawan = '5'");
+								  $total1 = 0;
+								  while ($num = mysqli_fetch_array($data_kepalagerbangtol)) {
+									$total1 += $num['jumlah'];}
+								  $data_kspt = mysqli_query($connect, "SELECT * FROM pengumpul_tol WHERE id_karyawan = '6'");
+                                  $total2 = 0;
+								  while ($num = mysqli_fetch_array($data_kspt)) {
+									$total2 += $num['jumlah'];}
+                                  $data_kryjasamarga = mysqli_query($connect, "SELECT * FROM pengumpul_tol WHERE id_karyawan = '1'");
+                                  $total3 = 0;
+								  while ($num = mysqli_fetch_array($data_kryjasamarga)) {
+									$total3 += $num['jumlah'];}
+                                  $data_kryjlj = mysqli_query($connect, "SELECT * FROM pengumpul_tol WHERE id_karyawan = '2'");
+                                  $total4 = 0;
+								  while ($num = mysqli_fetch_array($data_kryjlj)) {
+									$total4 += $num['jumlah'];}
+                                  $data_kryjlo= mysqli_query($connect, "SELECT * FROM pengumpul_tol WHERE id_karyawan = '3'");
+                                  $total5= 0;
+								  while ($num = mysqli_fetch_array($data_kryjlo)) {
+									$total5 += $num['jumlah'];}
+                                  $data_sakitpermanen = mysqli_query($connect, "SELECT * FROM pengumpul_tol WHERE id_karyawan = '4'");
+                                  $total6 = 0;
+								  while ($num = mysqli_fetch_array($data_sakitpermanen)) {
+									$total6 += $num['jumlah'];}
+                                  $data_tugt = mysqli_query($connect, "SELECT * FROM pengumpul_tol WHERE id_karyawan = '7'");
+								  $total7 = 0;
+                                  $total8 = 0;
+								  while ($num = mysqli_fetch_array($data_tugt)) {
+									$total8 += $num['jumlah'];}
+								}
+                                  ?>
+                              <tr>
+                                <td colspan='3'>Total</td>
+                                <td><?php echo $total1?></td>
+                                <td><?php echo $total2?></td>
+                                <td><?php echo $total3?></td>
+                                <td><?php echo $total4?></td>
+                                <td><?php echo $total5?></td>
+								<td><?php echo $total6?></td>
+                                <td><?php echo $total7+=($total3+$total4+$total5+$total6)?></td>
+								<td><?php echo $total8?></td>
+                              </tr>
                             </tbody>
                           </table>
                   </div>

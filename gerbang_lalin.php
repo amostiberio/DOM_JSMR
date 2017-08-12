@@ -2,15 +2,14 @@
 include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 
-  $getidcabang = $_GET['id_cabang'];
-  $cabang =  mysqli_query($connect,"SELECT * FROM cabang WHERE id_cabang = '$getidcabang'");
-  $data_cabang = mysqli_fetch_array($cabang);
+  $getidgerbang = $_GET['id_gerbang'];
+  $gerbang =  mysqli_query($connect,"SELECT * FROM gerbang WHERE id_gerbang = '$getidgerbang'");
+  $data_gerbang = mysqli_fetch_array($gerbang);
   $iduser = $_SESSION['id_user'];
 
   //ambil informasi jenis sub gardu
   $gardu = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM jenis_subgardu"));
 
-  $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM gerbang"));
 	
 ?>
 <!DOCTYPE html>
@@ -72,7 +71,7 @@ include ('connect.php'); //connect ke database
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Lalu-lintas Jam-jaman Cabang <?php echo $data_cabang['nama_cabang']?></h3>
+                <h3>Lalu-lintas Jam-jaman Gerbang <?php echo $data_gerbang['nama_gerbang']?></h3>
               </div>
 
 
@@ -99,7 +98,7 @@ include ('connect.php'); //connect ke database
 
                               <tr >
                                 <th rowspan="3">No</th>
-                                <th rowspan="3">Cabang/Gerbang</th>
+                                <th rowspan="3">Gerbang</th>
 								<th rowspan="3">Tahun</th>
 								<th rowspan="3">TW</th>
                                 <th colspan="7">Lalu Lintas Transaksi Tinggi</th>
@@ -123,7 +122,7 @@ include ('connect.php'); //connect ke database
                             </thead>
                             <tbody>
                               <?php
-                                $lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join gerbang on gerbang.id_gerbang=transaksi_tinggi.id_gerbang WHERE transaksi_tinggi.id_cabang='$getidcabang' group by transaksi_tinggi.tahun, transaksi_tinggi.id_gerbang");
+                                $lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join gerbang on gerbang.id_gerbang=transaksi_tinggi.id_gerbang WHERE transaksi_tinggi.id_gerbang='$getidgerbang' group by transaksi_tinggi.tahun, transaksi_tinggi.id_gerbang");
                                 $nomor = 1;
                                 while($data_lalin = mysqli_fetch_array($lalin)){
                                    $idgerbanglist = $data_lalin['id_gerbang'];

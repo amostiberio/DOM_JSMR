@@ -18,7 +18,8 @@ if(isset($_POST['deletelaporan'])){
 if(isset($_POST['deletett'])){
 	$idgerbang = $_POST['idgerbang'];
 	$tahun = $_POST['tahun'];
-	$delete = mysqli_query($connect,"DELETE FROM transaksi_tinggi WHERE id_gerbang='$idgerbang' AND tahun='$tahun'");
+	$tw = $_POST['tw'];
+	$delete = mysqli_query($connect,"DELETE FROM transaksi_tinggi WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw'");
 	if($delete){
 ?>
 		<script> window.alert('Penghapusan Data Berhasil') </script>
@@ -33,6 +34,7 @@ if(isset($_POST['deletett'])){
 	if(isset($_POST['edittt'])){
 	$idgerbang = $_POST['idgerbang'];
 	$tahun = $_POST['tahun'];
+	$tw = $_POST['tw'];
 	$data1 = $_POST['gardu_terbuka_lalin'];
 	$data2 = $_POST['gardu_masuk_lalin'];
 	$data3 = $_POST['gardu_keluar_lalin'];
@@ -41,13 +43,13 @@ if(isset($_POST['deletett'])){
 	$data6 = $_POST['gardu_keluar_gto_lalin'];
 	$data7 = $_POST['epass_lalin'];
 	
-	$update1 = mysqli_query($connect,"UPDATE transaksi_tinggi SET nilai ='$data1' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND id_subgardu='1'");
-	$update2 = mysqli_query($connect,"UPDATE transaksi_tinggi SET nilai ='$data2' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND id_subgardu='2'");
-	$update3 = mysqli_query($connect,"UPDATE transaksi_tinggi SET nilai ='$data3' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND id_subgardu='3'");
-	$update4 = mysqli_query($connect,"UPDATE transaksi_tinggi SET nilai ='$data4' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND id_subgardu='4'");
-	$update5 = mysqli_query($connect,"UPDATE transaksi_tinggi SET nilai ='$data5' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND id_subgardu='5'");
-	$update6 = mysqli_query($connect,"UPDATE transaksi_tinggi SET nilai ='$data6' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND id_subgardu='6'");
-	$update7 = mysqli_query($connect,"UPDATE transaksi_tinggi SET nilai ='$data7' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND id_subgardu='7'");
+	$update1 = mysqli_query($connect,"UPDATE transaksi_tinggi SET nilai ='$data1' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='1'");
+	$update2 = mysqli_query($connect,"UPDATE transaksi_tinggi SET nilai ='$data2' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='2'");
+	$update3 = mysqli_query($connect,"UPDATE transaksi_tinggi SET nilai ='$data3' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='3'");
+	$update4 = mysqli_query($connect,"UPDATE transaksi_tinggi SET nilai ='$data4' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='4'");
+	$update5 = mysqli_query($connect,"UPDATE transaksi_tinggi SET nilai ='$data5' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='5'");
+	$update6 = mysqli_query($connect,"UPDATE transaksi_tinggi SET nilai ='$data6' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='6'");
+	$update7 = mysqli_query($connect,"UPDATE transaksi_tinggi SET nilai ='$data7' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='7'");
 
 	if($update1 AND $update2 AND $update3 AND $update4 AND $update5 AND $update6 AND $update7){
 ?>
@@ -65,7 +67,8 @@ if(isset($_POST['deletett'])){
 	if(isset($_POST['deletejg'])){
 	$idgerbang = $_POST['idgerbang'];
 	$tahun = $_POST['tahun'];
-	$delete = mysqli_query($connect,"DELETE FROM jml_gardutersedia WHERE id_gerbang='$idgerbang' AND tahun='$tahun'");
+	$tw = $_POST['tw'];
+	$delete = mysqli_query($connect,"DELETE FROM jml_gardutersedia WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw'");
 	if($delete){
 ?>
 		<script> window.alert('Penghapusan Data Berhasil') </script>
@@ -80,6 +83,7 @@ if(isset($_POST['deletett'])){
 	if(isset($_POST['editjg'])){
 	$idgerbang = $_POST['idgerbang'];
 	$tahun = $_POST['tahun'];
+	$tw = $_POST['tw'];
 	$data1 = $_POST['gardu_terbuka_tersedia'];
 	$data2 = $_POST['gardu_masuk_tersedia'];
 	$data3 = $_POST['gardu_keluar_tersedia'];
@@ -88,13 +92,13 @@ if(isset($_POST['deletett'])){
 	$data6 = $_POST['gardu_keluar_gto_tersedia'];
 	$data7 = $_POST['epass_tersedia'];
 	
-	$update1 = mysqli_query($connect,"UPDATE jml_gardutersedia SET nilai ='$data1' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND id_subgardu='1'");
-	$update2 = mysqli_query($connect,"UPDATE jml_gardutersedia SET nilai ='$data2' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND id_subgardu='2'");
-	$update3 = mysqli_query($connect,"UPDATE jml_gardutersedia SET nilai ='$data3' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND id_subgardu='3'");
-	$update4 = mysqli_query($connect,"UPDATE jml_gardutersedia SET nilai ='$data4' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND id_subgardu='4'");
-	$update5 = mysqli_query($connect,"UPDATE jml_gardutersedia SET nilai ='$data5' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND id_subgardu='5'");
-	$update6 = mysqli_query($connect,"UPDATE jml_gardutersedia SET nilai ='$data6' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND id_subgardu='6'");
-	$update7 = mysqli_query($connect,"UPDATE jml_gardutersedia SET nilai ='$data7' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND id_subgardu='8'");
+	$update1 = mysqli_query($connect,"UPDATE jml_gardutersedia SET nilai ='$data1' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='1'");
+	$update2 = mysqli_query($connect,"UPDATE jml_gardutersedia SET nilai ='$data2' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='2'");
+	$update3 = mysqli_query($connect,"UPDATE jml_gardutersedia SET nilai ='$data3' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='3'");
+	$update4 = mysqli_query($connect,"UPDATE jml_gardutersedia SET nilai ='$data4' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='4'");
+	$update5 = mysqli_query($connect,"UPDATE jml_gardutersedia SET nilai ='$data5' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='5'");
+	$update6 = mysqli_query($connect,"UPDATE jml_gardutersedia SET nilai ='$data6' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='6'");
+	$update7 = mysqli_query($connect,"UPDATE jml_gardutersedia SET nilai ='$data7' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='8'");
 
 	if($update1 AND $update2 AND $update3 AND $update4 AND $update5 AND $update6 AND $update7){
 ?>

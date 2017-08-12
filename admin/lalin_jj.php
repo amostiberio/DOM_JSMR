@@ -71,7 +71,7 @@ include ('connect.php'); //connect ke database
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Laporan KPI</h3>
+                <h3>Lalu-lintas Jam-jaman</h3>
               </div>
 
 
@@ -83,13 +83,25 @@ include ('connect.php'); //connect ke database
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Data Lalu-lintas Jam-jaman</small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small></small></h2>
 
                     <div class="clearfix"></div>
                   </div>
-
+					
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
+					<div class="input-group buttonright" >
+                      <div class="btn-group  buttonrightfloat text-center" >
+                      <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
+                      </button>
+                      <ul role="menu" class="dropdown-menu pull-right">
+                        <li><a href="#" onClick="doExport('#datatable-keytable', {type: 'xlsx'});" ><img src='xls.png' alt="XLSX" style="width:20px"> Excels</a>
+                        </li>
+
+                      </ul>
+                      </div>
+
+                      </div>
                       <div class="input-group buttonright" >
                       <div class="btn-group  buttonrightfloat " >
 	                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Tambah <span class="caret"></span>
@@ -179,7 +191,52 @@ include ('connect.php'); //connect ke database
 								<td><?php echo $total_gerbang_terbuka_gto_lalin?></td>
                                 <td><?php echo $total_epass_lalin?></td>
                               </tr>
-                              <?php }?>
+                              <?php }
+							  
+                                $lalin_transaksitinggi = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join cabang on cabang.id_cabang=transaksi_tinggi.id_cabang group by transaksi_tinggi.tahun, transaksi_tinggi.id_cabang");
+                                while($data_lalintransaksi = mysqli_fetch_array($lalin_transaksitinggi)){
+
+                                  //fetching data untuk tabel bagian jumlah gardu lalin
+                                  $data_gerbang_terbuka_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE id_subgardu = '1'");
+                                  $total1 = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_terbuka_lalin)) {
+								  $total1 += $num['nilai'];}
+                                  $data_gerbang_masuk_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE id_subgardu = '2'");
+                                  $total2 = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_masuk_lalin)) {
+								  $total2 += $num['nilai'];}
+                                  $data_gerbang_keluar_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE id_subgardu = '3'");
+                                  $total3 = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_keluar_lalin)) {
+								  $total3 += $num['nilai'];}
+                                  $data_gerbang_terbuka_gto_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE id_subgardu = '4'");
+                                  $total4 = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_terbuka_gto_lalin)) {
+								  $total4 += $num['nilai'];}
+                                  $data_gerbang_masuk_gto_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE id_subgardu = '5'");
+                                  $total5 = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_masuk_gto_lalin)) {
+								  $total5 += $num['nilai'];}
+                                  $data_gerbang_keluar_gto_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE id_subgardu = '6'");
+                                  $total6 = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_keluar_gto_lalin)) {
+								  $total6 += $num['nilai'];}
+                                  $data_epass_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE id_subgardu = '7'");
+                                  $total7 = 0;
+								  while ($num = mysqli_fetch_array($data_epass_lalin)) {
+								  $total7 += $num['nilai'];}
+                              }
+                            ?>
+                              <tr>
+                                <td colspan='3'>Total</td>
+                                <td><?php echo $total3?></td>
+                                <td><?php echo $total2?></td>
+                                <td><?php echo $total1?></td>
+                                <td><?php echo $total6?></td>
+                                <td><?php echo $total5?></td>
+								<td><?php echo $total4?></td>
+                                <td><?php echo $total7?></td>
+                              </tr>
                             </tbody>
                        </table>
                   </div>
@@ -193,109 +250,6 @@ include ('connect.php'); //connect ke database
         <!-- /page content -->
 
 		<div class="x_content">
-	<!-- Modal Delete Lalin -->
- 				<div class="modal fade bs-delete-modal" id="modal_deletelalin" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                      <div class="modal-content">
-
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                          </button>
-                          <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
-                        </div>
-                        <div class="modal-body">
-                        <form action="editdelete.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" ">
-                         <div class="alert alert-danger" role="alert">
-						   <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
-								<h4> Anda yakin untuk menghapus data ini? </h4>
-						  </div>
-                          <h2 style="color:red;"></h2>
-                          <form action="editdelete.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-							  <input name="idgerbang" type="text" id="id" value="" hidden>						
-							  <input name="tahun" type="text" id="tahun" value="" hidden>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-danger" name ="deletett" >Delete</button>
-                        </div>
-						</form>
-                      </div>
-                    </div>
-                  </div>
-			<!-- Modal Edit Lalin -->
-			 <div class="modal fade bs-edit-modal" id="modal_editlalin" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                      <div class="modal-content">
-
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                          </button>
-                          <h4 class="modal-title" id="myModalLabel">Edit Rencana</h4>
-                        </div>
-                        <div class="modal-body">
-                        <form action="editdelete.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-							  <input name="idgerbang" type="text" id="id" value="" hidden>					  
-							  <input name="tahun" type="text" id="tahun" value="" hidden>
-							<div>
-								<h4><b>Gardu Reguler</b></h4>
-							</div>
-							<div class="form-group">
-							  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka">Gardu Terbuka</label>
-							  <div class="col-md-6 col-sm-6 col-xs-12">
-								<input value ="" name= "gardu_terbuka_lalin" type="number" min="0" id="gardu_terbuka_lalin" required="required" class="form-control col-md-7 col-xs-12">
-							  </div>
-							</div>
-							<div class="form-group">
-							  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka">Gardu Masuk</label>
-							  <div class="col-md-6 col-sm-6 col-xs-12">
-								<input value ="" name= "gardu_masuk_lalin" type="number" min="0" id="gardu_masuk_lalin" required="required" class="form-control col-md-7 col-xs-12">
-							  </div>
-							</div>
-							<div class="form-group">
-							  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar">Gardu Keluar</label>
-							  <div class="col-md-6 col-sm-6 col-xs-12">
-								<input value ="" name= "gardu_keluar_lalin" type="number" min="0" id="gardu_keluar_lalin" required="required" class="form-control col-md-7 col-xs-12">
-							  </div>
-							</div>
-
-							<div>
-								<h4><b>Gardu GTO</b></h4>
-							</div>
-							<div class="form-group">
-							  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto_lalin">Gardu Terbuka</label>
-							  <div class="col-md-6 col-sm-6 col-xs-12">
-								<input value ="" name= "gardu_terbuka_gto_lalin" type="number" min="0" id="gardu_terbuka_gto_lalin" required="required" class="form-control col-md-7 col-xs-12">
-							  </div>
-							</div>
-							<div class="form-group">
-							  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto_lalin">Gardu Masuk</label>
-							  <div class="col-md-6 col-sm-6 col-xs-12">
-								<input value ="" name= "gardu_masuk_gto_lalin" type="number" min="0" id="gardu_masuk_gto_lalin" required="required" class="form-control col-md-7 col-xs-12">
-							  </div>
-							</div>
-							<div class="form-group">
-							  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar_gto">Gardu Keluar</label>
-							  <div class="col-md-6 col-sm-6 col-xs-12">
-								<input value ="" name= "gardu_keluar_gto_lalin" type="number" min="0" id="gardu_keluar_gto_lalin" required="required" class="form-control col-md-7 col-xs-12">
-							  </div>
-							</div><br>
-
-							<div class="form-group">
-							  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="epass_gto_lalin">E-Pass</label>
-							  <div class="col-md-6 col-sm-6 col-xs-12">
-								<input name= "epass_lalin" type="text" min="0" id="epass_gto_lalin" required="required" class="form-control col-md-7 col-xs-12">
-							  </div>
-							</div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name ="edittt" >Save changes</button>
-                        </div>
-						</form>
-                      </div>
-                    </div>
-                  </div>
-
 			<!-- Modal Tambah Lalin Transaksi Tinggi-->
 			<div class="modal fade bs-lalin" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog modal-lg">
@@ -338,7 +292,31 @@ include ('connect.php'); //connect ke database
 					<input name ="tahun" type="number" id="tahun" required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
-
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tw">Triwulan</label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+					  <div class="radio">
+						<label>
+						  <input type="radio" value="1" name="tw"> TW 1
+						</label>
+					  </div>
+					  <div class="radio">
+						<label>
+						  <input type="radio" value="2" name="tw"> TW 2
+						</label>
+					  </div>
+					  <div class="radio">
+						<label>
+						  <input type="radio" value="3" name="tw"> TW 3
+						</label>
+					  </div>
+					  <div class="radio">
+						<label>
+						  <input type="radio" value="4" name="tw"> TW 4
+						</label>
+					  </div>
+					</div>
+				  </div>
 
                 <div>
                     <h4><b>Gardu Reguler</b></h4>

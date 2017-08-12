@@ -2,9 +2,9 @@
 include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 
-  $getidcabang = $_GET['id_cabang'];
-  $cabang =  mysqli_query($connect,"SELECT * FROM cabang WHERE id_cabang = '$getidcabang'");
-  $data_cabang = mysqli_fetch_array($cabang);
+  $getidgerbang = $_GET['id_gerbang'];
+  $gerbang =  mysqli_query($connect,"SELECT * FROM gerbang WHERE id_gerbang = '$getidgerbang'");
+  $data_gerbang = mysqli_fetch_array($gerbang);
   $iduser = $_SESSION['id_user'];
 
   //ambil informasi jenis sub gardu
@@ -72,7 +72,7 @@ include ('connect.php'); //connect ke database
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Jumlah Gardu Cabang <?php echo $data_cabang['nama_cabang']?></h3>
+                <h3>Jumlah Gardu <?php echo $data_gerbang['nama_gerbang']?></h3>
               </div>
 
             </div>
@@ -123,7 +123,7 @@ include ('connect.php'); //connect ke database
                             </thead>
                             <tbody>
                               <?php
-                                $jmlgardu = mysqli_query($connect, "SELECT * FROM jml_gardutersedia join gerbang on gerbang.id_gerbang=jml_gardutersedia.id_gerbang WHERE jml_gardutersedia.id_cabang='$getidcabang' group by jml_gardutersedia.tahun, jml_gardutersedia.id_gerbang");
+                                $jmlgardu = mysqli_query($connect, "SELECT * FROM jml_gardutersedia join gerbang on gerbang.id_gerbang=jml_gardutersedia.id_gerbang WHERE jml_gardutersedia.id_gerbang='$getidgerbang' group by jml_gardutersedia.tahun, jml_gardutersedia.id_gerbang");
                                 $nomor = 1;
                                 while($data_jmlgardu = mysqli_fetch_array($jmlgardu)){
                                    $idgerbanglist = $data_jmlgardu['id_gerbang'];
@@ -353,7 +353,7 @@ include ('connect.php'); //connect ke database
                         <form action="editdelete.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 							  <input name="idgerbang" type="text" id="id" value="" hidden>					  
 							  <input name="tahun" type="text" id="tahun" value="" hidden>
-							  <input name="tw" type="text" id="tw" value="">
+							  <input name="tw" type="text" id="tw" value="" hidden>
 							<div>
 								<h4><b>Gardu Reguler</b></h4>
 							</div>

@@ -80,7 +80,7 @@ include ('connect.php'); //connect ke database
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Laporan KPI</h3>
+                <h3>VC Ratio Cabang<?php echo $namacabang; ?></h3>
               </div>
 
 
@@ -92,7 +92,7 @@ include ('connect.php'); //connect ke database
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Data Waktu Transaksi 2 SPM Cabang <?php echo $namacabang; ?> </small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small></small></h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="title_right">
@@ -102,7 +102,7 @@ include ('connect.php'); //connect ke database
                             <thead>
                               <tr >
                                 <th rowspan="3">No</th>
-                                <th rowspan="3">Cabang/Gerbang</th>
+                                <th rowspan="3">Gerbang</th>
 								<th rowspan="3">Tahun</th>
                                 <th colspan="7">Lalu Lintas Transaksi Tinggi</th>
                                 <th colspan="7">Jumlah Gardu Tersedia</th>
@@ -133,7 +133,8 @@ include ('connect.php'); //connect ke database
                             <tbody>
                               <?php
                                 $vcratio = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join jml_gardutersedia join gerbang on gerbang.id_gerbang=transaksi_tinggi.id_gerbang AND gerbang.id_gerbang=jml_gardutersedia.id_gerbang WHERE transaksi_tinggi.id_cabang = '$idcabang' AND jml_gardutersedia.id_cabang='$idcabang' AND transaksi_tinggi.tahun=jml_gardutersedia.tahun group by transaksi_tinggi.tahun, transaksi_tinggi.id_gerbang");
-                                $nomor = 1;
+                                $nomor = 1; $total1 =0; $total2 =0; $total3 =0; $total4 =0; $total5 =0; $total6 =0; $total7 =0; 
+								$total8 =0; $total9 =0; $total10 =0; $total11 =0; $total12 =0; $total13 =0; $total14 =0;
                                 while($data_vcratio = mysqli_fetch_array($vcratio)){
                                    $idgerbanglist = $data_vcratio['id_gerbang'];
                                    $idsubgardulist = $data_vcratio['id_subgardu'];
@@ -162,26 +163,56 @@ include ('connect.php'); //connect ke database
                             ?>
                               <tr>
                                 <td><?php echo $nomor; $nomor++?></td>
-								<td><?php echo $data_gerbang['nama_gerbang']?></td>
+								<td><?php echo $data_vcratio['nama_gerbang']?></td>
 								<td><?php echo $data_vcratio['tahun'];?></td>
-								<td><?php echo $data_gerbang_keluar_lalin['nilai']?></td>
-                                <td><?php echo $data_gerbang_masuk_lalin['nilai']?></td>
-                                <td><?php echo $data_gerbang_terbuka_lalin['nilai']?></td>
-                                <td><?php echo $data_gerbang_keluar_gto_lalin['nilai']?></td>
-                                <td><?php echo $data_gerbang_masuk_gto_lalin['nilai']?></td>
-								<td><?php echo $data_gerbang_terbuka_gto_lalin['nilai']?></td>
-                                <td><?php echo $data_epass_lalin['nilai']?></td>
-                                <td><?php echo $data_gerbang_keluar_tersedia['nilai']?></td>
-                                <td><?php echo $data_gerbang_masuk_tersedia['nilai']?></td>
-                                <td><?php echo $data_gerbang_terbuka_tersedia['nilai']?></td>
-                                <td><?php echo $data_gerbang_keluar_gto_tersedia['nilai']?></td>
-                                <td><?php echo $data_gerbang_masuk_gto_tersedia['nilai']?></td>
-								<td><?php echo $data_gerbang_terbuka_gto_tersedia['nilai']?></td>
-                                <td><?php echo $data_epass_tersedia['nilai']?></td>
+								<td><?php $total1+=$data_gerbang_keluar_lalin['nilai'];
+									echo $data_gerbang_keluar_lalin['nilai']?></td>
+                                <td><?php $total2+=$data_gerbang_masuk_lalin['nilai'];
+									echo $data_gerbang_masuk_lalin['nilai']?></td>
+                                <td><?php $total3+=$data_gerbang_terbuka_lalin['nilai'];
+									echo $data_gerbang_terbuka_lalin['nilai']?></td>
+                                <td><?php $total4+=$data_gerbang_keluar_gto_lalin['nilai'];
+									echo $data_gerbang_keluar_gto_lalin['nilai']?></td>
+                                <td><?php $total5+=$data_gerbang_masuk_gto_lalin['nilai'];
+									echo $data_gerbang_masuk_gto_lalin['nilai']?></td>
+								<td><?php $total6+=$data_gerbang_terbuka_gto_lalin['nilai'];
+									echo $data_gerbang_terbuka_gto_lalin['nilai']?></td>
+                                <td><?php $total7+=$data_epass_lalin['nilai'];
+									echo $data_epass_lalin['nilai']?></td>
+                                <td><?php $total8+=$data_gerbang_keluar_tersedia['nilai'];
+									echo $data_gerbang_keluar_tersedia['nilai'];?></td>
+                                <td><?php $total9+=$data_gerbang_masuk_tersedia['nilai'];
+									echo $data_gerbang_masuk_tersedia['nilai']?></td>
+                                <td><?php $total10+=$data_gerbang_terbuka_tersedia['nilai'];
+									echo $data_gerbang_terbuka_tersedia['nilai']?></td>
+                                <td><?php $total11+=$data_gerbang_keluar_gto_tersedia['nilai'];
+									echo $data_gerbang_keluar_gto_tersedia['nilai']?></td>
+                                <td><?php $total12+=$data_gerbang_masuk_gto_tersedia['nilai'];
+									echo $data_gerbang_masuk_gto_tersedia['nilai']?></td>
+								<td><?php $total13+=$data_gerbang_terbuka_gto_tersedia['nilai'];
+									echo $data_gerbang_terbuka_gto_tersedia['nilai']?></td>
+                                <td><?php $total14+=$data_epass_tersedia['nilai'];
+									echo $data_epass_tersedia['nilai']?></td>
                               </tr>
-                              <?php }?>
-                            </tbody>
-                          </table>
+                        <?php }?>
+						  <tr>
+							<td colspan='3'>Total</td>
+							<td><?php echo $total1?></td>
+							<td><?php echo $total2?></td>
+							<td><?php echo $total3?></td>
+							<td><?php echo $total4?></td>
+							<td><?php echo $total5?></td>
+							<td><?php echo $total6?></td>
+							<td><?php echo $total7?></td>
+							<td><?php echo $total8?></td>
+							<td><?php echo $total9?></td>
+							<td><?php echo $total10?></td>
+							<td><?php echo $total11?></td>
+							<td><?php echo $total12?></td>
+							<td><?php echo $total13?></td>
+							<td><?php echo $total14?></td>
+						  </tr>
+						</tbody>
                   </div>
                 </div>
               </div>
