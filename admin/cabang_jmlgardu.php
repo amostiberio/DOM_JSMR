@@ -353,7 +353,7 @@ include ('connect.php'); //connect ke database
                         <form action="editdelete.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 							  <input name="idgerbang" type="text" id="id" value="" hidden>					  
 							  <input name="tahun" type="text" id="tahun" value="" hidden>
-							  <input name="tw" type="text" id="tw" value="">
+							  <input name="tw" type="text" id="tw" value="" hidden>
 							<div>
 								<h4><b>Gardu Reguler</b></h4>
 							</div>

@@ -68,7 +68,7 @@ if(isset($_POST['deletett'])){
 	$idgerbang = $_POST['idgerbang'];
 	$tahun = $_POST['tahun'];
 	$tw = $_POST['tw'];
-	$delete = mysqli_query($connect,"DELETE FROM jml_gardutersedia WHERE id_gerbang='$idgerbang' AND tahun='$tahun AND tw='$tw''");
+	$delete = mysqli_query($connect,"DELETE FROM jml_gardutersedia WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw'");
 	if($delete){
 ?>
 		<script> window.alert('Penghapusan Data Berhasil') </script>

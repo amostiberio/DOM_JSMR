@@ -105,9 +105,18 @@ include ('connect.php'); //connect ke database
 	                    </button>
 	                    <ul role="menu" class="dropdown-menu pull-right">
 						    <li><a data-toggle="modal" data-target=".bs-lalin" >Tambah Lalin Transaksi Tinggi</a></li>
-                    </ul>
+						</ul>
 	                    </div>
-
+                      </div>
+					  <div class="input-group buttonright" >
+                      <div class="btn-group  buttonrightfloat " >
+						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
+                      </button>
+                      <ul role="menu" class="dropdown-menu pull-right">
+                       <li><a href="downloadjg.php" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                       </li>
+					   </ul>
+	                    </div>
                       </div>
                     </div>
                    </div>
@@ -140,7 +149,7 @@ include ('connect.php'); //connect ke database
                             <tbody>
                               <?php
                                 $lalin_transaksitinggi = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join gerbang on gerbang.id_gerbang=transaksi_tinggi.id_gerbang WHERE transaksi_tinggi.id_cabang = '$idcabang' group by transaksi_tinggi.tahun, transaksi_tinggi.id_gerbang");
-                                $nomor = 1;
+                                $nomor = 1; $total1 =0; $total2 =0; $total3 =0; $total4 =0; $total5 =0; $total6 =0; $total7 =0; 
                                 while($data_lalintransaksi = mysqli_fetch_array($lalin_transaksitinggi)){
                                    $idgerbanglist = $data_lalintransaksi['id_gerbang'];
                                    $idsubgardulist = $data_lalintransaksi['id_subgardu'];
@@ -184,58 +193,30 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo $nomor; $nomor++?></td>
                                 <td><a href="gerbang_lalin.php?id_gerbang=<?php echo $data_lalintransaksi['id_gerbang'];?>"><font color="#337ab7"><?php echo $data_lalintransaksi['nama_gerbang']?></font></a></td>
 								<td><?php echo $data_lalintransaksi['tahun']?></td>
-								<td><?php echo $total_gerbang_keluar_lalin?></td>
-                                <td><?php echo $total_gerbang_masuk_lalin?></td>
-                                <td><?php echo $total_gerbang_terbuka_lalin?></td>
-                                <td><?php echo $total_gerbang_keluar_gto_lalin?></td>
-                                <td><?php echo $total_gerbang_masuk_gto_lalin?></td>
-								<td><?php echo $total_gerbang_terbuka_gto_lalin?></td>
-                                <td><?php echo $total_epass_lalin?></td>
+								<td><?php $total1+=$total_gerbang_keluar_lalin;
+									echo $total_gerbang_keluar_lalin?></td>
+								<td><?php $total2+=$total_gerbang_masuk_lalin;
+									echo $total_gerbang_masuk_lalin?></td>
+								<td><?php $total3+=$total_gerbang_terbuka_lalin;
+									echo $total_gerbang_terbuka_lalin?></td>
+								<td><?php $total4+=$total_gerbang_keluar_gto_lalin;
+									echo $total_gerbang_keluar_gto_lalin?></td>
+								<td><?php $total5+=$total_gerbang_masuk_gto_lalin;
+									echo $total_gerbang_masuk_gto_lalin?></td>
+							    <td><?php $total6+=$total_gerbang_terbuka_gto_lalin;
+									echo $total_gerbang_terbuka_gto_lalin?></td>
+								<td><?php $total7+=$total_epass_lalin;
+									echo $total_epass_lalin?></td>
                               </tr>
-                              <?php }
-							  
-                                $lalin_transaksitinggi = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join gerbang on gerbang.id_gerbang=transaksi_tinggi.id_gerbang WHERE transaksi_tinggi.id_cabang = '$idcabang' group by transaksi_tinggi.tahun, transaksi_tinggi.id_gerbang");
-                                while($data_lalintransaksi = mysqli_fetch_array($lalin_transaksitinggi)){
-
-                                  //fetching data untuk tabel bagian jumlah gardu lalin
-                                  $data_gerbang_terbuka_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE id_cabang='$idcabang' AND id_subgardu = '1'");
-                                  $total1 = 0;
-								  while ($num = mysqli_fetch_array($data_gerbang_terbuka_lalin)) {
-								  $total1 += $num['nilai'];}
-                                  $data_gerbang_masuk_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE id_cabang='$idcabang' AND id_subgardu = '2'");
-                                  $total2 = 0;
-								  while ($num = mysqli_fetch_array($data_gerbang_masuk_lalin)) {
-								  $total2 += $num['nilai'];}
-                                  $data_gerbang_keluar_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE id_cabang='$idcabang' AND id_subgardu = '3'");
-                                  $total3 = 0;
-								  while ($num = mysqli_fetch_array($data_gerbang_keluar_lalin)) {
-								  $total3 += $num['nilai'];}
-                                  $data_gerbang_terbuka_gto_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE id_cabang='$idcabang' AND id_subgardu = '4'");
-                                  $total4 = 0;
-								  while ($num = mysqli_fetch_array($data_gerbang_terbuka_gto_lalin)) {
-								  $total4 += $num['nilai'];}
-                                  $data_gerbang_masuk_gto_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE id_cabang='$idcabang' AND id_subgardu = '5'");
-                                  $total5 = 0;
-								  while ($num = mysqli_fetch_array($data_gerbang_masuk_gto_lalin)) {
-								  $total5 += $num['nilai'];}
-                                  $data_gerbang_keluar_gto_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE id_cabang='$idcabang' AND id_subgardu = '6'");
-                                  $total6 = 0;
-								  while ($num = mysqli_fetch_array($data_gerbang_keluar_gto_lalin)) {
-								  $total6 += $num['nilai'];}
-                                  $data_epass_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE id_cabang='$idcabang' AND id_subgardu = '7'");
-                                  $total7 = 0;
-								  while ($num = mysqli_fetch_array($data_epass_lalin)) {
-								  $total7 += $num['nilai'];}
-                              }
-                            ?>
+                              <?php }?>
                               <tr>
                                 <td colspan='3'>Total</td>
-                                <td><?php echo $total3?></td>
-                                <td><?php echo $total2?></td>
                                 <td><?php echo $total1?></td>
-                                <td><?php echo $total6?></td>
+                                <td><?php echo $total2?></td>
+                                <td><?php echo $total3?></td>
+                                <td><?php echo $total4?></td>
                                 <td><?php echo $total5?></td>
-								<td><?php echo $total4?></td>
+								<td><?php echo $total6?></td>
                                 <td><?php echo $total7?></td>
                               </tr>
                             </tbody>

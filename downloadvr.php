@@ -1,7 +1,6 @@
-<?php
+<?php 
+include "connect.php";
 include('akses.php'); //untuk memastikan dia sudah login
-include ('connect.php'); //connect ke database
-
 
   $iduser = $_SESSION['id_user'];
 
@@ -13,104 +12,18 @@ include ('connect.php'); //connect ke database
   $cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT nama_cabang FROM cabang WHERE id_cabang = '$idcabang'"));
   $namacabang = $cabang['nama_cabang'];
 
-  $resultuntukrencana = $connect-> query("SELECT * FROM program_kerja WHERE id_cabang = '$idcabang' AND jenis = 'bpt' ");
 
-  //ambil informasi jenis sub gardu
-  $gardu = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM jenis_subgardu"));
-
-  $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM gerbang"));
-
+// Fungsi header dengan mengirimkan raw data excel
+header("Content-type: application/x-msdownload");
+// Mendefinisikan nama file ekspor "hasil-export.xls"
+header("Content-Disposition: attachment; filename=Laporan VC Ratio Cabang ".$namacabang.".xls");
+header("Pragma : no-cache");
+header("Expires :0"); $i=0;
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<!-- head -->
-<?php include 'templates/head.php' ?>
-<!--/head-->
 
+ <div align="center"> <p>VC Ratio Cabang <?php echo $namacabang?> </p></div>
 
-  <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <a href="home.php" class="site_title"><i class="fa fa-group"></i> <span>Dashboard DOM</span></a>
-            </div>
-
-            <div class="clearfix"></div>
-
-           <!-- menu profile quick info -->
-           <?php include'templates/headmenu.php' ?>
-            <!-- /menu profile quick info -->
-
-
-            <br />
-
-             <!-- sidebar menu -->
-            <?php include 'templates/sidebarmenu.php' ?>
-            <!-- /sidebar menu -->
-
-
-            <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
-            <!-- /menu footer buttons -->
-          </div>
-        </div>
-
-          <!-- top navigation -->
-        <?php include 'topnavigation.php' ?>
-        <!-- /top navigation -->
-
-
-        <!-- page content -->
-        <div class="right_col" role="main">
-          <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>VC Ratio Cabang <?php echo $namacabang; ?></h3>
-              </div>
-
-
-            </div>
-
-            <div class="clearfix"></div>
-
-            <div class="">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small></small></h2>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="title_right">
-				  <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
-				  <div class="input-group buttonright" >
-                      <div class="btn-group  buttonrightfloat " >
-						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
-                      </button>
-                      <ul role="menu" class="dropdown-menu pull-right">
-                       <li><a href="downloadvr.php" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
-                       </li>
-					   </ul>
-	                    </div>
-                      </div>
-					  </div>
-                   </div>
-                  <div class="x_content">
-                      <table id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
+                       <table border="1" id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
                             <thead>
                               <tr >
                                 <th rowspan="3">No</th>
@@ -226,45 +139,17 @@ include ('connect.php'); //connect ke database
 						  </tr>
 						</tbody>
 					 </table>
-                  </div>
-                </div>
-              </div>
-              <div class="clearfix"></div>
-            </div>
-          </div>
-          <div class="clearfix"></div>
-        </div>
-		
-        <!-- /page content -->
 
-<style>
-.table th {
-   vertical-align: middle ; text-align: center ;"
-}
-.buttonright {
-  width:60%;
-  display:inline;
-  overflow: auto;
-  white-space: nowrap;
-  margin:0px auto;
-}
-.buttonrightfloat {
-  float:right;
-  margin-right: 10px;
-}
-</style>
-        <!-- footer content -->
-<?php include 'templates/footer.php' ?>
-        <!-- /footer content -->
-      </div>
-    </div>
-<!-- scripts -->
-<?php include 'templates/scripts.php' ?>
+            
+
+<div align="right">
+ <p>Jakarta, </p>
+ <br>
+ 
+ <p><u>.........</u><br>
+ NPP. </p>
+<div>
 
 
 
-
-
-<!-- /scripts -->
-  </body>
-</html>
+ 

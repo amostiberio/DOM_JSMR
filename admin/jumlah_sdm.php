@@ -96,7 +96,17 @@ include ('connect.php'); //connect ke database
 	                    </button>
 	                    <ul role="menu" class="dropdown-menu pull-right">
                             <li><a data-toggle="modal" data-target=".bs-pengumpultol" >Tambah Jumlah Pulantol</a></li>
-                    </ul>
+						</ul>
+	                    </div>
+                      </div>
+					  <div class="input-group buttonright" >
+                      <div class="btn-group  buttonrightfloat " >
+						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
+                      </button>
+                      <ul role="menu" class="dropdown-menu pull-right">
+                       <li><a href="downloadjs.php" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                       </li>
+					   </ul>
 	                    </div>
                       </div>
                     </div>
@@ -125,7 +135,7 @@ include ('connect.php'); //connect ke database
 
                               <?php
                                 $jumlah_sdm = mysqli_query($connect, "SELECT * FROM pengumpul_tol join jenis_karyawan join cabang on cabang.id_cabang=pengumpul_tol.id_cabang group by pengumpul_tol.tahun, pengumpul_tol.id_cabang");
-                                $nomor = 1;
+                                $nomor = 1; $total1 =0; $total2 =0; $total3 =0; $total4 =0; $total5 =0; $total6 =0; $total7 =0; $total8=0;
                                 while($data_jumlahsdm = mysqli_fetch_array($jumlah_sdm)){
                                   $idcabang = $data_jumlahsdm['id_cabang'];
 								  $tahun = $data_jumlahsdm['tahun'];
@@ -163,50 +173,25 @@ include ('connect.php'); //connect ke database
 								<td><?php echo $nomor; $nomor++ ?></td>
                                 <td><a href="cabang_jmlsdm.php?id_cabang=<?php echo $data_jumlahsdm['id_cabang'];?>"><font color="#337ab7"><?php echo $data_jumlahsdm['nama_cabang']?></font></a></td>
 								<td><?php echo $data_jumlahsdm['tahun']?></td>
-                                <td><?php echo $total_kepalagerbangtol?></td>
-                                <td><?php echo $total_kspt?></td>
-                                <td><?php echo $total_kryjasamarga?></td>
-                                <td><?php echo $total_kryjlj?></td>
-                                <td><?php echo $total_kryjlo?></td>
-                                <td><?php echo $total_sakitpermanen?></td>
-                                <td><?php echo $total+=($total_kryjasamarga+$total_kryjlj+ $total_kryjlo+$total_sakitpermanen);?></td>
-                                <td><?php echo $total_tugt?></td>
+                                <td><?php $total1+=$total_kepalagerbangtol;
+									echo $total_kepalagerbangtol?></td>
+								<td><?php $total2+=$total_kspt;
+									echo $total_kspt?></td>
+								<td><?php $total3+=$total_kryjasamarga;
+									echo $total_kryjasamarga?></td>
+								<td><?php $total4+=$total_kryjlj;
+									echo $total_kryjlj?></td>
+								<td><?php $total5+=$total_kryjlo;
+									echo $total_kryjlo?></td>
+								<td><?php $total6+=$total_sakitpermanen;
+									echo $total_sakitpermanen?></td>
+								<td><?php echo $total+=($total_kryjasamarga+$total_kryjlj+ $total_kryjlo+$total_sakitpermanen);
+									$total7+=$total;?></td>
+								<td><?php $total8+=$total_tugt;
+									echo $total_tugt?></td>
 							 </tr>
-                              <?php }
-                                $jumlah_sdm = mysqli_query($connect, "SELECT * FROM pengumpul_tol join jenis_karyawan join cabang on cabang.id_cabang=pengumpul_tol.id_cabang group by pengumpul_tol.tahun, pengumpul_tol.id_cabang");
-                                while($data_jumlahsdm = mysqli_fetch_array($jumlah_sdm)){
-								  $data_kepalagerbangtol = mysqli_query($connect, "SELECT * FROM pengumpul_tol WHERE id_karyawan = '5'");
-								  $total1 = 0;
-								  while ($num = mysqli_fetch_array($data_kepalagerbangtol)) {
-									$total1 += $num['jumlah'];}
-								  $data_kspt = mysqli_query($connect, "SELECT * FROM pengumpul_tol WHERE id_karyawan = '6'");
-                                  $total2 = 0;
-								  while ($num = mysqli_fetch_array($data_kspt)) {
-									$total2 += $num['jumlah'];}
-                                  $data_kryjasamarga = mysqli_query($connect, "SELECT * FROM pengumpul_tol WHERE id_karyawan = '1'");
-                                  $total3 = 0;
-								  while ($num = mysqli_fetch_array($data_kryjasamarga)) {
-									$total3 += $num['jumlah'];}
-                                  $data_kryjlj = mysqli_query($connect, "SELECT * FROM pengumpul_tol WHERE id_karyawan = '2'");
-                                  $total4 = 0;
-								  while ($num = mysqli_fetch_array($data_kryjlj)) {
-									$total4 += $num['jumlah'];}
-                                  $data_kryjlo= mysqli_query($connect, "SELECT * FROM pengumpul_tol WHERE id_karyawan = '3'");
-                                  $total5= 0;
-								  while ($num = mysqli_fetch_array($data_kryjlo)) {
-									$total5 += $num['jumlah'];}
-                                  $data_sakitpermanen = mysqli_query($connect, "SELECT * FROM pengumpul_tol WHERE id_karyawan = '4'");
-                                  $total6 = 0;
-								  while ($num = mysqli_fetch_array($data_sakitpermanen)) {
-									$total6 += $num['jumlah'];}
-                                  $data_tugt = mysqli_query($connect, "SELECT * FROM pengumpul_tol WHERE id_karyawan = '7'");
-								  $total7 = 0;
-                                  $total8 = 0;
-								  while ($num = mysqli_fetch_array($data_tugt)) {
-									$total8 += $num['jumlah'];}
-								}
-                                  ?>
-                              <tr>
+                              <?php }?>
+                             <tr>
                                 <td colspan='3'>Total</td>
                                 <td><?php echo $total1?></td>
                                 <td><?php echo $total2?></td>
@@ -214,9 +199,9 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo $total4?></td>
                                 <td><?php echo $total5?></td>
 								<td><?php echo $total6?></td>
-                                <td><?php echo $total7+=($total3+$total4+$total5+$total6)?></td>
+                                <td><?php echo $total7?></td>
 								<td><?php echo $total8?></td>
-                              </tr>
+                             </tr>
                             </tbody>
                           </table>
                   </div>

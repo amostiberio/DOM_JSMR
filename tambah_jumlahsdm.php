@@ -1,8 +1,8 @@
 <?php
 include 'connect.php';
 if(isset($_POST['tambah'])){
-	$idcabang = $_POST['cabang'];
-	$idgerbang= $_POST['gerbang'];
+	$idcabang = $_POST['idcabang'];
+	$idgerbang= $_POST['idgerbang'];
 	$tahun= $_POST['tahun'];
 
 	$idkpl_gerbangtol = $_POST['idkpl_gerbangtol'];
