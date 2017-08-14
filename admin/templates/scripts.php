@@ -199,6 +199,20 @@
     });
     </script>
 
+    <script>
+      $('#semester-list').on('change', function(){
+          var id_semester = this.value;
+          $.ajax({
+              type: "POST",
+              url: "get_triwulan.php",
+              data:'id_semester='+id_semester,
+              success: function(result){
+                  $("#triwulan-list").html(result);
+              }
+          });
+      });
+      </script>
+
 
 
 

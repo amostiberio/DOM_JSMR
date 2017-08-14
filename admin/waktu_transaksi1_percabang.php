@@ -7,6 +7,8 @@ include ('connect.php'); //connect ke database
 
   $namacabang = $cabang['nama_cabang'];
 
+  $resultjs = $connect-> query("SELECT * FROM semester");
+
   $iduser = $_SESSION['id_user'];
 
   //ambil informasi user id dan cabang id dari table cabang
@@ -677,17 +679,17 @@ include ('connect.php'); //connect ke database
                  <div class="form-group">
                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="semester">Semester</label>
                    <div class="col-md-6 col-sm-6 col-xs-12">
-                     <select name ="idsemester" class="select2_single form-control" tabindex="-1" required="required">
-                       <option></option>
+                     <select required="required" name ="idsemester" id="semester-list" class="select2_single form-control" tabindex="-1" required="required">
+                       <option value="">---Pilih Semester---</option>
                        <?php
                           $semester= mysqli_query($connect, "SELECT * FROM semester ");
                           $idsemester = ['id_semester'];
                           while($datasemester = mysqli_fetch_array($semester)){
                        ?>
-                       <option  value="<?php echo $datasemester['id_semester'];?>"><?php echo $datasemester['semester'];?></option>
+                          <option  value="<?php echo $datasemester['id_semester'];?>"><?php echo $datasemester['semester'];?></option>
                        <?php
                           }
-                        ?>
+                       ?>
                         <input name ="idcabang" type="text" id="idcabang" value="<?php echo $id_cabang; ?>" hidden>
                       </select>
                     </div>
@@ -696,14 +698,10 @@ include ('connect.php'); //connect ke database
 
                   <!-- Dropdown list Tri Wulan -->
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="triwulan">Triwulan</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <select required="required" name= "triwulan" class="select2_single form-control" tabindex="-1">
-                        <option value="">Pilih Triwulan</option>
-                        <option value="1">Tri Wulan 1</option>
-                        <option value="2">Tri Wulan 2</option>
-                        <option value="3">Tri Wulan 3</option>
-                        <option value="4">Tri Wulan 4</option>
+                      <select required="required" name= "triwulan" id="triwulan-list" class="select2_single form-control" tabindex="-1">
+                        <option value="">---Pilih Triwulan---</option>
                       </select>
                     </div>
                   </div>
