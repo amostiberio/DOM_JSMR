@@ -97,7 +97,7 @@ if(isset($_GET['triwulan'])){
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table" value="<?php echo $idcabang; ?>" hidden></i> Table <small>Data Beban Cabang <?php echo $namacabang; ?> </small></h2>
+                    <h2><i class="fa fa-table" value="<?php echo $idcabang; ?>" hidden></i> Table <small>Data Beban BPLL Semua Cabang</small></h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -159,7 +159,7 @@ if(isset($_GET['triwulan'])){
                       <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
                       </button>
                       <ul role="menu" class="dropdown-menu pull-right">
-                       <li><a href="downloadlaporanbpt.php?triwulan=<?php echo $nilaiTriwulan;?>"" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                       <li><a href="downloadlaporanbpt.php?triwulan=<?php echo $nilaiTriwulan;?>&tahun=<?php echo $nilaiTahun;?>" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
                        </li>
 
                       </ul>
@@ -178,7 +178,11 @@ if(isset($_GET['triwulan'])){
                             <th rowspan="2">Cabang</th>
                             <th rowspan="2">Program Kerja</th>
                             <th rowspan="2">Sub Program Kerja</th>
-                            <th rowspan="2">Total RKAP </th>
+                            <th rowspan="2">Total RKAP  <?php if(isset($_GET['tahun'])){
+                               echo $nilaiTahun; } ?>
+  
+                       
+                           </th>
                             <th rowspan="2">Total Status Akhir s.d TW 
                                 <?php if($nilaiTriwulan > 0 ){echo $nilaiTriwulan;}else {?> 4 <?php }?></th>
                             <th rowspan="2">TOTAL Realisasi s.d TW <?php if($nilaiTriwulan > 0 ){echo $nilaiTriwulan;}
@@ -233,7 +237,12 @@ if(isset($_GET['triwulan'])){
                         </thead>
                             <tbody>
                             <?php
-							$listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1' AND beban_realisasi.jenis ='bpt' AND sub_program.jenis='beban' AND tahun='$nilaiTahun'");
+                            if($nilaiTahun > 0){
+                            $listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1' AND beban_realisasi.jenis ='bpt' AND sub_program.jenis='beban' AND tahun='$nilaiTahun'");
+                            }else {
+                              $listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1' AND beban_realisasi.jenis ='bpt' AND sub_program.jenis='beban''");
+                            }
+							
 							while($datalistTW = mysqli_fetch_array($listTW)){
   								$idpklist= $datalistTW['id_pk'];
   								$idspklist= $datalistTW['id_sp'];

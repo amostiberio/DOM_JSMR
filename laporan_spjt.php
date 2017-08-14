@@ -2,6 +2,11 @@
 include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 
+if(isset($_GET['tahun'])){
+    $nilaiTahun = $_GET['tahun'];
+  
+  }else $nilaiTahun = '0';
+    
 
 if(isset($_GET['triwulan'])){
     $nilaiTriwulan = $_GET['triwulan'];
@@ -93,12 +98,30 @@ if(isset($_GET['triwulan'])){
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table" value="<?php echo $idcabang; ?>" hidden></i> Table <small>Data Capex Cabang <?php echo $namacabang; ?> </small></h2>
+                    <h2><i class="fa fa-table" value="<?php echo $idcabang; ?>" hidden></i> Table <small>Laporan Data Capex Cabang <?php echo $namacabang; ?> </small></h2>
 
                     <div class="clearfix"></div>
                   </div>
                 
-                        
+                  <form action="dropdownproses.php" method="POST">
+                  <div class='col-sm-2'>                    
+                    <div class="form-group">
+                    <h5 class="control-label col-md-4 col-sm-3 col-xs-12" for="tahun">Tahun</h5>
+                        <div class='input-group date ' id='myDatepickerFilter'>
+
+                            <input type='text' class="form-control" name= "tahun" <?php if(isset($_GET['tahun'])){ ?> value="<?php echo $nilaiTahun ;?>" <?php } ?>/>
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        <?php if(isset($_GET['triwulan'])){
+                              ?> <input type='text' name="triwulan" value="<?php echo $nilaiTriwulan; ?>" hidden>
+  
+                          <?php  }?>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary" name="dropdownTahunLaporanspjt">Lihat</button>
+                  </form>    
                
                   <div class="title_right">
                     <div class="col-md-12 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
@@ -114,6 +137,10 @@ if(isset($_GET['triwulan'])){
                                     <option value="3" <?php if ($nilaiTriwulan == '3') echo 'selected'?>>Triwulan 3</option>
                                     <option value="4" <?php if ($nilaiTriwulan == '4') echo 'selected'?>>Triwulan 4</option>                                                    
                             </select>
+                            <?php if(isset($_GET['tahun'])){
+                              ?> <input type='text' name="tahun" value="<?php echo $nilaiTahun; ?>" hidden>
+  
+                          <?php  }?>
                             <button type="submit" class="btn btn-primary" name="dropdownTWSPJT">Lihat</button>
                           </form>
                         </div>
@@ -130,8 +157,8 @@ if(isset($_GET['triwulan'])){
                       <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
                       </button>
                       <ul role="menu" class="dropdown-menu pull-right">
-                        <li><a href="#" onClick="doExport('#datatable-keytable', {type: 'xlsx'});" ><img src='xls.png' alt="XLSX" style="width:20px"> Excels</a>
-                        </li>
+                       <li><a href="downloadlaporanspjt.php?triwulan=<?php echo $nilaiTriwulan;?>&tahun=<?php echo $nilaiTahun;?>" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                       </li>
 
                       </ul>
                       </div>
@@ -146,7 +173,9 @@ if(isset($_GET['triwulan'])){
                           <tr>
                             <th rowspan="2">Program Kerja</th>
                             <th rowspan="2">Sub Program Kerja</th>
-                            <th rowspan="2">Total RKAP</th>
+                            <th rowspan="2">Total RKAP <?php if(isset($_GET['tahun'])){
+                               echo $nilaiTahun; } ?>
+                            </th>
                             <th rowspan="2">Total Status Akhir s.d TW 
                                 <?php if($nilaiTriwulan > 0 ){echo $nilaiTriwulan;}else {?> 4 <?php }?></th>
                             <th rowspan="2">TOTAL Realisasi s.d TW <?php if($nilaiTriwulan > 0 ){echo $nilaiTriwulan;}else {?> 4 <?php }?></th>
@@ -200,7 +229,12 @@ if(isset($_GET['triwulan'])){
                         </thead>
                             <tbody>
                             <?php
-							$listTW = mysqli_query($connect, "SELECT * FROM capex_realisasi, sub_program WHERE sub_program.id_sp = capex_realisasi.id_sp AND stat_twrl ='1'  AND sub_program.id_cabang = '$idcabang' AND capex_realisasi.jenis ='spjt' AND sub_program.jenis='capex' ");
+                             if($nilaiTahun >0 ){
+                               $listTW = mysqli_query($connect, "SELECT * FROM capex_realisasi, sub_program WHERE sub_program.id_sp = capex_realisasi.id_sp AND stat_twrl ='1'  AND sub_program.id_cabang = '$idcabang' AND capex_realisasi.jenis ='spjt' AND sub_program.jenis='capex' AND tahun = '$nilaiTahun'  ");
+                            }else {
+                               $listTW = mysqli_query($connect, "SELECT * FROM capex_realisasi, sub_program WHERE sub_program.id_sp = capex_realisasi.id_sp AND stat_twrl ='1'  AND sub_program.id_cabang = '$idcabang' AND capex_realisasi.jenis ='spjt' AND sub_program.jenis='capex' ");
+                            }
+						
 							while($datalistTW = mysqli_fetch_array($listTW)){
 								$idpklist= $datalistTW['id_pk'];
 								$idspklist= $datalistTW['id_sp'];

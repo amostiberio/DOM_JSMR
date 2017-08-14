@@ -11,6 +11,7 @@ if(isset($_GET['triwulan'])){
     $nilaiTriwulan = $_GET['triwulan'];
   
   }else $nilaiTriwulan = '0';
+
   $iduser = $_SESSION['id_user'];
 
   //ambil informasi user id dan cabang id dari table user
@@ -21,39 +22,42 @@ if(isset($_GET['triwulan'])){
   $cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT nama_cabang FROM cabang WHERE id_cabang = '$idcabang'"));
   $namacabang = $cabang['nama_cabang'];
 
+  $resultuntukrencana = $connect-> query("SELECT * FROM program_kerja WHERE id_cabang = '$idcabang' ");
+  $resultuntukrealisasi = $connect-> query("SELECT * FROM program_kerja WHERE id_cabang = '$idcabang' ");
+
+/*date_default_timezone_set('Asia/Jakarta');
+$catch = date("Y-m-d H:i:s");
+$date = date("j F Y H.i.s", strtotime($catch));*/ 
 
 // Fungsi header dengan mengirimkan raw data excel
 header("Content-type: application/x-msdownload");
 // Mendefinisikan nama file ekspor "hasil-export.xls"
-header("Content-Disposition: attachment; filename=Data Laporan Beban BPT ".$nilaiTahun.".xls");
+header("Content-Disposition: attachment; filename=Data Laporan Beban BPLL ".$nilaiTahun." Cabang ".$namacabang.".xls");
 header("Pragma : no-cache");
 header("Expires :0"); $i=0;
 ?>
 
- <div align="center"> <p>Data Laporan Beban BPT Tahun  <?php if($nilaiTahun >0 ) { echo $nilaiTahun;} ?> <?php if($nilaiTriwulan == 0){?> Semua Triwulan <?php  }else ?> Triwulan <?php {echo $nilaiTriwulan;} ?> </p></div>
+ <div align="center"> <p>Data Laporan Beban BPLL Tahun  <?php if($nilaiTahun >0 ) { echo $nilaiTahun;} ?> <?php if($nilaiTriwulan == 0){?> Semua Triwulan <?php  }else{ ?> Triwulan <?php echo $nilaiTriwulan;} ?> </p></div>
 
-                       <table border="1"  class="table table-striped table-bordered text-center">
+                      <table border="1"  id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
                         <thead>
                           <tr bgcolor="#ddebf7">
-                            <th rowspan="2">Cabang</th>
                             <th rowspan="2">Program Kerja</th>
                             <th rowspan="2">Sub Program Kerja</th>
-                            <th rowspan="2">Total RKAP <?php 
-                              if($nilaiTahun > 0){
-                               echo $nilaiTahun; }?>
-                            
-                            </th>
-                              
+                            <th rowspan="2">Total RKAP  <?php if(isset($_GET['tahun'])){
+                               echo $nilaiTahun; } ?>
+  
+                       
+                           </th>
                             <th rowspan="2">Total Status Akhir s.d TW 
                                 <?php if($nilaiTriwulan > 0 ){echo $nilaiTriwulan;}else {?> 4 <?php }?></th>
-                            <th rowspan="2">TOTAL Realisasi s.d TW <?php if($nilaiTriwulan > 0 ){echo $nilaiTriwulan;}
-                              else {?> 4 <?php }?></th>
+                            <th rowspan="2">TOTAL Realisasi s.d TW <?php if($nilaiTriwulan > 0 ){echo $nilaiTriwulan;}else {?> 4 <?php }?></th>
                             <th rowspan="2">Tahun </th>
-                              <?php if($nilaiTriwulan > 0 ){
+                            <?php if($nilaiTriwulan > 0 ){
                                 for($hitungTW = 1; $hitungTW<= $nilaiTriwulan;$hitungTW++){
                                   
                               ?>
-                            <th colspan="3">TW <?php echo $hitungTW;?></th>
+                               <th colspan="3">TW <?php echo $hitungTW;?></th>
                                 
                               <?php }}else{ ?>
                             <th colspan="3">TW 1</th>
@@ -98,15 +102,20 @@ header("Expires :0"); $i=0;
                         </thead>
                             <tbody>
                             <?php
-                            $listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1' AND beban_realisasi.jenis ='bpt' AND sub_program.jenis='beban' AND tahun='$nilaiTahun'");
-                            while($datalistTW = mysqli_fetch_array($listTW)){
-                                $idpklist= $datalistTW['id_pk'];
-                                $idspklist= $datalistTW['id_sp'];
-                                $tahun= $datalistTW['tahun'];
-                                $jmlstakhir = mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun'");
-                                $jmlrealisasi = mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun'");
-                                $qty1 = 0; 
-                                $qty2 = 0;
+                             if($nilaiTahun > 0){
+                               $listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1'  AND sub_program.id_cabang = '$idcabang' AND beban_realisasi.jenis ='bpll' AND sub_program.jenis='beban' AND tahun ='$nilaiTahun'");
+                            }else{
+                                $listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1'  AND sub_program.id_cabang = '$idcabang' AND beban_realisasi.jenis ='bpll' AND sub_program.jenis='beban' ");
+                            }
+                        
+                          while($datalistTW = mysqli_fetch_array($listTW)){
+                            $idpklist= $datalistTW['id_pk'];
+                            $idspklist= $datalistTW['id_sp'];
+                            $tahun= $datalistTW['tahun'];
+                            $jmlstakhir = mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun'");
+                            $jmlrealisasi = mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun'");
+                              $qty1 = 0; 
+                              $qty2 = 0;
 
                   if($nilaiTriwulan > 0){
                     $loop1 = 0;
@@ -159,24 +168,20 @@ header("Expires :0"); $i=0;
                         $qty2 += $num['realisasi'];                       
                     }
                   }
-                 
-                        $dataprogramkerja = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM program_kerja WHERE id_pk = '$idpklist'"));
-                        $datasubprogramkerja= mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM sub_program WHERE id_sp = '$idspklist'"));
-                        $idcabang= $dataprogramkerja['id_cabang'];
-                        $cabang = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM cabang WHERE id_cabang ='$idcabang'"));
-
-                          //realisasi
-                        $datatwreal1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '1' AND jenis ='bpt'"));
-                        $datatwreal2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '2' AND jenis ='bpt'"));
-                        $datatwreal3 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '3' AND jenis ='bpt'"));
-                        $datatwreal4 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '4' AND jenis ='bpt'"));
-                          //rkap
-                         $datatwrc1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '1' AND jenis ='bpt'"));
-                          $datatwrc2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '2' AND jenis ='bpt'"));
-                          $datatwrc3 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '3' AND jenis ='bpt'"));
-                          $datatwrc4 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '4' AND jenis ='bpt'"));
-
-                  $totalrkap = 0;
+                
+                $dataprogramkerja = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM program_kerja WHERE id_pk = '$idpklist'"));
+                $datasubprogramkerja= mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM sub_program WHERE id_sp = '$idspklist'"));
+                                //realisasi
+                $datatwreal1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '1' AND jenis ='bpll'"));
+                $datatwreal2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '2' AND jenis ='bpll'"));
+                $datatwreal3 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '3' AND jenis ='bpll'"));
+                $datatwreal4 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '4' AND jenis ='bpll'"));
+                                //rkap
+                $datatwrc1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '1' AND jenis ='bpll'"));
+                $datatwrc2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '2' AND jenis ='bpll'"));
+                $datatwrc3 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '3' AND jenis ='bpll'"));
+                $datatwrc4 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '4' AND jenis ='bpll'"));
+                $totalrkap = 0;
                   if($nilaiTriwulan > 0){
                       if($nilaiTriwulan >= 1){
                         $totalrkap += $datatwrc1['rkap'];
@@ -193,15 +198,14 @@ header("Expires :0"); $i=0;
                   }else{
                     $totalrkap = $datatwrc1['rkap']+ $datatwrc2['rkap'] + $totalrkap += $datatwrc3['rkap'] + $datatwrc4['rkap'];
                   }
-                            ?>
+              ?>
                               <tr>
-                                  <td><?php echo $cabang['nama_cabang']?> </td>
-                                  <td><?php echo $dataprogramkerja['nama_pk'] ?></td>
-                                  <td><?php echo $datasubprogramkerja['nama_sp'] ?></td>
-                                  <td><?php echo $totalrkap; ?></td>
-                                  <td><?php echo $qty1;?></td>
-                                  <td><?php echo $qty2;?></td>
-                                  <td><?php echo $datalistTW['tahun'] ?></td>
+                                <td><?php echo $dataprogramkerja['nama_pk'] ?></td>
+                                <td><?php echo $datasubprogramkerja['nama_sp'] ?></td>
+                                <td><?php echo $totalrkap; ?></td>
+                                <td><?php echo $qty1;?></td>
+                                <td><?php echo $qty2;?></td>
+                                <td><?php echo $datalistTW['tahun'] ?></td>
                                 <?php if($nilaiTriwulan >= 1 ){ ?>
                                  
                                     <td><?php echo $datatwrc1['rkap'] ?></td>
@@ -242,7 +246,6 @@ header("Expires :0"); $i=0;
                               </tr>
                             </tbody>
                           </table>
-
             
 
 <div align="right">
