@@ -58,13 +58,13 @@
                         <li><a>Referensi File<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                           <li><a href="referensifilerkap.php">RKAP</a></li>
-                          <li><a href="referensifilerevisirkap.php">Revisi RKAP</a></li>                          
+                          <li><a href="referensifilerevisirkap.php">Revisi RKAP</a></li>
                           <li><a href="referensifilepencapaian.php">Pencapaian</a></li>
                         </ul>
                         </li>
                         <li><a href="laporanrealisasi.php">Management Laporan Realisasi <span class="fa"></span></a>
                       </ul>
-                   
+
                     </li>
                   </ul>
               <!-- Menu Laporan KPI -->
@@ -74,6 +74,7 @@
                         <li><a>Waktu Transaksi<span class="fa fa-chevron-down"></span></a>
         							<ul class="nav child_menu">
         							  <li><a href="waktu_transaksi1.php">Waktu Transaksi 1</a></li>
+        							  <li><a href="waktu_transaksi2.php">Rencana SPM</a></li>
         							  <li><a href="waktu_transaksi2.php">Waktu Transaksi 2 SPM</a></li>
         							</ul>
 						          </li>
@@ -88,10 +89,10 @@
               <!-- Menu Management -->
                   <ul class="nav side-menu">
                     <li><a><i class="fa fa-gear"></i>Management<span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu">                       
-                        <li><a href="manage_user.php">User</a></li>  
-                        <li><a href="manage_cabang.php">Cabang</a></li>  
-                                                  
+                      <ul class="nav child_menu">
+                        <li><a href="manage_user.php">User</a></li>
+                        <li><a href="manage_cabang.php">Cabang</a></li>
+
                       </ul>
                     </li>
                   </ul>
