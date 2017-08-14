@@ -114,14 +114,10 @@ if(isset($_GET['triwulan'])){
                             <span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
-                        <?php if(isset($_GET['triwulan'])){
-                              ?> <input type='text' name="triwulan" value="<?php echo $nilaiTriwulan; ?>" hidden>
-  
-                          <?php  }?>
+                      
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary" name="dropdownTahunLaporanbpt">Lihat</button>
-                  </form>     
+                   
                
                   <div class="title_right">
                     <div class="col-md-12 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
@@ -129,7 +125,7 @@ if(isset($_GET['triwulan'])){
                       <div class="btn-group  buttonleftfloat " >
 	                    <h5 class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Triwulan</h5>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <form action="dropdownproses.php" method="POST">
+                         
                             <select name= "dropDownListTW" class="select2_single form-control" tabindex="-1">
                                     <option value="0">Pilih Triwulan</option>                            
                                     <option value="1" <?php if ($nilaiTriwulan =='1') echo 'selected'?>>Triwulan 1</option>
@@ -137,10 +133,7 @@ if(isset($_GET['triwulan'])){
                                     <option value="3" <?php if ($nilaiTriwulan == '3') echo 'selected'?>>Triwulan 3</option>
                                     <option value="4" <?php if ($nilaiTriwulan == '4') echo 'selected'?>>Triwulan 4</option>                                                    
                             </select>
-                            <?php if(isset($_GET['tahun'])){
-                              ?> <input type='text' name="tahun" value="<?php echo $nilaiTahun; ?>" hidden>
-  
-                          <?php  }?>
+                          
                             <button type="submit" class="btn btn-primary" name="dropdownTW">Lihat</button>
                           </form>
                         </div>
