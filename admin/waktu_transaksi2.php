@@ -80,16 +80,30 @@ include ('connect.php'); //connect ke database
 
                     <div class="clearfix"></div>
                   </div>
+                  <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
 
+					  <div class="input-group buttonright" >
+                      <div class="btn-group  buttonrightfloat " >
+						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
+                      </button>
+                      <ul role="menu" class="dropdown-menu pull-right">
+                       <li><a href="download_wt2.php" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                       </li>
+					   </ul>
+	                    </div>
+                      </div>
+                    </div>
+                  </div>
 
                   <div class="x_content">
 
                       <table id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
                             <thead >
                               <tr >
-                                <th rowspan="4">No</th>
-                                <th rowspan="4">Cabang</th>
-                                <th rowspan="4">Keterangan</th>
+                                <th rowspan="3">No</th>
+                                <th rowspan="3">Cabang</th>
+                                <th rowspan="3">Keterangan</th>
                                 <th colspan="6">2017</th>
                               </tr>
                               <tr>
@@ -106,15 +120,7 @@ include ('connect.php'); //connect ke database
                                 <th colspan="1">Capaian Semester 1</th>
                                 <th colspan="1">Capaian Semester 2</th>
                               </tr>
-                              <tr>
-
-                                <th colspan="1">(1)</th>
-								                <th colspan="1">(2)</th>
-                                <th colspan="1">(3)</th>
-								                <th colspan="1">(4)</th>
-                                <th colspan="1">x</th>
-                                <th colspan="1">x</th>
-                              </tr>
+                              
 
                             </thead>
                             <tbody>

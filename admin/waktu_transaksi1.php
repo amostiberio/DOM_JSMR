@@ -82,7 +82,21 @@ include ('connect.php'); //connect ke database
 
                     <div class="clearfix"></div>
                   </div>
+                  <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
 
+					  <div class="input-group buttonright" >
+                      <div class="btn-group  buttonrightfloat " >
+						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
+                      </button>
+                      <ul role="menu" class="dropdown-menu pull-right">
+                       <li><a href="download_wt1.php" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                       </li>
+					   </ul>
+	                    </div>
+                      </div>
+                    </div>
+                   </div>
                   <div class="x_content">
 
                       <table id="datatable-keytable"  class="table table-striped table-bordered text-center">

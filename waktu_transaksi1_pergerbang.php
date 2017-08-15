@@ -102,7 +102,7 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
 	                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Tambah <span class="caret"></span>
 	                    </button>
 	                    <ul role="menu" class="dropdown-menu pull-right">
-						                <li><a data-toggle="modal" data-target=".bs-rencana" >Tambah Waktu Transaksi</a></li>
+						                <li><a data-toggle="modal" data-target=".bs-tambahtransaksi" >Tambah Waktu Transaksi</a></li>
 	                    </ul>
 	                    </div>
 
@@ -627,171 +627,165 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
               </div>
               <!-- End of Modal Edit Waktu Transaksi Semester 2 TW 3-->
 
-			<!-- Modal Tambah Waktu Transaksi-->
-			<div class="modal fade bs-rencana" tabindex="-1" role="dialog" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
-				  <div class="modal-content">
-					<div class="modal-header">
-					  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-					  </button>
-					  <h4 class="modal-title" id="myModalLabel">Tambah Waktu Transaksi</h4>
-					</div>
-					<div class="modal-body">
-              <form action="tambah_waktutransaksi1.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
-                <!-- Dropdown list Gerbang -->
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gerbang">Gerbang</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select name ="idgerbang" class="select2_single form-control" tabindex="-1" required="required">
-                      <option></option>
-                      <?php
-                          $gerbang= mysqli_query($connect, "SELECT * FROM gerbang WHERE id_cabang ='$idcabang'");
-                          $idgerbang = ['id_gerbang'];
-                          while($datagerbang = mysqli_fetch_array($gerbang)){
-                      ?>
-                      <option  value="<?php echo $datagerbang['id_gerbang'];?>"><?php echo $datagerbang['nama_gerbang'];?></option>
-
-                      <?php
-                          }
-                      ?>
-                    </select>
+              <!-- Modal Tambah Waktu Transaksi-->
+              <div class="modal fade bs-tambahtransaksi" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Tambah Waktu Transaksi</h4>
                   </div>
-                </div>
-                <!-- End of Dropdown list Gerbang -->
+                  <div class="modal-body">
+                      <form action="tambah_waktutransaksi1.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-                <!-- Dropdown list Tahun -->
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select required="required" name= "tahun" class="select2_single form-control" tabindex="-1">
-                      <option value="">Pilih Tahun</option>
-                      <option value="2015">2015</option>
-                      <option value="2016">2016</option>
-                      <option value="2017">2017</option>
-                      <option value="2018">2018</option>
-                      <option value="2019">2019</option>
-                    </select>
-                  </div>
-                </div>
-                  <!-- Dropdown list Tahun -->
+                        <!-- Dropdown list Gerbang -->
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gerbang">Gerbang</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name ="idgerbang" class="select2_single form-control" tabindex="-1" required="required">
+                              <option></option>
+                              <?php
+                                  $gerbang= mysqli_query($connect, "SELECT * FROM gerbang WHERE id_cabang ='$idcabang'");
+                                  $idgerbang = ['id_gerbang'];
+                                  while($datagerbang = mysqli_fetch_array($gerbang)){
+                              ?>
+                              <option  value="<?php echo $datagerbang['id_gerbang'];?>"><?php echo $datagerbang['nama_gerbang'];?></option>
 
-                <!-- Dropdown list Semester -->
-                 <div class="form-group">
-                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="semester">Semester</label>
-                   <div class="col-md-6 col-sm-6 col-xs-12">
-                     <select name ="idsemester" class="select2_single form-control" tabindex="-1" required="required">
-                       <option></option>
-                       <?php
-                          $semester= mysqli_query($connect, "SELECT * FROM semester ");
-                          $idsemester = ['id_semester'];
-                          while($datasemester = mysqli_fetch_array($semester)){
-                       ?>
-                       <option  value="<?php echo $datasemester['id_semester'];?>"><?php echo $datasemester['semester'];?></option>
-                       <?php
-                          }
-                        ?>
-                        <input name ="idcabang" type="text" id="idcabang" value="<?php echo $idcabang; ?>" hidden>
-                      </select>
+                              <?php
+                                  }
+                              ?>
+                            </select>
+                          </div>
+                        </div>
+                        <!-- End of Dropdown list Gerbang -->
+
+                        <!-- Dropdown list Tahun -->
+                        <div class="form-group">
+                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                               <div class='input-group date' id='myDatepickerFormMonitoring'>
+                                   <input type='text' class="form-control" name= "tahun"  />
+                                   <span class="input-group-addon">
+                                   <span class="glyphicon glyphicon-calendar"></span>
+                                   </span>
+                               </div>
+                               </div>
+                         </div>
+                          <!-- Dropdown list Tahun -->
+
+                        <!-- Dropdown list Semester -->
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="semester">Semester</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select required="required" name ="idsemester" id="semester-list" class="select2_single form-control" tabindex="-1" required="required">
+                              <option value="">---Pilih Semester---</option>
+                              <?php
+                                 $semester= mysqli_query($connect, "SELECT * FROM semester ");
+                                 $idsemester = ['id_semester'];
+                                 while($datasemester = mysqli_fetch_array($semester)){
+                              ?>
+                                 <option  value="<?php echo $datasemester['id_semester'];?>"><?php echo $datasemester['semester'];?></option>
+                              <?php
+                                 }
+                              ?>
+                               <input name ="idcabang" type="text" id="idcabang" value="<?php echo $id_cabang; ?>" hidden>
+                             </select>
+                           </div>
+                         </div>
+                          <!-- Dropdown list Semester -->
+
+                          <!-- Dropdown list Tri Wulan -->
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="triwulan">Tri Wulan</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <select required="required" name= "triwulan" id="triwulan-list" class="select2_single form-control" tabindex="-1">
+                                <option value="">---Pilih Triwulan---</option>
+                              </select>
+                            </div>
+                          </div>
+                            <!-- Dropdown list Tahun -->
+
+                        <!-- field Jenis Gardu Reguluer-->
+                        <div>
+                            <h4><b>Gardu Reguler</b></h4>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka">Gardu Terbuka</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input name= "idgardu_terbuka" type="text" value="1" hidden>
+                            <input name= "gardu_terbuka" type="number" min="0" id="gardu_terbuka" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <h5 class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_tertutup"><b>Gardu Tertutup</b></h5>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka">Gardu Masuk</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input name= "idgardu_masuk" type="text" value="2" hidden>
+                            <input name= "gardu_masuk" type="number" min="0" id="gardu_masuk" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar">Gardu Keluar</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input name= "idgardu_keluar" type="text" value="3" hidden>
+                            <input name= "gardu_keluar" type="number" min="0" id="gardu_keluar" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                        <!-- End of field Jenis Gardu Reguluer-->
+
+                        <!-- field Jenis Gardu GTO-->
+                        <div>
+                            <h4><b>Gardu GTO</b></h4>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto">Gardu Terbuka</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input name= "idgardu_terbuka_gto" type="text" value="4" hidden>
+                            <input name= "gardu_terbuka_gto" type="number" min="0" id="gardu_terbuka_gto" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <h5 class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_tertutup_gto"><b>Gardu Tertutup</b></h5>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto">Gardu Masuk</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input name= "idgardu_masuk_gto" type="text" value="5" hidden>
+                            <input name= "gardu_masuk_gto" type="number" min="0" id="gardu_masuk_gto" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar_gto">Gardu Keluar</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input name= "idgardu_keluar_gto" type="text" value="6" hidden>
+                            <input name= "gardu_keluar_gto" type="number" min="0" id="gardu_keluar_gto" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div><br>
+                        <!-- End of field Jenis Gardu GTO-->
+
+                        <!-- field Panjang Antrian -->
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="panjang_antrian">Panjang Antrian</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input name= "panjang_antrian" type="text" min="0" id="panjang_antrian" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                        <!-- end of field Panjang Antrian -->
+
+
                     </div>
-                  </div>
-                  <!-- Dropdown list Semester -->
-
-                  <!-- Dropdown list Tri Wulan -->
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <select required="required" name= "triwulan" class="select2_single form-control" tabindex="-1">
-                        <option value="">Pilih Triwulan</option>
-                        <option value="1">Tri Wulan 1</option>
-                        <option value="2">Tri Wulan 2</option>
-                        <option value="3">Tri Wulan 3</option>
-                        <option value="4">Tri Wulan 4</option>
-                      </select>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                      <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
                     </div>
-                  </div>
-                    <!-- Dropdown list Tahun -->
-
-                <!-- field Jenis Gardu Reguluer-->
-                <div>
-                    <h4><b>Gardu Reguler</b></h4>
-                </div>
-							  <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka">Gardu Terbuka</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_terbuka" type="text" value="1" hidden>
-                    <input name= "gardu_terbuka" type="number" min="0" id="gardu_terbuka" required="required" class="form-control col-md-7 col-xs-12">
+                  </form>
                   </div>
                 </div>
-                <div class="form-group">
-                  <h5 class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_tertutup"><b>Gardu Tertutup</b></h5>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka">Gardu Masuk</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_masuk" type="text" value="2" hidden>
-                    <input name= "gardu_masuk" type="number" min="0" id="gardu_masuk" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar">Gardu Keluar</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_keluar" type="text" value="3" hidden>
-                    <input name= "gardu_keluar" type="number" min="0" id="gardu_keluar" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <!-- End of field Jenis Gardu Reguluer-->
-
-                <!-- field Jenis Gardu GTO-->
-                <div>
-                    <h4><b>Gardu GTO</b></h4>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto">Gardu Terbuka</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_terbuka_gto" type="text" value="4" hidden>
-                    <input name= "gardu_terbuka_gto" type="number" min="0" id="gardu_terbuka_gto" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <h5 class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_tertutup_gto"><b>Gardu Tertutup</b></h5>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto">Gardu Masuk</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_masuk_gto" type="text" value="5" hidden>
-                    <input name= "gardu_masuk_gto" type="number" min="0" id="gardu_masuk_gto" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar_gto">Gardu Keluar</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "idgardu_keluar_gto" type="text" value="6" hidden>
-                    <input name= "gardu_keluar_gto" type="number" min="0" id="gardu_keluar_gto" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div><br>
-                <!-- End of field Jenis Gardu GTO-->
-
-                <!-- field Panjang Antrian -->
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="panjang_antrian">Panjang Antrian</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input name= "panjang_antrian" type="text" min="0" id="panjang_antrian" required="required" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <!-- end of field Panjang Antrian -->
-
-
-						</div>
-						<div class="modal-footer">
-						  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-						  <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
-						</div>
-					</form>
-				  </div>
-				</div>
-			</div>
-      <!-- End of Modal Tambah Transaksi -->
+              </div>
+              <!-- End of Modal Tambah Transaksi -->
 		</div>
     <!-- End of Modal Content -->
 

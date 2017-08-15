@@ -103,7 +103,7 @@ include ('connect.php'); //connect ke database
                             <thead >
                               <tr >
                                 <th rowspan="4">No</th>
-                                <th rowspan="4">Cabang</th>
+                                <th rowspan="4">Gerbang</th>
                                 <th rowspan="4">Keterangan</th>
                                 <th colspan="6">2017</th>
                               </tr>
@@ -192,6 +192,7 @@ include ('connect.php'); //connect ke database
                                             $persen_capaian_semester1 = number_format( $data_capaian_semester1 * 100, 2 ) . '%'; //2 angka dibelakang koma
 
                                     //Hitung nilai Realisasi Capaian Semester 1
+                                    if (isset($data_gerbang_keluar2)){
                                     $array3 = array(($datarencana_gardu_masuk_tertutup['nilai']/$data_gerbang_masuk2['nilai']),
                                                     ($datarencana_gardu_keluar_tertutup['nilai']/$data_gerbang_keluar2['nilai']),
                                                     ($datarencana_gardu_terbuka['nilai']/$data_gerbang_terbuka2['nilai']),
@@ -201,7 +202,7 @@ include ('connect.php'); //connect ke database
                                                     );
                                               $data_capaian_semester2= (array_sum($array3)/count($array3));
                                               $persen_capaian_semester2 = number_format( $data_capaian_semester2 * 100, 2 ) . '%'; //2 angka dibelakang koma
-
+                                      };
 
                               ?>
                               <tr rowspan="6">
