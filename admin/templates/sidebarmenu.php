@@ -74,7 +74,7 @@
                         <li><a>Waktu Transaksi<span class="fa fa-chevron-down"></span></a>
         							<ul class="nav child_menu">
         							  <li><a href="waktu_transaksi1.php">Waktu Transaksi 1</a></li>
-        							  <li><a href="waktu_transaksi2.php">Rencana SPM</a></li>
+        							  <li><a href="waktu_transaksi2_rencana.php">Rencana SPM</a></li>
         							  <li><a href="waktu_transaksi2.php">Waktu Transaksi 2 SPM</a></li>
         							</ul>
 						          </li>

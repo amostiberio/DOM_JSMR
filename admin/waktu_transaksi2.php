@@ -121,6 +121,9 @@ include ('connect.php'); //connect ke database
                               <?php
                               $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join wt_rencana join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_semester=semester.id_semester AND waktu_transaksi.id_subgardu=wt_rencana.id_subgardu AND semester.id_semester=panjang_antrian.id_semester GROUP BY waktu_transaksi.id_cabang");
                               $nomor = 1;
+                              $count = 0;
+                              $total_rataans1=0;
+                              $total_rataans2=0;
                               while($data_waktu_transaksi = mysqli_fetch_array($rata_waktu_transaksi)){
 
                   $idcabanglist = $data_waktu_transaksi['id_cabang'];
@@ -242,8 +245,12 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo $datarencana_gardu_masuk_tertutup['nilai'];?></td>
                                 <td><?php echo $total_data_gerbang_masuk;?></td>
                                 <td><?php echo $total_data_gerbang_masuk2;?></td>
-								                <td rowspan="6"><?php echo $persen_capaian_semester1?></td>
-                                <td rowspan="6"><?php echo $persen_capaian_semester2?></td>
+								                <td rowspan="6"><?php $total_rataans1+=$persen_capaian_semester1;
+                                                      echo $persen_capaian_semester1;?>
+                                </td>
+                                <td rowspan="6"><?php $total_rataans2+=$persen_capaian_semester2;
+                                                      echo $persen_capaian_semester2;?>
+                                </td>
                               </tr>
                               <tr>
                                 <td><?php echo "Gardu Keluar Sistem Tertutup"?></td>
@@ -285,7 +292,12 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo $total_data_panjang_antrian2;?></td>
 
                               </tr>
-                              <?php }?>
+                              <?php $count++;}?>
+                              <tr>
+                                <td colspan="7">Rata-rata</td>
+                                <td> <?php echo $total_rataans1/$count;?></td>
+                                <td> <?php echo $total_rataans2/$count;?></td>
+                              </tr>
                             </tbody>
                           </table>
 
