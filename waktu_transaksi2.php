@@ -95,16 +95,29 @@ include ('connect.php'); //connect ke database
 
                     <div class="clearfix"></div>
                   </div>
-
+                  <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
+                      <div class="input-group buttonright" >
+                                <div class="btn-group  buttonrightfloat " >
+                                  <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
+                                  </button>
+                                  <ul role="menu" class="dropdown-menu pull-right">
+                                    <li><a href="download_wt2.php" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                                    </li>
+                                  </ul>
+                                </div>
+                      </div>
+                    </div>
+                   </div>
 
                   <div class="x_content">
 
                       <table id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
                             <thead >
                               <tr >
-                                <th rowspan="4">No</th>
-                                <th rowspan="4">Gerbang</th>
-                                <th rowspan="4">Keterangan</th>
+                                <th rowspan="3">No</th>
+                                <th rowspan="3">Gerbang</th>
+                                <th rowspan="3">Keterangan</th>
                                 <th colspan="6">2017</th>
                               </tr>
                               <tr>
@@ -121,21 +134,16 @@ include ('connect.php'); //connect ke database
                                 <th colspan="1">Capaian Semester 1</th>
                                 <th colspan="1">Capaian Semester 2</th>
                               </tr>
-                              <tr>
 
-                                <th colspan="1">(1)</th>
-								                <th colspan="1">(2)</th>
-                                <th colspan="1">(3)</th>
-								                <th colspan="1">(4)</th>
-                                <th colspan="1"></th>
-                                <th colspan="1"></th>
-                              </tr>
 
                             </thead>
                             <tbody>
                               <?php
                                   $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join wt_rencana  join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_subgardu=wt_rencana.id_subgardu WHERE waktu_transaksi.id_cabang = '$idcabang' group by waktu_transaksi.id_gerbang");
                                   $nomor = 1;
+                                  $count = 0;
+                                  $total_rataans1 = 0;
+                                  $total_rataans2 = 0;
                                   while($data_waktu_transaksi = mysqli_fetch_array($rata_waktu_transaksi)){
                                     $idgerbanglist = $data_waktu_transaksi['id_gerbang'];
                     								$idsubgardulist = $data_waktu_transaksi['id_subgardu'];
@@ -213,8 +221,12 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo $datarencana_gardu_masuk_tertutup['nilai'];?></td>
                                 <td><?php echo $data_gerbang_masuk['nilai'];?></td>
                                 <td><?php echo $data_gerbang_masuk2['nilai'];?></td>
-								                <td rowspan="6"><?php echo $persen_capaian_semester1?></td>
-                                <td rowspan="6"><?php echo $persen_capaian_semester2?></td>
+                                <td rowspan="6"><?php $total_rataans1+=$persen_capaian_semester1;
+                                                      echo $persen_capaian_semester1;?>
+                                </td>
+                                <td rowspan="6"><?php $total_rataans2+=$persen_capaian_semester2;
+                                                      echo $persen_capaian_semester2;?>
+                                </td>
                               </tr>
                               <tr>
                                 <td><?php echo "Gardu Keluar Sistem Tertutup"?></td>
@@ -257,7 +269,12 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo $data_panjang_antrian2['panjang_antrian'];?></td>
 
                               </tr>
-                              <?php }?>
+                              <?php $count++;}?>
+                              <tr>
+                                <td colspan="7">Rata-rata</td>
+                                <td> <?php echo $total_rataans1/$count?></td>
+                                <td> <?php echo $total_rataans2/$count?> </td>
+                              </tr>
                             </tbody>
                           </table>
 

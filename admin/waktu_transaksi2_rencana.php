@@ -169,7 +169,7 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo $datarencana_antrian_kendaraan_s2['nilai'];?></td>
                               </tr>
                               <tr>
-                                <td>z</td>
+                                <td>Aksi</td>
                                 <td>
                                   <button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-editrencanaspm"
                                   data-id-semester = "<?php echo $datarencana_gardu_keluar_tertutup_s1['id_semester'];?>"
@@ -218,8 +218,6 @@ include ('connect.php'); //connect ke database
                                   </button>
                                 </td>
                               </tr>
-
-
                             </tbody>
                           </table>
 

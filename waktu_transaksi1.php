@@ -23,7 +23,6 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
 
 
 
-?>
 <!DOCTYPE html>
 <html lang="en">
 <!-- head -->
@@ -110,6 +109,16 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
                       </ul>
                       </div>
 
+                      </div>
+                      <div class="input-group buttonright" >
+                                <div class="btn-group  buttonrightfloat " >
+                                  <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
+                                  </button>
+                                  <ul role="menu" class="dropdown-menu pull-right">
+                                    <li><a href="download_wt1.php" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                                    </li>
+                                  </ul>
+                                </div>
                       </div>
                     </div>
                    </div>
@@ -351,7 +360,7 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
                       <?php
                          }
                       ?>
-                       <input name ="idcabang" type="text" id="idcabang" value="<?php echo $id_cabang; ?>" hidden>
+                       <input name ="idcabang" type="text" id="idcabang" value="<?php echo $idcabang; ?>" hidden>
                      </select>
                    </div>
                  </div>
