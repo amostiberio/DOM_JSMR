@@ -322,7 +322,7 @@ include ('connect.php'); //connect ke database
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cabang">Cabang</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select required="required" name="cabang" id="cabang-list" class="select2_single form-control" tabindex="-1">
+                    <select required="required" name="idcabang" id="cabang-list" class="select2_single form-control" tabindex="-1">
                       <option value="">---Pilih Cabang---</option>
                       <?php
                       if ($resultjs->num_rows > 0) {
@@ -342,13 +342,13 @@ include ('connect.php'); //connect ke database
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gerbang">Gerbang</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select required="required" name="gerbang" id="gerbang-list" class="select2_single form-control" tabindex="-1">
+                    <select required="required" name="idgerbang" id="gerbang-list" class="select2_single form-control" tabindex="-1">
                       <option>---Pilih Gerbang---</option>
                     </select>
                   </div>
         			  </div>
                 <!-- End of Dropdown list Gerbang -->
-                
+
                 <!-- Dropdown list Tahun -->
                 <div class="form-group">
                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
