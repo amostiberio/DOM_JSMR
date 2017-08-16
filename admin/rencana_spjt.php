@@ -112,7 +112,7 @@ if(isset($_GET['tahun'])){
 
                       
                     </div>
-                    <button  type="submit" class="btn btn-primary" name="dropdownTahunRencanaSpjt">Lihat</button>
+                    <button  type="submit" class="btn btn-primary" name="dropdownTahunRealisasiSpojt">Lihat</button>
                   </div>
                   </form> 
 

@@ -3,6 +3,11 @@ include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 
 
+if(isset($_GET['tahun'])){
+    $nilaiTahun = $_GET['tahun'];
+  
+  }else $nilaiTahun = '0';
+
   $iduser = $_SESSION['id_user'];
 
   //ambil informasi user id dan cabang id dari table user
@@ -92,6 +97,22 @@ include ('connect.php'); //connect ke database
                     <div class="clearfix"></div>
                   </div>
 
+                  <form action="dropdownproses.php" method="POST">
+                  <div class='col-sm-10'>                    
+                    <div class="form-group col-md-3 col-sm-3 col-xs-12">
+                    <h5 class="control-label col-md-4 col-sm-4 col-xs-12" for="tahun">Tahun</h5>
+                        <div class='input-group date ' id='myDatepickerFilter'>
+
+                            <input type='text' class="form-control" name= "tahun" <?php if(isset($_GET['tahun'])){ ?> value="<?php echo $nilaiTahun ;?>" <?php } ?>/>
+                            <span style="margin-right:10px;" class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>                             
+                        </div>           
+                    </div>
+                    <button  type="submit" class="btn btn-primary" name="dropdownTahunRealisasiSpjt">Lihat</button>
+                  </div>
+                  </form>
+
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
                       <div class="input-group buttonright" >
@@ -138,7 +159,12 @@ include ('connect.php'); //connect ke database
 						</thead>
 						<tbody>
 							<?php
+							if($nilaiTahun > 0 ){
+							$listTW = mysqli_query($connect, "SELECT * FROM capex_realisasi, sub_program WHERE sub_program.id_sp = capex_realisasi.id_sp AND stat_twrl ='1' AND capex_realisasi.jenis ='spjt' AND sub_program.jenis='capex' AND capex_realisasi.tahun = '$nilaiTahun'");
+
+							}else{
 							$listTW = mysqli_query($connect, "SELECT * FROM capex_realisasi, sub_program WHERE sub_program.id_sp = capex_realisasi.id_sp AND stat_twrl ='1' AND capex_realisasi.jenis ='spjt' AND sub_program.jenis='capex' ");
+							}
 							while($datalistTW = mysqli_fetch_array($listTW)){
 								$idpklist= $datalistTW['id_pk'];
 								$idspklist= $datalistTW['id_sp'];
