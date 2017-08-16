@@ -378,7 +378,7 @@ include ('connect.php'); //connect ke database
                        <?php
                           }
                        ?>
-                        <input name ="idcabang" type="text" id="idcabang" value="<?php echo $id_cabang; ?>" hidden>
+                        
                       </select>
                     </div>
                   </div>

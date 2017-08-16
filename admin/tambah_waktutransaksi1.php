@@ -38,7 +38,6 @@
 <?php
 		}
 		else {
-
 			//insert data
 			$insert_waktutransaksi= mysqli_query($connect,"INSERT INTO waktu_transaksi VALUES
       ('','$gardu_terbuka', '$tahun', '$idgerbang','$idgardu_terbuka', '$idcabang', '$idsemester', '$idtw'),
