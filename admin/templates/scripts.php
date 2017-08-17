@@ -82,6 +82,20 @@
             });
         });
     </script>
+
+    <script>
+      $('#modal_editgerbang').on('show.bs.modal', function(e) {
+          var idgerbang = $(e.relatedTarget).data('id-gerbang');
+          $(e.currentTarget).find('input[name="edit_idgerbang"]').val(idgerbang);
+          var gerbang = $(e.relatedTarget).data('namagerbang');
+          $(e.currentTarget).find('input[name="edit_namagerbang"]').val(gerbang);
+      });
+      $('#modal_deletegerbang').on('show.bs.modal', function(e) {
+          var idgerbang = $(e.relatedTarget).data('id-gerbang');
+          $(e.currentTarget).find('input[name="edit_idgerbang"]').val(idgerbang);
+      });
+    </script>
+
 	 <script>
 		$('#modal_deletelalin').on('show.bs.modal', function(e) {
 

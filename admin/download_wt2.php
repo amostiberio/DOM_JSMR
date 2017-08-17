@@ -21,7 +21,7 @@ header("Expires :0"); $i=0;
 
  <div align="center"> <p>Waktu Transkasi 2 SPM</p></div>
 
- <table border="1" id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
+ <table border="1"  id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
        <thead >
          <tr >
            <th rowspan="3">No</th>
@@ -50,9 +50,17 @@ header("Expires :0"); $i=0;
          <?php
          $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join wt_rencana join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_semester=semester.id_semester AND waktu_transaksi.id_subgardu=wt_rencana.id_subgardu AND semester.id_semester=panjang_antrian.id_semester GROUP BY waktu_transaksi.id_cabang");
          $nomor = 1;
-         $count = 0;
-         $total_rataans1=0;
-         $total_rataans2=0;
+
+         //variabel pembagi untuk rata-rata
+         $count_rataanmasuks1=0;     $count_rataanambilkartus1=0;
+         $count_rataanmasuks2=0;     $count_rataanambilkartus2=0;
+         $count_rataankeluars1=0;    $count_rataanantrians1=0;
+         $count_rataankeluars2=0;    $count_rataanantrians2=0;
+         $count_rataanterbukas1=0;   $count_rataantoltransaksis1=0;
+         $count_rataanterbukas2=0;   $count_rataantoltransaksis2=0;
+         $count_capaiansemester1=0;  $total_capaiansemester1=0;
+         $count_capaiansemester2=0;  $total_capaiansemester2=0;
+
          while($data_waktu_transaksi = mysqli_fetch_array($rata_waktu_transaksi)){
 
 $idcabanglist = $data_waktu_transaksi['id_cabang'];
@@ -126,106 +134,139 @@ $total_data_panjang_antrian2 = $hasil_data_panjang_antrian2['nilai_total'];
 
 
 
+
+//ambil data Rencana semester 1
+$datarencana_gardu_terbukas1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '1' AND jenis_subgardu.id_jenisgardu='1' AND wt_rencana.id_semester='1'"));
+$datarencana_gardu_masuk_tertutups1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '2' AND jenis_subgardu.id_jenisgardu='1' AND wt_rencana.id_semester='1'"));
+$datarencana_gardu_keluar_tertutups1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '3' AND jenis_subgardu.id_jenisgardu='1' AND wt_rencana.id_semester='1'"));
+$datarencana_gardu_tol_ambil_kartus1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '5' AND jenis_subgardu.id_jenisgardu='2' AND wt_rencana.id_semester='1'"));
+$datarencana_gardutol_transaksis1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '4' AND jenis_subgardu.id_jenisgardu='2' AND wt_rencana.id_semester='1'"));
+$datarencana_antrian_kendaraans1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '9' AND jenis_subgardu.id_jenisgardu='3' AND wt_rencana.id_semester='1'"));
+
+//ambil data Rencana semester 2
+$datarencana_gardu_terbukas2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '1' AND jenis_subgardu.id_jenisgardu='1' AND wt_rencana.id_semester='2'"));
+$datarencana_gardu_masuk_tertutups2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '2' AND jenis_subgardu.id_jenisgardu='1' AND wt_rencana.id_semester='2'"));
+$datarencana_gardu_keluar_tertutups2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '3' AND jenis_subgardu.id_jenisgardu='1' AND wt_rencana.id_semester='2'"));
+$datarencana_gardu_tol_ambil_kartus2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '5' AND jenis_subgardu.id_jenisgardu='2' AND wt_rencana.id_semester='2'"));
+$datarencana_gardutol_transaksis2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '4' AND jenis_subgardu.id_jenisgardu='2' AND wt_rencana.id_semester='2'"));
+$datarencana_antrian_kendaraans2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '9' AND jenis_subgardu.id_jenisgardu='3' AND wt_rencana.id_semester='2'"));
+
 //Hitung nilai Realisasi Gardu Tol transaksi Semester 1
-$array = array($total_data_gerbang_keluar_gto,$total_data_gerbang_terbuka_gto);
-$data_gardutol_transaksi = ( array_sum($array) / count($array) );
+ $array = array($total_data_gerbang_keluar_gto,$total_data_gerbang_terbuka_gto);
+        $data_gardutol_transaksi = ( array_sum($array) / count($array) );
 //Hitung nilai Realisasi Gardu Tol Transaksi Semester 2
-$array2 = array($total_data_gerbang_keluar_gto2,$total_data_gerbang_terbuka_gto2);
-$data_gardutol_transaksi2 = ( array_sum($array2) / count($array2) );
-
-//ambil data Rencana
- $datarencana_gardu_terbuka = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '1' AND jenis_subgardu.id_jenisgardu='1'"));
- $datarencana_gardu_masuk_tertutup = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '2' AND jenis_subgardu.id_jenisgardu='1'"));
- $datarencana_gardu_keluar_tertutup = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '3' AND jenis_subgardu.id_jenisgardu='1'"));
- $datarencana_gardu_tol_ambil_kartu = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '5' AND jenis_subgardu.id_jenisgardu='2'"));
- $datarencana_gardutol_transaksi = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '4' AND jenis_subgardu.id_jenisgardu='2'"));
- $datarencana_antrian_kendaraan = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM wt_rencana, jenis_subgardu WHERE wt_rencana.id_subgardu = '9' AND jenis_subgardu.id_jenisgardu='3'"));
-
-//Hitung nilai Realisasi Capaian Semester 1
-$array3 = array(($datarencana_gardu_masuk_tertutup['nilai']/$total_data_gerbang_masuk),
-                ($datarencana_gardu_keluar_tertutup['nilai']/$total_data_gerbang_keluar),
-                ($datarencana_gardu_terbuka['nilai']/$total_data_gerbang_terbuka),
-                ($datarencana_gardu_tol_ambil_kartu['nilai']/$total_data_gerbang_masuk_gto),
-                ($datarencana_gardutol_transaksi['nilai']/$data_gardutol_transaksi),
-                ($datarencana_antrian_kendaraan['nilai']/$total_data_panjang_antrian)
-              );
-       $data_capaian_semester1= (array_sum($array3)/count($array3));
-       $persen_capaian_semester1 = number_format( $data_capaian_semester1 * 100, 2 ) . '%'; //2 angka dibelakang koma
-
-//Hitung nilai Realisasi Capaian Semester 1
-$array3 = array(($datarencana_gardu_masuk_tertutup['nilai']/$total_data_gerbang_masuk2),
-               ($datarencana_gardu_keluar_tertutup['nilai']/$total_data_gerbang_keluar2),
-               ($datarencana_gardu_terbuka['nilai']/$total_data_gerbang_terbuka2),
-               ($datarencana_gardu_tol_ambil_kartu['nilai']/$total_data_gerbang_masuk_gto2),
-               ($datarencana_gardutol_transaksi['nilai']/$data_gardutol_transaksi2),
-               ($datarencana_antrian_kendaraan['nilai']/$total_data_panjang_antrian2)
-               );
-         $data_capaian_semester2= (array_sum($array3)/count($array3));
-         $persen_capaian_semester2 = number_format( $data_capaian_semester2 * 100, 2 ) . '%'; //2 angka dibelakang koma
+ $array2 = array($total_data_gerbang_keluar_gto2,$total_data_gerbang_terbuka_gto2);
+        $data_gardutol_transaksi2 = ( array_sum($array2) / count($array2) );
 
 
 
          ?>
-         <tr>
+         <tr rowspan="6">
            <td rowspan="6"><?php echo $nomor; $nomor++;?></td>
            <td rowspan="6"><?php echo $data_cabang['nama_cabang'] ?></td>
            <td><?php echo "Gardu Masuk Sistem Tertutup"?></td>
-           <td><?php echo $datarencana_gardu_masuk_tertutup['nilai'];?></td>
-           <td><?php echo $datarencana_gardu_masuk_tertutup['nilai'];?></td>
-           <td><?php echo $total_data_gerbang_masuk;?></td>
-           <td><?php echo $total_data_gerbang_masuk2;?></td>
-           <td rowspan="6"><?php $total_rataans1+=$persen_capaian_semester1;
-                                 echo $persen_capaian_semester1;?>
+           <td><?php echo $datarencana_gardu_masuk_tertutups1['nilai'];?></td>
+           <td><?php echo $datarencana_gardu_masuk_tertutups2['nilai'];?></td>
+           <td><?php $rataan_gardumasuks1=$datarencana_gardu_masuk_tertutups1['nilai']/$total_data_gerbang_masuk;
+                     $count_rataanmasuks1++;
+                     $rataan_gardukeluars1=$datarencana_gardu_keluar_tertutups1['nilai']/$total_data_gerbang_keluar;
+                     $count_rataankeluars1++;
+                     $rataan_garduterbukas1=$datarencana_gardu_terbukas1['nilai']/$total_data_gerbang_terbuka;
+                     $count_rataanterbukas1++;
+                     $rataan_ambilkartus1=$datarencana_gardu_tol_ambil_kartus1['nilai']/$total_data_gerbang_masuk_gto;
+                     $count_rataanambilkartus1++;
+                     $rataan_antriankendaraans1=$datarencana_antrian_kendaraans1['nilai']/$total_data_panjang_antrian;
+                     $count_rataanantrians1++;
+                     $rataan_toltrasnsaksis1=$datarencana_gardutol_transaksis1['nilai']/$data_gardutol_transaksi;
+                     $count_rataantoltransaksis1++;
+
+                     echo $total_data_gerbang_masuk;
+               ?>
            </td>
-           <td rowspan="6"><?php $total_rataans2+=$persen_capaian_semester2;
-                                 echo $persen_capaian_semester2;?>
+           <td><?php if(isset($total_data_gerbang_masuk2)){
+                     $rataan_gardumasuks2=$datarencana_gardu_masuk_tertutups1['nilai']/$total_data_gerbang_masuk2;
+                     $count_rataanmasuks2++;
+                     $rataan_gardukeluars2=$datarencana_gardu_keluar_tertutups1['nilai']/$total_data_gerbang_keluar2;
+                     $count_rataankeluars2++;
+                     $rataan_garduterbukas2=$datarencana_gardu_terbukas2['nilai']/$total_data_gerbang_terbuka2;
+                     $count_rataanterbukas2++;
+                     $rataan_ambilkartus2=$datarencana_gardu_tol_ambil_kartus2['nilai']/$total_data_gerbang_masuk_gto2;
+                     $count_rataanambilkartus2++;
+                     $rataan_antriankendaraans2=$datarencana_antrian_kendaraans2['nilai']/$total_data_panjang_antrian2;
+                     $count_rataanantrians2++;
+                     $rataan_toltrasnsaksis2=$datarencana_gardutol_transaksis2['nilai']/$data_gardutol_transaksi2;
+                     $count_rataantoltransaksis2++;
+                     echo $total_data_gerbang_masuk2;
+                   };
+               ?>
+           </td>
+           <td rowspan="6"><?php $capaian_semester1=($rataan_toltrasnsaksis1+$rataan_gardumasuks1+$rataan_gardukeluars1+$rataan_garduterbukas1+$rataan_ambilkartus1+$rataan_antriankendaraans1)/
+                                                    ($count_rataantoltransaksis1+$count_rataanmasuks1+$count_rataankeluars1+$count_rataanterbukas1+$count_rataanambilkartus1+$count_rataanantrians1);
+                                 $persen_capaian_semester1 = number_format( $capaian_semester1 * 100, 2 ) . '%';
+                                 $total_capaiansemester1+=$persen_capaian_semester1;
+                                 $count_capaiansemester1++;
+                                 echo $persen_capaian_semester1;
+                           ?>
+           </td>
+           <td rowspan="6"><?php
+                                 $capaian_semester2=($rataan_toltrasnsaksis2+$rataan_gardumasuks2+$rataan_gardukeluars2+$rataan_garduterbukas2+$rataan_ambilkartus2+$rataan_antriankendaraans2)/
+                                                    ($count_rataantoltransaksis2+$count_rataanmasuks2+$count_rataankeluars2+$count_rataanterbukas2+$count_rataanambilkartus2+$count_rataanantrians2);
+                                 $persen_capaian_semester2 = number_format( $capaian_semester2 * 100, 2 ) . '%';
+                                 $total_capaiansemester2+=$persen_capaian_semester2;
+                                 $count_capaiansemester2++;
+                                 if(isset($persen_capaian_semester2)){
+                                 echo $persen_capaian_semester2;};
+                           ?>
            </td>
          </tr>
          <tr>
            <td><?php echo "Gardu Keluar Sistem Tertutup"?></td>
-           <td><?php echo $datarencana_gardu_keluar_tertutup['nilai'];?></td>
-           <td><?php echo $datarencana_gardu_keluar_tertutup['nilai'];?></td>
+           <td><?php echo $datarencana_gardu_keluar_tertutups1['nilai'];?></td>
+           <td><?php echo $datarencana_gardu_keluar_tertutups2['nilai'];?></td>
            <td><?php echo $total_data_gerbang_keluar;?></td>
            <td><?php echo $total_data_gerbang_keluar2;?></td>
 
          </tr>
          <tr>
            <td><?php echo "Gardu Sistem Terbuka"?></td>
-           <td><?php echo $datarencana_gardu_terbuka['nilai'];?></td>
-           <td><?php echo $datarencana_gardu_terbuka['nilai'];?></td>
+           <td><?php echo $datarencana_gardu_terbukas1['nilai'];?></td>
+           <td><?php echo $datarencana_gardu_terbukas2['nilai'];?></td>
            <td><?php echo $total_data_gerbang_terbuka;?></td>
            <td><?php echo $total_data_gerbang_terbuka2;?></td>
-
          </tr>
          <tr>
            <td><?php echo "Gardu Tol Ambil Kartu"?></td>
-           <td><?php echo $datarencana_gardu_tol_ambil_kartu['nilai']?></td>
-           <td><?php echo $datarencana_gardu_tol_ambil_kartu['nilai']?></td>
+           <td><?php echo $datarencana_gardu_tol_ambil_kartus1['nilai']?></td>
+           <td><?php echo $datarencana_gardu_tol_ambil_kartus2['nilai']?></td>
            <td><?php echo $total_data_gerbang_masuk_gto;?></td>
            <td><?php echo $total_data_gerbang_masuk_gto2;?></td>
-
          </tr>
          <tr>
            <td><?php echo "Gardu Tol Transaksi"?></td>
-           <td><?php echo $datarencana_gardutol_transaksi['nilai']?></td>
-           <td><?php echo $datarencana_gardutol_transaksi['nilai']?></td>
+           <td><?php echo $datarencana_gardutol_transaksis1['nilai']?></td>
+           <td><?php echo $datarencana_gardutol_transaksis2['nilai']?></td>
            <td><?php echo $data_gardutol_transaksi;?></td>
            <td><?php echo $data_gardutol_transaksi2;?></td>
 
          </tr>
          <tr>
            <td><?php echo "Jumlah Antrian Kendaraan"?></td>
-           <td><?php echo $datarencana_antrian_kendaraan['nilai'];?></td>
-           <td><?php echo $datarencana_antrian_kendaraan['nilai'];?></td>
+           <td><?php echo $datarencana_antrian_kendaraans1['nilai'];?></td>
+           <td><?php echo $datarencana_antrian_kendaraans2['nilai'];?></td>
            <td><?php echo $total_data_panjang_antrian;?></td>
            <td><?php echo $total_data_panjang_antrian2;?></td>
-
          </tr>
-         <?php $count++;}?>
+         <?php }?>
          <tr>
            <td colspan="7">Rata-rata</td>
-           <td> <?php echo $total_rataans1/$count;?></td>
-           <td> <?php echo $total_rataans2/$count;?></td>
+           <td> <?php $rataan_capaiansemester1=$total_capaiansemester1/$count_capaiansemester1;
+                      echo $rataan_capaiansemester1;
+                 ?>
+           </td>
+           <td> <?php $rataan_capaiansemester2=$total_capaiansemester2/$count_capaiansemester2;
+                      echo $rataan_capaiansemester2;
+                 ?>
+         </td>
          </tr>
        </tbody>
      </table>

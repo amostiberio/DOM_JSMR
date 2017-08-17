@@ -13,7 +13,8 @@ include ('connect.php'); //connect ke database
   $cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT nama_cabang FROM cabang WHERE id_cabang = '$idcabang'"));
   $namacabang = $cabang['nama_cabang'];
 
-  
+ $resultjs = $connect-> query("SELECT * FROM cabang");
+
 
 ?>
 <!DOCTYPE html>
@@ -99,10 +100,10 @@ include ('connect.php'); //connect ke database
 	                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Tambah <span class="caret"></span>
 	                    </button>
 	                    <ul role="menu" class="dropdown-menu pull-right">
-                           
-	                      <li><a data-toggle="modal" data-target=".bs-cabang">Tambah Cabang</a>
-	                      </li>
-	                     		             
+
+	                      <li><a data-toggle="modal" data-target=".bs-cabang">Tambah Cabang</a></li>
+                        <li><a data-toggle="modal" data-target=".bs-gerbang">Tambah Gerbang</a></li>
+
 
 	                    </ul>
 	                    </div>
@@ -116,10 +117,11 @@ include ('connect.php'); //connect ke database
                             <thead >
                                 <th>No</th>
                                 <th>Cabang</th>
-                                <th>Jumlah User</th>                                
+                                <th>Jumlah User</th>
+                                <th>Jumlah Gerbang</th>
                 								<th>Aksi</th>
 
-                             
+
                             </thead>
                             <tbody>
                             <?php
@@ -128,30 +130,35 @@ include ('connect.php'); //connect ke database
                             while($dataListCabang = mysqli_fetch_array($listCabang)){
                                 $idCabang = $dataListCabang['id_cabang'];
                                 $namaCabang = $dataListCabang['nama_cabang'];
-                                
+
                                 $userDataCabang = mysqli_query($connect, "SELECT * FROM user WHERE id_cabang = '$idCabang'");
-                                $hitungUser = mysqli_fetch_array($userDataCabang,MYSQLI_NUM);
+                                $hitungUser = mysqli_num_rows($userDataCabang);
+
+                                $gerbangDataCabang = mysqli_query($connect, "SELECT * FROM gerbang WHERE id_cabang = '$idCabang'");
+                                $hitungGerbang = mysqli_num_rows($gerbangDataCabang);
 
                                 ?>
                               <tr >
                                 <td><?php echo $qty++; ?></td>
-                                <td><?php echo $namaCabang; ?></td>
-                                <td><?php echo $hitungUser[0]; ?></td>                            
+                                <td><a href="manage_gerbang.php?id=<?php echo $idCabang;?>"><font color="#337ab7"><?php echo $namaCabang?></font></a></td>
+
+                                <td><?php echo $hitungUser; ?></td>
+                                <td><?php echo $hitungGerbang;?></td>
                 								<td>
-                								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal" 
-                								data-namacabang ="<?php echo $namaCabang; ?>" 
+                								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal"
+                								data-namacabang ="<?php echo $namaCabang; ?>"
                 								 >
                 								 Edit
-                								 </button>																 
-                								 <!-- <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
+                								 </button>
+                								 <!-- <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal"
                                  data-id-user = "<?php echo $idUserCabang;?>"
                 								>
-                								 Delete 
+                								 Delete
                 								 </button> -->
                 								 </td>
                               </tr>
-                              <?php 
-                                  } 
+                              <?php
+                                  }
                               ?>
                             </tbody>
                           </table>
@@ -185,16 +192,16 @@ include ('connect.php'); //connect ke database
                           <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
                         </div>
                         <div class="modal-body text-center">
-                        <form action="editdataUser.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" ">
+                        <form action="editdataUser.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
                          <div class="alert alert-danger" role="alert">
 		 				               <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
-								  
+
 								              <h4> Anda yakin untuk menghapus data rencana ini? </h4>
 						              </div>
                           <h2 style="color:red;"></h2>
                           <input name ="idUserCabang" type="text"  required="required" class="form-control col-md-7 col-xs-12" hidden>
-						              			
-						             
+
+
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -216,7 +223,7 @@ include ('connect.php'); //connect ke database
                         </div>
                         <div class="modal-body">
                         <form action="editdataUser.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                         
+
                         <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ma">Nama Cabang</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -224,7 +231,7 @@ include ('connect.php'); //connect ke database
                         </div>
 
                         </div>
-                        
+
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -245,7 +252,7 @@ include ('connect.php'); //connect ke database
 					</div>
 
 				    <div class="modal-body">
-					       <form action="tambahuser.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">          
+					       <form action="tambahuser.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                         <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Role</label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
@@ -257,11 +264,11 @@ include ('connect.php'); //connect ke database
                                   $dataRole = mysqli_query($connect, "SELECT * FROM user_role");
                                    while($ambilDataRole = mysqli_fetch_array($dataRole)){
                                             ?>
-                                           <option  value="<?php echo $ambilDataRole['id_role'];?>"><?php echo $ambilDataRole['role'];?>                                             
+                                           <option  value="<?php echo $ambilDataRole['id_role'];?>"><?php echo $ambilDataRole['role'];?>
                                            </option>
 
                             <?php }?>
-                                      
+
 
                             </select>
                           </div>
@@ -279,16 +286,16 @@ include ('connect.php'); //connect ke database
                                   $dataCabang = mysqli_query($connect, "SELECT * FROM cabang");
                                    while($ambilDataCabang = mysqli_fetch_array($dataCabang)){
                                             ?>
-                                           <option  value="<?php echo $ambilDataCabang['id_cabang'];?>"><?php echo $ambilDataCabang['nama_cabang'];?>                                             
+                                           <option  value="<?php echo $ambilDataCabang['id_cabang'];?>"><?php echo $ambilDataCabang['nama_cabang'];?>
                                            </option>
 
                             <?php }?>
-                                      
+
 
                             </select>
                           </div>
                         </div>
-                        
+
           						  <div class="form-group">
           							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="ma">Username</label>
           							<div class="col-md-6 col-sm-6 col-xs-12">
@@ -315,7 +322,7 @@ include ('connect.php'); //connect ke database
 			           </div>
 
 
-			
+
 
 			<!-- Modal Tambah Cabang -->
       <div class="modal fade bs-cabang" tabindex="-1" role="dialog" aria-hidden="true">
@@ -328,10 +335,10 @@ include ('connect.php'); //connect ke database
           </div>
 
             <div class="modal-body">
-                 <form action="tambahcabang.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">          
-                       
-                        
-                        
+                 <form action="tambahcabang.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+
+
                         <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Cabang</label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
@@ -349,7 +356,55 @@ include ('connect.php'); //connect ke database
 
                     </div>
                  </div>
-			
+
+                 <!-- Modal Tambah Gerbang-->
+                 <div class="modal fade bs-gerbang" tabindex="-1" role="dialog" aria-hidden="true">
+                   <div class="modal-dialog modal-lg">
+                     <div class="modal-content">
+                       <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                         <h4 class="modal-title" id="myModalLabel">Tambah Gerbang</h4>
+                       </div>
+                       <div class="modal-body">
+                         <form action="tambah_gerbang.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                           <!-- Dropdown List Cabang -->
+                           <div class="form-group">
+                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cabang">Cabang</label>
+                             <div class="col-md-6 col-sm-6 col-xs-12">
+                               <select required="required" name="idcabang" id="cabang-list" class="select2_single form-control" tabindex="-1">
+                                 <option value="">---Pilih Cabang---</option>
+                                 <?php
+                                 if ($resultjs->num_rows > 0) {
+                                   // output data of each row
+                                   while($row = $resultjs -> fetch_assoc()) {
+                                 ?>
+                                 <option value="<?php echo $row["id_cabang"]; ?>"><?php echo $row["nama_cabang"]; ?> </option>
+                                 <?php
+                                   }
+                                 }?>
+                              </select>
+                            </div>
+                          </div>
+                          <!-- End of Dropdown List Cabang -->
+                           <div class="form-group">
+                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Gerbang</label>
+                             <div class="col-md-6 col-sm-6 col-xs-12">
+                               <input name ="gerbang" type="text"  required="required" class="form-control col-md-7 col-xs-12">
+                             </div>
+                           </div>
+                         </div>
+                         <div class="modal-footer">
+                           <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                           <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
+                         </div>
+                         </form>
+                     </div>
+                   </div>
+                 </div>
+                 <!-- End ofModal Tambah Gerbang-->
+
+
+
 		</div>
 
 <style>

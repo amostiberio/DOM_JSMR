@@ -150,7 +150,24 @@ include ('connect.php'); //connect ke database
                               <?php
                               $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_semester=semester.id_semester AND semester.id_semester=panjang_antrian.id_semester GROUP BY waktu_transaksi.id_cabang");
                               $nomor = 1;
-                              $count=0;
+
+                              //variable untuk menghitung rataan waktu transaksi
+                              $total_garduterbukas1=0; $total_gardumasuks1=0; $total_gardukeluars1=0;
+                              $count_garduterbukas1=0; $count_gardumasuks1=0; $count_gardukeluars1=0;
+                              $total_garduterbukas2=0; $total_gardumasuks2=0; $total_gardukeluars2=0;
+                              $count_garduterbukas2=0; $count_gardumasuks2=0; $count_gardukeluars2=0;
+
+                              $total_garduterbukagtos1=0; $total_gardumasukgtos1=0; $total_gardukeluargtos1=0;
+                              $count_garduterbukagtos1=0; $count_gardumasukgtos1=0; $count_gardukeluargtos1=0;
+                              $total_garduterbukagtos2=0; $total_gardumasukgtos2=0; $total_gardukeluargtos2=0;
+                              $count_garduterbukagtos2=0; $count_gardumasukgtos2=0; $count_gardukeluargtos2=0;
+
+                              $total_panjangantrians1=0;
+                              $count_panjangantrians1=0;
+                              $total_panjangantrians2=0;
+                              $count_panjangantrians2=0;
+
+
                               while($data_waktu_transaksi = mysqli_fetch_array($rata_waktu_transaksi)){
 
   								$idcabanglist = $data_waktu_transaksi['id_cabang'];
@@ -224,19 +241,55 @@ include ('connect.php'); //connect ke database
                     $total_data_panjang_antrian2 = $hasil_data_panjang_antrian2['nilai_total'];
 
 
+
                               ?>
                               <tr >
                                 <td rowspan="2"><?php echo $nomor; $nomor++?></td>
                                 <td rowspan="2"><?php echo $data_cabang['nama_cabang'] ?></td>
                                 <td rowspan="2"><?php echo $data_tahun['tahun']?></td>
                                 <td><?php echo $data_semester1['semester']?></td>
-                                <td><?php echo $total_data_gerbang_terbuka;?></td>
-                                <td><?php echo $total_data_gerbang_masuk;?></td>
-                                <td><?php echo $total_data_gerbang_keluar;?></td>
-                                <td><?php echo $total_data_gerbang_terbuka_gto;?></td>
-                                <td><?php echo $total_data_gerbang_masuk_gto;?></td>
-                                <td><?php echo $total_data_gerbang_keluar_gto;?></td>
-                                <td><?php echo $total_data_panjang_antrian;?></td>
+                                <td><?php if(isset($total_garduterbukas1)){
+                                          $total_garduterbukas1+=$total_data_gerbang_terbuka;
+                                          $count_garduterbukas1++;
+                                          echo $total_data_gerbang_terbuka;
+                                        };?>
+                                </td>
+                                <td><?php if(isset($total_gardumasuks1)){
+                                          $total_gardumasuks1+=$total_data_gerbang_masuk;
+                                          $count_gardumasuks1++;
+                                          echo $total_data_gerbang_masuk;
+                                        };?>
+                                </td>
+                                <td><?php if(isset($total_gardukeluars1)){
+                                          $total_gardukeluars1+=$total_data_gerbang_keluar;
+                                          $count_gardukeluars1++;
+                                          echo $total_data_gerbang_keluar;
+                                        };?>
+                                </td>
+                                <td><?php if(isset($total_garduterbukagtos1)){
+                                          $total_garduterbukagtos1+=$total_data_gerbang_terbuka_gto;
+                                          $count_garduterbukagtos1++;
+                                          echo $total_data_gerbang_terbuka_gto;
+                                        };?>
+                                </td>
+                                <td><?php if(isset($total_gardumasukgtos1)){
+                                          $total_gardumasukgtos1+=$total_data_gerbang_masuk_gto;
+                                          $count_gardumasukgtos1++;
+                                          echo $total_data_gerbang_masuk_gto;
+                                        };?>
+                                </td>
+                                <td><?php if(isset($total_gardukeluargtos1)){
+                                          $total_gardukeluargtos1+=$total_data_gerbang_keluar_gto;
+                                          $count_gardukeluargtos1++;
+                                          echo $total_data_gerbang_keluar_gto;
+                                        };?>
+                                </td>
+                                <td><?php if(isset($total_data_panjang_antrian)){
+                                          $total_panjangantrians1+=$total_data_panjang_antrian;
+                                          $count_panjangantrians1++;
+                                          echo $total_data_panjang_antrian;
+                                        };?>
+                                </td>
                                 <td rowspan="2">
                                   <button type="button" class="btn btn-round btn-info" class="btn btn-primary"><a href="waktu_transaksi1_percabang.php?id=<?php echo $data_waktu_transaksi['id_cabang'];?>">
 
@@ -244,42 +297,94 @@ include ('connect.php'); //connect ke database
                                  </a></button>
                                 </td>
                               </tr>
+                              <?php ?>
                               <tr>
                                 <td><?php echo $data_semester2['semester'];?></td>
-                                <td><?php $total_garduterbuka=$total_data_gerbang_terbuka+$total_data_gerbang_terbuka2;
-                                          echo $total_data_gerbang_terbuka2;?>
+                                <td><?php if (isset($total_data_gerbang_terbuka2)){
+                                            $total_garduterbukas2+=$total_data_gerbang_terbuka2;
+                                            $count_garduterbukas2++;
+                                            echo $total_data_gerbang_terbuka2;
+                                          };?>
                                 </td>
-                                <td><?php $total_gardumasuk=$total_data_gerbang_masuk+$total_data_gerbang_masuk2;
-                                          echo $total_data_gerbang_masuk2;?>
+                                <td><?php if(isset($total_data_gerbang_masuk2)){
+                                          $total_gardumasuks2+=$total_data_gerbang_masuk2;
+                                          $count_gardumasuks2++;
+                                          echo $total_data_gerbang_masuk2;
+                                        };?>
                                 </td>
-                                <td><?php $total_gardukeluar=$total_data_gerbang_keluar+$total_data_gerbang_keluar2;
-                                          echo $total_data_gerbang_keluar2;?>
+                                <td><?php if(isset($total_data_gerbang_keluar2)){
+                                          $total_gardukeluars2+=$total_data_gerbang_keluar2;
+                                          $count_gardukeluars2++;
+                                          echo $total_data_gerbang_keluar2;
+                                        };?>
                                 </td>
-                                <td><?php $total_gardugto_terbuka=$total_data_gerbang_terbuka_gto+$total_data_gerbang_terbuka_gto2;
-                                          echo $total_data_gerbang_terbuka_gto2;?>
+                                <td><?php if(isset($total_data_gerbang_terbuka_gto2)){
+                                          $total_garduterbukagtos2+=$total_data_gerbang_terbuka_gto2;
+                                          $count_garduterbukagtos2++;
+                                          echo $total_data_gerbang_terbuka_gto2;
+                                        };?>
                                 </td>
-                                <td><?php $total_gardugto_masuk=$total_data_gerbang_masuk_gto+$total_data_gerbang_masuk_gto2;
-                                          echo $total_data_gerbang_masuk_gto2;?>
+                                <td><?php if(isset($total_data_gerbang_masuk_gto2)){
+                                          $total_gardumasukgtos2+=$total_data_gerbang_masuk_gto2;
+                                          $count_gardumasukgtos2++;
+                                          echo $total_data_gerbang_masuk_gto2;
+                                        };?>
                                 </td>
-                                <td><?php $total_gardugto_keluar=$total_data_gerbang_keluar_gto+$total_data_gerbang_keluar_gto2;
-                                          echo $total_data_gerbang_keluar_gto2;?>
+                                <td><?php if(isset($total_data_gerbang_keluar_gto2)){
+                                          $total_gardukeluargtos2+=$total_data_gerbang_keluar_gto2;
+                                          $count_gardukeluargtos2++;
+                                          echo $total_data_gerbang_keluar_gto2;
+                                        };?>
                                 </td>
-                                <td><?php $total_panjangantrian=$total_data_panjang_antrian+$total_data_panjang_antrian2;
-                                          echo $total_data_panjang_antrian2;?>
+                                <td><?php if(isset($total_data_panjang_antrian2)){
+                                          $total_panjangantrians2+=$total_data_panjang_antrian2;
+                                          $count_panjangantrians2++;
+                                          echo $total_data_panjang_antrian2;
+                                        };?>
                                 </td>
+
                               </tr>
 
 
-                                <?php $count+=2; } ?>
+
+                                <?php } ?>
                                 <tr>
                                   <td colspan="4"> Rata-rata </td>
-                                  <td><?php echo $total_garduterbuka/$count;?></td>
-                                  <td><?php echo $total_gardumasuk/$count;?></td>
-                                  <td><?php echo $total_gardukeluar/$count;?></td>
-                                  <td><?php echo $total_gardugto_terbuka/$count;?></td>
-                                  <td><?php echo $total_gardugto_masuk/$count;?></td>
-                                  <td><?php echo $total_gardugto_keluar/$count;?></td>
-                                  <td><?php echo $total_panjangantrian/$count;?></td>
+                                  <td>
+                                    <?php $hasil_rataangarduterbuka=($total_garduterbukas1+$total_garduterbukas2)/($count_garduterbukas1+$count_garduterbukas2);
+                                          echo number_format((float)$hasil_rataangarduterbuka, 2, '.', '');
+                                    ?>
+                                  </td>
+                                  <td>
+                                    <?php $hasil_rataangardumasuk=($total_gardumasuks1+$total_gardumasuks2)/($count_gardumasuks1+$count_gardumasuks2);
+                                          echo number_format((float)$hasil_rataangardumasuk, 2, '.', '');
+                                    ?>
+                                  </td>
+                                  <td>
+                                    <?php $hasil_rataangardukeluar=($total_gardukeluars1+$total_gardukeluars2)/($count_gardukeluars1+$count_gardukeluars2);
+                                          echo $hasil_rataangardukeluar;
+                                    ?>
+                                  </td>
+                                  <td>
+                                    <?php $hasil_rataangarduterbukagto=($total_garduterbukagtos1+$total_garduterbukagtos2)/($count_garduterbukagtos1+$count_garduterbukagtos2);
+                                          echo number_format((float)$hasil_rataangarduterbukagto, 2, '.', '');
+                                    ?>
+                                  </td>
+                                  <td>
+                                    <?php $hasil_rataangardumasukgto=($total_gardumasukgtos1+$total_gardumasukgtos2)/($count_gardumasukgtos1+$count_gardumasukgtos2);
+                                          echo number_format((float)$hasil_rataangardumasukgto, 2, '.', '');
+                                    ?>
+                                  </td>
+                                  <td>
+                                    <?php $hasil_rataangardukeluargto=($total_gardukeluargtos1+$total_gardukeluargtos2)/($count_gardukeluargtos1+$count_gardukeluargtos2);
+                                          echo number_format((float)$hasil_rataangardukeluargto, 2, '.', '');
+                                    ?>
+                                  </td>
+                                  <td>
+                                    <?php $hasil_rataanpanjangantrian=($total_panjangantrians1+$total_panjangantrians2)/($count_panjangantrians1+$count_panjangantrians2);
+                                          echo number_format((float)$hasil_rataanpanjangantrian, 2, '.', '');
+                                    ?>
+                                  </td>
                                 </tr>
                             </tbody>
                           </table>
@@ -378,7 +483,7 @@ include ('connect.php'); //connect ke database
                        <?php
                           }
                        ?>
-                        
+
                       </select>
                     </div>
                   </div>
