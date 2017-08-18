@@ -2,6 +2,10 @@
 include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 
+if(isset($_GET['tahun'])){
+    $nilaiTahun = $_GET['tahun'];
+  }else $nilaiTahun = '0';
+  
   $getidgerbang = $_GET['id_gerbang'];
   $gerbang =  mysqli_query($connect,"SELECT * FROM gerbang WHERE id_gerbang = '$getidgerbang'");
   $data_gerbang = mysqli_fetch_array($gerbang);
@@ -87,6 +91,21 @@ include ('connect.php'); //connect ke database
 
                     <div class="clearfix"></div>
                   </div>
+				  <form action="dropdownproses.php" method="POST">
+                  <div class='col-sm-2'>                    
+                    <div class="form-group">
+                        <div class='input-group date' id='myDatepickerFilter'>
+                            <input type='text' class="form-control" name= "tahun" <?php if(isset($_GET['tahun'])){ ?> value="<?php echo $nilaiTahun ;?>" <?php } ?>/>
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+					<input type='hidden' value=<?php echo $getidgerbang; ?> name ="id_gerbang">
+                  </div>
+                  <button type="submit" class="btn btn-primary" name="dropdownTahunGardu1">View</button>
+				  <button type="submit" class="btn btn-danger" name="clearTahunGardu1">Clear</button>
+                  </form>
 
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
@@ -123,8 +142,11 @@ include ('connect.php'); //connect ke database
                             </thead>
                             <tbody>
                               <?php
-                                $jmlgardu = mysqli_query($connect, "SELECT * FROM jml_gardutersedia join gerbang on gerbang.id_gerbang=jml_gardutersedia.id_gerbang WHERE jml_gardutersedia.id_gerbang='$getidgerbang' group by jml_gardutersedia.tahun, jml_gardutersedia.id_gerbang");
-                                $nomor = 1;
+							  if($nilaiTahun > 0){
+							  $jmlgardu = mysqli_query($connect, "SELECT * FROM jml_gardutersedia join gerbang on gerbang.id_gerbang=jml_gardutersedia.id_gerbang WHERE jml_gardutersedia.tahun='$nilaiTahun' AND jml_gardutersedia.id_gerbang='$getidgerbang' group by jml_gardutersedia.tahun, jml_gardutersedia.id_gerbang");}
+							  else{
+							  $jmlgardu = mysqli_query($connect, "SELECT * FROM jml_gardutersedia join gerbang on gerbang.id_gerbang=jml_gardutersedia.id_gerbang WHERE jml_gardutersedia.id_gerbang='$getidgerbang' group by jml_gardutersedia.tahun, jml_gardutersedia.id_gerbang");}                              
+								$nomor = 1;
                                 while($data_jmlgardu = mysqli_fetch_array($jmlgardu)){
                                    $idgerbanglist = $data_jmlgardu['id_gerbang'];
                                    $idsubgardulist = $data_jmlgardu['id_subgardu'];

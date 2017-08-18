@@ -2,6 +2,11 @@
 include "connect.php";
 include('akses.php'); //untuk memastikan dia sudah login
 
+  if(isset($_GET['tahun'])){
+    $nilaiTahun = $_GET['tahun'];
+  
+  }else $nilaiTahun = '0';
+  
   $iduser = $_SESSION['id_user'];
 
   //ambil informasi user id dan cabang id dari table user
@@ -16,7 +21,10 @@ include('akses.php'); //untuk memastikan dia sudah login
 // Fungsi header dengan mengirimkan raw data excel
 header("Content-type: application/x-msdownload");
 // Mendefinisikan nama file ekspor "hasil-export.xls"
-header("Content-Disposition: attachment; filename=Laporan VC Ratio Cabang ".$namacabang.".xls");
+if($nilaiTahun > 0){
+	header("Content-Disposition: attachment; filename=Laporan VC Ratio Cabang ".$namacabang." Tahun ".$nilaiTahun.".xls");}
+else{
+	header("Content-Disposition: attachment; filename=Laporan VC Ratio Cabang ".$namacabang.".xls");}
 header("Pragma : no-cache");
 header("Expires :0"); $i=0;
 ?>
@@ -57,8 +65,12 @@ header("Expires :0"); $i=0;
                             </thead>
                             <tbody>
                               <?php
-                                $vcratio = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join jml_gardutersedia join gerbang on gerbang.id_gerbang=transaksi_tinggi.id_gerbang AND gerbang.id_gerbang=jml_gardutersedia.id_gerbang WHERE transaksi_tinggi.id_cabang = '$idcabang' AND jml_gardutersedia.id_cabang='$idcabang' AND transaksi_tinggi.tahun=jml_gardutersedia.tahun group by transaksi_tinggi.tahun, transaksi_tinggi.id_gerbang");
-                                $nomor = 1; $total1 =0; $total2 =0; $total3 =0; $total4 =0; $total5 =0; $total6 =0; $total7 =0; 
+							  if($nilaiTahun > 0){
+                                $vcratio = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join jml_gardutersedia join gerbang on gerbang.id_gerbang=transaksi_tinggi.id_gerbang AND gerbang.id_gerbang=jml_gardutersedia.id_gerbang WHERE transaksi_tinggi.tahun='$nilaiTahun' AND jml_gardutersedia.tahun='$nilaiTahun' AND transaksi_tinggi.id_cabang = '$idcabang' AND jml_gardutersedia.id_cabang='$idcabang' group by transaksi_tinggi.tahun, transaksi_tinggi.id_gerbang");
+                              }else{
+                                $vcratio = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join jml_gardutersedia join gerbang on gerbang.id_gerbang=transaksi_tinggi.id_gerbang AND gerbang.id_gerbang=jml_gardutersedia.id_gerbang WHERE transaksi_tinggi.tahun=jml_gardutersedia.tahun AND transaksi_tinggi.id_cabang = '$idcabang' AND jml_gardutersedia.id_cabang='$idcabang' group by transaksi_tinggi.tahun, transaksi_tinggi.id_gerbang");								
+							  } 
+							    $nomor = 1; $total1 =0; $total2 =0; $total3 =0; $total4 =0; $total5 =0; $total6 =0; $total7 =0; 
 								$total8 =0; $total9 =0; $total10 =0; $total11 =0; $total12 =0; $total13 =0; $total14 =0;
                                 while($data_vcratio = mysqli_fetch_array($vcratio)){
                                    $idgerbanglist = $data_vcratio['id_gerbang'];

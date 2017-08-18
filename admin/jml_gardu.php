@@ -2,6 +2,11 @@
 include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 
+if(isset($_GET['tahun'])){
+    $nilaiTahun = $_GET['tahun'];
+  
+  }else $nilaiTahun = '0';
+
   $iduser = $_SESSION['id_user'];
 
   $resultjs = $connect-> query("SELECT * FROM cabang");
@@ -87,7 +92,20 @@ include ('connect.php'); //connect ke database
 
                     <div class="clearfix"></div>
                   </div>
-
+					<form action="dropdownproses.php" method="POST">
+                  <div class='col-sm-2'>                    
+                    <div class="form-group">
+                        <div class='input-group date' id='myDatepickerFilter'>
+                            <input type='text' class="form-control" name= "tahun" <?php if(isset($_GET['tahun'])){ ?> value="<?php echo $nilaiTahun ;?>" <?php } ?>/>
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary" name="dropdownTahunGardu">View</button>
+				  <button type="submit" class="btn btn-danger" name="clearTahunGardu">Clear</button>
+                  </form>
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
                       <div class="input-group buttonright" >
@@ -104,7 +122,7 @@ include ('connect.php'); //connect ke database
 						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
                       </button>
                       <ul role="menu" class="dropdown-menu pull-right">
-                       <li><a href="downloadjg.php" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                       <li><a href="downloadjg.php?tahun=<?php echo $nilaiTahun;?>" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
                        </li>
 					   </ul>
 	                    </div>
@@ -142,8 +160,12 @@ include ('connect.php'); //connect ke database
                             </thead>
                             <tbody>
                               <?php
-                                $jmlgardu = mysqli_query($connect, "SELECT * FROM jml_gardutersedia join cabang on cabang.id_cabang=jml_gardutersedia.id_cabang group by jml_gardutersedia.tahun, jml_gardutersedia.id_cabang");
-                                $nomor = 1; $total1 =0; $total2 =0; $total3 =0; $total4 =0; $total5 =0; $total6 =0; $total7 =0; 
+							  if($nilaiTahun > 0){
+                                $jmlgardu = mysqli_query($connect, "SELECT * FROM jml_gardutersedia join cabang on cabang.id_cabang=jml_gardutersedia.id_cabang WHERE jml_gardutersedia.tahun='$nilaiTahun' group by jml_gardutersedia.tahun, jml_gardutersedia.id_cabang");
+                              }else{
+                                $jmlgardu = mysqli_query($connect, "SELECT * FROM jml_gardutersedia join cabang on cabang.id_cabang=jml_gardutersedia.id_cabang group by jml_gardutersedia.tahun, jml_gardutersedia.id_cabang");								
+							  }
+								$nomor = 1; $total1 =0; $total2 =0; $total3 =0; $total4 =0; $total5 =0; $total6 =0; $total7 =0; 
                                 while($data_jmlgardu = mysqli_fetch_array($jmlgardu)){
                                    $idcabang = $data_jmlgardu['id_cabang'];
 								   $tahun = $data_jmlgardu['tahun'];
@@ -257,12 +279,17 @@ include ('connect.php'); //connect ke database
 					</select>
 				</div>
 			  </div>
-				 <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
-				<div class="col-md-6 col-sm-6 col-xs-12">
-					<input name ="tahun" type="number" id="tahun" required="required" class="form-control col-md-7 col-xs-12">
-				</div>
-			  </div>
+			  <div class="form-group">
+                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                       <div class='input-group date' id='myDatepickerFormMonitoring'>
+                           <input type='text' class="form-control" name= "tahun"  />
+                           <span class="input-group-addon">
+                           <span class="glyphicon glyphicon-calendar"></span>
+                           </span>
+                       </div>
+                       </div>
+                 </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tw">Triwulan</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">

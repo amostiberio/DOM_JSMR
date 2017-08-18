@@ -1,7 +1,12 @@
 <?php 
 include "connect.php";
 include('akses.php'); //untuk memastikan dia sudah login
-
+  
+  if(isset($_GET['tahun'])){
+    $nilaiTahun = $_GET['tahun'];
+  
+  }else $nilaiTahun = '0';
+  
   $iduser = $_SESSION['id_user'];
 
   //ambil informasi user id dan cabang id dari table user
@@ -16,7 +21,10 @@ include('akses.php'); //untuk memastikan dia sudah login
 // Fungsi header dengan mengirimkan raw data excel
 header("Content-type: application/x-msdownload");
 // Mendefinisikan nama file ekspor "hasil-export.xls"
-header("Content-Disposition: attachment; filename=Laporan Jumlah SDM Cabang ".$namacabang.".xls");
+if($nilaiTahun > 0){
+	header("Content-Disposition: attachment; filename=Laporan Jumlah SDM Cabang ".$namacabang." Tahun ".$nilaiTahun.".xls");}
+else{
+	header("Content-Disposition: attachment; filename=Laporan Jumlah SDM Cabang ".$namacabang.".xls");}
 header("Pragma : no-cache");
 header("Expires :0"); $i=0;
 ?>
@@ -45,8 +53,11 @@ header("Expires :0"); $i=0;
                             <tbody>
 
                               <?php
-                                $jumlah_sdm = mysqli_query($connect, "SELECT * FROM pengumpul_tol join jenis_karyawan join gerbang on gerbang.id_gerbang=pengumpul_tol.id_gerbang WHERE pengumpul_tol.id_cabang = '$idcabang' group by pengumpul_tol.tahun, pengumpul_tol.id_gerbang");
-                                $nomor = 1; $total1 =0; $total2 =0; $total3 =0; $total4 =0; $total5 =0; $total6 =0; $total7 =0; $total8=0;
+							  if($nilaiTahun > 0){
+                                $jumlah_sdm = mysqli_query($connect, "SELECT * FROM pengumpul_tol join jenis_karyawan join gerbang on gerbang.id_gerbang=pengumpul_tol.id_gerbang WHERE pengumpul_tol.tahun='$nilaiTahun' AND pengumpul_tol.id_cabang = '$idcabang' group by pengumpul_tol.tahun, pengumpul_tol.id_gerbang");
+							  }else{
+                                $jumlah_sdm = mysqli_query($connect, "SELECT * FROM pengumpul_tol join jenis_karyawan join gerbang on gerbang.id_gerbang=pengumpul_tol.id_gerbang WHERE pengumpul_tol.id_cabang = '$idcabang' group by pengumpul_tol.tahun, pengumpul_tol.id_gerbang");								
+							  }                                $nomor = 1; $total1 =0; $total2 =0; $total3 =0; $total4 =0; $total5 =0; $total6 =0; $total7 =0; $total8=0;
                                 while($data_jumlahsdm = mysqli_fetch_array($jumlah_sdm)){
                                   $idgerbanglist = $data_jumlahsdm['id_gerbang'];
                                   $total = 0;
@@ -91,7 +102,6 @@ header("Expires :0"); $i=0;
 								<td><?php echo $total6?></td>
                                 <td><?php echo $total7?></td>
 								<td><?php echo $total8?></td>
-								<td style></td>
                               </tr>
                             </tbody>
                           </table>

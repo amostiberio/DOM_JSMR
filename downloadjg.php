@@ -2,6 +2,11 @@
 include "connect.php";
 include('akses.php'); //untuk memastikan dia sudah login
 
+if(isset($_GET['tahun'])){
+    $nilaiTahun = $_GET['tahun'];
+  
+  }else $nilaiTahun = '0';
+
   $iduser = $_SESSION['id_user'];
 
   //ambil informasi user id dan cabang id dari table user
@@ -16,7 +21,10 @@ include('akses.php'); //untuk memastikan dia sudah login
 // Fungsi header dengan mengirimkan raw data excel
 header("Content-type: application/x-msdownload");
 // Mendefinisikan nama file ekspor "hasil-export.xls"
-header("Content-Disposition: attachment; filename=Laporan Jumlah Gardu Cabang ".$namacabang.".xls");
+if($nilaiTahun > 0){
+	header("Content-Disposition: attachment; filename=Laporan Jumlah Gardu Cabang ".$namacabang." Tahun ".$nilaiTahun.".xls");}
+else{
+	header("Content-Disposition: attachment; filename=Laporan Jumlah Gardu Cabang ".$namacabang.".xls");}
 header("Pragma : no-cache");
 header("Expires :0"); $i=0;
 ?>
@@ -50,8 +58,12 @@ header("Expires :0"); $i=0;
                             </thead>
                             <tbody>
                               <?php
-                                $jmlgardu = mysqli_query($connect, "SELECT * FROM jml_gardutersedia join gerbang on gerbang.id_gerbang=jml_gardutersedia.id_gerbang WHERE jml_gardutersedia.id_cabang='$idcabang' group by jml_gardutersedia.tahun, jml_gardutersedia.id_gerbang");
-                                $nomor = 1; $total1 =0; $total2 =0; $total3 =0; $total4 =0; $total5 =0; $total6 =0; $total7 =0; 
+								if($nilaiTahun > 0){
+                                 $jmlgardu = mysqli_query($connect, "SELECT * FROM jml_gardutersedia join gerbang on gerbang.id_gerbang=jml_gardutersedia.id_gerbang WHERE jml_gardutersedia.tahun='$nilaiTahun' AND jml_gardutersedia.id_cabang='$idcabang' group by jml_gardutersedia.tahun, jml_gardutersedia.id_gerbang");
+
+							  }else{
+                                $jmlgardu = mysqli_query($connect, "SELECT * FROM jml_gardutersedia join gerbang on gerbang.id_gerbang=jml_gardutersedia.id_gerbang WHERE jml_gardutersedia.id_cabang='$idcabang' group by jml_gardutersedia.tahun, jml_gardutersedia.id_gerbang");}
+								$nomor = 1; $total1 =0; $total2 =0; $total3 =0; $total4 =0; $total5 =0; $total6 =0; $total7 =0; 
                                 while($data_jmlgardu = mysqli_fetch_array($jmlgardu)){
                                    $idgerbanglist = $data_jmlgardu['id_gerbang'];
                                    $idsubgardulist = $data_jmlgardu['id_subgardu'];

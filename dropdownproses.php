@@ -1,21 +1,9 @@
 <?php 
 include 'connect.php';
 
-        if(isset($_POST['dropdownTW'])){
-            $triwulan = $_POST['dropDownListTW'];
-            $tahun =$_POST['tahun'];            
-             if($tahun >0 && $triwulan >0){ ?>
-                <script>document.location.href="laporan_bpt.php?tahun=<?php echo $tahun;?>&triwulan=<?php echo $triwulan;?>";</script>
-
-           <?php }
-            else if($tahun >0){
-                ?>
-                <script>document.location.href="laporan_bpt.php?tahun=<?php echo $tahun;?>";</script>
-
-           <?php
-            }
-
-            else{
+		if(isset($_POST['dropdownTW'])){
+			$triwulan = $_POST['dropDownListTW'];
+		 
             if($triwulan > 0 ){
 ?>
 
@@ -25,23 +13,10 @@ include 'connect.php';
 ?>               
                 <script>document.location.href="laporan_bpt.php";</script>
 <?php        }
-}
 
 if(isset($_POST['dropdownTWBPLL'])){
-            $triwulan = $_POST['dropDownListTW'];
-            $tahun =$_POST['tahun'];       
-           
-            if($tahun > 0 && $triwulan >0){ ?>
-                  <script>document.location.href="laporan_bpll.php?tahun=<?php echo $tahun;?>&triwulan=<?php echo $triwulan;?>";</script>
-
-           <?php 
-
-            }else if($tahun >0){
-                ?>
-                <script>document.location.href="laporan_bpll.php?tahun=<?php echo $tahun;?>";</script>
-
-           <?php
-            }else{
+			$triwulan = $_POST['dropDownListTW'];
+		 
             if($triwulan > 0 ){
  ?>
 
@@ -51,25 +26,11 @@ if(isset($_POST['dropdownTWBPLL'])){
 ?>               
                 <script>document.location.href="laporan_bpll.php";</script>
 <?php        }
-}
 
 
 if(isset($_POST['dropdownTWSPOJT'])){
             $triwulan = $_POST['dropDownListTW'];
-            $tahun =$_POST['tahun'];       
-           
-            if($tahun > 0 && $triwulan >0){ ?>
-                  <script>document.location.href="laporan_spojt.php?tahun=<?php echo $tahun;?>&triwulan=<?php echo $triwulan;?>";</script>
-
-           <?php 
-
-            }else if($tahun >0){
-                ?>
-                <script>document.location.href="laporan_spojt.php?tahun=<?php echo $tahun;?>";</script>
-
-           <?php
-            }
-            else {
+         
             if($triwulan > 0 ){
  ?>
 
@@ -79,23 +40,10 @@ if(isset($_POST['dropdownTWSPOJT'])){
 ?>               
                 <script>document.location.href="laporan_spojt.php";</script>
 <?php        }
-}
 
 if(isset($_POST['dropdownTWSPJT'])){
             $triwulan = $_POST['dropDownListTW'];
-            $tahun =$_POST['tahun'];       
-           
-            if($tahun > 0 && $triwulan >0){ ?>
-                  <script>document.location.href="laporan_spjt.php?tahun=<?php echo $tahun;?>&triwulan=<?php echo $triwulan;?>";</script>
-
-           <?php 
-
-            }else if($tahun >0){
-                ?>
-                <script>document.location.href="laporan_spjt.php?tahun=<?php echo $tahun;?>";</script>
-
-           <?php
-            }else {
+         
             if($triwulan > 0 ){
  ?>
 
@@ -105,129 +53,120 @@ if(isset($_POST['dropdownTWSPJT'])){
 ?>               
                 <script>document.location.href="laporan_spjt.php";</script>
 <?php        }
-}
 
-
-
-        if(isset($_POST['dropdownTahun'])){
+if(isset($_POST['dropdownTahunGardu'])){
             $tahun = $_POST['tahun'];
          
             if($tahun > 0 ){
-?>
+ ?>
 
-                <script>document.location.href="csi.php?tahun=<?php echo $tahun;?>";</script>
+                <script>document.location.href="jml_gardu.php?tahun=<?php echo $tahun?>";</script>
 <?php       }
             else 
 ?>               
-                <script>document.location.href="csi.php";</script>
-<?php       
+                <script>document.location.href="jml_gardu.php";</script>
+<?php        }
+
+if(isset($_POST['clearTahunGardu'])){
+?>               
+                <script>document.location.href="jml_gardu.php";</script>
+<?php
 }
- if(isset($_POST['dropdownTahunRencanaBpt'])){
+
+if(isset($_POST['dropdownTahunLalin'])){
             $tahun = $_POST['tahun'];
          
             if($tahun > 0 ){
-?>
+ ?>
 
-                <script>document.location.href="rencana_bpt.php?tahun=<?php echo $tahun;?>";</script>
+                <script>document.location.href="lalin_jj.php?tahun=<?php echo $tahun?>";</script>
 <?php       }
             else 
 ?>               
-                <script>document.location.href="rencana_bpt.php";</script>
-<?php       
+                <script>document.location.href="lalin_jj.php";</script>
+<?php        }
+
+if(isset($_POST['clearTahunLalin'])){
+?>               
+                <script>document.location.href="lalin_jj.php";</script>
+<?php
 }
-  if(isset($_POST['dropdownTahunRealisasiBpt'])){
+
+if(isset($_POST['dropdownTahunSDM'])){
             $tahun = $_POST['tahun'];
          
             if($tahun > 0 ){
-?>
+ ?>
 
-                <script>document.location.href="realisasi_bpt.php?tahun=<?php echo $tahun;?>";</script>
+                <script>document.location.href="jumlah_sdm.php?tahun=<?php echo $tahun?>";</script>
 <?php       }
             else 
 ?>               
-                <script>document.location.href="realisasi_bpt.php";</script>
-<?php       
+                <script>document.location.href="jumlah_sdm.php";</script>
+<?php        }
+
+if(isset($_POST['clearTahunSDM'])){
+?>               
+                <script>document.location.href="jumlah_sdm.php";</script>
+<?php
 }
 
- if(isset($_POST['dropdownTahunRencanaBpll'])){
+if(isset($_POST['dropdownTahunRatio'])){
             $tahun = $_POST['tahun'];
          
             if($tahun > 0 ){
-?>
+ ?>
 
-                <script>document.location.href="rencana_bpll.php?tahun=<?php echo $tahun;?>";</script>
+                <script>document.location.href="vc_ratio.php?tahun=<?php echo $tahun?>";</script>
 <?php       }
             else 
 ?>               
-                <script>document.location.href="rencana_bpll.php";</script>
-<?php       
+                <script>document.location.href="vc_ratio.php";</script>
+<?php        }
+
+if(isset($_POST['clearTahunRatio'])){
+?>               
+                <script>document.location.href="vc_ratio.php";</script>
+<?php
 }
 
-if(isset($_POST['dropdownTahunRealisasiBpll'])){
+if(isset($_POST['dropdownTahunGardu1'])){
             $tahun = $_POST['tahun'];
+			$id_gerbang = $_POST ['id_gerbang'];
          
             if($tahun > 0 ){
-?>
+ ?>
 
-                <script>document.location.href="realisasi_bpll.php?tahun=<?php echo $tahun;?>";</script>
+                <script>document.location.href="gerbang_jmlgardu.php?id_gerbang=<?php echo $id_gerbang;?>&tahun=<?php echo $tahun?>";</script>
 <?php       }
             else 
 ?>               
-                <script>document.location.href="realisasi_bpll.php";</script>
-<?php       
+                <script>document.location.href="gerbang_jmlgardu.php?id_gerbang=<?php  echo $id_gerbang;?>";</script>
+<?php        }
+
+if(isset($_POST['clearTahunGardu1'])){
+?>               
+                <script>document.location.href="gerbang_jmlgardu.php?id_gerbang=<?php  echo $id_gerbang;?>";</script>
+<?php
 }
 
- if(isset($_POST['dropdownTahunRencanaSpjt'])){
+if(isset($_POST['dropdownTahunLalin1'])){
             $tahun = $_POST['tahun'];
-         
+			$id_gerbang = $_POST ['id_gerbang'];
+			
             if($tahun > 0 ){
-?>
+ ?>
 
-                <script>document.location.href="rencana_spjt.php?tahun=<?php echo $tahun;?>";</script>
+                <script>document.location.href="gerbang_lalin.php?id_gerbang=<?php echo $id_gerbang;?>&tahun=<?php echo $tahun?>";</script>
 <?php       }
             else 
 ?>               
-                <script>document.location.href="rencana_spjt.php";</script>
-<?php       
-}
- if(isset($_POST['dropdownTahunRealisasiSpjt'])){
-            $tahun = $_POST['tahun'];
-         
-            if($tahun > 0 ){
-?>
+                <script>document.location.href="gerbang_lalin.php?id_gerbang=<?php  echo $id_gerbang;?>";</script>
+<?php        }
 
-                <script>document.location.href="realisasi_spjt.php?tahun=<?php echo $tahun;?>";</script>
-<?php       }
-            else 
+if(isset($_POST['clearTahunLalin1'])){
 ?>               
-                <script>document.location.href="realisasi_spjt.php";</script>
-<?php       
+                <script>document.location.href="gerbang_lalin.php?id_gerbang=<?php echo $id_gerbang;?>";</script>
+<?php
 }
-
-if(isset($_POST['dropdownTahunRencanaSpojt'])){
-            $tahun = $_POST['tahun'];
-         
-            if($tahun > 0 ){
 ?>
-
-                <script>document.location.href="rencana_spojt.php?tahun=<?php echo $tahun;?>";</script>
-<?php       }
-            else 
-?>               
-                <script>document.location.href="rencana_spojt.php";</script>
-<?php       
-}
-
-if(isset($_POST['dropdownTahunRealisasiSpojt'])){
-            $tahun = $_POST['tahun'];
-         
-            if($tahun > 0 ){
-?>
-
-                <script>document.location.href="realisasi_spojt.php?tahun=<?php echo $tahun;?>";</script>
-<?php       }
-            else 
-?>               
-                <script>document.location.href="realisasi_spojt.php";</script>
-<?php       
-}

@@ -2,6 +2,11 @@
 include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 
+if(isset($_GET['tahun'])){
+    $nilaiTahun = $_GET['tahun'];
+  
+  }else $nilaiTahun = '0';
+
   $iduser = $_SESSION['id_user'];
 
   $resultjs = $connect-> query("SELECT * FROM cabang");
@@ -86,6 +91,20 @@ include ('connect.php'); //connect ke database
                     <h2><i class="fa fa-table"></i> Table <small></small></h2>
                     <div class="clearfix"></div>
                   </div>
+				  <form action="dropdownproses.php" method="POST">
+                  <div class='col-sm-2'>                    
+                    <div class="form-group">
+                        <div class='input-group date' id='myDatepickerFilter'>
+                            <input type='text' class="form-control" name= "tahun" <?php if(isset($_GET['tahun'])){ ?> value="<?php echo $nilaiTahun ;?>" <?php } ?>/>
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary" name="dropdownTahunRatio">View</button>
+				  <button type="submit" class="btn btn-danger" name="clearTahunRatio">Clear</button>
+                  </form>
                   <div class="title_right">
 				  <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">		
 					  <div class="input-group buttonright" >
@@ -93,7 +112,7 @@ include ('connect.php'); //connect ke database
 						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
                       </button>
                       <ul role="menu" class="dropdown-menu pull-right">
-                       <li><a href="downloadvr.php" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                       <li><a href="downloadvr.php?tahun=<?php echo $nilaiTahun;?>" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
                        </li>
 					   </ul>
 	                    </div>
@@ -135,8 +154,12 @@ include ('connect.php'); //connect ke database
                             </thead>
                             <tbody>
                               <?php
-                                $vcratio = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join jml_gardutersedia join cabang on cabang.id_cabang=transaksi_tinggi.id_cabang AND cabang.id_cabang=jml_gardutersedia.id_cabang WHERE transaksi_tinggi.tahun=jml_gardutersedia.tahun group by transaksi_tinggi.tahun, transaksi_tinggi.id_cabang");
-                                $nomor = 1; $total1 =0; $total2 =0; $total3 =0; $total4 =0; $total5 =0; $total6 =0; $total7 =0; 
+							  if($nilaiTahun > 0){
+                                $vcratio = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join jml_gardutersedia join cabang on cabang.id_cabang=transaksi_tinggi.id_cabang AND cabang.id_cabang=jml_gardutersedia.id_cabang WHERE transaksi_tinggi.tahun='$nilaiTahun' AND jml_gardutersedia.tahun='$nilaiTahun' group by transaksi_tinggi.tahun, transaksi_tinggi.id_cabang");
+                              }else{
+                                $vcratio = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join jml_gardutersedia join cabang on cabang.id_cabang=transaksi_tinggi.id_cabang AND cabang.id_cabang=jml_gardutersedia.id_cabang WHERE transaksi_tinggi.tahun=jml_gardutersedia.tahun group by transaksi_tinggi.tahun, transaksi_tinggi.id_cabang");								
+							  }
+								$nomor = 1; $total1 =0; $total2 =0; $total3 =0; $total4 =0; $total5 =0; $total6 =0; $total7 =0; 
 								$total8 =0; $total9 =0; $total10 =0; $total11 =0; $total12 =0; $total13 =0; $total14 =0;
                                 while($data_vcratio = mysqli_fetch_array($vcratio)){
                                    $idcabang = $data_vcratio['id_cabang'];

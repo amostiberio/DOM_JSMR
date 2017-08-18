@@ -2,7 +2,11 @@
 include "connect.php";
 include('akses.php'); //untuk memastikan dia sudah login
 
- $iduser = $_SESSION['id_user'];
+ if(isset($_GET['tahun'])){
+    $nilaiTahun = $_GET['tahun'];
+  
+  }else $nilaiTahun = '0';
+  $iduser = $_SESSION['id_user'];
 
   $resultjs = $connect-> query("SELECT * FROM cabang");
 
@@ -16,8 +20,10 @@ include('akses.php'); //untuk memastikan dia sudah login
 // Fungsi header dengan mengirimkan raw data excel
 header("Content-type: application/x-msdownload");
 // Mendefinisikan nama file ekspor "hasil-export.xls"
-header("Content-Disposition: attachment; filename=Laporan Lalin Jam-jaman.xls");
-header("Pragma : no-cache");
+if($nilaiTahun > 0){
+	header("Content-Disposition: attachment; filename=Laporan Lalin Jam-jaman Tahun ".$nilaiTahun.".xls");}
+else{
+	header("Content-Disposition: attachment; filename=Laporan Lalin Jam-jaman.xls");}header("Pragma : no-cache");
 header("Expires :0"); $i=0;
 ?>
 
@@ -50,7 +56,11 @@ header("Expires :0"); $i=0;
                             </thead>
                             <tbody>
                               <?php
-                                $lalin_transaksitinggi = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join cabang on cabang.id_cabang=transaksi_tinggi.id_cabang group by transaksi_tinggi.tahun, transaksi_tinggi.id_cabang");
+                              if($nilaiTahun > 0){
+								$lalin_transaksitinggi = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join cabang on cabang.id_cabang=transaksi_tinggi.id_cabang WHERE transaksi_tinggi.tahun='$nilaiTahun' group by transaksi_tinggi.tahun, transaksi_tinggi.id_cabang");
+							  }else{
+								$lalin_transaksitinggi = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join cabang on cabang.id_cabang=transaksi_tinggi.id_cabang group by transaksi_tinggi.tahun, transaksi_tinggi.id_cabang");
+							  }
                                 $nomor = 1; $total1 =0; $total2 =0; $total3 =0; $total4 =0; $total5 =0; $total6 =0; $total7 =0;
                                 while($data_lalintransaksi = mysqli_fetch_array($lalin_transaksitinggi)){
                                    $idcabang = $data_lalintransaksi['id_cabang'];
