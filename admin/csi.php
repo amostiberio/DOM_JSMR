@@ -106,7 +106,7 @@ if(isset($_GET['tahun'])){
                         </div>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary" name="dropdownTahun">Lihat</button>
+                  <button type="submit" class="btn btn-primary" name="dropdownTahunCSI">Lihat</button>
                   </form>
 
                   
@@ -181,11 +181,11 @@ if(isset($_GET['tahun'])){
                                   while($ambilListCabang = mysqli_fetch_array($listCabang)) {		
                                     
                                        $ambilIDCabang = $ambilListCabang['id_cabang'];
-									   
-									   $cobaRencanaSms11 = mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '1' AND stat_twrl ='1' AND jenis = 'Rencana' AND tahun = '$nilaiTahun'");
+                  									   
+                  									   $cobaRencanaSms11 = mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '1' AND stat_twrl ='1' AND jenis = 'Rencana' AND tahun = '$nilaiTahun'");
                                        $selectRencanaSms11 = mysqli_fetch_array($cobaRencanaSms11);
-                                      
-									   $selectRencanaSms12 = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '1' AND stat_twrl ='2' AND jenis = 'Rencana' AND tahun = '$nilaiTahun'"));
+                                                        
+                  									   $selectRencanaSms12 = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '1' AND stat_twrl ='2' AND jenis = 'Rencana' AND tahun = '$nilaiTahun'"));
 
                                         
                                        $selectRencanaSms21 = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '2' AND stat_twrl ='1'  AND jenis = 'Rencana' AND tahun = '$nilaiTahun'"));
@@ -200,8 +200,10 @@ if(isset($_GET['tahun'])){
                                        $selectRealisasiSms22 = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM data_csi WHERE id_cabang = '$ambilIDCabang' AND id_semester = '2' AND stat_twrl ='2' AND jenis = 'Realisasi' AND tahun = '$nilaiTahun'"));
 
                                      
-                                     
+                              
+                              if($selectRencanaSms11 OR $selectRencanaSms12 OR $selectRencanaSms21 OR $selectRencanaSms22 OR  $selectRealisasiSms11 OR $selectRealisasiSms12 OR  $selectRealisasiSms21 OR  $selectRealisasiSms22){       
                               ?><!-- Pembacaan Sms12 = semester 1 triwulan 2 -->
+
                               <tr>
                                 <td><?php echo $noIterasi++; ?> </td>
                                 <td><?php echo $ambilListCabang['nama_cabang'];?> </td>
@@ -280,7 +282,7 @@ if(isset($_GET['tahun'])){
                                 </td>
                               </tr>
                               
-                              <?php }
+                              <?php }}
                               ?>
                             </tbody>
                           </table>

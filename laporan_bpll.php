@@ -227,7 +227,7 @@ if(isset($_GET['triwulan'])){
                             <tbody>
                             <?php
                              if($nilaiTahun > 0){
-                               $listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1'  AND sub_program.id_cabang = '$idcabang' AND beban_realisasi.jenis ='bpll' AND sub_program.jenis='beban' AND tahun ='$nilaiTahun'");
+                               $listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1'  AND sub_program.id_cabang = '$idcabang' AND beban_realisasi.jenis ='bpll' AND sub_program.jenis='beban' AND beban_realisasi.tahun ='$nilaiTahun'");
                             }else{
                                 $listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1'  AND sub_program.id_cabang = '$idcabang' AND beban_realisasi.jenis ='bpll' AND sub_program.jenis='beban' ");
                             }

@@ -104,7 +104,29 @@ header("Expires :0"); $i=0;
                         </thead>
                             <tbody>
                             <?php
-                                $listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1' AND beban_realisasi.jenis ='bpll' AND sub_program.jenis='beban' AND tahun='$nilaiTahun' ");
+                            if($nilaiTahun > 0){
+                              
+                                $listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1' AND beban_realisasi.jenis ='bpll' AND sub_program.jenis='beban' AND beban_realisasi.tahun='$nilaiTahun' ");
+                            }else{
+                               
+                                $listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1' AND beban_realisasi.jenis ='bpll' AND sub_program.jenis='beban'");
+                            }
+                          $jumlahtotalRKAP=0;
+                          $jumlahtotalqty1=0;
+                          $jumlahtotalqty2=0;
+                          $totaldatatwrc1 = 0;
+                          $totaldatatwreal1statakhir = 0;
+                          $totaldatatwreal1realisasi = 0;
+                          $totaldatatwrc2 = 0;
+                          $totaldatatwreal2statakhir = 0;
+                          $totaldatatwreal2realisasi = 0;
+                          $totaldatatwrc3 = 0;
+                          $totaldatatwreal3statakhir = 0;
+                          $totaldatatwreal3realisasi = 0;
+                          $totaldatatwrc4 = 0;
+                          $totaldatatwreal4statakhir = 0;
+                          $totaldatatwreal4realisasi = 0;
+
                                 while($datalistTW = mysqli_fetch_array($listTW)){
                                   $idpklist= $datalistTW['id_pk'];
                                   $idspklist= $datalistTW['id_sp'];
@@ -203,48 +225,94 @@ header("Expires :0"); $i=0;
                                 <td><?php echo $cabang['nama_cabang']?> </td>
                                 <td><?php echo $dataprogramkerja['nama_pk'] ?></td>
                                 <td><?php echo $datasubprogramkerja['nama_sp'] ?></td>
-                                <td><?php echo $totalrkap; ?></td>
-                                <td><?php echo $qty1;?></td>
-                                <td><?php echo $qty2;?></td>
+                                <td><?php $jumlahtotalRKAP+=$totalrkap; echo $totalrkap; ?></td>
+                                <td><?php $jumlahtotalqty1+= $qty1; echo $qty1;?></td>
+                                <td><?php $jumlahtotalqty2+= $qty2; echo $qty2;?></td>
                                 <td><?php echo $datalistTW['tahun'] ?></td>
                                 <?php if($nilaiTriwulan >= 1 ){ ?>
                                  
-                                    <td><?php echo $datatwrc1['rkap'] ?></td>
-                                    <td><?php echo $datatwreal1['stat_akhir'] ?></td>
-                                    <td><?php echo $datatwreal1['realisasi'] ?></td>
+                                    <td><?php $totaldatatwrc1+= $datatwrc1['rkap'];  echo $datatwrc1['rkap'] ?></td>
+                                    <td><?php $totaldatatwreal1statakhir +=$datatwreal1['stat_akhir']; echo $datatwreal1['stat_akhir'] ?></td>
+                                    <td><?php $totaldatatwreal1realisasi +=$datatwreal1['realisasi']; echo $datatwreal1['realisasi'] ?></td>
 
                                 <?php 
                                     if($nilaiTriwulan >= 2){ ?>
-                                    <td><?php echo $datatwrc2['rkap'] ?></td>
-                                    <td><?php echo $datatwreal2['stat_akhir'] ?></td>
-                                    <td><?php echo $datatwreal2['realisasi'] ?></td>
+                                    <td><?php $totaldatatwrc2+= $datatwrc2['rkap']; echo $datatwrc2['rkap'] ?></td>
+                                    <td><?php $totaldatatwreal2statakhir +=$datatwreal2['stat_akhir']; echo $datatwreal2['stat_akhir'] ?></td>
+                                    <td><?php $totaldatatwreal2realisasi +=$datatwreal2['realisasi'];echo $datatwreal2['realisasi'] ?></td>
                                 <?php }
                                     if($nilaiTriwulan >= 3){ ?>
-                                    <td><?php echo $datatwrc3['rkap'] ?></td>
-                                    <td><?php echo $datatwreal3['stat_akhir'] ?></td>
-                                    <td><?php echo $datatwreal3['realisasi'] ?></td>    
+                                    <td><?php $totaldatatwrc3+= $datatwrc3['rkap']; echo $datatwrc3['rkap'] ?></td>
+                                    <td><?php $totaldatatwreal3statakhir +=$datatwreal3['stat_akhir']; echo $datatwreal3['stat_akhir'] ?></td>
+                                    <td><?php $totaldatatwreal3realisasi +=$datatwreal3['realisasi']; echo $datatwreal3['realisasi'] ?></td>    
                                  <?php } 
                                     if($nilaiTriwulan >= 4){ ?>
-                                    <td><?php echo $datatwrc4['rkap'] ?></td>
-                                    <td><?php echo $datatwreal4['stat_akhir'] ?></td>
-                                    <td><?php echo $datatwreal4['realisasi'] ?></td>
+                                    <td><?php $totaldatatwrc4+= $datatwrc4['rkap']; echo $datatwrc4['rkap'] ?></td>
+                                    <td><?php $totaldatatwreal4statakhir +=$datatwreal4['stat_akhir']; echo $datatwreal4['stat_akhir'] ?></td>
+                                    <td><?php $totaldatatwreal4realisasi +=$datatwreal4['realisasi'];echo $datatwreal4['realisasi'] ?></td>
                                 <?php }}else {
                                   ?>
 
-                                <td><?php echo $datatwrc1['rkap'] ?></td>
-                                <td><?php echo $datatwreal1['stat_akhir'] ?></td>
-                                <td><?php echo $datatwreal1['realisasi'] ?></td>                                  
-                                <td><?php echo $datatwrc2['rkap'] ?></td>
-                                <td><?php echo $datatwreal2['stat_akhir'] ?></td>
-                                <td><?php echo $datatwreal2['realisasi'] ?></td>
-                                <td><?php echo $datatwrc3['rkap'] ?></td>
-                                <td><?php echo $datatwreal3['stat_akhir'] ?></td>
-                                <td><?php echo $datatwreal3['realisasi'] ?></td>
-                                <td><?php echo $datatwrc4['rkap'] ?></td>
-                                <td><?php echo $datatwreal4['stat_akhir'] ?></td>
-                                <td><?php echo $datatwreal4['realisasi'] ?></td>
-                              
+                                <td><?php $totaldatatwrc1+= $datatwrc1['rkap'];  echo $datatwrc1['rkap'] ?></td>
+                                <td><?php $totaldatatwreal1statakhir +=$datatwreal1['stat_akhir']; echo $datatwreal1['stat_akhir'] ?></td>
+                                <td><?php $totaldatatwreal1realisasi +=$datatwreal1['realisasi']; echo $datatwreal1['realisasi'] ?></td>
+                                <td><?php $totaldatatwrc2+= $datatwrc2['rkap']; echo $datatwrc2['rkap'] ?></td>
+                                <td><?php $totaldatatwreal2statakhir +=$datatwreal2['stat_akhir']; echo $datatwreal2['stat_akhir'] ?></td>
+                                <td><?php $totaldatatwreal2realisasi +=$datatwreal2['realisasi'];echo $datatwreal2['realisasi'] ?></td>
+                                <td><?php $totaldatatwrc3+= $datatwrc3['rkap']; echo $datatwrc3['rkap'] ?></td>
+                                <td><?php $totaldatatwreal3statakhir +=$datatwreal3['stat_akhir']; echo $datatwreal3['stat_akhir'] ?></td>
+                                <td><?php $totaldatatwreal3realisasi +=$datatwreal3['realisasi']; echo $datatwreal3['realisasi'] ?></td>
+                                <td><?php $totaldatatwrc4+= $datatwrc4['rkap']; echo $datatwrc4['rkap'] ?></td>
+                                <td><?php $totaldatatwreal4statakhir +=$datatwreal4['stat_akhir']; echo $datatwreal4['stat_akhir'] ?></td>
+                                <td><?php $totaldatatwreal4realisasi +=$datatwreal4['realisasi'];echo $datatwreal4['realisasi'] ?></td>
                               <?php }} ?>
+                              </tr>
+                              <tr bgcolor="#ddebf7"> 
+                              <td colspan="2">Total DOM</td>
+                              <td> <?php echo $jumlahtotalRKAP;?></td>
+                              <td> <?php echo $jumlahtotalqty1;?></td>
+                              <td> <?php echo $jumlahtotalqty2;?></td>
+                              <td> - </td>
+                              <?php if($nilaiTriwulan >= 1 ){ ?>
+                                 
+                                    <td><?php echo $totaldatatwrc1;?></td>
+                                    <td><?php echo $totaldatatwreal1statakhir;?></td>
+                                    <td><?php echo $totaldatatwreal1realisasi; ?></td>
+
+                                <?php 
+                               
+                                    if($nilaiTriwulan >= 2){ ?>
+                                    <td><?php echo $totaldatatwrc2; ?></td>
+                                    <td><?php echo $totaldatatwreal2statakhir;?></td>
+                                    <td><?php echo $totaldatatwreal2realisasi;  ?></td>
+                                <?php }
+                                    if($nilaiTriwulan >= 3){ ?>
+                                    <td><?php echo $totaldatatwrc3; ?></td>
+                                    <td><?php echo $totaldatatwreal3statakhir;?></td>
+                                    <td><?php echo $totaldatatwreal3realisasi;  ?></td>  
+                                 <?php } 
+                                    if($nilaiTriwulan >= 4){ ?>
+                                    <td><?php echo $totaldatatwrc4; ?></td>
+                                    <td><?php echo $totaldatatwreal4statakhir;?></td>
+                                    <td><?php echo $totaldatatwreal4realisasi;  ?></td>  
+                                <?php }
+                                }else {
+                                  ?>
+                                  <td><?php echo $totaldatatwrc1;?></td>
+                                  <td><?php echo $totaldatatwreal1statakhir;?></td>
+                                  <td><?php echo $totaldatatwreal1realisasi; ?></td>                                 
+                                  <td><?php echo $totaldatatwrc2; ?></td>
+                                  <td><?php echo $totaldatatwreal2statakhir;?></td>
+                                  <td><?php echo $totaldatatwreal2realisasi;  ?></td>
+                                  <td><?php echo $totaldatatwrc3; ?></td>
+                                  <td><?php echo $totaldatatwreal3statakhir;?></td>
+                                  <td><?php echo $totaldatatwreal3realisasi;  ?></td>  
+                                  <td><?php echo $totaldatatwrc4; ?></td>
+                                  <td><?php echo $totaldatatwreal4statakhir;?></td>
+                                  <td><?php echo $totaldatatwreal4realisasi;  ?></td> 
+                              
+                              <?php }?>
+                                
                               </tr>
                             </tbody>
                           </table>

@@ -223,7 +223,13 @@ if(isset($_GET['triwulan'])){
                         </thead>
                             <tbody>
                             <?php
-							$listTW = mysqli_query($connect, "SELECT * FROM capex_realisasi, sub_program WHERE sub_program.id_sp = capex_realisasi.id_sp AND stat_twrl ='1' AND capex_realisasi.jenis ='spjt' AND sub_program.jenis='capex' AND tahun='$nilaiTahun' ");
+                            if($nilaiTahun > 0 ){
+                              $listTW = mysqli_query($connect, "SELECT * FROM capex_realisasi, sub_program WHERE sub_program.id_sp = capex_realisasi.id_sp AND stat_twrl ='1' AND capex_realisasi.jenis ='spjt' AND sub_program.jenis='capex' AND capex_realisasi.tahun='$nilaiTahun' ");
+                            }else{
+                               $listTW = mysqli_query($connect, "SELECT * FROM capex_realisasi, sub_program WHERE sub_program.id_sp = capex_realisasi.id_sp AND stat_twrl ='1' AND capex_realisasi.jenis ='spjt' AND sub_program.jenis='capex' ");
+                            }
+							           
+               
 							while($datalistTW = mysqli_fetch_array($listTW)){
 								$idpklist= $datalistTW['id_pk'];
 								$idspklist= $datalistTW['id_sp'];
