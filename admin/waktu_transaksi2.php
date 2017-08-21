@@ -4,6 +4,13 @@ include ('connect.php'); //connect ke database
 
 
   $iduser = $_SESSION['id_user'];
+
+  if(isset($_GET['tahun'])){
+      $nilaiTahun = $_GET['tahun'];
+  }
+  else{
+    $nilaiTahun = 0;
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,6 +87,23 @@ include ('connect.php'); //connect ke database
 
                     <div class="clearfix"></div>
                   </div>
+                  <form action="dropdownproses.php" method="POST">
+                  <div class='col-sm-10'>
+                   <div class="form-group col-md-3 col-sm-3 col-xs-12">
+                   <h5 class="control-label col-md-4 col-sm-4 col-xs-12" for="tahun">Tahun</h5>
+                       <div class='input-group date ' id='myDatepickerFilter'>
+
+                           <input type='text' class="form-control" name= "tahun" <?php if(isset($_GET['tahun'])){ ?> value="<?php echo $nilaiTahun ;?>" <?php } ?>/>
+
+                           <span style="margin-right:10px;" class="input-group-addon">
+                           <span class="glyphicon glyphicon-calendar"></span>
+                           </span>
+
+                       </div>
+                   </div>
+                   <button  type="submit" class="btn btn-primary" name="dropdownWaktuTransaksi2">Lihat</button>
+                  </div>
+                  </form>
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
 
@@ -125,7 +149,15 @@ include ('connect.php'); //connect ke database
                             </thead>
                             <tbody>
                               <?php
-                              $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join wt_rencana join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_semester=semester.id_semester AND waktu_transaksi.id_subgardu=wt_rencana.id_subgardu AND semester.id_semester=panjang_antrian.id_semester GROUP BY waktu_transaksi.id_cabang");
+                              if($nilaiTahun > 0 ){
+                              $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join wt_rencana join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_semester=semester.id_semester
+                                                                              AND waktu_transaksi.id_subgardu=wt_rencana.id_subgardu AND semester.id_semester=panjang_antrian.id_semester WHERE waktu_transaksi.tahun='$nilaiTahun' GROUP BY waktu_transaksi.id_cabang");
+                              }
+                              else{
+                              $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join wt_rencana join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_semester=semester.id_semester
+                                                                                AND waktu_transaksi.id_subgardu=wt_rencana.id_subgardu AND semester.id_semester=panjang_antrian.id_semester GROUP BY waktu_transaksi.id_cabang");
+
+                              }
                               $nomor = 1;
 
                               //variabel pembagi untuk rata-rata
