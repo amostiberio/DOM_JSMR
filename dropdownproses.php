@@ -94,6 +94,7 @@ if(isset($_POST['dropdownTahunGardu1'])){
 <?php        }
 
 if(isset($_POST['clearTahunGardu1'])){
+	$id_gerbang = $_POST ['id_gerbang'];
 ?>
                 <script>document.location.href="gerbang_jmlgardu.php?id_gerbang=<?php  echo $id_gerbang;?>";</script>
 <?php
@@ -114,6 +115,7 @@ if(isset($_POST['dropdownTahunLalin1'])){
 <?php        }
 
 if(isset($_POST['clearTahunLalin1'])){
+	$id_gerbang = $_POST ['id_gerbang'];
 ?>
                 <script>document.location.href="gerbang_lalin.php?id_gerbang=<?php echo $id_gerbang;?>";</script>
 <?php

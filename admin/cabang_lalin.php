@@ -2,6 +2,10 @@
 include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 
+  if(isset($_GET['tahun'])){
+    $nilaiTahun = $_GET['tahun'];
+  }else $nilaiTahun = '0';
+
   $getidcabang = $_GET['id_cabang'];
   $cabang =  mysqli_query($connect,"SELECT * FROM cabang WHERE id_cabang = '$getidcabang'");
   $data_cabang = mysqli_fetch_array($cabang);
@@ -88,7 +92,21 @@ include ('connect.php'); //connect ke database
 
                     <div class="clearfix"></div>
                   </div>
-
+				  <form action="dropdownproses.php" method="POST">
+                  <div class='col-sm-2'>                    
+                    <div class="form-group">
+                        <div class='input-group date' id='myDatepickerFilter'>
+                            <input type='text' class="form-control" name= "tahun" <?php if(isset($_GET['tahun'])){ ?> value="<?php echo $nilaiTahun ;?>" <?php } ?>/>
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+					<input type='hidden' value=<?php echo $getidcabang; ?> name ="id_cabang">
+                  </div>
+                  <button type="submit" class="btn btn-primary" name="dropdownTahunLalin1">View</button>
+				  <button type="submit" class="btn btn-danger" name="clearTahunLalin1">Clear</button>
+                  </form>
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
                     </div>
@@ -123,7 +141,13 @@ include ('connect.php'); //connect ke database
                             </thead>
                             <tbody>
                               <?php
+							  if($nilaiTahun >0){
+                                $lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join gerbang on gerbang.id_gerbang=transaksi_tinggi.id_gerbang WHERE transaksi_tinggi.tahun='$nilaiTahun' AND transaksi_tinggi.id_cabang='$getidcabang' group by transaksi_tinggi.tahun, transaksi_tinggi.id_gerbang");
+								  
+							  }else{
                                 $lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join gerbang on gerbang.id_gerbang=transaksi_tinggi.id_gerbang WHERE transaksi_tinggi.id_cabang='$getidcabang' group by transaksi_tinggi.tahun, transaksi_tinggi.id_gerbang");
+								  
+							  }
                                 $nomor = 1;
                                 while($data_lalin = mysqli_fetch_array($lalin)){
                                    $idgerbanglist = $data_lalin['id_gerbang'];

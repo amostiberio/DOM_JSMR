@@ -79,122 +79,67 @@ if(isset($_POST['clearTahunRatio'])){
 <?php
 }
 
-if(isset($_POST['dropdownTahunGardu'])){
-            $tahun = $_POST['tahun'];
-
-            if($tahun > 0 ){
- ?>
-
-                <script>document.location.href="jml_gardu.php?tahun=<?php echo $tahun?>";</script>
-<?php       }
-            else
-?>
-                <script>document.location.href="jml_gardu.php";</script>
-<?php        }
-
-if(isset($_POST['clearTahunGardu'])){
-?>
-                <script>document.location.href="jml_gardu.php";</script>
-<?php
-}
-
-if(isset($_POST['dropdownTahunLalin'])){
-            $tahun = $_POST['tahun'];
-
-            if($tahun > 0 ){
- ?>
-
-                <script>document.location.href="lalin_jj.php?tahun=<?php echo $tahun?>";</script>
-<?php       }
-            else
-?>
-                <script>document.location.href="lalin_jj.php";</script>
-<?php        }
-
-if(isset($_POST['clearTahunLalin'])){
-?>
-                <script>document.location.href="lalin_jj.php";</script>
-<?php
-}
-
-if(isset($_POST['dropdownTahunSDM'])){
-            $tahun = $_POST['tahun'];
-
-            if($tahun > 0 ){
- ?>
-
-                <script>document.location.href="jumlah_sdm.php?tahun=<?php echo $tahun?>";</script>
-<?php       }
-            else
-?>
-                <script>document.location.href="jumlah_sdm.php";</script>
-<?php        }
-
-if(isset($_POST['clearTahunSDM'])){
-?>
-                <script>document.location.href="jumlah_sdm.php";</script>
-<?php
-}
-
-if(isset($_POST['dropdownTahunRatio'])){
-            $tahun = $_POST['tahun'];
-
-            if($tahun > 0 ){
- ?>
-
-                <script>document.location.href="vc_ratio.php?tahun=<?php echo $tahun?>";</script>
-<?php       }
-            else
-?>
-                <script>document.location.href="vc_ratio.php";</script>
-<?php        }
-
-if(isset($_POST['clearTahunRatio'])){
-?>
-                <script>document.location.href="vc_ratio.php";</script>
-<?php
-}
-
 if(isset($_POST['dropdownTahunGardu1'])){
             $tahun = $_POST['tahun'];
-			$id_gerbang = $_POST ['id_gerbang'];
-
+			$id_cabang = $_POST ['id_cabang'];
             if($tahun > 0 ){
  ?>
 
-                <script>document.location.href="gerbang_jmlgardu.php?id_gerbang=<?php echo $id_gerbang;?>&tahun=<?php echo $tahun?>";</script>
+                <script>document.location.href="cabang_jmlgardu.php?id_cabang=<?php echo $id_cabang;?>&tahun=<?php echo $tahun?>";</script>
 <?php       }
             else
 ?>
-                <script>document.location.href="gerbang_jmlgardu.php?id_gerbang=<?php  echo $id_gerbang;?>";</script>
+                <script>document.location.href="cabang_jmlgardu.php?id_cabang=<?php  echo $id_cabang;?>";</script>
 <?php        }
 
 if(isset($_POST['clearTahunGardu1'])){
+	$id_cabang = $_POST ['id_cabang'];
 ?>
-                <script>document.location.href="gerbang_jmlgardu.php?id_gerbang=<?php  echo $id_gerbang;?>";</script>
+                <script>document.location.href="cabang_jmlgardu.php?id_cabang=<?php  echo $id_cabang;?>";</script>
 <?php
 }
 
 if(isset($_POST['dropdownTahunLalin1'])){
             $tahun = $_POST['tahun'];
-			$id_gerbang = $_POST ['id_gerbang'];
+			$id_cabang = $_POST ['id_cabang'];
 
             if($tahun > 0 ){
  ?>
 
-                <script>document.location.href="gerbang_lalin.php?id_gerbang=<?php echo $id_gerbang;?>&tahun=<?php echo $tahun?>";</script>
+                <script>document.location.href="cabang_lalin.php?id_cabang=<?php echo $id_cabang;?>&tahun=<?php echo $tahun?>";</script>
 <?php       }
             else
 ?>
-                <script>document.location.href="gerbang_lalin.php?id_gerbang=<?php  echo $id_gerbang;?>";</script>
+                <script>document.location.href="cabang_lalin.php?id_cabang=<?php  echo $id_cabang;?>";</script>
 <?php        }
 
 if(isset($_POST['clearTahunLalin1'])){
+	$id_cabang = $_POST ['id_cabang'];
 ?>
-                <script>document.location.href="gerbang_lalin.php?id_gerbang=<?php echo $id_gerbang;?>";</script>
+                <script>document.location.href="cabang_lalin.php?id_cabang=<?php  echo $id_cabang;?>";</script>
 <?php
 }
 
+if(isset($_POST['dropdownTahunSDM1'])){
+            $tahun = $_POST['tahun'];
+			$id_cabang = $_POST ['id_cabang'];
+
+            if($tahun > 0 ){
+ ?>
+
+                <script>document.location.href="cabang_jmlsdm.php?id_cabang=<?php echo $id_cabang;?>&tahun=<?php echo $tahun?>";</script>
+<?php       }
+            else
+?>
+                <script>document.location.href="cabang_jmlsdm.php?id_cabang=<?php  echo $id_cabang;?>";</script>
+<?php        }
+
+if(isset($_POST['clearTahunSDM1'])){
+	$id_cabang = $_POST ['id_cabang'];
+?>
+                <script>document.location.href="cabang_jmlsdm.php?id_cabang=<?php  echo $id_cabang;?>";</script>
+<?php
+}
 
         if(isset($_POST['dropdownTahunCSI'])){
             $tahun = $_POST['tahun'];
