@@ -4,6 +4,13 @@ include ('connect.php'); //connect ke database
 
 
 $iduser = $_SESSION['id_user'];
+if(isset($_GET['tahun'])){
+    $nilaiTahun = $_GET['tahun'];
+
+}
+else{
+  $nilaiTahun = 0;
+}
 
 //ambil informasi user id dan cabang id dari table user
 $user = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM user WHERE id_user = '$iduser' "));
@@ -98,6 +105,23 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
 
                     <div class="clearfix"></div>
                   </div>
+                  <form action="dropdownproses.php" method="POST">
+                 <div class='col-sm-10'>
+                   <div class="form-group col-md-3 col-sm-3 col-xs-12">
+                   <h5 class="control-label col-md-4 col-sm-4 col-xs-12" for="tahun">Tahun</h5>
+                       <div class='input-group date ' id='myDatepickerFilter'>
+
+                           <input type='text' class="form-control" name= "tahun" <?php if(isset($_GET['tahun'])){ ?> value="<?php echo $nilaiTahun ;?>" <?php } ?>/>
+                           <span style="margin-right:10px;" class="input-group-addon">
+                           <span class="glyphicon glyphicon-calendar"></span>
+                           </span>
+
+                       </div>
+
+                   </div>
+                   <button  type="submit" class="btn btn-primary" name="dropdownWaktuTransaksi1">Lihat</button>
+                 </div>
+                 </form>
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
                       <div class="input-group buttonright" >
@@ -164,7 +188,15 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
                             </thead>
                             <tbody>
                               <?php
-                              $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_semester=semester.id_semester AND semester.id_semester=panjang_antrian.id_semester WHERE waktu_transaksi.id_cabang='$idcabang' GROUP BY waktu_transaksi.id_gerbang");
+                              if($nilaiTahun > 0 ){
+                              $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_semester=semester.id_semester AND semester.id_semester=panjang_antrian.id_semester
+                                                                              WHERE waktu_transaksi.id_cabang='$idcabang' AND waktu_transaksi.tahun='$nilaiTahun' GROUP BY waktu_transaksi.id_gerbang");
+                              }
+                              else{
+                                $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_semester=semester.id_semester AND semester.id_semester=panjang_antrian.id_semester
+                                                                                WHERE waktu_transaksi.id_cabang='$idcabang' GROUP BY waktu_transaksi.id_gerbang");
+
+                              }
 
                               $nomor = 1;
 
@@ -362,37 +394,67 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
                                 <tr>
                                   <td colspan="4"> Rata-rata </td>
                                   <td>
-                                    <?php $hasil_rataangarduterbuka=($total_garduterbukas1+$total_garduterbukas2)/($count_garduterbukas1+$count_garduterbukas2);
+                                    <?php
+                                          if($count_garduterbukas1==0 && $count_garduterbukas2==0){
+                                            $count_garduterbukas1=1;
+                                            $count_garduterbukas2=1;
+                                          }
+                                          $hasil_rataangarduterbuka=($total_garduterbukas1+$total_garduterbukas2)/($count_garduterbukas1+$count_garduterbukas2);
                                           echo number_format((float)$hasil_rataangarduterbuka, 2, '.', '');
                                     ?>
                                   </td>
                                   <td>
-                                    <?php $hasil_rataangardumasuk=($total_gardumasuks1+$total_gardumasuks2)/($count_gardumasuks1+$count_gardumasuks2);
+                                    <?php if($count_gardumasuks1==0 && $count_gardumasuks2==0){
+                                             $count_gardumasuks1=1;
+                                             $count_gardumasuks2=1;
+                                           }
+                                          $hasil_rataangardumasuk=($total_gardumasuks1+$total_gardumasuks2)/($count_gardumasuks1+$count_gardumasuks2);
                                           echo number_format((float)$hasil_rataangardumasuk, 2, '.', '');
                                     ?>
                                   </td>
                                   <td>
-                                    <?php $hasil_rataangardukeluar=($total_gardukeluars1+$total_gardukeluars2)/($count_gardukeluars1+$count_gardukeluars2);
+                                    <?php
+                                          if($count_gardukeluars1==0 && $count_gardukeluars2==0){
+                                             $count_gardukeluars1=1;
+                                             $count_gardukeluars2=1;
+                                           }
+                                          $hasil_rataangardukeluar=($total_gardukeluars1+$total_gardukeluars2)/($count_gardukeluars1+$count_gardukeluars2);
                                           echo $hasil_rataangardukeluar;
                                     ?>
                                   </td>
                                   <td>
-                                    <?php $hasil_rataangarduterbukagto=($total_garduterbukagtos1+$total_garduterbukagtos2)/($count_garduterbukagtos1+$count_garduterbukagtos2);
+                                    <?php if($count_garduterbukagtos1==0 && $count_garduterbukagtos2==0){
+                                              $count_garduterbukagtos1=1;
+                                              $count_garduterbukagtos2=1;
+                                            }
+                                          $hasil_rataangarduterbukagto=($total_garduterbukagtos1+$total_garduterbukagtos2)/($count_garduterbukagtos1+$count_garduterbukagtos2);
                                           echo number_format((float)$hasil_rataangarduterbukagto, 2, '.', '');
                                     ?>
                                   </td>
                                   <td>
-                                    <?php $hasil_rataangardumasukgto=($total_gardumasukgtos1+$total_gardumasukgtos2)/($count_gardumasukgtos1+$count_gardumasukgtos2);
+                                    <?php if($count_gardumasukgtos1==0 && $count_gardumasukgtos2==0){
+                                            $count_gardumasukgtos1=1;
+                                            $count_gardumasukgtos2=2;
+                                          }
+                                          $hasil_rataangardumasukgto=($total_gardumasukgtos1+$total_gardumasukgtos2)/($count_gardumasukgtos1+$count_gardumasukgtos2);
                                           echo number_format((float)$hasil_rataangardumasukgto, 2, '.', '');
                                     ?>
                                   </td>
                                   <td>
-                                    <?php $hasil_rataangardukeluargto=($total_gardukeluargtos1+$total_gardukeluargtos2)/($count_gardukeluargtos1+$count_gardukeluargtos2);
+                                    <?php if($count_gardukeluargtos1==0 && $count_gardukeluargtos2==0){
+                                              $count_gardukeluargtos1=1;
+                                              $count_gardukeluargtos2=1;
+                                            }
+                                          $hasil_rataangardukeluargto=($total_gardukeluargtos1+$total_gardukeluargtos2)/($count_gardukeluargtos1+$count_gardukeluargtos2);
                                           echo number_format((float)$hasil_rataangardukeluargto, 2, '.', '');
                                     ?>
                                   </td>
                                   <td>
-                                    <?php $hasil_rataanpanjangantrian=($total_panjangantrians1+$total_panjangantrians2)/($count_panjangantrians1+$count_panjangantrians2);
+                                    <?php if($count_panjangantrians1==0 && $count_panjangantrians2==0){
+                                              $count_panjangantrians1=1;
+                                              $count_panjangantrians2=2;
+                                            }
+                                          $hasil_rataanpanjangantrian=($total_panjangantrians1+$total_panjangantrians2)/($count_panjangantrians1+$count_panjangantrians2);
                                           echo number_format((float)$hasil_rataanpanjangantrian, 2, '.', '');
                                     ?>
                                   </td>

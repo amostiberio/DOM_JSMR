@@ -385,37 +385,66 @@ include ('connect.php'); //connect ke database
                                   <td colspan="4"> Rata-rata </td>
                                   <td>
                                     <?php
+                                          if($count_garduterbukas1==0 && $count_garduterbukas2==0){
+                                            $count_garduterbukas1=1;
+                                            $count_garduterbukas2=1;
+                                          }
                                           $hasil_rataangarduterbuka=($total_garduterbukas1+$total_garduterbukas2)/($count_garduterbukas1+$count_garduterbukas2);
                                           echo number_format((float)$hasil_rataangarduterbuka, 2, '.', '');
                                     ?>
                                   </td>
                                   <td>
-                                    <?php $hasil_rataangardumasuk=($total_gardumasuks1+$total_gardumasuks2)/($count_gardumasuks1+$count_gardumasuks2);
+                                    <?php if($count_gardumasuks1==0 && $count_gardumasuks2==0){
+                                             $count_gardumasuks1=1;
+                                             $count_gardumasuks2=1;
+                                           }
+                                          $hasil_rataangardumasuk=($total_gardumasuks1+$total_gardumasuks2)/($count_gardumasuks1+$count_gardumasuks2);
                                           echo number_format((float)$hasil_rataangardumasuk, 2, '.', '');
                                     ?>
                                   </td>
                                   <td>
-                                    <?php $hasil_rataangardukeluar=($total_gardukeluars1+$total_gardukeluars2)/($count_gardukeluars1+$count_gardukeluars2);
+                                    <?php
+                                          if($count_gardukeluars1==0 && $count_gardukeluars2==0){
+                                             $count_gardukeluars1=1;
+                                             $count_gardukeluars2=1;
+                                           }
+                                          $hasil_rataangardukeluar=($total_gardukeluars1+$total_gardukeluars2)/($count_gardukeluars1+$count_gardukeluars2);
                                           echo $hasil_rataangardukeluar;
                                     ?>
                                   </td>
                                   <td>
-                                    <?php $hasil_rataangarduterbukagto=($total_garduterbukagtos1+$total_garduterbukagtos2)/($count_garduterbukagtos1+$count_garduterbukagtos2);
+                                    <?php if($count_garduterbukagtos1==0 && $count_garduterbukagtos2==0){
+                                              $count_garduterbukagtos1=1;
+                                              $count_garduterbukagtos2=1;
+                                            }
+                                          $hasil_rataangarduterbukagto=($total_garduterbukagtos1+$total_garduterbukagtos2)/($count_garduterbukagtos1+$count_garduterbukagtos2);
                                           echo number_format((float)$hasil_rataangarduterbukagto, 2, '.', '');
                                     ?>
                                   </td>
                                   <td>
-                                    <?php $hasil_rataangardumasukgto=($total_gardumasukgtos1+$total_gardumasukgtos2)/($count_gardumasukgtos1+$count_gardumasukgtos2);
+                                    <?php if($count_gardumasukgtos1==0 && $count_gardumasukgtos2==0){
+                                            $count_gardumasukgtos1=1;
+                                            $count_gardumasukgtos2=2;
+                                          }
+                                          $hasil_rataangardumasukgto=($total_gardumasukgtos1+$total_gardumasukgtos2)/($count_gardumasukgtos1+$count_gardumasukgtos2);
                                           echo number_format((float)$hasil_rataangardumasukgto, 2, '.', '');
                                     ?>
                                   </td>
                                   <td>
-                                    <?php $hasil_rataangardukeluargto=($total_gardukeluargtos1+$total_gardukeluargtos2)/($count_gardukeluargtos1+$count_gardukeluargtos2);
+                                    <?php if($count_gardukeluargtos1==0 && $count_gardukeluargtos2==0){
+                                              $count_gardukeluargtos1=1;
+                                              $count_gardukeluargtos2=1;
+                                            }
+                                          $hasil_rataangardukeluargto=($total_gardukeluargtos1+$total_gardukeluargtos2)/($count_gardukeluargtos1+$count_gardukeluargtos2);
                                           echo number_format((float)$hasil_rataangardukeluargto, 2, '.', '');
                                     ?>
                                   </td>
                                   <td>
-                                    <?php $hasil_rataanpanjangantrian=($total_panjangantrians1+$total_panjangantrians2)/($count_panjangantrians1+$count_panjangantrians2);
+                                    <?php if($count_panjangantrians1==0 && $count_panjangantrians2==0){
+                                              $count_panjangantrians1=1;
+                                              $count_panjangantrians2=2;
+                                            }
+                                          $hasil_rataanpanjangantrian=($total_panjangantrians1+$total_panjangantrians2)/($count_panjangantrians1+$count_panjangantrians2);
                                           echo number_format((float)$hasil_rataanpanjangantrian, 2, '.', '');
                                     ?>
                                   </td>

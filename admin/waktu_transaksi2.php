@@ -368,11 +368,18 @@ include ('connect.php'); //connect ke database
                               <?php }?>
                               <tr>
                                 <td colspan="7">Rata-rata</td>
-                                <td> <?php $rataan_capaiansemester1=$total_capaiansemester1/$count_capaiansemester1;
+                                <td> <?php if($count_capaiansemester1==0){
+                                              $count_capaiansemester1=1;
+                                            }
+                                          $rataan_capaiansemester1=$total_capaiansemester1/$count_capaiansemester1;
                                            echo $rataan_capaiansemester1;
                                       ?>
                                 </td>
-                                <td> <?php $rataan_capaiansemester2=$total_capaiansemester2/$count_capaiansemester2;
+                                <td> <?php
+                                            if($count_capaiansemester2==0){
+                                              $count_capaiansemester2=1;
+                                            }
+                                          $rataan_capaiansemester2=$total_capaiansemester2/$count_capaiansemester2;
                                            echo $rataan_capaiansemester2;
                                       ?>
                               </td>
