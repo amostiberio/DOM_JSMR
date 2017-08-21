@@ -339,7 +339,7 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
                                 </td>
                                 <td rowspan="2">
                                   <?php if(isset($total_data_gerbang_terbuka)) {?>
-                                  <button type="button" class="btn btn-round btn-info" class="btn btn-primary"><a href="waktu_transaksi1_pergerbang.php?">
+                                  <button type="button" class="btn btn-round btn-info" class="btn btn-primary"><a href="waktu_transaksi1_pergerbang.php?id=<?php echo $idgerbanglist;?>">
                                    Ubah
                                  </a></button>
                                  <?php }?>
