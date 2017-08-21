@@ -2,6 +2,7 @@
 include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 
+$id_gerbang = $_GET['id'];
 $iduser = $_SESSION['id_user'];
 if(isset($_GET['tahun'])){
     $nilaiTahun = $_GET['tahun'];
@@ -15,7 +16,7 @@ else{
 $user = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM user WHERE id_user = '$iduser' "));
 $idcabang = $user['id_cabang'];
 
-$id_gerbang = $_GET['id'];
+
 //ambil informasi user id dan cabang id dari table cabang
 $cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT nama_cabang FROM cabang WHERE id_cabang = '$idcabang'"));
 $namacabang = $cabang['nama_cabang'];
@@ -114,9 +115,9 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
                            </span>
 
                        </div>
-
+                     <input type='hidden' value=<?php echo $id_gerbang ;?> name=idgerbang>
                    </div>
-                   <button  type="submit" class="btn btn-primary" name="dropdownWaktuTransaksi1Pergerbang">Lihat</button>
+                   <button  type="submit" class="btn btn-primary" name="dropdownWaktuTransaksiPergerbang">Lihat</button>
                  </div>
                  </form>
                   <div class="title_right">
@@ -176,11 +177,11 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
                             <?php
 							if($nilaiTahun > 0){
                             $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join triwulan join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND triwulan.id_tw=waktu_transaksi.id_tw  AND triwulan.id_tw=panjang_antrian.id_tw
-                                                                            AND waktu_transaksi.id_semester=semester.id_semester AND semester.id_semester=panjang_antrian.id_semester WHERE waktu_transaksi.id_cabang = '$idcabang' AND waktu_transaksi.id_gerbang='$id_gerbang' group by waktu_transaksi.id_gerbang");
+                                                                            AND waktu_transaksi.id_semester=semester.id_semester AND semester.id_semester=panjang_antrian.id_semester WHERE waktu_transaksi.id_cabang = '$idcabang' AND waktu_transaksi.id_gerbang='$id_gerbang' AND waktu_transaksi.tahun='$nilaiTahun' group by waktu_transaksi.id_gerbang");
                             }
 							else{
 							$rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join triwulan join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND triwulan.id_tw=waktu_transaksi.id_tw  AND triwulan.id_tw=panjang_antrian.id_tw
-                                                                            AND waktu_transaksi.id_semester=semester.id_semester AND semester.id_semester=panjang_antrian.id_semester WHERE waktu_transaksi.id_cabang = '$idcabang' group by waktu_transaksi.id_gerbang");
+                                                                            AND waktu_transaksi.id_semester=semester.id_semester AND semester.id_semester=panjang_antrian.id_semester WHERE waktu_transaksi.id_cabang = '$idcabang'AND waktu_transaksi.id_gerbang='$id_gerbang' group by waktu_transaksi.id_gerbang");
                             }
 							$nomor = 1;
                             while($data_waktu_transaksi = mysqli_fetch_array($rata_waktu_transaksi)){

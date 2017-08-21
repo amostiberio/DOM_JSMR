@@ -365,18 +365,18 @@ if(isset($_POST['dropdownWaktuTransaksi1'])){
                 <script>document.location.href="waktu_transaksi1.php";</script>
 <?php
 }
-if(isset($_POST['dropdownWaktuTransaksiPercabang'])){
+if(isset($_POST['dropdownWaktuTransaksiPergerbang'])){
             $tahun = $_POST['tahun'];
-						$id_cabang = $_POST['idcabang'];
+						$id_gerbang = $_POST['idgerbang'];
 
             if($tahun > 0 ){
 ?>
 
-                <script>document.location.href="waktu_transaksi1_percabang.php?id=<?php echo $id_cabang?>&tahun=<?php echo $tahun;?>";</script>
+                <script>document.location.href="waktu_transaksi1_pergerbang.php?id=<?php echo $id_gerbang?>&tahun=<?php echo $tahun;?>";</script>
 <?php       }
             else
 ?>
-                <script>document.location.href="waktu_transaksi1_percabang.php";</script>
+                <script>document.location.href="waktu_transaksi1_pergerbang.php";</script>
 <?php
 }
 if(isset($_POST['dropdownWaktuTransaksi2'])){
