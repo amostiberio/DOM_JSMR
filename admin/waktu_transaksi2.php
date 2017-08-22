@@ -102,6 +102,7 @@ include ('connect.php'); //connect ke database
                        </div>
                    </div>
                    <button  type="submit" class="btn btn-primary" name="dropdownWaktuTransaksi2">Lihat</button>
+                    <button type="submit" class="btn btn-danger" name="clearTahunWT2">Hapus Filter</button>
                   </div>
                   </form>
                   <div class="title_right">
@@ -112,7 +113,7 @@ include ('connect.php'); //connect ke database
 						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
                       </button>
                       <ul role="menu" class="dropdown-menu pull-right">
-                       <li><a href="download_wt2.php" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                       <li><a href="download_wt2.php?tahun=<?php echo $nilaiTahun;?>" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
                        </li>
 					   </ul>
 	                    </div>
@@ -128,7 +129,10 @@ include ('connect.php'); //connect ke database
                                 <th rowspan="3">No</th>
                                 <th rowspan="3">Cabang</th>
                                 <th rowspan="3">Keterangan</th>
-                                <th colspan="6">2017</th>
+                                <th colspan="6"><?php if($nilaiTahun >0 ){ echo $nilaiTahun;}
+                                                      else{ echo "Seluruh Tahun";}
+                                                ?>
+                                </th>
                               </tr>
                               <tr>
                                 <th colspan="2">Rencana</th>

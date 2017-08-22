@@ -112,6 +112,7 @@ include ('connect.php'); //connect ke database
 
                    </div>
                    <button  type="submit" class="btn btn-primary" name="dropdownWaktuTransaksi1">Lihat</button>
+                   <button type="submit" class="btn btn-danger" name="clearTahunWT1">Hapus Filter</button>
                  </div>
                  </form>
                   <div class="title_right">
@@ -128,7 +129,7 @@ include ('connect.php'); //connect ke database
                         <div class="btn-group  buttonrightfloat " >
                           <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span></button>
                           <ul role="menu" class="dropdown-menu pull-right">
-                            <li><a href="download_wt1.php" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a></li>
+                            <li><a href="download_wt1.php?tahun=<?php echo $nilaiTahun;?>" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a></li>
 					                </ul>
                         </div>
                       </div>

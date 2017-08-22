@@ -2,6 +2,11 @@
 include "connect.php";
 include('akses.php'); //untuk memastikan dia sudah login
 
+if(isset($_GET['tahun'])){
+  $nilaiTahun = $_GET['tahun'];
+
+}else $nilaiTahun = '0';
+
   $iduser = $_SESSION['id_user'];
 
   //ambil informasi user id dan cabang id dari table user
@@ -16,7 +21,10 @@ include('akses.php'); //untuk memastikan dia sudah login
 // Fungsi header dengan mengirimkan raw data excel
 header("Content-type: application/x-msdownload");
 // Mendefinisikan nama file ekspor "hasil-export.xls"
-header("Content-Disposition: attachment; filename=Waktu Transaksi 2 SPM Cabang ".$namacabang.".xls");
+if($nilaiTahun > 0){
+  header("Content-Disposition: attachment; filename=Waktu Transaksi 2 SPM Cabang ".$namacabang." Tahun ".$nilaiTahun.".xls");}
+else{
+header("Content-Disposition: attachment; filename=Waktu Transaksi 2 SPM Cabang ".$namacabang." Seluruh Tahun.xls");}
 header("Pragma : no-cache");
 header("Expires :0"); $i=0;
 ?>
@@ -29,7 +37,10 @@ header("Expires :0"); $i=0;
            <th rowspan="3">No</th>
            <th rowspan="3">Gerbang</th>
            <th rowspan="3">Keterangan</th>
-           <th colspan="6">2017</th>
+           <th colspan="6"><?php if($nilaiTahun >0 ){ echo $nilaiTahun;}
+                                 else{ echo "Seluruh Tahun";}
+                           ?>
+           </th>
          </tr>
          <tr>
            <th colspan="2">Rencana</th>
@@ -50,12 +61,16 @@ header("Expires :0"); $i=0;
        </thead>
        <tbody>
          <?php
+             if($nilaiTahun >0 ){
+             $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join wt_rencana  join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_subgardu=wt_rencana.id_subgardu
+                                                             WHERE waktu_transaksi.id_cabang = '$idcabang'AND waktu_transaksi.tahun='$nilaiTahun' group by waktu_transaksi.id_gerbang");
+             }
+             else{
              $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join wt_rencana  join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_subgardu=wt_rencana.id_subgardu WHERE waktu_transaksi.id_cabang = '$idcabang' group by waktu_transaksi.id_gerbang");
+
+             }
              $nomor = 1;
              $count = 0;
-             $total_rataans1 = 0;
-             $total_rataans2 = 0;
-
              //variabel pembagi untuk rata-rata
              $count_rataanmasuks1=0;     $count_rataanambilkartus1=0;
              $count_rataanmasuks2=0;     $count_rataanambilkartus2=0;
@@ -201,7 +216,15 @@ header("Expires :0"); $i=0;
                      echo $total_data_gerbang_masuk2;
                ?>
            </td>
-           <td rowspan="6"><?php $capaian_semester1=($rataan_toltrasnsaksis1+$rataan_gardumasuks1+$rataan_gardukeluars1+$rataan_garduterbukas1+$rataan_ambilkartus1+$rataan_antriankendaraans1)/
+           <td rowspan="6"><?php if($count_rataantoltransaksis1==0 && $count_rataanmasuks1==0 && $count_rataankeluars1==0 && $count_rataanterbukas1==0 && $count_rataanambilkartus1==0 && $count_rataanantrians1==0){
+                                 $count_rataantoltransaksis1=1;
+                                 $count_rataanmasuks1=1;
+                                 $count_rataankeluars1=1;
+                                 $count_rataanterbukas1=1;
+                                 $count_rataanambilkartus1=1;
+                                 $count_rataanantrians1=1;
+                                 }
+                                 $capaian_semester1=($rataan_toltrasnsaksis1+$rataan_gardumasuks1+$rataan_gardukeluars1+$rataan_garduterbukas1+$rataan_ambilkartus1+$rataan_antriankendaraans1)/
                                                     ($count_rataantoltransaksis1+$count_rataanmasuks1+$count_rataankeluars1+$count_rataanterbukas1+$count_rataanambilkartus1+$count_rataanantrians1);
                                  $persen_capaian_semester1 = number_format( $capaian_semester1 * 100, 2 ) . '%';
                                  $total_capaiansemester1+=$persen_capaian_semester1;
@@ -209,7 +232,15 @@ header("Expires :0"); $i=0;
                                  echo $persen_capaian_semester1;
                            ?>
            </td>
-           <td rowspan="6"><?php $capaian_semester2=($rataan_toltrasnsaksis2+$rataan_gardumasuks2+$rataan_gardukeluars2+$rataan_garduterbukas2+$rataan_ambilkartus2+$rataan_antriankendaraans2)/
+           <td rowspan="6"><?php if($count_rataantoltransaksis2==0 && $count_rataanmasuks2==0 && $count_rataankeluars2==0 && $count_rataanterbukas2==0 && $count_rataanambilkartus2==0 && $count_rataanantrians2==0){
+                                 $count_rataantoltransaksis2=1;
+                                 $count_rataanmasuks2=1;
+                                 $count_rataankeluars2=1;
+                                 $count_rataanterbukas2=1;
+                                 $count_rataanambilkartus2=1;
+                                 $count_rataanantrians2=1;
+                                 }
+                                 $capaian_semester2=($rataan_toltrasnsaksis2+$rataan_gardumasuks2+$rataan_gardukeluars2+$rataan_garduterbukas2+$rataan_ambilkartus2+$rataan_antriankendaraans2)/
                                                     ($count_rataantoltransaksis2+$count_rataanmasuks2+$count_rataankeluars2+$count_rataanterbukas2+$count_rataanambilkartus2+$count_rataanantrians2);
                                  $persen_capaian_semester2 = number_format( $capaian_semester2 * 100, 2 ) . '%';
                                  $total_capaiansemester2+=$persen_capaian_semester2;
@@ -258,18 +289,23 @@ header("Expires :0"); $i=0;
          <?php }?>
          <tr>
            <td colspan="7">Rata-rata</td>
-           <td> <?php $rataan_capaiansemester1=$total_capaiansemester1/$count_capaiansemester1;
+           <td> <?php if($count_capaiansemester1==0){
+                       $count_capaiansemester1=1;
+                      }
+                      $rataan_capaiansemester1=$total_capaiansemester1/$count_capaiansemester1;
                       echo $rataan_capaiansemester1;
                  ?>
            </td>
-           <td> <?php $rataan_capaiansemester2=$total_capaiansemester2/$count_capaiansemester2;
+           <td> <?php if($count_capaiansemester2==0){
+                       $count_capaiansemester2=1;
+                      }
+                      $rataan_capaiansemester2=$total_capaiansemester2/$count_capaiansemester2;
                       echo $rataan_capaiansemester2;
                  ?>
          </td>
          </tr>
        </tbody>
      </table>
-
 
 <div align="right">
  <p>Jakarta, </p>

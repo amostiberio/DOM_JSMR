@@ -365,6 +365,12 @@ if(isset($_POST['dropdownWaktuTransaksi1'])){
                 <script>document.location.href="waktu_transaksi1.php";</script>
 <?php
 }
+if(isset($_POST['clearTahunWT1'])){
+?>
+                <script>document.location.href="waktu_transaksi1.php";</script>
+<?php
+}
+
 if(isset($_POST['dropdownWaktuTransaksiPergerbang'])){
             $tahun = $_POST['tahun'];
 						$id_gerbang = $_POST['idgerbang'];
@@ -379,6 +385,12 @@ if(isset($_POST['dropdownWaktuTransaksiPergerbang'])){
                 <script>document.location.href="waktu_transaksi1_pergerbang.php";</script>
 <?php
 }
+if(isset($_POST['clearTahunWT1Pergerbang'])){
+	$id_gerbang = $_POST ['idgerbang'];
+?>
+                <script>document.location.href="waktu_transaksi1_pergerbang.php?id=<?php echo $id_gerbang;?>";</script>
+<?php
+}
 if(isset($_POST['dropdownWaktuTransaksi2'])){
             $tahun = $_POST['tahun'];
 
@@ -388,6 +400,11 @@ if(isset($_POST['dropdownWaktuTransaksi2'])){
                 <script>document.location.href="waktu_transaksi2.php?tahun=<?php echo $tahun;?>";</script>
 <?php       }
             else
+?>
+                <script>document.location.href="waktu_transaksi2.php";</script>
+<?php
+}
+if(isset($_POST['clearTahunWT2'])){
 ?>
                 <script>document.location.href="waktu_transaksi2.php";</script>
 <?php

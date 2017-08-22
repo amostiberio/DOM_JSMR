@@ -118,6 +118,7 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
                      <input type='hidden' value=<?php echo $id_gerbang ;?> name=idgerbang>
                    </div>
                    <button  type="submit" class="btn btn-primary" name="dropdownWaktuTransaksiPergerbang">Lihat</button>
+                    <button type="submit" class="btn btn-danger" name="clearTahunWT1Pergerbang">Hapus Filter</button>
                  </div>
                  </form>
                   <div class="title_right">

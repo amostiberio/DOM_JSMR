@@ -116,6 +116,7 @@ include ('connect.php'); //connect ke database
                        <input type='hidden' value=<?php echo $id_cabang ;?> name=idcabang>
                    </div>
                    <button  type="submit" class="btn btn-primary" name="dropdownWaktuTransaksiPercabang">Lihat</button>
+                   <button type="submit" class="btn btn-danger" name="clearTahunWT1Percabang">Hapus Filter</button>
                   </div>
                   </form>
                   <div class="title_right">
@@ -130,6 +131,7 @@ include ('connect.php'); //connect ke database
 	                    </div>
 
                       </div>
+                      
                     </div>
                    </div>
                   <div class="x_content">

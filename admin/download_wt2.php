@@ -3,6 +3,12 @@ include "connect.php";
 include('akses.php'); //untuk memastikan dia sudah login
 
   $iduser = $_SESSION['id_user'];
+  if(isset($_GET['tahun'])){
+      $nilaiTahun = $_GET['tahun'];
+  }
+  else{
+    $nilaiTahun = 0;
+  }
 
   $resultjs = $connect-> query("SELECT * FROM cabang");
 
@@ -14,20 +20,26 @@ include('akses.php'); //untuk memastikan dia sudah login
 // Fungsi header dengan mengirimkan raw data excel
 header("Content-type: application/x-msdownload");
 // Mendefinisikan nama file ekspor "hasil-export.xls"
-header("Content-Disposition: attachment; filename=Waktu Transaksi 2 SPM.xls");
+if($nilaiTahun > 0){
+header("Content-Disposition: attachment; filename=Waktu Transaksi 2 SPM Tahun ".$nilaiTahun.".xls");}
+else{
+header("Content-Disposition: attachment; filename=Waktu Transaksi 2 SPM Seluruh Tahun.xls");}
 header("Pragma : no-cache");
 header("Expires :0"); $i=0;
 ?>
 
  <div align="center"> <p>Waktu Transkasi 2 SPM</p></div>
 
- <table border="1"  id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
+ <table border="1" id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
        <thead >
          <tr >
            <th rowspan="3">No</th>
            <th rowspan="3">Cabang</th>
            <th rowspan="3">Keterangan</th>
-           <th colspan="6">2017</th>
+           <th colspan="6"><?php if($nilaiTahun >0 ){ echo $nilaiTahun;}
+                                 else{ echo "Seluruh Tahun";}
+                           ?>
+           </th>
          </tr>
          <tr>
            <th colspan="2">Rencana</th>
@@ -48,7 +60,15 @@ header("Expires :0"); $i=0;
        </thead>
        <tbody>
          <?php
-         $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join wt_rencana join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_semester=semester.id_semester AND waktu_transaksi.id_subgardu=wt_rencana.id_subgardu AND semester.id_semester=panjang_antrian.id_semester GROUP BY waktu_transaksi.id_cabang");
+         if($nilaiTahun > 0 ){
+         $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join wt_rencana join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_semester=semester.id_semester
+                                                         AND waktu_transaksi.id_subgardu=wt_rencana.id_subgardu AND semester.id_semester=panjang_antrian.id_semester WHERE waktu_transaksi.tahun='$nilaiTahun' GROUP BY waktu_transaksi.id_cabang");
+         }
+         else{
+         $rata_waktu_transaksi = mysqli_query($connect, "SELECT * FROM waktu_transaksi join panjang_antrian join wt_rencana join semester join gerbang on gerbang.id_gerbang=waktu_transaksi.id_gerbang AND gerbang.id_gerbang=panjang_antrian.id_gerbang AND waktu_transaksi.id_semester=semester.id_semester
+                                                           AND waktu_transaksi.id_subgardu=wt_rencana.id_subgardu AND semester.id_semester=panjang_antrian.id_semester GROUP BY waktu_transaksi.id_cabang");
+
+         }
          $nomor = 1;
 
          //variabel pembagi untuk rata-rata
@@ -259,11 +279,18 @@ $datarencana_antrian_kendaraans2 = mysqli_fetch_array(mysqli_query($connect, "SE
          <?php }?>
          <tr>
            <td colspan="7">Rata-rata</td>
-           <td> <?php $rataan_capaiansemester1=$total_capaiansemester1/$count_capaiansemester1;
+           <td> <?php if($count_capaiansemester1==0){
+                         $count_capaiansemester1=1;
+                       }
+                     $rataan_capaiansemester1=$total_capaiansemester1/$count_capaiansemester1;
                       echo $rataan_capaiansemester1;
                  ?>
            </td>
-           <td> <?php $rataan_capaiansemester2=$total_capaiansemester2/$count_capaiansemester2;
+           <td> <?php
+                       if($count_capaiansemester2==0){
+                         $count_capaiansemester2=1;
+                       }
+                     $rataan_capaiansemester2=$total_capaiansemester2/$count_capaiansemester2;
                       echo $rataan_capaiansemester2;
                  ?>
          </td>
