@@ -115,7 +115,7 @@ include ('connect.php'); //connect ke database
 							<td><?php echo $datalaporan['type_file']?></td>
 							<td><?php echo $datalaporan['waktu']?></td>
 							<td><a href="unduh.php?id_realisasi=<?php echo $datalaporan['id_realisasi'];?>"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button></a>
-								<button type="button" class="btn btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" id_realisasi="<?php echo $datatwrc1['id_realisasi'];?>"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+								<button type="button" class="btn btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" data-id-realisasi="<?php echo $datalaporan['id_realisasi'];?>"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 							</td>
 						  </tr>
 						  <?php } ?>
@@ -190,29 +190,31 @@ include ('connect.php'); //connect ke database
 	</div>
 </div>
 
-<!-- Modal Delete Rencana -->
-<div class="modal fade bs-delete-modal" id="modal_deleterencana" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- Modal Delete File -->
+<div class="modal fade bs-delete-modal" id="modal_deletefile" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 	  <div class="modal-content">
 		<div class="modal-header">
 		  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 		  </button>
-		  <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
+		  <h4 class="modal-title" id="myModalLabel">Delete File</h4>
 		</div>
-	<form action="editdatabeban.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" ">
+	<form action="editdelete.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 		<div class="modal-body">
 		  <div class="alert alert-danger" role="alert">
 		  <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
-	      <h4> Anda yakin untuk menghapus data rencana ini? </h4>
-		</div>
+	      <h4> Anda yakin untuk menghapus file ini? </h4>
 		  
-		 
-	   </div>
+		  <input name ="id_realisasi" type="text" id="id" value="" hidden>
+		  </div>
+		</div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-		  <button type="submit" class="btn btn-danger" name ="deleterencanabeban" >Delete</button>
+		  <button type="submit" class="btn btn-danger" name ="deletelaporan" >Delete</button>
 		</div>
 		</form>
+		
+	</div>
 	</div>
 </div>
 

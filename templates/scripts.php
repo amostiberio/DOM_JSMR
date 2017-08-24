@@ -129,6 +129,12 @@
 		$(e.currentTarget).find('input[name="id_realisasi"]').val(id_realisasidelete);
 
         });
+		$('#modal_deletelj').on('show.bs.modal', function(e) {
+
+		var id_lalinjj = $(e.relatedTarget).data('id-lalinjj');
+		$(e.currentTarget).find('input[name="id"]').val(id_lalinjj);
+
+        });
 		$('#modal_deletelalin').on('show.bs.modal', function(e) {
 
 		var id_gerbangl = $(e.relatedTarget).data('id-gerbang');

@@ -341,7 +341,6 @@ if(isset($_GET['tahun'])){
                           <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
                         </div>
                         <div class="modal-body">
-                        <form action="editdelete.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" ">
                          <div class="alert alert-danger" role="alert">
 						   <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
 								<h4> Anda yakin untuk menghapus data ini? </h4>
