@@ -569,7 +569,7 @@ include ('connect.php'); //connect ke database
                     <h4><b>Gardu Reguler</b></h4>
                 </div>
 							  <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka">Gardu Terbuka</label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka">Waktu Transaksi Gardu Terbuka</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input name= "idgardu_terbuka" type="text" value="1" hidden>
                     <input name= "gardu_terbuka" type="number" min="0" id="gardu_terbuka" required="required" class="form-control col-md-7 col-xs-12">
@@ -579,14 +579,14 @@ include ('connect.php'); //connect ke database
                   <h5 class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_tertutup"><b>Gardu Tertutup</b></h5>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka">Gardu Masuk</label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka">Waktu Transaksi Gardu Masuk</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input name= "idgardu_masuk" type="text" value="2" hidden>
                     <input name= "gardu_masuk" type="number" min="0" id="gardu_masuk" required="required" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar">Gardu Keluar</label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar">Waktu Transaksi Gardu Keluar</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input name= "idgardu_keluar" type="text" value="3" hidden>
                     <input name= "gardu_keluar" type="number" min="0" id="gardu_keluar" required="required" class="form-control col-md-7 col-xs-12">
@@ -599,7 +599,7 @@ include ('connect.php'); //connect ke database
                     <h4><b>Gardu GTO</b></h4>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto">Gardu Terbuka</label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto">Waktu Transaksi Gardu Terbuka</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input name= "idgardu_terbuka_gto" type="text" value="4" hidden>
                     <input name= "gardu_terbuka_gto" type="number" min="0" id="gardu_terbuka_gto" required="required" class="form-control col-md-7 col-xs-12">
@@ -609,14 +609,14 @@ include ('connect.php'); //connect ke database
                   <h5 class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_tertutup_gto"><b>Gardu Tertutup</b></h5>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto">Gardu Masuk</label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto">Waktu Transaksi Gardu Masuk</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input name= "idgardu_masuk_gto" type="text" value="5" hidden>
                     <input name= "gardu_masuk_gto" type="number" min="0" id="gardu_masuk_gto" required="required" class="form-control col-md-7 col-xs-12">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar_gto">Gardu Keluar</label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar_gto">Waktu Transaksi Gardu Keluar</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input name= "idgardu_keluar_gto" type="text" value="6" hidden>
                     <input name= "gardu_keluar_gto" type="number" min="0" id="gardu_keluar_gto" required="required" class="form-control col-md-7 col-xs-12">

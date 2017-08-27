@@ -296,16 +296,7 @@ include ('connect.php'); //connect ke database
                                           echo $total_data_gerbang_masuk;
                                     ?>
                                 </td>
-                                <td><?php
-                                        if($total_data_gerbang_masuk2==0 && $total_data_gerbang_keluar2==0 && $total_data_gerbang_terbuka2==0 && $total_data_gerbang_masuk_gto2==0 && $total_data_panjang_antrian2==0 && $data_gardutol_transaksi2==0){
-                                              $rataan_gardumasuks2=0;
-                                              $rataan_gardukeluars2=0;
-                                              $rataan_garduterbukas2=0;
-                                              $rataan_ambilkartus2=0;
-                                              $rataan_antriankendaraans2=0;
-                                              $rataan_toltrasnsaksis2=0;
-                                          }
-                                        else{
+                                <td><?php if(isset($total_data_gerbang_masuk2)){
                                           $rataan_gardumasuks2=$datarencana_gardu_masuk_tertutups1['nilai']/$total_data_gerbang_masuk2;
                                           $count_rataanmasuks2++;
                                           $rataan_gardukeluars2=$datarencana_gardu_keluar_tertutups1['nilai']/$total_data_gerbang_keluar2;
@@ -320,40 +311,24 @@ include ('connect.php'); //connect ke database
                                           $count_rataantoltransaksis2++;
                                           echo $total_data_gerbang_masuk2;
                                         };
-
                                     ?>
                                 </td>
-                                <td rowspan="6"><?php if($count_rataantoltransaksis1==0 && $count_rataanmasuks1==0 && $count_rataankeluars1==0 && $count_rataanterbukas1==0 && $count_rataanambilkartus1==0 && $count_rataanantrians1==0){
-                                                      $count_rataantoltransaksis1=1;
-                                                      $count_rataanmasuks1=1;
-                                                      $count_rataankeluars1=1;
-                                                      $count_rataanterbukas1=1;
-                                                      $count_rataanambilkartus1=1;
-                                                      $count_rataanantrians1=1;
-                                                      }
-                                                      $capaian_semester1=($rataan_toltrasnsaksis1+$rataan_gardumasuks1+$rataan_gardukeluars1+$rataan_garduterbukas1+$rataan_ambilkartus1+$rataan_antriankendaraans1)/
+                                <td rowspan="6"><?php $capaian_semester1=($rataan_toltrasnsaksis1+$rataan_gardumasuks1+$rataan_gardukeluars1+$rataan_garduterbukas1+$rataan_ambilkartus1+$rataan_antriankendaraans1)/
                                                                          ($count_rataantoltransaksis1+$count_rataanmasuks1+$count_rataankeluars1+$count_rataanterbukas1+$count_rataanambilkartus1+$count_rataanantrians1);
                                                       $persen_capaian_semester1 = number_format( $capaian_semester1 * 100, 2 ) . '%';
                                                       $total_capaiansemester1+=$persen_capaian_semester1;
                                                       $count_capaiansemester1++;
-
-                                                echo $persen_capaian_semester1;
+                                                      echo $persen_capaian_semester1;
                                                 ?>
                                 </td>
-                                <td rowspan="6"><?php if($count_rataantoltransaksis2==0 && $count_rataanmasuks2==0 && $count_rataankeluars2==0 && $count_rataanterbukas2==0 && $count_rataanambilkartus2==0 && $count_rataanantrians2==0){
-                                                      $count_rataantoltransaksis2=1;
-                                                      $count_rataanmasuks2=1;
-                                                      $count_rataankeluars2=1;
-                                                      $count_rataanterbukas2=1;
-                                                      $count_rataanambilkartus2=1;
-                                                      $count_rataanantrians2=1;
-                                                      }
+                                <td rowspan="6"><?php
                                                       $capaian_semester2=($rataan_toltrasnsaksis2+$rataan_gardumasuks2+$rataan_gardukeluars2+$rataan_garduterbukas2+$rataan_ambilkartus2+$rataan_antriankendaraans2)/
                                                                          ($count_rataantoltransaksis2+$count_rataanmasuks2+$count_rataankeluars2+$count_rataanterbukas2+$count_rataanambilkartus2+$count_rataanantrians2);
                                                       $persen_capaian_semester2 = number_format( $capaian_semester2 * 100, 2 ) . '%';
                                                       $total_capaiansemester2+=$persen_capaian_semester2;
                                                       $count_capaiansemester2++;
-                                                      echo $persen_capaian_semester2;
+                                                      if(isset($persen_capaian_semester2)){
+                                                      echo $persen_capaian_semester2;};
                                                 ?>
                                 </td>
                               </tr>

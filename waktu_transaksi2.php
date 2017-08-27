@@ -307,9 +307,19 @@ include ('connect.php'); //connect ke database
                                           echo $total_data_gerbang_masuk;
                                     ?>
                                 </td>
-                                <td><?php $rataan_gardumasuks2=$datarencana_gardu_masuk_tertutups1['nilai']/$total_data_gerbang_masuk2;
+                                <td><?php if($total_data_gerbang_masuk2==0 && $total_data_gerbang_keluar2==0 && $total_data_gerbang_terbuka2==0 && $total_data_gerbang_masuk_gto2==0 && $total_data_panjang_antrian2==0 && $data_gardutol_transaksi2==0){
+                                              $rataan_gardumasuks2=0;
+                                              $rataan_gardukeluars2=0;
+                                              $rataan_garduterbukas2=0;
+                                              $rataan_ambilkartus2=0;
+                                              $rataan_antriankendaraans2=0;
+                                              $rataan_toltrasnsaksis2=0;
+
+                                          }
+                                          else{
+                                          $rataan_gardumasuks2=$datarencana_gardu_masuk_tertutups2['nilai']/$total_data_gerbang_masuk2;
                                           $count_rataanmasuks2++;
-                                          $rataan_gardukeluars2=$datarencana_gardu_keluar_tertutups1['nilai']/$total_data_gerbang_keluar2;
+                                          $rataan_gardukeluars2=$datarencana_gardu_keluar_tertutups2['nilai']/$total_data_gerbang_keluar2;
                                           $count_rataankeluars2++;
                                           $rataan_garduterbukas2=$datarencana_gardu_terbukas2['nilai']/$total_data_gerbang_terbuka2;
                                           $count_rataanterbukas2++;
@@ -319,6 +329,7 @@ include ('connect.php'); //connect ke database
                                           $count_rataanantrians2++;
                                           $rataan_toltrasnsaksis2=$datarencana_gardutol_transaksis2['nilai']/$data_gardutol_transaksi2;
                                           $count_rataantoltransaksis2++;
+                                        };
                                           echo $total_data_gerbang_masuk2;
                                     ?>
                                 </td>
@@ -335,7 +346,8 @@ include ('connect.php'); //connect ke database
                                                       $persen_capaian_semester1 = number_format( $capaian_semester1 * 100, 2 ) . '%';
                                                       $total_capaiansemester1+=$persen_capaian_semester1;
                                                       $count_capaiansemester1++;
-                                                      echo $persen_capaian_semester1;
+
+                                                echo $persen_capaian_semester1;
                                                 ?>
                                 </td>
                                 <td rowspan="6"><?php if($count_rataantoltransaksis2==0 && $count_rataanmasuks2==0 && $count_rataankeluars2==0 && $count_rataanterbukas2==0 && $count_rataanambilkartus2==0 && $count_rataanantrians2==0){

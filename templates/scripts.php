@@ -484,6 +484,23 @@
                      var idtws2 = $(e.relatedTarget).data('id-tw');
                      $(e.currentTarget).find('input[name="edit_idtws2"]').val(idtws2);
                       });
+                      
+                      //untuk modal tambah waktu transaksi pertw
+                          $('#modal_tambahwtpertw').on('show.bs.modal', function(e) {
+
+                          var idgerbang = $(e.relatedTarget).data('id-gerbang');
+                          $(e.currentTarget).find('input[name="idgerbang"]').val(idgerbang);
+
+                          var idsemester= $(e.relatedTarget).data('id-semester');
+                          $(e.currentTarget).find('input[name="idsemester"]').val(idsemester);
+
+                          var idtw = $(e.relatedTarget).data('id-tw');
+                          $(e.currentTarget).find('input[name="triwulan"]').val(idtw);
+
+
+                          var tahun = $(e.relatedTarget).data('tahun');
+                          $(e.currentTarget).find('input[name="tahun"]').val(tahun);
+                          });
         </script>
 
         <script type="text/javaScript">
