@@ -425,4 +425,114 @@ if(isset($_POST['clearTahunWT2'])){
                 <script>document.location.href="waktu_transaksi2.php";</script>
 <?php
 }
+
+
+if(isset($_POST['dropdownTahunStatusLaporanBulanan'])){
+            $ambilTanggal = $_POST['tahun'];
+
+
+            if($ambilTanggal > 0 ){
+?>
+
+                <script>document.location.href="statuslaporanbulanan.php?tahun=<?php echo $ambilTanggal;?>";</script>
+<?php       }
+            else
+?>
+                <script>document.location.href="statuslaporanbulanan.php";</script>
+<?php
+}
+
+
+
+if(isset($_POST['dropdownTahunLaporanRealisasi'])){
+                    $idcabang = $_POST['dropDownCabangLaporan'];
+                    $tahun = $_POST['tahun'];
+
+            if($tahun > 0 ){
+                if($idcabang >0 ){
+
+?>                
+                <script>document.location.href="laporanrealisasi.php?tahun=<?php echo $tahun;?>&cabang=<?php echo $idcabang?>";</script>
+<?php 
+
+                }
+                else{
+?>
+
+                <script>document.location.href="laporanrealisasi.php?tahun=<?php echo $tahun;?>";</script>
+<?php 
+                }
+            }
+            else{
+                if($idcabang >0 ){
+?>                
+                <script>document.location.href="laporanrealisasi.php?cabang=<?php echo $idcabang?>";</script>
+<?php   
+                }
+                else{
+?>                
+                <script>document.location.href="laporanrealisasi.php";</script>
+<?php  
+                }
+            }
+           
+}
+if(isset($_POST['clearTahunLaporanRealisasi'])){
+?>
+                <script>document.location.href="laporanrealisasi.php";</script>
+<?php
+}
+
+if(isset($_POST['dropdownTahunRevisiBpt'])){
+            $tahun = $_POST['tahun'];
+
+            if($tahun > 0 ){
+?>
+
+                <script>document.location.href="revisi_bpt.php?tahun=<?php echo $tahun;?>";</script>
+<?php       }
+            else
+?>
+                <script>document.location.href="revisi_bpt.php";</script>
+<?php
+}
+if(isset($_POST['dropdownTahunRevisiBpll'])){
+            $tahun = $_POST['tahun'];
+
+            if($tahun > 0 ){
+?>
+
+                <script>document.location.href="revisi_bpll.php?tahun=<?php echo $tahun;?>";</script>
+<?php       }
+            else
+?>
+                <script>document.location.href="revisi_bpll.php";</script>
+<?php
+}
+if(isset($_POST['dropdownTahunRevisiSpojt'])){
+            $tahun = $_POST['tahun'];
+
+            if($tahun > 0 ){
+?>
+
+                <script>document.location.href="revisi_spojt.php?tahun=<?php echo $tahun;?>";</script>
+<?php       }
+            else
+?>
+                <script>document.location.href="revisi_spojt.php";</script>
+<?php
+}
+if(isset($_POST['dropdownTahunRevisiSpjt'])){
+            $tahun = $_POST['tahun'];
+
+            if($tahun > 0 ){
+?>
+
+                <script>document.location.href="revisi_spjt.php?tahun=<?php echo $tahun;?>";</script>
+<?php       }
+            else
+?>
+                <script>document.location.href="revisi_spjt.php";</script>
+<?php
+}
  ?>

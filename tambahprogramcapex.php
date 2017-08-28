@@ -2,7 +2,8 @@
 	include 'connect.php';
         
 		if(isset($_POST['tambah'])){
-			$ma=$_POST['nomorMA'];
+			$noitem = $_POST['nomorItem'];
+			$ma = $_POST['nomorMA'];
 		 	$nama_pk=$_POST['programKerja'];
 			$idcabang = $_POST['idcabang'];
 			$jenis = $_POST['jenis'];
@@ -25,7 +26,7 @@
 <?php }
 
 		//insert semua
-		else $insert= mysqli_query($connect,"INSERT INTO program_kerja VALUES ('','$ma','$nama_pk','$idcabang','$jenis')");
+		else $insert= mysqli_query($connect,"INSERT INTO program_kerja VALUES ('','$noitem','$ma','$nama_pk','$idcabang','$jenis')");
 		if($insert){
 ?>		 		<script> window.alert('Data berhasil Ditambah') </script>
 				 <script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>

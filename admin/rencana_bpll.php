@@ -91,7 +91,7 @@ if(isset($_GET['tahun'])){
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Data Beban Cabang <?php echo $namacabang; ?> </small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small>Data Beban Semua Cabang </small></h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -142,6 +142,8 @@ if(isset($_GET['tahun'])){
                             <thead >
                               <tr >
                                 <th rowspan="2">Cabang</th>
+                                <th rowspan="2">No. Item</th>
+                                <th rowspan="2">MA</th>  
                                 <th rowspan="2">Program Kerja</th>
                                 <th rowspan="2">Sub Program Kerja</th>
                                 <th rowspan="2">Total RKAP</th>
@@ -187,6 +189,8 @@ if(isset($_GET['tahun'])){
                             ?>
                               <tr>
                                 <td><?php echo $cabang['nama_cabang']?></td>
+                                <td><?php echo $dataprogramkerja['no_item'] ?></td>
+                                <td><?php echo $dataprogramkerja['MA'] ?></td>
                                 <td><?php echo $dataprogramkerja['nama_pk'] ?></td>
                                 <td><?php echo $datasubprogramkerja['nama_sp'] ?></td>
                                 <td><?php echo $qty;?></td>
@@ -201,7 +205,7 @@ if(isset($_GET['tahun'])){
                 								 data-id-twrc2 ="<?php echo $datatwrc2['id_twrc'];?>" 
                 								 data-id-twrc3 ="<?php echo $datatwrc3['id_twrc'];?>" 
                 								 data-id-twrc4 ="<?php echo $datatwrc4['id_twrc'];?>"
-                								 data-twrc1="<?php echo $datatwrc1['rkap'] ?>" data-twrc2="<?php echo $datatwrc2['rkap'] ?>" data-twrc3="<?php echo $datatwrc3['rkap'] ?>" data-twrc4="<?php echo $datatwrc1['rkap'] ?>">
+                								 data-twrc1="<?php echo $datatwrc1['rkap'] ?>" data-twrc2="<?php echo $datatwrc2['rkap'] ?>" data-twrc3="<?php echo $datatwrc3['rkap'] ?>" data-twrc4="<?php echo $datatwrc4['rkap'] ?>">
                 								 Edit
                 								 </button>																 
                 								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
@@ -371,6 +375,12 @@ if(isset($_GET['tahun'])){
                     </select>
                   </div>
                 </div>
+               <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ma">Nomor Item</label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input name ="nomorItem" type="text" id="item" required="required" class="form-control col-md-7 col-xs-12">
+                </div>
+               </div>
 						  <div class="form-group">
   							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="ma">Nomor MA</label>
   							<div class="col-md-6 col-sm-6 col-xs-12">

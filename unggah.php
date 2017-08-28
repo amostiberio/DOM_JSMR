@@ -5,7 +5,8 @@ if(isset($_POST['tambah']) && $_FILES['file']['size'] > 0)
 	$idcabang = $_POST['idcabang'];
 	$nama = $_POST['nama'];
 	$tipe = $_POST['tipe'];
-	$tahun = $_POST['tahun'];
+	$tanggal = $_POST['tanggal'];
+    list($month,$year) = explode('-',$tanggal);
 	$tmpName = $_FILES['file']['tmp_name'];
 	$size = $_FILES['file']['size'];
 	
@@ -19,7 +20,7 @@ if(isset($_POST['tambah']) && $_FILES['file']['size'] > 0)
 		$nama = addslashes($nama);
 	}
 	
-	$insert= mysqli_query($connect,"INSERT INTO realisasi_laporan VALUES ('','$nama','$tipe','$content','$size','$tahun',now(),'$idcabang')");
+	$insert= mysqli_query($connect,"INSERT INTO realisasi_laporan VALUES ('','$nama','$tipe','$content','$size','$year','$month',now(),'$idcabang','1')");
 		if($insert){
 ?>		 		<script> window.alert('Data berhasil Ditambah') </script>
 				<script>document.location.href="javascript:history.back()";</script>

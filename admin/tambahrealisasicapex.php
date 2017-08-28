@@ -8,7 +8,6 @@
 			$jenis = $_POST['jenis'];
 			$tahun = $_POST['tahun'];
 			$sttwrl = $_POST['sttwrl'];
-			$stakhir= $_POST['stakhir'];
 			$realisasi= $_POST['realisasi'];
 		//cek input double
 		$cek_rencana = mysqli_query($connect,"SELECT * FROM capex_rencana WHERE id_sp='$id_subpk' AND tahun='$tahun' AND jenis = '$jenis'");
@@ -29,7 +28,7 @@
  		
 		}
 		else {
-			$insertrealisasi= mysqli_query($connect,"INSERT INTO capex_realisasi VALUES ('','$id_subpk','$tahun','$sttwrl','$stakhir','$realisasi','$jenis')");
+			$insertrealisasi= mysqli_query($connect,"INSERT INTO capex_realisasi VALUES ('','$id_subpk','$tahun','$sttwrl','0','$realisasi','$jenis')");
 		
 			if($insertrealisasi){
 ?>		 		<script> window.alert('Data berhasil Ditambah') </script>

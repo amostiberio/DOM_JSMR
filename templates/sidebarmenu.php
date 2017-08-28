@@ -15,6 +15,7 @@
                             <li><a>BPT<span class="fa fa-chevron-down"></span></a>
               							  <ul class="nav child_menu">
               								<li><a href="rencana_bpt.php">Rencana</a></li>
+                              <li><a href="revisi_bpt.php">Revisi</a></li>
               								<li><a href="realisasi_bpt.php">Realisasi</a></li>
               								<li><a href="laporan_bpt.php">Tabel Laporan</a></li>
           							     </ul>
@@ -22,6 +23,7 @@
               							<li><a>BPLL<span class="fa fa-chevron-down"></span></a>
               							  <ul class="nav child_menu">
               								<li><a href="rencana_bpll.php">Rencana</a></li>
+                              <li><a href="revisi_bpll.php">Revisi</a></li>                              
               								<li><a href="realisasi_bpll.php">Realisasi</a></li>
               								<li><a href="laporan_bpll.php">Tabel Laporan</a></li>
               							  </ul>
@@ -33,6 +35,7 @@
                             <li><a>SPOJT<span class="fa fa-chevron-down"></span></a>
               							  <ul class="nav child_menu">
               								<li><a href="rencana_spojt.php">Rencana</a></li>
+                              <li><a href="revisi_spojt.php">Revisi</a></li>
               								<li><a href="realisasi_spojt.php">Realisasi</a></li>
               								<li><a href="laporan_spojt.php">Tabel Laporan</a></li>
               							  </ul>
@@ -40,6 +43,7 @@
               							<li><a>SPJT<span class="fa fa-chevron-down"></span></a>
               							  <ul class="nav child_menu">
               								<li><a href="rencana_spjt.php">Rencana</a></li>
+                              <li><a href="revisi_spjt.php">Revisi</a></li>
               								<li><a href="realisasi_spjt.php">Realisasi</a></li>
               								<li><a href="laporan_spjt.php">Tabel Laporan</a></li>
               							  </ul>

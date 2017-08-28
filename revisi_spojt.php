@@ -110,7 +110,7 @@ if(isset($_GET['tahun'])){
                         </div>
                   
                     </div>
-                    <button  type="submit" class="btn btn-primary" name="dropdownTahunRencanaSpojt">Lihat</button>
+                    <button  type="submit" class="btn btn-primary" name="dropdownTahunRevisiSpojt">Lihat</button>
                   </div>
                   </form> 
 
@@ -145,18 +145,22 @@ if(isset($_GET['tahun'])){
                                 <th rowspan="2">Sub Program Kerja</th>
                                 <th rowspan="2">Total RKAP</th>
                                 <th rowspan="2">Tahun</th>
-                                <th colspan="1">TW 1</th>
-                								<th colspan="1">TW 2</th>
-                								<th colspan="1">TW 3</th>
-                								<th colspan="1">TW 4</th>
+                                <th colspan="2">TW 1</th>
+                								<th colspan="2">TW 2</th>
+                								<th colspan="2">TW 3</th>
+                								<th colspan="2">TW 4</th>
                 								<th rowspan="2">Aksi</th>
 
                               </tr>
                               <tr>
                                 <th>RKAP</th>
-                								<th>RKAP</th>
-                								<th>RKAP</th>
-                								<th>RKAP</th>
+                                <th>Revisi</th>
+                                <th>RKAP</th>
+                                <th>Revisi</th>
+                                <th>RKAP</th>
+                                <th>Revisi</th>
+                                <th>RKAP</th>
+                                <th>Revisi</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -191,9 +195,13 @@ if(isset($_GET['tahun'])){
                                 <td><?php echo $qty;?></td>
                                 <td><?php echo $datalistTW['tahun'] ?></td>
                                 <td><?php echo $datatwrc1['rkap'] ?></td>
+                                <td><?php if($datatwrc1['revisi'] != 0 ) { echo $datatwrc1['revisi']; } ?></td>
                                 <td><?php echo $datatwrc2['rkap'] ?></td>
+                                <td><?php if($datatwrc2['revisi'] != 0 ) { echo $datatwrc2['revisi']; }?></td>
                                 <td><?php echo $datatwrc3['rkap'] ?></td>
-								<td><?php echo $datatwrc4['rkap'] ?></td>
+                                <td><?php if($datatwrc3['revisi'] != 0 ) { echo $datatwrc3['revisi']; }?></td>
+                                <td><?php echo $datatwrc4['rkap'] ?></td>
+                                <td><?php if($datatwrc4['revisi'] != 0 ) { echo $datatwrc4['revisi']; }?></td>
 								<td>
 								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal" 
 								 data-id-twrc1 ="<?php echo $datatwrc1['id_twrc'];?>" 
@@ -327,7 +335,7 @@ if(isset($_GET['tahun'])){
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name ="editrencanacapex" >Save changes</button>
+                          <button type="submit" class="btn btn-primary" name ="updaterencanacapex" >Save changes</button>
                         </div>
 						</form>
                       </div>

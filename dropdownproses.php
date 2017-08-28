@@ -410,4 +410,75 @@ if(isset($_POST['clearTahunWT2'])){
 <?php
 }
 
+if(isset($_POST['dropdownTahunLaporanBulanan'])){
+            $tahun = $_POST['tahun'];
+
+            if($tahun > 0 ){
+?>
+
+                <script>document.location.href="laporanbulanan.php?tahun=<?php echo $tahun;?>";</script>
+<?php       }
+            else
+?>
+                <script>document.location.href="laporanbulanan.php";</script>
+<?php
+}
+if(isset($_POST['clearTahunLaporanBulanan'])){
+?>
+                <script>document.location.href="laporanbulanan.php";</script>
+<?php
+}
+
+if(isset($_POST['dropdownTahunRevisiBpt'])){
+            $tahun = $_POST['tahun'];
+
+            if($tahun > 0 ){
+?>
+
+                <script>document.location.href="revisi_bpt.php?tahun=<?php echo $tahun;?>";</script>
+<?php       }
+            else
+?>
+                <script>document.location.href="revisi_bpt.php";</script>
+<?php
+}
+if(isset($_POST['dropdownTahunRevisiBpll'])){
+            $tahun = $_POST['tahun'];
+
+            if($tahun > 0 ){
+?>
+
+                <script>document.location.href="revisi_bpll.php?tahun=<?php echo $tahun;?>";</script>
+<?php       }
+            else
+?>
+                <script>document.location.href="revisi_bpll.php";</script>
+<?php
+}
+if(isset($_POST['dropdownTahunRevisiSpojt'])){
+            $tahun = $_POST['tahun'];
+
+            if($tahun > 0 ){
+?>
+
+                <script>document.location.href="revisi_spojt.php?tahun=<?php echo $tahun;?>";</script>
+<?php       }
+            else
+?>
+                <script>document.location.href="revisi_spojt.php";</script>
+<?php
+}
+if(isset($_POST['dropdownTahunRevisiSpjt'])){
+            $tahun = $_POST['tahun'];
+
+            if($tahun > 0 ){
+?>
+
+                <script>document.location.href="revisi_spjt.php?tahun=<?php echo $tahun;?>";</script>
+<?php       }
+            else
+?>
+                <script>document.location.href="revisi_spjt.php";</script>
+<?php
+}
  ?>

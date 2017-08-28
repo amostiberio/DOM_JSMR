@@ -17,7 +17,7 @@ if(isset($_GET['tahun'])){
   $cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT nama_cabang FROM cabang WHERE id_cabang = '$idcabang'"));
   $namacabang = $cabang['nama_cabang'];
 
-  $resultuntukrencana = $connect-> query("SELECT * FROM program_kerja WHERE jenis = 'spjt' ");
+  $resultuntukrencana = $connect-> query("SELECT * FROM program_kerja WHERE jenis = 'bpt' ");
 
 ?>
 <!DOCTYPE html>
@@ -79,7 +79,7 @@ if(isset($_GET['tahun'])){
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Monitoring Capex</h3>
+                <h3>Monitoring Beban</h3>
               </div>
 
 
@@ -91,7 +91,7 @@ if(isset($_GET['tahun'])){
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Data Capex Cabang <?php echo $namacabang; ?> </small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small>Data Beban Semua Cabang </small></h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -112,9 +112,10 @@ if(isset($_GET['tahun'])){
 
                       
                     </div>
-                    <button  type="submit" class="btn btn-primary" name="dropdownTahunRencanaSpjt">Lihat</button>
+                    <button  type="submit" class="btn btn-primary" name="dropdownTahunRevisiBpt">Lihat</button>
                   </div>
                   </form> 
+
 
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
@@ -126,8 +127,8 @@ if(isset($_GET['tahun'])){
 	                      <li><a data-toggle="modal" data-target=".bs-program">Tambah Program</a>
 	                      </li>
 	                      <li><a data-toggle="modal" data-target=".bs-subprogram" >Tambah Subprogram</a>
-	                       </li>
-						            <li><a data-toggle="modal" data-target=".bs-rencana" >Tambah Rencana</a>
+	                      </li>
+						             <li><a data-toggle="modal" data-target=".bs-rencana" >Tambah Rencana</a>
 	                      </li>
 
 	                    </ul>
@@ -138,72 +139,77 @@ if(isset($_GET['tahun'])){
                    </div>
                   <div class="x_content">
 
-                      <table id="datatable-keytable"  class="table table-striped table-bordered text-center">
+                      <table id="datatable-keytable"  class="table table-striped table-bordered text-center" >
                             <thead >
                               <tr >
-                                <th rowspan="2">Cabang</th>                                
+                                <th rowspan="2">Cabang</th>
                                 <th rowspan="2">No. Item</th>
-                                <th rowspan="2">MA</th>   
+                                <th rowspan="2">MA</th>
                                 <th rowspan="2">Program Kerja</th>
                                 <th rowspan="2">Sub Program Kerja</th>
                                 <th rowspan="2">Total RKAP</th>
                                 <th rowspan="2">Tahun</th>
-                                <th colspan="1">TW 1</th>
-                								<th colspan="1">TW 2</th>
-                								<th colspan="1">TW 3</th>
-                								<th colspan="1">TW 4</th>                								
+                                <th colspan="2">TW 1</th>
+                                <th colspan="2">TW 2</th>
+                                <th colspan="2">TW 3</th>
+                                <th colspan="2">TW 4</th>
                 								<th rowspan="2">Aksi</th>
 
                               </tr>
                               <tr>
                                 <th>RKAP</th>
-                								<th>RKAP</th>
-                								<th>RKAP</th>
-                								<th>RKAP</th>
+                                <th>Revisi</th>
+                                <th>RKAP</th>
+                                <th>Revisi</th>
+                                <th>RKAP</th>
+                                <th>Revisi</th>
+                                <th>RKAP</th>
+                                <th>Revisi</th>
                               </tr>
                             </thead>
                             <tbody>
                             <?php
                             if($nilaiTahun > 0 ){
-                            $listTW = mysqli_query($connect, "SELECT * FROM capex_rencana, sub_program WHERE sub_program.id_sp = capex_rencana.id_sp AND stat_twrc = '1' AND capex_rencana.jenis ='spjt' AND sub_program.jenis='capex' AND capex_rencana.tahun ='$nilaiTahun' ");
-
-
+                              $listTW = mysqli_query($connect, "SELECT * FROM beban_rencana, sub_program WHERE sub_program.id_sp = beban_rencana.id_sp AND stat_twrc = '1' AND beban_rencana.jenis ='bpt' AND sub_program.jenis='beban' AND beban_rencana.tahun ='$nilaiTahun'");
                             }else{
-                            $listTW = mysqli_query($connect, "SELECT * FROM capex_rencana, sub_program WHERE sub_program.id_sp = capex_rencana.id_sp AND stat_twrc = '1' AND capex_rencana.jenis ='spjt' AND sub_program.jenis='capex' ");
+                               $listTW = mysqli_query($connect, "SELECT * FROM beban_rencana, sub_program WHERE sub_program.id_sp = beban_rencana.id_sp AND stat_twrc = '1' AND beban_rencana.jenis ='bpt' AND sub_program.jenis='beban' ");
                             }
 
-    
+                           
                             while($datalistTW = mysqli_fetch_array($listTW)){
                                 
-              								$idpklist = $datalistTW['id_pk'];
-              								$idspklist = $datalistTW['id_sp'];
-              								$tahun= $datalistTW['tahun'];
-              								$jmlrkap = mysqli_query($connect, "SELECT * FROM capex_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun'");
-              								$qty= 0;
-              								while ($num = mysqli_fetch_array($jmlrkap)) {
-              									$qty += $num['rkap'];}
-              								$dataprogramkerja = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM program_kerja WHERE id_pk = '$idpklist'"));
-              								$datasubprogramkerja= mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM sub_program WHERE id_sp = '$idspklist'"));
-                              $idcabang= $dataprogramkerja['id_cabang'];
-                              $cabang = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM cabang WHERE id_cabang ='$idcabang'"));
-                       
-              								$datatwrc1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM capex_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '1'"));
-              								$datatwrc2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM capex_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '2'"));
-              								$datatwrc3 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM capex_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '3'"));
-              								$datatwrc4 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM capex_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '4'"));
-                            ?>
-                              <tr>
-                                <td><?php echo $cabang['nama_cabang']?></td>                                                             
+                								$idpklist = $datalistTW['id_pk'];
+                								$idspklist = $datalistTW['id_sp'];
+                								$tahun= $datalistTW['tahun'];
+                								$jmlrkap = mysqli_query($connect, "SELECT * FROM beban_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun'");
+                								$qty= 0;
+                								while ($num = mysqli_fetch_array($jmlrkap)) {
+                									$qty += $num['rkap'];}
+                								$dataprogramkerja = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM program_kerja WHERE id_pk = '$idpklist'"));
+                								$datasubprogramkerja= mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM sub_program WHERE id_sp = '$idspklist'"));
+                                $idcabang= $dataprogramkerja['id_cabang'];
+                                $cabang = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM cabang WHERE id_cabang ='$idcabang'"));
+                								$datatwrc1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '1'"));
+                								$datatwrc2 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '2'"));
+                								$datatwrc3 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '3'"));
+                								$datatwrc4 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM beban_rencana WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrc = '4'"));
+                                            ?>
+                              <tr >
+                                <td><?php echo $cabang['nama_cabang']?></td>
                                 <td><?php echo $dataprogramkerja['no_item'] ?></td>
-                                <td><?php echo $dataprogramkerja['MA'] ?></td>
+                                <td><?php echo $dataprogramkerja['MA'] ?></td>                                
                                 <td><?php echo $dataprogramkerja['nama_pk'] ?></td>
                                 <td><?php echo $datasubprogramkerja['nama_sp'] ?></td>
                                 <td><?php echo $qty;?></td>
                                 <td><?php echo $datalistTW['tahun'] ?></td>
                                 <td><?php echo $datatwrc1['rkap'] ?></td>
+                                <td><?php if($datatwrc1['revisi'] != 0 ) { echo $datatwrc1['revisi']; } ?></td>
                                 <td><?php echo $datatwrc2['rkap'] ?></td>
+                                <td><?php if($datatwrc2['revisi'] != 0 ) { echo $datatwrc2['revisi']; }?></td>
                                 <td><?php echo $datatwrc3['rkap'] ?></td>
-                								<td><?php echo $datatwrc4['rkap'] ?></td>
+                                <td><?php if($datatwrc3['revisi'] != 0 ) { echo $datatwrc3['revisi']; }?></td>
+                                <td><?php echo $datatwrc4['rkap'] ?></td>
+                                <td><?php if($datatwrc4['revisi'] != 0 ) { echo $datatwrc4['revisi']; }?></td>
                 								<td>
                 								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal" 
                 								 data-id-twrc1 ="<?php echo $datatwrc1['id_twrc'];?>" 
@@ -222,7 +228,9 @@ if(isset($_GET['tahun'])){
                 								 </button>
                 								 </td>
                               </tr>
-                              <?php } ?>
+                              <?php 
+                                  } 
+                              ?>
                             </tbody>
                           </table>
 
@@ -230,7 +238,13 @@ if(isset($_GET['tahun'])){
                   </div>
                 </div>
               </div>
+
+
+
               <div class="clearfix"></div>
+
+
+
             </div>
           </div>
           <div class="clearfix"></div>
@@ -238,8 +252,7 @@ if(isset($_GET['tahun'])){
         <!-- /page content -->
 
 		<div class="x_content">
-
-		<!-- Modal Delete Rencana -->
+				<!-- Modal Delete Rencana -->
  				<div class="modal fade bs-delete-modal" id="modal_deleterencana" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
@@ -249,26 +262,26 @@ if(isset($_GET['tahun'])){
                           </button>
                           <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
                         </div>
-                        <div class="modal-body">
-                        <form action="editdatacapex.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" ">
+                        <div class="modal-body text-center">
+                        <form action="editdatabeban.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" ">
                          <div class="alert alert-danger" role="alert">
-          		 				 <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
-          								  
-          								  <h4> Anda yakin untuk menghapus data rencana ini? </h4>
-          						</div>
+		 				               <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
+								  
+								              <h4> Anda yakin untuk menghapus data rencana ini? </h4>
+						              </div>
                           <h2 style="color:red;"></h2>
-                          <form action="editdatacapex.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-          						    <input name ="editidtwrc1" type="text" id="jenis" value="" hidden>						
-          						    <input name ="editidtwrc2" type="text" id="jenis" value="" hidden>
+                          <form action="editdatabeban.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+						              <input name ="editidtwrc1" type="text" id="jenis" value="" hidden>						
+						              <input name ="editidtwrc2" type="text" id="jenis" value="" hidden>
           					      <input name ="editidtwrc3" type="text" id="jenis" value="" hidden>
           					      <input name ="editidtwrc4" type="text" id="jenis" value="" hidden>
 						 
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-danger" name ="deleterencanacapex" >Delete</button>
+                          <button type="submit" class="btn btn-danger" name ="deleterencanabeban" >Delete</button>
                         </div>
-					           	</form>
+						            </form>
                       </div>
                     </div>
                   </div>
@@ -283,56 +296,56 @@ if(isset($_GET['tahun'])){
                           <h4 class="modal-title" id="myModalLabel">Edit Rencana</h4>
                         </div>
                         <div class="modal-body">
-                        <form action="editdatacapex.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                        <form action="editdatabeban.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                           
                           <h4>Rencana Hanya bisa diedit jika Data Realisasi belum di isi.</h4>
                           <form action="editrencanabeban.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-            						  <input name ="editidtwrc1" type="text" id="jenis" value="" hidden >
-            						  <input name ="editidtwrc2" type="text" id="jenis" value="" hidden>
+            						    <input name ="editidtwrc1" type="text" id="jenis" value="" hidden >
+            						    <input name ="editidtwrc2" type="text" id="jenis" value="" hidden>
             					      <input name ="editidtwrc3" type="text" id="jenis" value="" hidden>
             					      <input name ="editidtwrc4" type="text" id="jenis" value="" hidden>
 
 
-            						  <div class="col-md-6">
-            							  <h4>Triwulan 1</h4>
-            							  <div class="form-group">
-            								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
-            								<div class="col-md-6 col-sm-6 col-xs-12">
-            								  <input value ="" name= "edittwrc1" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
-            								</div>
-            							  </div>
-            						  </div>
-            						  <div class="col-md-6">
-            							  <h4>Triwulan 2</h4>
-            							  <div class="form-group">
-            								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
-            								<div class="col-md-6 col-sm-6 col-xs-12">
-            								  <input value ="" name= "edittwrc2" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
-            								</div>
-            							  </div>
-            						  </div>
-            						  <div class="col-md-6">
-            							  <h4>Triwulan 3</h4>
-            							  <div class="form-group">
-            								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
-            								<div class="col-md-6 col-sm-6 col-xs-12">
-            								  <input value ="" name= "edittwrc3" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
-            								</div>
-            							  </div>
-            						  </div>
-            						  <div class="col-md-6">
-            							  <h4>Triwulan 4</h4>
-            							  <div class="form-group">
-            								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
-            								<div class="col-md-6 col-sm-6 col-xs-12">
-            								  <input value ="" name= "edittwrc4" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
-            								</div>
-            							  </div>
-            						  </div>
+              						  <div class="col-md-6">
+              							  <h4>Triwulan 1</h4>
+              							  <div class="form-group">
+              								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
+              								<div class="col-md-6 col-sm-6 col-xs-12">
+              								  <input value ="" name= "edittwrc1" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
+              								</div>
+              							  </div>
+              						  </div>
+              						  <div class="col-md-6">
+              							  <h4>Triwulan 2</h4>
+              							  <div class="form-group">
+              								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
+              								<div class="col-md-6 col-sm-6 col-xs-12">
+              								  <input value ="" name= "edittwrc2" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
+              								</div>
+              							  </div>
+              						  </div>
+              						  <div class="col-md-6">
+              							  <h4>Triwulan 3</h4>
+              							  <div class="form-group">
+              								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
+              								<div class="col-md-6 col-sm-6 col-xs-12">
+              								  <input value ="" name= "edittwrc3" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
+              								</div>
+              							  </div>
+              						  </div>
+              						  <div class="col-md-6">
+              							  <h4>Triwulan 4</h4>
+              							  <div class="form-group">
+              								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">RKAP</label>
+              								<div class="col-md-6 col-sm-6 col-xs-12">
+              								  <input value ="" name= "edittwrc4" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
+              								</div>
+              							  </div>
+              						  </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name ="editrencanacapex" >Save changes</button>
+                          <button type="submit" class="btn btn-primary" name ="updaterencanabeban" >Save changes</button>
                         </div>
 						          </form>
                       </div>
@@ -348,56 +361,56 @@ if(isset($_GET['tahun'])){
 					  <h4 class="modal-title" id="myModalLabel">Tambah Program</h4>
 					</div>
 
-					<div class="modal-body">
-					<form action="tambahprogramcapex.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                                     
-              <input name ="jenis" type="text" id="jenis" value="spjt" hidden>
-               <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Cabang</label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
+				    <div class="modal-body">
+					       <form action="tambahprogrambeban.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">                       
+                 
+                        <input name ="jenis" type="text" id="jenis" value="bpt" hidden>
+                        <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Cabang</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
 
-                    <select name ="idcabang" class="select2_single form-control" tabindex="-1" required="required">
+                            <select name ="idcabang" class="select2_single form-control" tabindex="-1" required="required">
 
-                    <option></option>
-                    <?php
-                          $dataCabang = mysqli_query($connect, "SELECT * FROM cabang");
-                           while($ambilDataCabang = mysqli_fetch_array($dataCabang)){
-                                    ?>
-                                   <option  value="<?php echo $ambilDataCabang['id_cabang'];?>"><?php echo $ambilDataCabang['nama_cabang'];?>                                             
-                                   </option>
+                            <option></option>
+                            <?php
+                                  $dataCabang = mysqli_query($connect, "SELECT * FROM cabang");
+                                   while($ambilDataCabang = mysqli_fetch_array($dataCabang)){
+                                            ?>
+                                           <option  value="<?php echo $ambilDataCabang['id_cabang'];?>"><?php echo $ambilDataCabang['nama_cabang'];?>                                             
+                                           </option>
 
-                    <?php }?>
-                              
+                            <?php }?>
+                                      
 
-                    </select>
-                  </div>
-                </div>
-              <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ma">Nomor Item</label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input name ="nomorItem" type="text" id="item" required="required" class="form-control col-md-7 col-xs-12">
-              </div>
-             </div>
-						  <div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="ma">Nomor MA</label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-							  <input name ="nomorMA" type="text" id="ma" required="required" class="form-control col-md-7 col-xs-12">
-							</div>
-						  </div>
-						  <div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Program Kerja</label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-							  <input name ="programKerja" type="text" id="programKerja" required="required" class="form-control col-md-7 col-xs-12">
-							</div>
-						  </div>
+                            </select>
+                          </div>
+                        </div>
+                         <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ma">Nomor Item</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input name ="nomorItem" type="text" id="item" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                         </div>
+          						  <div class="form-group">
+          							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="ma">Nomor MA</label>
+          							<div class="col-md-6 col-sm-6 col-xs-12">
+          							  <input name ="nomorMA" type="text" id="ma" required="required" class="form-control col-md-7 col-xs-12">
+          							</div>
+          						  </div>
+          						  <div class="form-group">
+          							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Program Kerja</label>
+            							<div class="col-md-6 col-sm-6 col-xs-12">
+            							  <input name ="programKerja" type="text" id="programKerja" required="required" class="form-control col-md-7 col-xs-12">
+            							</div>
+          						  </div>
 
-					</div>
-					<div class="modal-footer">
-					  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-					  <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
-					</div>
-					 </form>
-				  </div>
+          					</div>
+          					<div class="modal-footer">
+          					  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+          					  <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
+          					</div>
+          					 </form>
+          				  </div>
 
 				</div>
 			</div>
@@ -413,12 +426,12 @@ if(isset($_GET['tahun'])){
 					  <h4 class="modal-title" id="myModalLabel">Tambah Subprogram</h4>
 					</div>
 					<div class="modal-body">
-					  <form action="tambahsubprogramcapex.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                   <div class="form-group">
+					  <form action="tambahsubprogrambeban.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Nama Cabang</label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
 
-                            <select name ="idcabang" id="list-cabangspjt1" class="select2_single form-control" tabindex="-1" required="required">
+                            <select name ="idcabang" id="list-cabangbpt1" class="select2_single form-control" tabindex="-1" required="required">
 
                             <option value=""> Pilih Cabang</option>
                             <?php
@@ -434,35 +447,35 @@ if(isset($_GET['tahun'])){
                             </select>
                           </div>
                         </div>
-        						  <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Program Kerja</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+          						  <div class="form-group">
+            							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Program Kerja</label>
+              							<div class="col-md-6 col-sm-6 col-xs-12">
 
-                              <select name ="idprogramkerja" id="program-listsemua1" class="select2_single form-control" tabindex="-1" required="required">
+              							  <select name ="idprogramkerja" id="program-listsemua1" class="select2_single form-control" tabindex="-1" required="required">
 
                                <option>Pilih Program Kerja</option>
-                              
+              								
 
-                              </select>
-                           </div>
-                         </div>
+              							  </select>
+          							   </div>
+          						   </div>
 
-      						  <div class="form-group">
-      							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="subProgram">Subrogram Kerja</label>
-      							<div class="col-md-6 col-sm-6 col-xs-12">
-      							  <input name ="subprogramkerja" type="text" id="subProgram" required="required" class="form-control col-md-7 col-xs-12" required="required">
-      							</div>
-      						  </div>
+          						  <div class="form-group">
+          							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="subProgram">Subrogram Kerja</label>
+          							<div class="col-md-6 col-sm-6 col-xs-12">
+          							  <input name ="subprogramkerja" type="text" id="subProgram" required="required" class="form-control col-md-7 col-xs-12" required="required">
+          							</div>
+          						  </div>
 
-					</div>
-					<div class="modal-footer">
-					  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-					  <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
-					</div>
-					</form>
-				  </div>
-				</div>
-			</div>
+          					</div>
+          					<div class="modal-footer">
+          					  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+          					  <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
+          					</div>
+          					</form>
+          				  </div>
+          				</div>
+          			</div>
 
 			<!-- Modal Tambah Rencana -->
 			<div class="modal fade bs-rencana" tabindex="-1" role="dialog" aria-hidden="true">
@@ -474,12 +487,12 @@ if(isset($_GET['tahun'])){
 					  <h4 class="modal-title" id="myModalLabel">Tambah Rencana</h4>
 					</div>
 					<div class="modal-body">
-					  <form action="tambahrencanacapex.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-						   <div class="form-group">
+					  <form action="tambahrencanabeban.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Nama Cabang</label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
 
-                            <select name ="idcabang" id="list-cabangspjt2" class="select2_single form-control" tabindex="-1" required="required">
+                            <select name ="idcabang" id="list-cabangbpt2" class="select2_single form-control" tabindex="-1" required="required">
 
                             <option value=""> Pilih Cabang</option>
                             <?php
@@ -495,7 +508,7 @@ if(isset($_GET['tahun'])){
                             </select>
                           </div>
                         </div>
-                     <div class="form-group">
+                        <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Program Kerja</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
 
@@ -507,34 +520,35 @@ if(isset($_GET['tahun'])){
                               </select>
                            </div>
                          </div>
-              
-                      <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="subProgram">Subprogram Kerja</label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input name ="jenis" type="text" id="jenis" value="bpt" hidden>
-                          
-                        <select required="required" name="subprogram" id="subprogram-list" class="select2_single form-control" tabindex="-1">
-                          <option>Pilih Subprogram Kerja</option>
-                        </select>
-                      </div>
-                      </div>
-				     		 <input name ="jenis" type="text" id="jenis" value="spjt" hidden>
+						   
+        						  <div class="form-group">
+        							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="subProgram">Subprogram Kerja</label>
+        							<div class="col-md-6 col-sm-6 col-xs-12">
+        								<input name ="jenis" type="text" id="jenis" value="bpt" hidden>
+        							    
+        								<select required="required" name="subprogram" id="subprogram-list" class="select2_single form-control" tabindex="-1">
+        									<option>Pilih Subprogram Kerja</option>
+        								</select>
+        							</div>
+        						  </div>
+						 					  
+					     
 
-						  
-					      <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
-                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <div class='input-group date' id='myDatepickerFormMonitoring'>
-                                    <input type='text' class="form-control" name= "tahun"  />
-                                    <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
-                                </div>
-                          </div>
+                 <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
+                       <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class='input-group date' id='myDatepickerFormMonitoring'>
+                            <input type='text' class="form-control" name= "tahun"  />
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        </div>
+                  </div>
 
 
-                          <br>
+
+              <br>
 						  <div class="col-md-6">
 							  <h4>Triwulan 1</h4>
 							  <div class="form-group">

@@ -27,9 +27,9 @@
 		}else{
 		
 			//insert data 
-			$insert= mysqli_query($connect,"INSERT INTO capex_rencana VALUES ('','$id_subpk','$tahun','1','$rkap1','$jenis'), 
-			('','$id_subpk','$tahun','2','$rkap2','$jenis'),('','$id_subpk','$tahun','3','$rkap3','$jenis'),
-			('','$id_subpk','$tahun','4','$rkap4','$jenis');");
+			$insert= mysqli_query($connect,"INSERT INTO capex_rencana VALUES ('','$id_subpk','$tahun','1','$rkap1','0','$jenis'), 
+			('','$id_subpk','$tahun','2','$rkap2','0','$jenis'),('','$id_subpk','$tahun','3','$rkap3','0','$jenis'),
+			('','$id_subpk','$tahun','4','$rkap4','0','$jenis');");
 			
 			if($insert){
 ?>		 		

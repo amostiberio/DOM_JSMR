@@ -10,7 +10,8 @@ include 'connect.php';
 		$tahun = $_POST['tahun'];
 		$tmpName = $_FILES['file']['tmp_name'];
 		$size = $_FILES['file']['size'];
-		
+	
+
 		$fp = fopen($tmpName, 'r');
 		$content = fread($fp, filesize($tmpName));
 		$content = addslashes($content);
@@ -21,7 +22,7 @@ include 'connect.php';
 			$nama = addslashes($nama);
 		}
 	
-		$insert= mysqli_query($connect,"INSERT INTO realisasi_laporan VALUES ('','$nama','$tipe','$content','$size','$tahun',now(),'$idcabang')");
+		$insert= mysqli_query($connect,"INSERT INTO realisasi_laporan VALUES ('','$nama','$tipe','$content','$size','$tahun',date('m'),now(),'$idcabang','1')");
 		if($insert){
 ?>		 		<script> window.alert('Data berhasil Ditambah') </script>
 				<script>document.location.href="javascript:history.back()";</script>

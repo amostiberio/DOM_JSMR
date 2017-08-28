@@ -309,6 +309,15 @@
         var idtwrl4 = $(e.relatedTarget).data('id-twrl4');
         $(e.currentTarget).find('input[name="editidtwrl4"]').val(idtwrl4);
 
+        var twrl1 = $(e.relatedTarget).data('twrl1');
+        $(e.currentTarget).find('input[name="edittwrl1"]').val(twrl1);
+        var twrl2 = $(e.relatedTarget).data('twrl2');
+        $(e.currentTarget).find('input[name="edittwrl2"]').val(twrl2);
+        var twrl3 = $(e.relatedTarget).data('twrl3');
+        $(e.currentTarget).find('input[name="edittwrl3"]').val(twrl3);
+        var twrl4 = $(e.relatedTarget).data('twrl4');
+        $(e.currentTarget).find('input[name="edittwrl4"]').val(twrl4);
+
 
 
         });

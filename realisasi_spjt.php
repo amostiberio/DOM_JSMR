@@ -130,29 +130,26 @@ if(isset($_GET['tahun'])){
                     </div>
                    </div>
                   <div class="x_content">
-					  <table id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
+					  <table id="datatable-keytable"  class="table table-striped table-bordered text-center">
 						<thead>
 						  <tr>
+						    <th rowspan="2">No. Item</th>
+							<th rowspan="2">MA</th>
 							<th rowspan="2">Program Kerja</th>
 							<th rowspan="2">Sub Program Kerja</th>
-							<th rowspan="2">Total Status Akhir s.d TW 4</th>
 							<th rowspan="2">TOTAL Realisasi s.d TW 4</th>
 							<th rowspan="2">Tahun </th>
-							<th colspan="2">TW 1</th>
-							<th colspan="2">TW 2</th>
-							<th colspan="2">TW 3</th>
-							<th colspan="2">TW 4</th>
+							<th colspan="1">TW 1</th>
+							<th colspan="1">TW 2</th>
+							<th colspan="1">TW 3</th>
+							<th colspan="1">TW 4</th>
 							<th rowspan="2">Aksi</th>
 
 						  </tr>
 						  <tr>
-							<th >Status Akhir</th>
 							<th >Realisasi</th>
-							<th >Status Akhir</th>
 							<th >Realisasi</th>
-							<th >Status Akhir</th>
 							<th >Realisasi</th>
-							<th >Status Akhir</th>
 							<th >Realisasi</th>
 						  </tr>
 						</thead>
@@ -171,11 +168,8 @@ if(isset($_GET['tahun'])){
 								$jmlstakhir = mysqli_query($connect, "SELECT * FROM capex_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun'");
 								$jmlrealisasi = mysqli_query($connect, "SELECT * FROM capex_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun'");
 								$qty1 = 0;
-								$qty2 = 0;
-								while ($num = mysqli_fetch_array($jmlstakhir)) {
-									$qty1 += $num['stat_akhir'];}
 								while ($num = mysqli_fetch_array($jmlrealisasi)) {
-									$qty2 += $num['realisasi'];}
+									$qty1 += $num['realisasi'];}
 								$dataprogramkerja = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM program_kerja WHERE id_pk = '$idpklist'"));
 								$datasubprogramkerja= mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM sub_program WHERE id_sp = '$idspklist'"));
 								$datatwreal1 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM capex_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '1'"));
@@ -184,23 +178,22 @@ if(isset($_GET['tahun'])){
 								$datatwreal4 = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM capex_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun' AND stat_twrl = '4'"));
 							?>
 						  <tr>
+						    <td><?php echo $dataprogramkerja['no_item'] ?></td>
+                            <td><?php echo $dataprogramkerja['MA'] ?></td>		
 							<td><?php echo $dataprogramkerja['nama_pk'] ?></td>
 							<td><?php echo $datasubprogramkerja['nama_sp'] ?></td>
 							<td><?php echo $qty1;?></td>
-							<td><?php echo $qty2;?></td>
 							<td><?php echo $datalistTW['tahun'] ?></td>
-							<td><?php echo $datatwreal1['stat_akhir'] ?></td>
 							<td><?php echo $datatwreal1['realisasi'] ?></td>
-							<td><?php echo $datatwreal2['stat_akhir'] ?></td>
 							<td><?php echo $datatwreal2['realisasi'] ?></td>
-							<td><?php echo $datatwreal3['stat_akhir'] ?></td>
 							<td><?php echo $datatwreal3['realisasi'] ?></td>
-							<td><?php echo $datatwreal4['stat_akhir'] ?></td>
 							<td><?php echo $datatwreal4['realisasi'] ?></td>
 							<td>
 							<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal" 
 							data-id-twrl1="<?php echo $datatwreal1['id_twrl'] ?>" data-id-twrl2="<?php echo $datatwreal2['id_twrl'] ?>" 
-							data-id-twrl3="<?php echo $datatwreal3['id_twrl'] ?>" data-id-twrl4="<?php echo $datatwreal4['id_twrl'] ?>">
+							data-id-twrl3="<?php echo $datatwreal3['id_twrl'] ?>" data-id-twrl4="<?php echo $datatwreal4['id_twrl'] ?>"
+							data-twrl1="<?php echo $datatwreal1['realisasi'] ?>" data-twrl2="<?php echo $datatwreal2['realisasi'] ?>" 
+							data-twrl3="<?php echo $datatwreal3['realisasi'] ?>" data-twrl4="<?php echo $datatwreal4['realisasi'] ?>">
 							 Edit
 							 </button>																 
 							 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
@@ -280,43 +273,41 @@ if(isset($_GET['tahun'])){
 							<input name ="editidtwrl2" type="text" id="jenis" value="" hidden>
 						    <input name ="editidtwrl3" type="text" id="jenis" value="" hidden>
 						    <input name ="editidtwrl4" type="text" id="jenis" value="" hidden>				   
-						  <div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="sttwrl">Triwulan</label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-							
-							 <div class="radio">
-								<label>
-								  <input type="radio" value="1" name="sttwrl"> TW 1
-								</label>
+						  <div class="col-md-6">
+							  <h4>Triwulan 1</h4>
+							  <div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">Realisasi</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+								  <input value ="" name= "edittwrl1" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
+								</div>
 							  </div>
-							  <div class="radio">
-								<label>
-								  <input type="radio" value="2" name="sttwrl"> TW 2
-								</label>
-							  </div>
-							  <div class="radio">
-								<label>
-								  <input type="radio" value="3" name="sttwrl"> TW 3
-								</label>
-							  </div>
-							  <div class="radio">
-								<label>
-								  <input type="radio" value="4" name="sttwrl"> TW 4
-								</label>
-							  </div>
-							</div>
 						  </div>
-						  <div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="status_akhir">Status Akhir</label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-							  <input name="stakhir" type="number" min="0" id="status_akhir" required="required" class="form-control col-md-7 col-xs-12">
-							</div>
+						  <div class="col-md-6">
+							  <h4>Triwulan 2</h4>
+							  <div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">Realisasi</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+								  <input value ="" name= "edittwrl2" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
+								</div>
+							  </div>
 						  </div>
-						  <div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="realisasi">Realisasi</label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-							  <input name="realisasi" type="number" min="0" id="realisasi" required="required" class="form-control col-md-7 col-xs-12">
-							</div>
+						  <div class="col-md-6">
+							  <h4>Triwulan 3</h4>
+							  <div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">Realisasi</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+								  <input value ="" name= "edittwrl3" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
+								</div>
+							  </div>
+						  </div>
+						  <div class="col-md-6">
+							  <h4>Triwulan 4</h4>
+							  <div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="rkap">Realisasi</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+								  <input value ="" name= "edittwrl4" type="number" min="0" id="rkap" required="required" class="form-control col-md-7 col-xs-12">
+								</div>
+							  </div>
 						  </div>
 						</div>
 						<div class="modal-footer">
@@ -380,34 +371,24 @@ if(isset($_GET['tahun'])){
 						  <div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="sttwrl">Triwulan</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
-							  <div class="radio">
+							  <div class="radio text-center">
 								<label>
 								  <input type="radio" value="1" name="sttwrl"> TW 1
 								</label>
-							  </div>
-							  <div class="radio">
 								<label>
 								  <input type="radio" value="2" name="sttwrl"> TW 2
 								</label>
-							  </div>
-							  <div class="radio">
 								<label>
 								  <input type="radio" value="3" name="sttwrl"> TW 3
 								</label>
-							  </div>
-							  <div class="radio">
 								<label>
 								  <input type="radio" value="4" name="sttwrl"> TW 4
 								</label>
 							  </div>
+							 
 							</div>
 						  </div>
-						  <div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="status_akhir">Status Akhir</label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-							  <input name="stakhir" type="number" min="0" id="status_akhir" required="required" class="form-control col-md-7 col-xs-12">
-							</div>
-						  </div>
+						  
 						  <div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="realisasi">Realisasi</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">

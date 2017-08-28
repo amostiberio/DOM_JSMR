@@ -2,6 +2,11 @@
 include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 
+if(isset($_GET['tahun'])){
+    $nilaiTahun = $_GET['tahun'];
+  
+  }else $nilaiTahun = '0';
+
 
   $iduser = $_SESSION['id_user'];
 
@@ -81,9 +86,29 @@ include ('connect.php'); //connect ke database
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Data Beban Cabang <?php echo $namacabang; ?> </small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small>Data Laporan Bulanan Cabang <?php echo $namacabang; ?> </small></h2>
                     <div class="clearfix"></div>
                   </div>
+
+                   <form action="dropdownproses.php" method="POST">
+                   <div class='col-sm-10'>                    
+                    <div class="form-group col-md-3 col-sm-3 col-xs-12">
+                    <h5 class="control-label col-md-4 col-sm-4 col-xs-12" for="tahun">Tahun</h5>
+                        <div class='input-group date ' id='myDatepickerFilter'>
+
+                            <input type='text' class="form-control" name= "tahun" <?php if(isset($_GET['tahun'])){ ?> value="<?php echo $nilaiTahun ;?>" <?php } ?>/>
+                            <span style="margin-right:10px;" class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                             
+                        </div>                    
+                    </div>
+                    
+                    <button  type="submit" class="btn btn-primary" name="dropdownTahunLaporanBulanan">Lihat</button>
+                    <button type="submit" class="btn btn-danger" name="clearTahunLaporanBulanan">Clear</button>
+                  </div>
+                  </form> 
+
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
                       <div class="input-group buttonright" >
@@ -94,11 +119,11 @@ include ('connect.php'); //connect ke database
                     </div>
                    </div>
                   <div class="x_content">
-					<table id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
+					<table id="datatable-keytable"  class="table table-striped table-bordered text-center">
 						<thead >
 						  <tr >
 							<th>Nama File</th>
-							<th>Tahun</th>
+							<th>Tanggal</th>
 							<th>Tipe File</th>
 							<th>Waktu Unggah</th>
 							<th>Unduh File</th>
@@ -106,12 +131,55 @@ include ('connect.php'); //connect ke database
 						</thead>
 						<tbody>
 						<?php
-						$laporan = mysqli_query($connect, "SELECT * FROM realisasi_laporan");
+						if($nilaiTahun >0 ){
+								$laporan = mysqli_query($connect, "SELECT * FROM realisasi_laporan WHERE tahun = '$nilaiTahun'");
+
+						}else{
+								$laporan = mysqli_query($connect, "SELECT * FROM realisasi_laporan");
+
+						}
 						while($datalaporan = mysqli_fetch_array($laporan)){
+						$ambilBulan = $datalaporan['bulan'];
+							if($ambilBulan=='1'){
+								$bulan= 'Januari';
+							}
+							if($ambilBulan=='2'){
+								$bulan= 'Februari';
+							}
+							if($ambilBulan=='3'){
+								$bulan= 'Maret';
+							}
+							if($ambilBulan=='4'){
+								$bulan= 'April';
+							}
+							if($ambilBulan=='5'){
+								$bulan= 'Mei';
+							}
+							if($ambilBulan=='6'){
+								$bulan= 'Juni';
+							}
+							if($ambilBulan=='7'){
+								$bulan= 'Juli';
+							}
+							if($ambilBulan=='8'){
+								$bulan= 'Agustus';
+							}
+							if($ambilBulan=='9'){
+								$bulan= 'September';
+							}
+							if($ambilBulan=='10'){
+								$bulan= 'Oktober';
+							}
+							if($ambilBulan=='11'){
+								$bulan= 'November';
+							}
+							if($ambilBulan=='12'){
+								$bulan= 'Desember';
+							}
 						?>
 						  <tr>
 							<td><?php echo $datalaporan['nama_file']?></td>
-							<td><?php echo $datalaporan['tahun']?></td>
+							<td><?php echo $bulan; ?> <?php echo $datalaporan['tahun']?></td>
 							<td><?php echo $datalaporan['type_file']?></td>
 							<td><?php echo $datalaporan['waktu']?></td>
 							<td><a href="unduh.php?id_realisasi=<?php echo $datalaporan['id_realisasi'];?>"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button></a>
@@ -163,10 +231,10 @@ include ('connect.php'); //connect ke database
 				</div>
 			  </div>
 			   <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tanggal</label>
                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div class='input-group date' id='myDatepickerFormMonitoring'>
-                            <input type='text' class="form-control" name= "tahun"  />
+                        <div class='input-group date' id='myDatepickerFormPencapaian'>
+                            <input type='text' class="form-control" name= "tanggal" />
                             <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -200,7 +268,7 @@ include ('connect.php'); //connect ke database
 		  <h4 class="modal-title" id="myModalLabel">Delete File</h4>
 		</div>
 	<form action="editdelete.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-		<div class="modal-body">
+		<div class="modal-body text-center">
 		  <div class="alert alert-danger" role="alert">
 		  <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
 	      <h4> Anda yakin untuk menghapus file ini? </h4>

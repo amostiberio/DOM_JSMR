@@ -1,6 +1,15 @@
 <?php
 include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
+if(isset($_GET['tahun'])){
+    $nilaiTahun = $_GET['tahun'];
+  
+  }else $nilaiTahun = '0';
+
+if(isset($_GET['cabang'])){
+    $nilaiCabang = $_GET['cabang'];
+  
+  }else $nilaiCabang = '0';
 
 
   $iduser = $_SESSION['id_user'];
@@ -83,15 +92,53 @@ include ('connect.php'); //connect ke database
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Data Beban Cabang <?php echo $namacabang; ?> </small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small> Data Laporan Bulanan Semua Cabang </small></h2>
                     <div class="clearfix"></div>
                   </div>
+
+                  <form action="dropdownproses.php" method="POST">
+                   <div class='col-sm-10'>                    
+                    <div class="form-group col-md-3 col-sm-3 col-xs-12">
+                    <h5 class="control-label col-md-4 col-sm-4 col-xs-12" for="tahun">Tahun</h5>
+                        <div class='input-group'>
+                            <select name= "dropDownCabangLaporan" class="select2_single form-control" tabindex="-1">
+                                    <option value="0">Pilih Cabang</option>
+                                    <?php $ambilCabang = mysqli_query($connect,"SELECT * FROM cabang");
+                                        while($ambilDataCabang = mysqli_fetch_array($ambilCabang)){
+                                    ?>      
+                                                              
+                                    <option value="<?php echo $ambilDataCabang['id_cabang'];?>" <?php if ($nilaiCabang == $ambilDataCabang['id_cabang']) echo 'selected'?> >
+                                    <?php echo $ambilDataCabang ['nama_cabang'];?></option>
+                                       
+                                    <?php  } 
+                                      ?>                                                      
+                            </select>                             
+                        </div>                 
+                    </div>
+                    
+                   
+                  </div>
+                  <div class='col-sm-10'>                    
+                    <div class="form-group col-md-3 col-sm-3 col-xs-12">
+                    <h5 class="control-label col-md-4 col-sm-4 col-xs-12" for="tahun">Tahun</h5>
+                        <div class='input-group date ' id='myDatepickerFilter'>
+                            <input type='text' class="form-control" name= "tahun" <?php if(isset($_GET['tahun'])){ ?> value="<?php echo $nilaiTahun ;?>" <?php } ?>/>
+                            <span style="margin-right:10px;" class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>                             
+                        </div>                 
+                    </div>
+                     <button  type="submit" class="btn btn-primary" name="dropdownTahunLaporanRealisasi">Lihat</button>
+                    <button type="submit" class="btn btn-danger" name="clearTahunLaporanRealisasi">Clear</button>
+                  </div>
+                  </form> 
+
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
                       <div class="input-group buttonright" >
-						  <div class="btn-group  buttonrightfloat " >
-							<button type="button" data-toggle="modal" data-target=".bs-unggah" class="btn btn-primary">Set Time Limit Unggah Laporan</button>
-						  </div>
+        						  <div class="btn-group  buttonrightfloat " >
+        							<button type="button" data-toggle="modal" data-target=".bs-unggah" class="btn btn-primary">Set Time Limit Unggah Laporan</button>
+        						  </div>
                       </div>
                     </div>
                    </div>
@@ -99,7 +146,7 @@ include ('connect.php'); //connect ke database
 					<table id="datatable-keytable"  class="table table-striped table-bordered text-center">
 						<thead >
 						  <tr >
-						  	<th>Cabang </th>
+						  <th>Cabang </th>
 							<th>Nama File</th>
 							<th>Tahun</th>
 							<th>Tipe File</th>
@@ -109,7 +156,19 @@ include ('connect.php'); //connect ke database
 						</thead>
 						<tbody>
 						<?php
-						$laporan = mysqli_query($connect, "SELECT * FROM realisasi_laporan");
+            if($nilaiTahun > 0 ){
+              if($nilaiCabang >0){
+                $laporan = mysqli_query($connect, "SELECT * FROM realisasi_laporan WHERE tahun = '$nilaiTahun' AND id_cabang ='$nilaiCabang'");
+              }else{
+                $laporan = mysqli_query($connect, "SELECT * FROM realisasi_laporan WHERE tahun = '$nilaiTahun'");
+              }
+            }else{
+              if($nilaiCabang > 0){
+                 $laporan = mysqli_query($connect, "SELECT * FROM realisasi_laporan WHERE id_cabang ='$nilaiCabang'");
+              }else{
+                 $laporan = mysqli_query($connect, "SELECT * FROM realisasi_laporan");
+              }
+            }
 						while($datalaporan = mysqli_fetch_array($laporan)){
 							$id_cabanglaporan = $datalaporan['id_cabang'];
 							$datacabang = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM cabang WHERE id_cabang='$id_cabanglaporan'"))
