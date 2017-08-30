@@ -19,7 +19,7 @@ if (isset($_SESSION['id_role']))
    // jika kondisi level user maka akan diarahkan ke halaman lain
    else if ($datacoba['role'] == "user")
    {
-      echo '<script language="javascript">alert("Welcome Back User!"); document.location="user/home.php";</script>';
+      echo '<script language="javascript">alert("Welcome Back User!"); document.location="home.php";</script>';
    }
 }
 //tidak ada kondisi yang sama

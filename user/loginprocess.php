@@ -21,5 +21,5 @@ echo "Login Sukses";
     header('location: admin.php');
 }
 else
- echo '<script language="javascript">alert("Username or Password is incorrect !"); document.location="../index.php";</script>';
+ echo '<script language="javascript">alert("Username or Password is incorrect !"); document.location="index.php";</script>';
 ?>
