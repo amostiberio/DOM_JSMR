@@ -64,7 +64,7 @@ include ('connect.php'); //connect ke database
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Laporan KPI</h3>
+                <h3>Rencana Data Waktu Transaksi 2 SPM</h3>
               </div>
 
 
@@ -76,7 +76,7 @@ include ('connect.php'); //connect ke database
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Data Waktu Transaksi 2 SPM Cabang <?php echo $namacabang; ?> </small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small></small></h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -186,12 +186,12 @@ include ('connect.php'); //connect ke database
                                   data-gardutoltransaksi ="<?php echo $datarencana_gardutol_transaksi_s1['nilai'];?>"
                                   data-jmlpanjangantrian ="<?php echo $datarencana_antrian_kendaraan_s1['nilai'];?>"
                                   >
-                                    Edit
+                                    Ubah
                                   </button>
                                   <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-deleterencanaspm"
                                   data-id-semester ="<?php echo $datarencana_gardu_keluar_tertutup_s1['id_semester'];?>"
                                   >
-                                    Delete
+                                    Hapus
                                   </button>
                                 </td>
                                 <td>
@@ -210,11 +210,11 @@ include ('connect.php'); //connect ke database
                                   data-gardutoltransaksi ="<?php echo $datarencana_gardutol_transaksi_s2['nilai'];?>"
                                   data-jmlpanjangantrian ="<?php echo $datarencana_antrian_kendaraan_s2['nilai'];?>"
                                   >
-                                    Edit
+                                    Ubah
                                   </button>
                                   <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-deleterencanaspm"
                                   data-id-semester ="<?php echo $datarencana_gardu_keluar_tertutup_s2['id_semester'];?>">
-                                    Delete
+                                    Hapus
                                   </button>
                                 </td>
                               </tr>
@@ -328,7 +328,7 @@ include ('connect.php'); //connect ke database
     						</div>
     						<div class="modal-footer">
     						  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-    						  <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
+    						  <button type="submit" class="btn btn-primary" name="tambah">Tambah</button>
     						</div>
     					</form>
     				  </div>
@@ -342,7 +342,7 @@ include ('connect.php'); //connect ke database
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
-                  <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
+                  <h4 class="modal-title" id="myModalLabel">Hapus Rencana</h4>
                 </div>
                 <div class="modal-body">
                   <form action="edit_rencanaspm.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
@@ -355,8 +355,8 @@ include ('connect.php'); //connect ke database
                       <input name ="edit_idsemester" type="text" id="waktutransaksi1" value="" hidden>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                      <button type="submit" class="btn btn-danger" name ="deleterencanaspm" >Delete</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                      <button type="submit" class="btn btn-danger" name ="deleterencanaspm" >Hapus</button>
                     </div>
                     </form>
                   </div>

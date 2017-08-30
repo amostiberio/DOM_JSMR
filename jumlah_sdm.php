@@ -111,8 +111,8 @@ if(isset($_GET['tahun'])){
                         </div>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary" name="dropdownTahunSDM">View</button>
-				  <button type="submit" class="btn btn-danger" name="clearTahunSDM">Clear</button>
+                  <button type="submit" class="btn btn-primary" name="dropdownTahunSDM">Lihat</button>
+				  <button type="submit" class="btn btn-danger" name="clearTahunSDM">Hapus Filter</button>
                   </form>
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
@@ -127,10 +127,10 @@ if(isset($_GET['tahun'])){
                       </div>
 					  <div class="input-group buttonright" >
                       <div class="btn-group  buttonrightfloat " >
-						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
+						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Unduh <span class="caret"></span>
                       </button>
                       <ul role="menu" class="dropdown-menu pull-right">
-                       <li><a href="downloadjs.php?tahun=<?php echo $nilaiTahun;?>" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                       <li><a href="downloadjs.php?tahun=<?php echo $nilaiTahun;?>" > Unduh Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
                        </li>
 					   </ul>
 	                    </div>
@@ -209,10 +209,10 @@ if(isset($_GET['tahun'])){
                                  data-data4="<?php echo $data_kryjlj['jumlah']?>"
                                  data-data5="<?php echo $data_kryjlo['jumlah']?>"
 								 data-data6="<?php echo $data_sakitpermanen['jumlah']?>"															 
-								 data-data7="<?php echo $data_tugt['jumlah']?>">Edit</button>
+								 data-data7="<?php echo $data_tugt['jumlah']?>">Ubah</button>
 								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
 								 data-id-gerbang ="<?php echo $data_gerbang['id_gerbang']?>"
-								 data-tahun ="<?php echo $data_jumlahsdm['tahun']?>">Delete</button>
+								 data-tahun ="<?php echo $data_jumlahsdm['tahun']?>">Hapus</button>
 								</td>
                               </tr>
                               <?php }?>
@@ -250,7 +250,7 @@ if(isset($_GET['tahun'])){
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 			  </button>
-			  <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
+			  <h4 class="modal-title" id="myModalLabel">Hapus Rencana</h4>
 			</div>
 			<div class="modal-body">
 			<form action="editdelete.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" ">
@@ -264,8 +264,8 @@ if(isset($_GET['tahun'])){
 				  <input name="tahun" type="text" id="tahun" value="" hidden>
 			</div>
 			<div class="modal-footer">
-			  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-			  <button type="submit" class="btn btn-danger" name ="deletejs" >Delete</button>
+			  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+			  <button type="submit" class="btn btn-danger" name ="deletejs" >Hapus</button>
 			</div>
 			</form>
 		  </div>
@@ -280,7 +280,7 @@ if(isset($_GET['tahun'])){
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 			  </button>
-			  <h4 class="modal-title" id="myModalLabel">Edit Rencana</h4>
+			  <h4 class="modal-title" id="myModalLabel">Ubah Rencana</h4>
 			</div>
 			<div class="modal-body">
 			<form action="editdelete.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
@@ -331,8 +331,8 @@ if(isset($_GET['tahun'])){
             </div>
 			</div>
 			<div class="modal-footer">
-			  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-			  <button type="submit" class="btn btn-primary" name ="editjs" >Save changes</button>
+			  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+			  <button type="submit" class="btn btn-primary" name ="editjs" >Simpan</button>
 			</div>
 			</form>
 		  </div>

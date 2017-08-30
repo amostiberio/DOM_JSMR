@@ -110,17 +110,17 @@ if(isset($_GET['tahun'])){
                         </div>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary" name="dropdownTahunRatio">View</button>
-				  <button type="submit" class="btn btn-danger" name="clearTahunRatio">Clear</button>
+                  <button type="submit" class="btn btn-primary" name="dropdownTahunRatio">Lihat</button>
+				  <button type="submit" class="btn btn-danger" name="clearTahunRatio">Hapus Filter</button>
                   </form>
                   <div class="title_right">
 				  <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
 				  <div class="input-group buttonright" >
                       <div class="btn-group  buttonrightfloat " >
-						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
+						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Unduh <span class="caret"></span>
                       </button>
                       <ul role="menu" class="dropdown-menu pull-right">
-                       <li><a href="downloadvr.php?tahun=<?php echo $nilaiTahun;?>" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                       <li><a href="downloadvr.php?tahun=<?php echo $nilaiTahun;?>" > Unduh Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
                        </li>
 					   </ul>
 	                    </div>

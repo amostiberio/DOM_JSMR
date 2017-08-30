@@ -87,7 +87,7 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Laporan KPI</h3>
+                <h3>Data Waktu Transaksi Cabang <?php echo $namacabang; ?> </h3>
               </div>
 
 
@@ -99,7 +99,7 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Data Waktu Transaksi Cabang <?php echo $namacabang; ?> </small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small></small></h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -262,13 +262,13 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
                                    data-gerbangmasukgto-s1 ="<?php echo $data_gerbang_masuk_gto_tw1['nilai'];?>"
                                    data-gerbangkeluargto-s1 ="<?php echo $data_gerbang_keluar_gto_tw1['nilai'];?>"
                                    data-panjangantrian-s1 ="<?php echo $data_panjang_antrian_tw1['panjang_antrian'];?>" >
-                  								 Edit
+                  								 Ubah
                   								 </button>
                                   <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modals1tw1"
                                     data-id-gerbang ="<?php echo $data_gerbang['id_gerbang'];?>"
                                     data-id-semester ="<?php echo $data_semester1['id_semester'];?>"
                                     data-id-tw = "<?php echo $data_tw1['id_tw'];?>" >
-                                    Delete
+                                    Hapus
                                   </button>
                 							  </td>
                               </tr>
@@ -306,13 +306,13 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
                                   data-gerbangkeluargto-s1 ="<?php echo $data_gerbang_keluar_gto_tw2['nilai'];?>"
                                   data-panjangantrian-s1 ="<?php echo $data_panjang_antrian_tw2['panjang_antrian'];?>"
                                   >
-                  								 Edit
+                  								 Ubah
                   								 </button>
                                   <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modals1tw1"
                                   data-id-gerbang ="<?php echo $data_gerbang['id_gerbang'];?>"
                                   data-id-semester ="<?php echo $data_semester1['id_semester'];?>"
                                   data-id-tw = "<?php echo $data_tw2['id_tw'];?>">
-                                    Delete
+                                    Hapus
                                   </button>
                 							  </td>
                               </tr>
@@ -349,14 +349,14 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
                                   data-gerbangmasukgto-s2 ="<?php echo $data_gerbang_masuk_gto2_tw3['nilai'];?>"
                                   data-gerbangkeluargto-s2 ="<?php echo $data_gerbang_keluar_gto2_tw3['nilai'];?>"
                                   data-panjangantrian-s2 ="<?php echo $data_panjang_antrian2_tw3['panjang_antrian'];?>">
-                                    Edit
+                                    Ubah
                                   </button>
                                   <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modals2tw3"
                                     data-id-gerbang2 ="<?php echo $data_gerbang['id_gerbang'];?>"
                                     data-id-semester2 ="<?php echo $data_semester2['id_semester'];?>"
                                     data-id-tw = "<?php echo $data_tw3['id_tw'];?>">
 
-                                    Delete
+                                    Hapus
                                   </button>
                 								 </td>
                               </tr>
@@ -393,14 +393,14 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
                                   data-gerbangkeluargto-s2 ="<?php echo $data_gerbang_keluar_gto2_tw4['nilai'];?>"
                                   data-panjangantrian-s2 ="<?php echo $data_panjang_antrian2_tw4['panjang_antrian'];?>"
                                   >
-                  								 Edit
+                  								 Ubah
                   								 </button>
                                   <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modals2tw3"
                                   data-id-gerbang2 ="<?php echo $data_gerbang['id_gerbang'];?>"
                                   data-id-semester2 ="<?php echo $data_semester2['id_semester'];?>"
                                   data-id-tw = "<?php echo $data_tw4['id_tw'];?>"
                                   >
-                                    Delete
+                                    Hapus
                                   </button>
                 							  </td>
                               </tr>
@@ -433,7 +433,7 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
-              <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
+              <h4 class="modal-title" id="myModalLabel">Hapus Rencana</h4>
             </div>
             <div class="modal-body">
               <form action="editwaktutransaksi1.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
@@ -448,8 +448,8 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
                   <input name ="edit_idtws1" type="text" id="waktutransaksi1" value="" hidden>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  <button type="submit" class="btn btn-danger" name ="deletewaktutransaksi" >Delete</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                  <button type="submit" class="btn btn-danger" name ="deletewaktutransaksi" >Hapus</button>
                 </div>
                 </form>
               </div>
@@ -463,7 +463,7 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
              <div class="modal-content">
                <div class="modal-header">
                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
-                 <h4 class="modal-title" id="myModalLabel">Edit Rencana</h4>
+                 <h4 class="modal-title" id="myModalLabel">Ubah Rencana</h4>
                </div>
                <div class="modal-body">
                  <form action="editwaktutransaksi1.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
@@ -539,8 +539,8 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
 
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary" name ="editwaktutransaksis1" >Save changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary" name ="editwaktutransaksis1" >Simpan</button>
                   </div>
                 </form>
               </div>
@@ -556,7 +556,7 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
-                  <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
+                  <h4 class="modal-title" id="myModalLabel">Hapus Rencana</h4>
                 </div>
                 <div class="modal-body">
                   <form action="editwaktutransaksi1.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
@@ -571,8 +571,8 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
                       <input name ="edit_idtws2" type="text" id="waktutransaksi1" value="" hidden>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                      <button type="submit" class="btn btn-danger" name ="deletewaktutransaksis2" >Delete</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                      <button type="submit" class="btn btn-danger" name ="deletewaktutransaksis2" >Hapus</button>
                     </div>
                     </form>
                   </div>
@@ -586,7 +586,7 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
                  <div class="modal-content">
                    <div class="modal-header">
                      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
-                     <h4 class="modal-title" id="myModalLabel">Edit Rencana</h4>
+                     <h4 class="modal-title" id="myModalLabel">Ubah Rencana</h4>
                    </div>
                    <div class="modal-body">
                      <form action="editwaktutransaksi1.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
@@ -662,8 +662,8 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
 
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary" name ="editwaktutransaksis2" >Save changes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary" name ="editwaktutransaksis2" >Simpan</button>
                       </div>
                     </form>
                   </div>
@@ -756,8 +756,8 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
                  <!-- end of field Panjang Antrian -->
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  <button type="submit" class="btn btn-primary" name ="tambah" >Save changes</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                  <button type="submit" class="btn btn-primary" name ="tambah" >Tambah</button>
                 </div>
               </form>
             </div>

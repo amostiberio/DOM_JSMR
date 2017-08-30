@@ -110,10 +110,10 @@ include ('connect.php'); //connect ke database
 
 					  <div class="input-group buttonright" >
                       <div class="btn-group  buttonrightfloat " >
-						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
+						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Unduh <span class="caret"></span>
                       </button>
                       <ul role="menu" class="dropdown-menu pull-right">
-                       <li><a href="download_wt2.php?tahun=<?php echo $nilaiTahun;?>" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                       <li><a href="download_wt2.php?tahun=<?php echo $nilaiTahun;?>" > Unduh Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
                        </li>
 					   </ul>
 	                    </div>

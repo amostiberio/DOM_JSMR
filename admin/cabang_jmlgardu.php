@@ -103,8 +103,8 @@ include ('connect.php'); //connect ke database
                     </div>
 					<input type='hidden' value=<?php echo $getidcabang; ?> name ="id_cabang">
                   </div>
-                  <button type="submit" class="btn btn-primary" name="dropdownTahunGardu1">View</button>
-				  <button type="submit" class="btn btn-danger" name="clearTahunGardu1">Clear</button>
+                  <button type="submit" class="btn btn-primary" name="dropdownTahunGardu1">Lihat</button>
+				  <button type="submit" class="btn btn-danger" name="clearTahunGardu1">Hapus Filter</button>
                   </form>
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
@@ -221,11 +221,11 @@ include ('connect.php'); //connect ke database
                                  data-data4="<?php echo $data_gerbang_terbuka_gto_tersedia1['nilai']?>"
                                  data-data5="<?php echo $data_gerbang_masuk_gto_tersedia1['nilai']?>"
 								 data-data6="<?php echo $data_gerbang_keluar_gto_tersedia1['nilai']?>"
-                                 data-data7="<?php echo $data_epass_tersedia1['nilai']?>">Edit</button>																 
+                                 data-data7="<?php echo $data_epass_tersedia1['nilai']?>">Ubah</button>																 
 								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
 								 data-id-gerbang ="<?php echo $data_gerbang['id_gerbang']?>"
 								 data-tahun ="<?php echo $data_jmlgardu['tahun']?>"
-								 data-tw ="<?php echo $data_tw1['tw']?>">Delete</button>
+								 data-tw ="<?php echo $data_tw1['tw']?>">Hapus</button>
 								 <?php }?>
 								 </td>
                               </tr>
@@ -250,11 +250,11 @@ include ('connect.php'); //connect ke database
                                  data-data4="<?php echo $data_gerbang_terbuka_gto_tersedia2['nilai']?>"
                                  data-data5="<?php echo $data_gerbang_masuk_gto_tersedia2['nilai']?>"
 								 data-data6="<?php echo $data_gerbang_keluar_gto_tersedia2['nilai']?>"
-                                 data-data7="<?php echo $data_epass_tersedia2['nilai']?>">Edit</button>																 
+                                 data-data7="<?php echo $data_epass_tersedia2['nilai']?>">Ubah</button>																 
 								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
 								 data-id-gerbang ="<?php echo $data_gerbang['id_gerbang']?>"
 								 data-tahun ="<?php echo $data_jmlgardu['tahun']?>"
-								 data-tw ="<?php echo $data_tw2['tw']?>">Delete</button>	
+								 data-tw ="<?php echo $data_tw2['tw']?>">Hapus</button>	
 								 <?php }?>
 								 </td>
                               </tr>
@@ -279,11 +279,11 @@ include ('connect.php'); //connect ke database
                                  data-data4="<?php echo $data_gerbang_terbuka_gto_tersedia3['nilai']?>"
                                  data-data5="<?php echo $data_gerbang_masuk_gto_tersedia3['nilai']?>"
 								 data-data6="<?php echo $data_gerbang_keluar_gto_tersedia3['nilai']?>"
-                                 data-data7="<?php echo $data_epass_tersedia3['nilai']?>">Edit</button>																 
+                                 data-data7="<?php echo $data_epass_tersedia3['nilai']?>">Ubah</button>																 
 								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
 								 data-id-gerbang ="<?php echo $data_gerbang['id_gerbang']?>"
 								 data-tahun ="<?php echo $data_jmlgardu['tahun']?>"
-								 data-tw ="<?php echo $data_tw3['tw']?>">Delete</button>
+								 data-tw ="<?php echo $data_tw3['tw']?>">Hapus</button>
 								 <?php }?>
 								 </td>
                               </tr>
@@ -308,11 +308,11 @@ include ('connect.php'); //connect ke database
                                  data-data4="<?php echo $data_gerbang_terbuka_gto_tersedia4['nilai']?>"
                                  data-data5="<?php echo $data_gerbang_masuk_gto_tersedia4['nilai']?>"
 								 data-data6="<?php echo $data_gerbang_keluar_gto_tersedia4['nilai']?>"
-                                 data-data7="<?php echo $data_epass_tersedia4['nilai']?>">Edit</button>																 
+                                 data-data7="<?php echo $data_epass_tersedia4['nilai']?>">Ubah</button>																 
 								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
 								 data-id-gerbang ="<?php echo $data_gerbang['id_gerbang']?>"
 								 data-tahun ="<?php echo $data_jmlgardu['tahun']?>"
-								 data-tw ="<?php echo $data_tw4['tw']?>">Delete</button>	
+								 data-tw ="<?php echo $data_tw4['tw']?>">Hapus</button>	
 								 <?php }?>
 								 </td>
                               </tr>
@@ -339,7 +339,7 @@ include ('connect.php'); //connect ke database
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
+                          <h4 class="modal-title" id="myModalLabel">Hapus Rencana</h4>
                         </div>
                         <div class="modal-body">
                         <form action="editdelete.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" ">
@@ -354,8 +354,8 @@ include ('connect.php'); //connect ke database
 							  <input name="tw" type="text" id="tw" value="" hidden>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-danger" name ="deletejg" >Delete</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                          <button type="submit" class="btn btn-danger" name ="deletejg" >Hapus</button>
                         </div>
 						</form>
                       </div>
@@ -370,7 +370,7 @@ include ('connect.php'); //connect ke database
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title" id="myModalLabel">Edit Rencana</h4>
+                          <h4 class="modal-title" id="myModalLabel">Ubah Rencana</h4>
                         </div>
                         <div class="modal-body">
                         <form action="editdelete.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
@@ -429,8 +429,8 @@ include ('connect.php'); //connect ke database
 							</div>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name ="editjg" >Save changes</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                          <button type="submit" class="btn btn-primary" name ="editjg" >Simpan</button>
                         </div>
 						</form>
                       </div>

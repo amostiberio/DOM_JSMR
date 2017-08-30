@@ -103,8 +103,8 @@ if(isset($_GET['tahun'])){
                         </div>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary" name="dropdownTahunGardu">View</button>
-				  <button type="submit" class="btn btn-danger" name="clearTahunGardu">Clear</button>
+                  <button type="submit" class="btn btn-primary" name="dropdownTahunGardu">Lihat</button>
+				  <button type="submit" class="btn btn-danger" name="clearTahunGardu">Hapus Filter</button>
                   </form>
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
@@ -119,10 +119,10 @@ if(isset($_GET['tahun'])){
 						</div>
 						<div class="input-group buttonright" >
                       <div class="btn-group  buttonrightfloat " >
-						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
+						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Unduh <span class="caret"></span>
                       </button>
                       <ul role="menu" class="dropdown-menu pull-right">
-                       <li><a href="downloadjg.php?tahun=<?php echo $nilaiTahun;?>" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                       <li><a href="downloadjg.php?tahun=<?php echo $nilaiTahun;?>" > Unduh Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
                        </li>
 					   </ul>
 	                    </div>
@@ -378,7 +378,7 @@ if(isset($_GET['tahun'])){
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-              <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
+              <button type="submit" class="btn btn-primary" name="tambah">Tambah</button>
             </div>
           </form>
           </div>

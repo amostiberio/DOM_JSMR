@@ -104,8 +104,8 @@ include ('connect.php'); //connect ke database
                     </div>
 					<input type='hidden' value=<?php echo $getidcabang; ?> name ="id_cabang">
                   </div>
-                  <button type="submit" class="btn btn-primary" name="dropdownTahunSDM1">View</button>
-				  <button type="submit" class="btn btn-danger" name="clearTahunSDM1">Clear</button>
+                  <button type="submit" class="btn btn-primary" name="dropdownTahunSDM1">Lihat</button>
+				  <button type="submit" class="btn btn-danger" name="clearTahunSDM1">Hapus Filter</button>
                   </form>
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
@@ -176,10 +176,10 @@ include ('connect.php'); //connect ke database
                                  data-data4="<?php echo $data_kryjlj['jumlah']?>"
                                  data-data5="<?php echo $data_kryjlo['jumlah']?>"
 								 data-data6="<?php echo $data_sakitpermanen['jumlah']?>"															 
-								 data-data7="<?php echo $data_tugt['jumlah']?>">Edit</button>
+								 data-data7="<?php echo $data_tugt['jumlah']?>">Ubah</button>
 								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
 								 data-id-gerbang ="<?php echo $data_gerbang['id_gerbang']?>"
-								 data-tahun ="<?php echo $data_jumlahsdm['tahun']?>">Delete</button>
+								 data-tahun ="<?php echo $data_jumlahsdm['tahun']?>">Hapus</button>
 								</td>
                               </tr>
                               <?php }?>
@@ -205,7 +205,7 @@ include ('connect.php'); //connect ke database
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 			  </button>
-			  <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
+			  <h4 class="modal-title" id="myModalLabel">Hapus Rencana</h4>
 			</div>
 			<div class="modal-body">
 			<form action="editdelete.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" ">
@@ -219,8 +219,8 @@ include ('connect.php'); //connect ke database
 				  <input name="tahun" type="text" id="tahun" value="" hidden>
 			</div>
 			<div class="modal-footer">
-			  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-			  <button type="submit" class="btn btn-danger" name ="deletejs" >Delete</button>
+			  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+			  <button type="submit" class="btn btn-danger" name ="deletejs" >Hapus</button>
 			</div>
 			</form>
 		  </div>
@@ -235,7 +235,7 @@ include ('connect.php'); //connect ke database
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 			  </button>
-			  <h4 class="modal-title" id="myModalLabel">Edit Rencana</h4>
+			  <h4 class="modal-title" id="myModalLabel">Ubah Rencana</h4>
 			</div>
 			<div class="modal-body">
 			<form action="editdelete.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
@@ -286,8 +286,8 @@ include ('connect.php'); //connect ke database
             </div>
 			</div>
 			<div class="modal-footer">
-			  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-			  <button type="submit" class="btn btn-primary" name ="editjs" >Save changes</button>
+			  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+			  <button type="submit" class="btn btn-primary" name ="editjs" >Simpan</button>
 			</div>
 			</form>
 		  </div>

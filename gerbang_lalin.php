@@ -104,8 +104,8 @@ if(isset($_GET['tahun'])){
                     </div>
 					<input type='hidden' value=<?php echo $getidgerbang; ?> name ="id_gerbang">
                   </div>
-                  <button type="submit" class="btn btn-primary" name="dropdownTahunLalin1">View</button>
-				  <button type="submit" class="btn btn-danger" name="clearTahunLalin1">Clear</button>
+                  <button type="submit" class="btn btn-primary" name="dropdownTahunLalin1">Lihat</button>
+				  <button type="submit" class="btn btn-danger" name="clearTahunLalin1">Hapus Filter</button>
                   </form>
 
                   <div class="title_right">
@@ -223,11 +223,11 @@ if(isset($_GET['tahun'])){
                                  data-data4="<?php echo $data_gerbang_terbuka_gto_lalin1['nilai']?>"
                                  data-data5="<?php echo $data_gerbang_masuk_gto_lalin1['nilai']?>"
 								 data-data6="<?php echo $data_gerbang_keluar_gto_lalin1['nilai']?>"
-                                 data-data7="<?php echo $data_epass_lalin1['nilai']?>">Edit</button>																 
+                                 data-data7="<?php echo $data_epass_lalin1['nilai']?>">Ubah</button>																 
 								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
 								 data-id-gerbang ="<?php echo $data_gerbang['id_gerbang']?>"
 								 data-tahun ="<?php echo $data_lalin['tahun']?>"
-								 data-tw ="<?php echo $data_tw1['tw']?>">Delete</button>
+								 data-tw ="<?php echo $data_tw1['tw']?>">Hapus</button>
 								 <?php }?>
 								 </td>
                               </tr>
@@ -252,11 +252,11 @@ if(isset($_GET['tahun'])){
                                  data-data4="<?php echo $data_gerbang_terbuka_gto_lalin2['nilai']?>"
                                  data-data5="<?php echo $data_gerbang_masuk_gto_lalin2['nilai']?>"
 								 data-data6="<?php echo $data_gerbang_keluar_gto_lalin2['nilai']?>"
-                                 data-data7="<?php echo $data_epass_lalin2['nilai']?>">Edit</button>																 
+                                 data-data7="<?php echo $data_epass_lalin2['nilai']?>">Ubah</button>																 
 								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
 								 data-id-gerbang ="<?php echo $data_gerbang['id_gerbang']?>"
 								 data-tahun ="<?php echo $data_lalin['tahun']?>"
-								 data-tw ="<?php echo $data_tw2['tw']?>">Delete</button>	
+								 data-tw ="<?php echo $data_tw2['tw']?>">Hapus</button>	
 								 <?php }?>
 								 </td>
                               </tr>
@@ -281,11 +281,11 @@ if(isset($_GET['tahun'])){
                                  data-data4="<?php echo $data_gerbang_terbuka_gto_lalin3['nilai']?>"
                                  data-data5="<?php echo $data_gerbang_masuk_gto_lalin3['nilai']?>"
 								 data-data6="<?php echo $data_gerbang_keluar_gto_lalin3['nilai']?>"
-                                 data-data7="<?php echo $data_epass_lalin3['nilai']?>">Edit</button>																 
+                                 data-data7="<?php echo $data_epass_lalin3['nilai']?>">Ubah</button>																 
 								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
 								 data-id-gerbang ="<?php echo $data_gerbang['id_gerbang']?>"
 								 data-tahun ="<?php echo $data_lalin['tahun']?>"
-								 data-tw ="<?php echo $data_tw3['tw']?>">Delete</button>
+								 data-tw ="<?php echo $data_tw3['tw']?>">Hapus</button>
 								 <?php }?>
 								 </td>
                               </tr>
@@ -310,11 +310,11 @@ if(isset($_GET['tahun'])){
                                  data-data4="<?php echo $data_gerbang_terbuka_gto_lalin4['nilai']?>"
                                  data-data5="<?php echo $data_gerbang_masuk_gto_lalin4['nilai']?>"
 								 data-data6="<?php echo $data_gerbang_keluar_gto_lalin4['nilai']?>"
-                                 data-data7="<?php echo $data_epass_lalin4['nilai']?>">Edit</button>																 
+                                 data-data7="<?php echo $data_epass_lalin4['nilai']?>">Ubah</button>																 
 								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
 								 data-id-gerbang ="<?php echo $data_gerbang['id_gerbang']?>"
 								 data-tahun ="<?php echo $data_lalin['tahun']?>"
-								 data-tw ="<?php echo $data_tw4['tw']?>">Delete</button>	
+								 data-tw ="<?php echo $data_tw4['tw']?>">Hapus</button>	
 								 <?php }?>
 								 </td>
                               </tr>
@@ -340,7 +340,7 @@ if(isset($_GET['tahun'])){
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
+                          <h4 class="modal-title" id="myModalLabel">Hapus Rencana</h4>
                         </div>
                         <div class="modal-body">
                         <form action="editdelete.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" ">
@@ -355,8 +355,8 @@ if(isset($_GET['tahun'])){
 							  <input name="tw" type="text" id="tw" value="" hidden>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-danger" name ="deletett" >Delete</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                          <button type="submit" class="btn btn-danger" name ="deletett" >Hapus</button>
                         </div>
 						</form>
                       </div>
@@ -429,8 +429,8 @@ if(isset($_GET['tahun'])){
 							</div>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name ="edittt" >Save changes</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                          <button type="submit" class="btn btn-primary" name ="edittt" >Simpan</button>
                         </div>
 						</form>
                       </div>

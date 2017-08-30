@@ -79,7 +79,7 @@ if(isset($_GET['tahun'])){
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Monitoring Capex</h3>
+                <h3>Capex Realisasi SPJT  Cabang <?php echo $namacabang; ?></h3>
               </div>
 
 
@@ -91,8 +91,7 @@ if(isset($_GET['tahun'])){
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Data Capex Realisasi SPJT  Cabang <?php echo $namacabang; ?> </small></h2>
-
+                    <h2><i class="fa fa-table"></i> Table <small></small></h2>
                     <div class="clearfix"></div>
                   </div>
                   <form action="dropdownproses.php" method="POST">

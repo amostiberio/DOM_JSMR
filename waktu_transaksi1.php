@@ -89,7 +89,7 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Laporan KPI</h3>
+                <h3>Data Waktu Transaksi</h3>
               </div>
 
 
@@ -101,7 +101,7 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Data Waktu Transaksi </small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small></small></h2>
 
                     <div class="clearfix"></div>
                   </div>
@@ -137,10 +137,10 @@ $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM ger
                       </div>
                       <div class="input-group buttonright" >
                                 <div class="btn-group  buttonrightfloat " >
-                                  <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
+                                  <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Unduh <span class="caret"></span>
                                   </button>
                                   <ul role="menu" class="dropdown-menu pull-right">
-                                    <li><a href="download_wt1.php?tahun=<?php echo $nilaiTahun;?>" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                                    <li><a href="download_wt1.php?tahun=<?php echo $nilaiTahun;?>" > Unduh Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
                                     </li>
                                   </ul>
                                 </div>

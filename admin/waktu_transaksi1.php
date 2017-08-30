@@ -78,7 +78,7 @@ include ('connect.php'); //connect ke database
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Laporan KPI</h3>
+                <h3>Data Waktu Transaksi</h3>
               </div>
 
 
@@ -92,7 +92,7 @@ include ('connect.php'); //connect ke database
                 <div class="x_panel">
 
                   <div class="x_title">
-                    <h2><i class="fa fa-table"></i> Table <small>Data Waktu Transaksi </small></h2>
+                    <h2><i class="fa fa-table"></i> Table <small></small></h2>
 
                     <div class="clearfix"></div>
 
@@ -127,9 +127,9 @@ include ('connect.php'); //connect ke database
                       </div>
 					            <div class="input-group buttonright" >
                         <div class="btn-group  buttonrightfloat " >
-                          <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span></button>
+                          <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Unduh <span class="caret"></span></button>
                           <ul role="menu" class="dropdown-menu pull-right">
-                            <li><a href="download_wt1.php?tahun=<?php echo $nilaiTahun;?>" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a></li>
+                            <li><a href="download_wt1.php?tahun=<?php echo $nilaiTahun;?>" > Unduh Excels <img src='xls.png' alt="XLSX" style="width:20px"></a></li>
 					                </ul>
                         </div>
                       </div>

@@ -2,6 +2,10 @@
 include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 
+if(isset($_GET['tahun'])){
+    $nilaiTahun = $_GET['tahun'];
+  
+  }else $nilaiTahun = '0';
 
   $iduser = $_SESSION['id_user'];
 
@@ -12,6 +16,13 @@ include ('connect.php'); //connect ke database
   //ambil informasi user id dan cabang id dari table cabang
   $cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT nama_cabang FROM cabang WHERE id_cabang = '$idcabang'"));
   $namacabang = $cabang['nama_cabang'];
+
+  $resultuntukrencana = $connect-> query("SELECT * FROM program_kerja WHERE id_cabang = '$idcabang' AND jenis = 'bpt' ");
+
+  //ambil informasi jenis sub gardu
+  $gardu = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM jenis_subgardu"));
+
+  $idgerbang= mysqli_fetch_array(mysqli_query($connect,"SELECT id_gerbang FROM gerbang"));
 
 ?>
 <!DOCTYPE html>
@@ -69,181 +80,322 @@ include ('connect.php'); //connect ke database
 
 
         <!-- page content -->
-		<div class="right_col" role="main">
+        <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Laporan Lalin Jam-jaman <?php echo $namacabang; ?></h3>
+                <h3>Lalin Jam-jaman Cabang <?php echo $namacabang; ?></h3>
               </div>
+
+
             </div>
+
             <div class="clearfix"></div>
+
             <div class="">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2><i class="fa fa-table"></i> Table <small></small></h2>
+
                     <div class="clearfix"></div>
                   </div>
-                  <div class="title_right">
-                    <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
-                      <div class="input-group buttonright" >
-						  <div class="btn-group  buttonrightfloat " >
-							<button type="button" data-toggle="modal" data-target=".bs-unggah" class="btn btn-primary">Unggah Laporan</button>
-						  </div>
-                      </div>
-                    </div>
-                   </div>
-                  <div class="x_content">
-					<table id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
-						<thead >
-						  <tr >
-							<th>Nama File</th>
-							<th>Tahun</th>
-							<th>Tipe File</th>
-							<th>TW</th>
-							<th>Aksi</th>
-						  </tr>
-						</thead>
-						<tbody>
-						<?php
-						$laporan = mysqli_query($connect, "SELECT * FROM lalin_jj");
-						while($datalaporan = mysqli_fetch_array($laporan)){
-						?>
-						  <tr>
-							<td><?php echo $datalaporan['nama_file']?></td>
-							<td><?php echo $datalaporan['tahun']?></td>
-							<td><?php echo $datalaporan['type_file']?></td>
-							<td><?php echo $datalaporan['tw']?></td>
-							<td><a href="unduh.php?id_lalinjj=<?php echo $datalaporan['id_lalinjj'];?>"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button></a>
-								<button type="button" class="btn btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" data-id-lalinjj="<?php echo $datalaporan['id_lalinjj'];?>"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-							</td>
-						  </tr>
-						  <?php } ?>
-						</tbody>
-					</table>
-				  </div>
-				</div>
-			  </div>
-			</div>
-		  </div>
-		</div>
-        <!-- /page content -->
-
-<!-- Modal Unggah File -->
-<div class="modal fade bs-unggah" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-	  <div class="modal-content">
-		<div class="modal-header">
-		  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-		  </button>
-		  <h4 class="modal-title" id="myModalLabel">Unggah Laporan</h4>
-		</div>
-		  <form action="unggah.php" method="post" id="demo-form2" data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left">
-			<div class="modal-body">
-			  <input name ="idcabang" type="text" id="idcabang" value="<?php echo $idcabang; ?>" hidden>
-			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Nama File</label>
-				<div class="col-md-6 col-sm-6 col-xs-12">
-					<input name ="nama" type="text" id="nama" required="required" class="form-control col-md-7 col-xs-12">
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipe">Tipe File</label>
-				<div class="col-md-6 col-sm-6 col-xs-12">
-					<select required="required" name= "tipe" class="select2_single form-control" tabindex="-1">
-						<option value="">---Pilih Tipe File---</option>
-						<option value="doc">doc</option>
-						<option value="docx">docx</option>
-						<option value="pdf">pdf</option>
-						<option value="xls">xls</option>
-						<option value="xlsx">xlsx</option>
-						<option value="ppt">ppt</option>
-						<option value="pptx">pptx</option>
-					</select>
-				</div>
-			  </div>
-			   <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
-                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div class='input-group date' id='myDatepickerFormMonitoring'>
-                            <input type='text' class="form-control" name= "tahun"  />
+					
+			     <form action="dropdownproses.php" method="POST">
+                  <div class='col-sm-2'>                    
+                    <div class="form-group">
+                        <div class='input-group date' id='myDatepickerFilter'>
+                            <input type='text' class="form-control" name= "tahun" <?php if(isset($_GET['tahun'])){ ?> value="<?php echo $nilaiTahun ;?>" <?php } ?>/>
                             <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
-                        </div>
+                    </div>
                   </div>
-				<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tw">Triwulan</label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-							
-							 <div class="radio">
-								<label>
-								  <input type="radio" value="1" name="tw"> TW 1
-								</label>
-							  </div>
-							  <div class="radio">
-								<label>
-								  <input type="radio" value="2" name="tw"> TW 2
-								</label>
-							  </div>
-							  <div class="radio">
-								<label>
-								  <input type="radio" value="3" name="tw"> TW 3
-								</label>
-							  </div>
-							  <div class="radio">
-								<label>
-								  <input type="radio" value="4" name="tw"> TW 4
-								</label>
-							  </div>
-							</div>
-						  </div>
+                  <button type="submit" class="btn btn-primary" name="dropdownTahunGardu">Lihat</button>
+				  <button type="submit" class="btn btn-danger" name="clearTahunGardu">Hapus Filter</button>
+                  </form>
+					
+                  <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
+                      <div class="input-group buttonright" >
+                      <div class="btn-group  buttonrightfloat " >
+	                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Tambah <span class="caret"></span>
+	                    </button>
+	                    <ul role="menu" class="dropdown-menu pull-right">
+                           <li><a data-toggle="modal" data-target=".bs-lalin" >Tambah Lalin Jam-jaman</a></li>
+						</ul>
+	                    </div>
+                      </div>
+					  <div class="input-group buttonright" >
+                      <div class="btn-group  buttonrightfloat " >
+						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Unduh <span class="caret"></span>
+                      </button>
+                      <ul role="menu" class="dropdown-menu pull-right">
+                       <li><a href="downloadll.php?tahun=<?php echo $nilaiTahun;?>" > Unduh Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                       </li>
+					   </ul>
+	                    </div>
+
+                      </div>
+                    </div>
+                   </div>
+                  <div class="x_content">
+
+                      <table id="datatable-keytable"  class="table table-striped table-bordered " class="centered">
+                            <thead >
+
+                              <tr >
+                                <th rowspan="3">No</th>
+                                <th rowspan="3">Gerbang</th>
+								<th rowspan="3">Tahun</th>
+                                <th colspan="7">Jumlah Lalin Jam-jaman</th>
+                              </tr>
+                              <tr>
+                                <th colspan="3">Reguler</th>
+								<th colspan="3">GTO</th>
+                                <th rowspan="2">E-Pass</th>
+                              </tr>
+                              <tr>
+
+                                <th rowspan="1">Gardu Keluar</th>
+                                <th rowspan="1">Gardu Masuk</th>
+                                <th colspan="1">Gardu Terbuka</th>
+                                <th rowspan="1">Gardu Keluar</th>
+                                <th rowspan="1">Gardu Masuk</th>
+                                <th colspan="1">Gardu Terbuka</th>
+                              </tr>
+
+                            </thead>
+                            <tbody>
+                              <?php
+							  if($nilaiTahun > 0){
+                                 $lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join gerbang on gerbang.id_gerbang=transaksi_tinggi.id_gerbang WHERE transaksi_tinggi.tahun='$nilaiTahun' AND transaksi_tinggi.id_cabang='$idcabang' group by transaksi_tinggi.tahun, transaksi_tinggi.id_gerbang");
+							  }else{
+                                $lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi join gerbang on gerbang.id_gerbang=transaksi_tinggi.id_gerbang WHERE transaksi_tinggi.id_cabang='$idcabang' group by transaksi_tinggi.tahun, transaksi_tinggi.id_gerbang");								  
+							  }
+                                $nomor = 1; $total1 =0; $total2 =0; $total3 =0; $total4 =0; $total5 =0; $total6 =0; $total7 =0; 
+                                while($data_lalin = mysqli_fetch_array($lalin)){
+                                   $idgerbanglist = $data_lalin['id_gerbang'];
+                                   $idsubgardulist = $data_lalin['id_subgardu'];
+								   $tahun = $data_lalin['tahun'];
+
+                                   //fething data dari tabel gerbang
+                                   $data_gerbang = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM gerbang WHERE id_gerbang = '$idgerbanglist'"));
+
+                                   //fetching data untuk tabel bagian lalin
+                                  $data_gerbang_terbuka_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE tahun='$tahun' AND id_gerbang = '$idgerbanglist' AND id_subgardu = '1'");
+                                  $total_gerbang_terbuka_lalin = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_terbuka_lalin)) {
+								  $total_gerbang_terbuka_lalin += $num['nilai'];}
+                                  $data_gerbang_masuk_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE tahun='$tahun' AND id_gerbang = '$idgerbanglist' AND id_subgardu = '2'");
+                                  $total_gerbang_masuk_lalin = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_masuk_lalin)) {
+								  $total_gerbang_masuk_lalin += $num['nilai'];}
+                                  $data_gerbang_keluar_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE tahun='$tahun' AND id_gerbang = '$idgerbanglist' AND id_subgardu = '3'");
+                                  $total_gerbang_keluar_lalin = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_keluar_lalin)) {
+								  $total_gerbang_keluar_lalin += $num['nilai'];}
+                                  $data_gerbang_terbuka_gto_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE tahun='$tahun' AND id_gerbang = '$idgerbanglist' AND id_subgardu = '4'");
+                                  $total_gerbang_terbuka_gto_lalin = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_terbuka_gto_lalin)) {
+								  $total_gerbang_terbuka_gto_lalin += $num['nilai'];}
+                                  $data_gerbang_masuk_gto_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE tahun='$tahun' AND id_gerbang = '$idgerbanglist' AND id_subgardu = '5'");
+                                  $total_gerbang_masuk_gto_lalin = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_masuk_gto_lalin)) {
+								  $total_gerbang_masuk_gto_lalin += $num['nilai'];}
+                                  $data_gerbang_keluar_gto_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE tahun='$tahun' AND id_gerbang = '$idgerbanglist' AND id_subgardu = '6'");
+                                  $total_gerbang_keluar_gto_lalin = 0;
+								  while ($num = mysqli_fetch_array($data_gerbang_keluar_gto_lalin)) {
+								  $total_gerbang_keluar_gto_lalin += $num['nilai'];}
+                                  $data_epass_lalin = mysqli_query($connect, "SELECT * FROM transaksi_tinggi WHERE tahun='$tahun' AND id_gerbang = '$idgerbanglist' AND id_subgardu = '7'");
+                                  $total_epass_lalin = 0;
+								  while ($num = mysqli_fetch_array($data_epass_lalin)) {
+								  $total_epass_lalin += $num['nilai'];}
+                            ?>
+                              <tr>
+                                <td><?php echo $nomor; $nomor++?></td>
+                                <td><a href="gerbang_lalin.php?id_gerbang=<?php echo $data_lalin['id_gerbang'];?>"><font color="#337ab7"><?php echo $data_lalin['nama_gerbang']?></font></a></td>
+								<td><?php echo $data_lalin['tahun'];?></td>
+                                <td><?php $total1+=$total_gerbang_keluar_lalin;
+									echo $total_gerbang_keluar_lalin?></td>
+								<td><?php $total2+=$total_gerbang_masuk_lalin;
+									echo $total_gerbang_masuk_lalin?></td>
+								<td><?php $total3+=$total_gerbang_terbuka_lalin;
+									echo $total_gerbang_terbuka_lalin?></td>
+								<td><?php $total4+=$total_gerbang_keluar_gto_lalin;
+									echo $total_gerbang_keluar_gto_lalin?></td>
+								<td><?php $total5+=$total_gerbang_masuk_gto_lalin;
+									echo $total_gerbang_masuk_gto_lalin?></td>
+							    <td><?php $total6+=$total_gerbang_terbuka_gto_lalin;
+									echo $total_gerbang_terbuka_gto_lalin?></td>
+								<td><?php $total7+=$total_epass_lalin;
+									echo $total_epass_lalin?></td>
+                              </tr>
+                              <?php }?>
+                              <tr>
+                                <td colspan='3'>Total</td>
+                                <td><?php echo $total1?></td>
+                                <td><?php echo $total2?></td>
+                                <td><?php echo $total3?></td>
+                                <td><?php echo $total4?></td>
+                                <td><?php echo $total5?></td>
+								<td><?php echo $total6?></td>
+                                <td><?php echo $total7?></td>
+                              </tr>
+                            </tbody>
+                       </table>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <!-- /page content -->
+
+		<div class="x_content">
+      <!-- Modal Tambah Jumlah Gardu Tersedia-->
+      <div class="modal fade bs-lalin" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Tambah Lalin Jam-jaman</h4>
+          </div>
+          <div class="modal-body">
+              <form action="tambah_transaksitinggi.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gerbang">Gerbang</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select name ="idgerbang" class="select2_single form-control" tabindex="-1" required="required">
+                      <option></option>
+                      <?php
+                                      $gerbang= mysqli_query($connect, "SELECT * FROM gerbang WHERE id_cabang ='$idcabang'");
+                                      $idgerbang = ['id_gerbang'];
+                                      while($datagerbang = mysqli_fetch_array($gerbang)){
+                                  ?>
+                  <option  value="<?php echo $datagerbang['id_gerbang'];?>"><?php echo $datagerbang['nama_gerbang'];?></option>
+
+                  <?php }?>
+                                  <input name ="idcabang" type="text" id="idcabang" value="<?php echo $idcabang; ?>" hidden>
+
+                  </select>
+                </div>
+                 </div>
+				 <div class="form-group">
+				 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tw">Tahun</label>
+				 <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class='input-group date' id='myDatepickerFormMonitoring'>
+                            <input type='text' class="form-control" name= "tahun" <?php if(isset($_GET['tahun'])){ ?> value="<?php echo $nilaiTahun ;?>" <?php } ?>/>
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                 </div>
+				 </div>
 			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="file">Pilih File</label>
-				<div class="col-md-6 col-sm-6 col-xs-12">
-					<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
-					<input type="file" name="file" id="file">
-				</div>
-			  </div>
-			</div>
-			<div class="modal-footer">
-			  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-			  <button type="submit" class="btn btn-primary" id="nama" name="tambah_lalinjj">Simpan</button>
-			</div>
-		 </form>
-	  </div>
-	</div>
-</div>
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tw">Triwulan</label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+					  <div class="radio">
+						<label>
+						  <input type="radio" value="1" name="tw"> TW 1
+						</label>
+					  </div>
+					  <div class="radio">
+						<label>
+						  <input type="radio" value="2" name="tw"> TW 2
+						</label>
+					  </div>
+					  <div class="radio">
+						<label>
+						  <input type="radio" value="3" name="tw"> TW 3
+						</label>
+					  </div>
+					  <div class="radio">
+						<label>
+						  <input type="radio" value="4" name="tw"> TW 4
+						</label>
+					  </div>
+					</div>
+				  </div>
 
-<!-- Modal Delete File -->
-<div class="modal fade bs-delete-modal" id="modal_deletelj" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-	  <div class="modal-content">
-		<div class="modal-header">
-		  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-		  </button>
-		  <h4 class="modal-title" id="myModalLabel">Delete File</h4>
-		</div>
-	<form action="editdelete.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-		<div class="modal-body">
-		  <div class="alert alert-danger" role="alert">
-		  <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
-	      <h4> Anda yakin untuk menghapus file ini? </h4>
-		  
-		  <input name ="id" type="text" id="id" value="" hidden>
-		  </div>
-		</div>
-		<div class="modal-footer">
-		  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-		  <button type="submit" class="btn btn-danger" name ="delete_lj" >Delete</button>
-		</div>
-		</form>
-		
-	</div>
-	</div>
-</div>
 
+                <div>
+                    <h4><b>Gardu Reguler</b></h4>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_lalin">Gardu Terbuka</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input name= "idgardu_terbuka_lalin" type="text" value="1" hidden>
+                    <input name= "gardu_terbuka_lalin" type="number" min="0" id="gardu_terbuka_lalin" required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_masuk_lalin">Gardu Masuk</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input name= "idgardu_masuk_lalin" type="text" value="2" hidden>
+                    <input name= "gardu_masuk_lalin" type="number" min="0" id="gardu_masuk_lalin" required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar_lalin">Gardu Keluar</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input name= "idgardu_keluar_lalin" type="text" value="3" hidden>
+                    <input name= "gardu_keluar_lalin" type="number" min="0" id="gardu_keluar_lalin" required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+                <div>
+                    <h4><b>Gardu GTO</b></h4>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto_lalin">Gardu Terbuka</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input name= "idgardu_terbuka_gto_lalin" type="text" value="4" hidden>
+                    <input name= "gardu_terbuka_gto_lalin" type="number" min="0" id="gardu_terbuka_gto_lalin" required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_terbuka_gto_lalin">Gardu Masuk</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input name= "idgardu_masuk_gto_lalin" type="text" value="5" hidden>
+                    <input name= "gardu_masuk_gto_lalin" type="number" min="0" id="gardu_masuk_gto_lalin" required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="gardu_keluar_gto">Gardu Keluar</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input name= "idgardu_keluar_gto_lalin" type="text" value="6" hidden>
+                    <input name= "gardu_keluar_gto_lalin" type="number" min="0" id="gardu_keluar_gto_lalin" required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div><br>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="epass_gto_lalin">E-Pass</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input name= "idepass_lalin" type="text" value="7" hidden>
+                    <input name= "epass_lalin" type="text" min="0" id="epass_gto_lalin" required="required" class="form-control col-md-7 col-xs-12">
+                  </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn-primary" name="tambah">Simpan</button>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+      <!--End of Modal Tambah Lalin Transaksi Tinggi-->
+
+		</div>
 
 <style>
 .table th {
@@ -261,7 +413,6 @@ include ('connect.php'); //connect ke database
   margin-right: 10px;
 }
 </style>
-
         <!-- footer content -->
 <?php include 'templates/footer.php' ?>
         <!-- /footer content -->
