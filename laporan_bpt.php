@@ -4,13 +4,13 @@ include ('connect.php'); //connect ke database
 
 if(isset($_GET['tahun'])){
     $nilaiTahun = $_GET['tahun'];
-  
+
   }else $nilaiTahun = '0';
-    
+
 
 if(isset($_GET['triwulan'])){
     $nilaiTriwulan = $_GET['triwulan'];
-	
+
  	}else $nilaiTriwulan = '0';
 
   $iduser = $_SESSION['id_user'];
@@ -102,9 +102,9 @@ if(isset($_GET['triwulan'])){
 
                     <div class="clearfix"></div>
                   </div>
-                
+
                   <form action="dropdownproses.php" method="POST">
-                  <div class='col-sm-2'>                    
+                  <div class='col-sm-2'>
                     <div class="form-group">
                     <h5 class="control-label col-md-4 col-sm-3 col-xs-12" for="tahun">Tahun</h5>
                         <div class='input-group date ' id='myDatepickerFilter'>
@@ -114,26 +114,26 @@ if(isset($_GET['triwulan'])){
                             <span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
-                      
+
                     </div>
                   </div>
-                   
-               
+
+
                   <div class="title_right">
                     <div class="col-md-12 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
                       <div class="input-group buttonleft" >
                       <div class="btn-group  buttonleftfloat " >
 	                    <h5 class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Triwulan</h5>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         
+
                             <select name= "dropDownListTW" class="select2_single form-control" tabindex="-1">
-                                    <option value="0">Pilih Triwulan</option>                            
+                                    <option value="0">Pilih Triwulan</option>
                                     <option value="1" <?php if ($nilaiTriwulan =='1') echo 'selected'?>>Triwulan 1</option>
                                     <option value="2" <?php if ($nilaiTriwulan == '2') echo 'selected'?>>Triwulan 2</option>
                                     <option value="3" <?php if ($nilaiTriwulan == '3') echo 'selected'?>>Triwulan 3</option>
-                                    <option value="4" <?php if ($nilaiTriwulan == '4') echo 'selected'?>>Triwulan 4</option>                                                    
+                                    <option value="4" <?php if ($nilaiTriwulan == '4') echo 'selected'?>>Triwulan 4</option>
                             </select>
-                          
+
                             <button type="submit" class="btn btn-primary" name="dropdownTW">Lihat</button>
                           </form>
                         </div>
@@ -148,10 +148,10 @@ if(isset($_GET['triwulan'])){
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
                       <div class="input-group buttonright" >
                       <div class="btn-group  buttonrightfloat text-center" >
-                      <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
+                      <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Unduh <span class="caret"></span>
                       </button>
                       <ul role="menu" class="dropdown-menu pull-right">
-                       <li><a href="downloadlaporanbpt.php?triwulan=<?php echo $nilaiTriwulan;?>&tahun=<?php echo $nilaiTahun;?>" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                       <li><a href="downloadlaporanbpt.php?triwulan=<?php echo $nilaiTriwulan;?>&tahun=<?php echo $nilaiTahun;?>" > Unduh Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
                        </li>
 
                       </ul>
@@ -161,7 +161,7 @@ if(isset($_GET['triwulan'])){
                     </div>
                    </div>
 
-                   
+
                   <div class="x_content">
 
                       <table id="datatable-keytable"  class="table table-striped table-bordered text-center">
@@ -173,42 +173,42 @@ if(isset($_GET['triwulan'])){
                             <th rowspan="2">Sub Program Kerja</th>
                             <th rowspan="2">Total RKAP  <?php if(isset($_GET['tahun'])){
                                echo $nilaiTahun; } ?>
-  
-                       
+
+
                            </th>
-                            <th rowspan="2">Total Status Akhir s.d TW 
+                            <th rowspan="2">Total Status Akhir s.d TW
                                 <?php if($nilaiTriwulan > 0 ){echo $nilaiTriwulan;}else {?> 4 <?php }?></th>
                             <th rowspan="2">TOTAL Realisasi s.d TW <?php if($nilaiTriwulan > 0 ){echo $nilaiTriwulan;}
                               else {?> 4 <?php }?></th>
                             <th rowspan="2">Tahun </th>
                               <?php if($nilaiTriwulan > 0 ){
                                 for($hitungTW = 1; $hitungTW<= $nilaiTriwulan;$hitungTW++){
-                                  
+
                               ?>
                             <th colspan="4">TW <?php echo $hitungTW;?></th>
-                                
+
                               <?php }}else{ ?>
                             <th colspan="4">TW 1</th>
                             <th colspan="4">TW 2</th>
                             <th colspan="4">TW 3</th>
                             <th colspan="4">TW 4</th>
                             <?php } ?>
-                            
+
                           </tr>
                           <tr>
                              <?php if($nilaiTriwulan > 0 ){
                                 for($hitungTW = 1; $hitungTW<= $nilaiTriwulan; $hitungTW++){
-                                  
+
                               ?>
                                 <th>RKAP</th>
                                 <th>Revisi RKAP</th>
                                 <th>Status Akhir</th>
                                 <th>Realisasi</th>
-                                
+
                               <?php }
                                 }else{
                               ?>
-                              
+
                                 <th>RKAP</th>
                                 <th>Revisi RKAP</th>
                                 <th>Status Akhir</th>
@@ -218,7 +218,7 @@ if(isset($_GET['triwulan'])){
                                 <th>Status Akhir</th>
                                 <th>Realisasi</th>
                                 <th>RKAP</th>
-                                <th>Revisi RKAP</th> 
+                                <th>Revisi RKAP</th>
                                 <th>Status Akhir</th>
                                 <th>Realisasi</th>
                                 <th>RKAP</th>
@@ -226,12 +226,12 @@ if(isset($_GET['triwulan'])){
                                 <th>Status Akhir</th>
                                 <th>Realisasi</th>
 
-                              
-                              <?php } ?> 
-                            
-                            
+
+                              <?php } ?>
+
+
                           </tr>
-                          
+
                         </thead>
                             <tbody>
                             <?php
@@ -240,14 +240,14 @@ if(isset($_GET['triwulan'])){
                             }else {
                                $listTW = mysqli_query($connect, "SELECT * FROM beban_realisasi, sub_program WHERE sub_program.id_sp = beban_realisasi.id_sp AND stat_twrl ='1'  AND sub_program.id_cabang = '$idcabang' AND beban_realisasi.jenis ='bpt' AND sub_program.jenis='beban'");
                             }
-							           
+
 							while($datalistTW = mysqli_fetch_array($listTW)){
   								$idpklist= $datalistTW['id_pk'];
   								$idspklist= $datalistTW['id_sp'];
   								$tahun= $datalistTW['tahun'];
   								$jmlstakhir = mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun'");
   								$jmlrealisasi = mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$idspklist' AND tahun = '$tahun'");
-  								
+
   								$dataprogramkerja = mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM program_kerja WHERE id_pk = '$idpklist'"));
   								$datasubprogramkerja= mysqli_fetch_array(mysqli_query($connect, "SELECT * FROM sub_program WHERE id_sp = '$idspklist'"));
                                   //realisasi
@@ -286,7 +286,7 @@ if(isset($_GET['triwulan'])){
                                 $totalrkap += $datatwrc4['revisi'];
                                 }else{
                                 $totalrkap += $datatwrc4['rkap'];
-                                }                            
+                                }
                             }
                           }
                         }
@@ -311,7 +311,7 @@ if(isset($_GET['triwulan'])){
                           $totalrkap += $datatwrc4['revisi'];
                           }else{
                           $totalrkap += $datatwrc4['rkap'];
-                          } 
+                          }
                   }
 
                   $totalstatakhir = 0;
@@ -323,7 +323,7 @@ if(isset($_GET['triwulan'])){
                              $totalstatakhir += abs($datatwrc1['rkap'] - $datatwreal1['realisasi']) ;
                             }
 
-                       
+
                         if($nilaiTriwulan >= 2){
                               if($datatwrc2['revisi'] > 0 ) {
                                  $totalstatakhir += abs($datatwrc2['revisi'] - $datatwreal2['realisasi']);
@@ -369,23 +369,23 @@ if(isset($_GET['triwulan'])){
                            }
                   }
 
-                  $qty1 = 0; 
+                  $qty1 = 0;
                   $qty2 = 0;
                    $loop1 = 0;
                     $loop2 = 0;
                   if($nilaiTriwulan > 0){
-                   
-                    
+
+
                     while ($num = mysqli_fetch_array($jmlrealisasi)) {
                       if($loop2 < $nilaiTriwulan){
                             $qty2 += $num['realisasi'];
                             $loop2++;
                           }
                       }
-                  }else {                    
-                    while ($num = mysqli_fetch_array($jmlrealisasi)) {                      
+                  }else {
+                    while ($num = mysqli_fetch_array($jmlrealisasi)) {
                         $qty2 += $num['realisasi'];
-                        $loop2++;                  
+                        $loop2++;
                     }
                   }
   							?>
@@ -399,53 +399,53 @@ if(isset($_GET['triwulan'])){
                                   <td><?php echo $qty2;?></td>
                                   <td><?php echo $datalistTW['tahun'] ?></td>
                                   <?php if($nilaiTriwulan >= 1 ){ ?>
-                                 
+
                                     <td><?php echo $datatwrc1['rkap'] ?></td>
                                     <td><?php if($datatwrc1['revisi'] > 0 ) {echo $datatwrc1['revisi'];} ?></td>
-                                    <td><?php 
+                                    <td><?php
                                         if($datatwrc1['revisi'] > 0 ) {
                                             echo abs($datatwrc1['revisi'] - $datatwreal1['realisasi']);
                                         }else{
                                             echo abs($datatwrc1['rkap'] - $datatwreal1['realisasi']) ;
-                                        }  
-                                        ?>                                      
+                                        }
+                                        ?>
                                     </td>
                                     <td><?php echo $datatwreal1['realisasi'] ?></td>
 
-                                  <?php 
+                                  <?php
                                     if($nilaiTriwulan >= 2){ ?>
                                     <td><?php echo $datatwrc2['rkap'] ?></td>
                                     <td><?php if($datatwrc2['revisi'] > 0 ) {echo $datatwrc2['revisi'];} ?></td>
-                                    <td><?php 
+                                    <td><?php
                                         if($datatwrc2['revisi'] > 0 ) {
                                             echo abs($datatwrc2['revisi'] - $datatwreal2['realisasi']);
                                         }else{
                                             echo abs($datatwrc2['rkap'] - $datatwreal2['realisasi']) ;
-                                        }  
+                                        }
                                     ?></td>
                                     <td><?php echo $datatwreal2['realisasi'] ?></td>
                                   <?php }
                                     if($nilaiTriwulan >= 3){ ?>
                                     <td><?php echo $datatwrc3['rkap'] ?></td>
                                     <td><?php if($datatwrc3['revisi'] > 0 ) {echo $datatwrc3['revisi'];} ?></td>
-                                    <td><?php 
+                                    <td><?php
                                         if($datatwrc3['revisi'] > 0 ) {
                                             echo abs($datatwrc3['revisi'] - $datatwreal3['realisasi']);
                                         }else{
                                             echo abs($datatwrc3['rkap'] - $datatwreal3['realisasi']) ;
-                                        }  
+                                        }
                                     ?></td>
-                                    <td><?php echo $datatwreal3['realisasi'] ?></td>    
-                                   <?php } 
+                                    <td><?php echo $datatwreal3['realisasi'] ?></td>
+                                   <?php }
                                     if($nilaiTriwulan >= 4){ ?>
                                     <td><?php echo $datatwrc4['rkap'] ?></td>
                                     <td><?php if($datatwrc4['revisi'] > 0 ) {echo $datatwrc4['revisi'];} ?></td>
-                                    <td><?php 
+                                    <td><?php
                                         if($datatwrc4['revisi'] > 0 ) {
                                             echo abs($datatwrc4['revisi'] - $datatwreal4['realisasi']);
                                         }else{
                                             echo abs($datatwrc4['rkap'] - $datatwreal4['realisasi']) ;
-                                        }  
+                                        }
                                     ?> </td>
                                     <td><?php echo $datatwreal4['realisasi'] ?></td>
                                   <?php }
@@ -453,52 +453,52 @@ if(isset($_GET['triwulan'])){
                                   ?>
                                 <td><?php echo $datatwrc1['rkap'] ?></td>
                                 <td><?php if($datatwrc1['revisi'] > 0 ) {echo $datatwrc1['revisi'];} ?></td>
-                                <td><?php 
+                                <td><?php
                                         if($datatwrc1['revisi'] > 0 ) {
                                             echo abs($datatwrc1['revisi'] - $datatwreal1['realisasi']);
                                         }else{
                                             echo abs($datatwrc1['rkap'] - $datatwreal1['realisasi']) ;
-                                        }  
-                                    ?> 
+                                        }
+                                    ?>
                                 </td>
-                                <td><?php echo $datatwreal1['realisasi'] ?></td>  
+                                <td><?php echo $datatwreal1['realisasi'] ?></td>
 
                                 <td><?php echo $datatwrc2['rkap'] ?></td>
                                 <td><?php if($datatwrc2['revisi'] > 0 ) {echo $datatwrc2['revisi'];} ?></td>
-                                <td><?php 
+                                <td><?php
                                         if($datatwrc2['revisi'] > 0 ) {
                                             echo abs($datatwrc2['revisi'] - $datatwreal2['realisasi']);
                                         }else{
                                             echo abs($datatwrc2['rkap'] - $datatwreal2['realisasi']) ;
-                                        }  
+                                        }
                                     ?>
                                 </td>
                                 <td><?php echo $datatwreal2['realisasi'] ?></td>
 
                                 <td><?php echo $datatwrc3['rkap'] ?></td>
                                 <td><?php if($datatwrc3['revisi'] > 0 ) {echo $datatwrc3['revisi'];} ?></td>
-                                <td><?php 
+                                <td><?php
                                         if($datatwrc3['revisi'] > 0 ) {
                                             echo abs($datatwrc3['revisi'] - $datatwreal3['realisasi']);
                                         }else{
                                             echo abs($datatwrc3['rkap'] - $datatwreal3['realisasi']) ;
-                                        }  
+                                        }
                                     ?>
                                 </td>
                                 <td><?php echo $datatwreal3['realisasi'] ?></td>
 
                                 <td><?php echo $datatwrc4['rkap'] ?></td>
                                 <td><?php if($datatwrc4['revisi'] > 0 ) { echo $datatwrc4['revisi'];} ?></td>
-                                <td><?php 
+                                <td><?php
                                         if($datatwrc4['revisi'] > 0 ) {
                                             echo abs($datatwrc4['revisi'] - $datatwreal4['realisasi']);
                                         }else{
                                             echo abs($datatwrc4['rkap'] - $datatwreal4['realisasi']) ;
-                                        }  
-                                    ?>                                      
+                                        }
+                                    ?>
                                 </td>
                                 <td><?php echo $datatwreal4['realisasi'] ?></td>
-                              
+
                               <?php }} ?>
                               </tr>
                             </tbody>
@@ -522,7 +522,7 @@ if(isset($_GET['triwulan'])){
         <!-- /page content -->
 
 		<div class="x_content">
-			
+
 
 		</div>
 

@@ -4,7 +4,7 @@ include ('connect.php'); //connect ke database
 
 if(isset($_GET['tahun'])){
     $nilaiTahun = $_GET['tahun'];
-  
+
   }else $nilaiTahun = '0';
 
 
@@ -91,7 +91,7 @@ if(isset($_GET['tahun'])){
                   </div>
 
                    <form action="dropdownproses.php" method="POST">
-                   <div class='col-sm-10'>                    
+                   <div class='col-sm-10'>
                     <div class="form-group col-md-3 col-sm-3 col-xs-12">
                     <h5 class="control-label col-md-4 col-sm-4 col-xs-12" for="tahun">Tahun</h5>
                         <div class='input-group date ' id='myDatepickerFilter'>
@@ -100,14 +100,14 @@ if(isset($_GET['tahun'])){
                             <span style="margin-right:10px;" class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                             </span>
-                             
-                        </div>                    
+
+                        </div>
                     </div>
-                    
+
                     <button  type="submit" class="btn btn-primary" name="dropdownTahunLaporanBulanan">Lihat</button>
-                    <button type="submit" class="btn btn-danger" name="clearTahunLaporanBulanan">Clear</button>
+                    <button type="submit" class="btn btn-danger" name="clearTahunLaporanBulanan">Hapus Filter</button>
                   </div>
-                  </form> 
+                  </form>
 
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
@@ -272,7 +272,7 @@ if(isset($_GET['tahun'])){
 		  <div class="alert alert-danger" role="alert">
 		  <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
 	      <h4> Anda yakin untuk menghapus file ini? </h4>
-		  
+
 		  <input name ="id_realisasi" type="text" id="id" value="" hidden>
 		  </div>
 		</div>
@@ -281,7 +281,7 @@ if(isset($_GET['tahun'])){
 		  <button type="submit" class="btn btn-danger" name ="deletelaporan" >Delete</button>
 		</div>
 		</form>
-		
+
 	</div>
 	</div>
 </div>

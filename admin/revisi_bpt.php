@@ -4,7 +4,7 @@ include ('connect.php'); //connect ke database
 
 if(isset($_GET['tahun'])){
     $nilaiTahun = $_GET['tahun'];
-  
+
   }else $nilaiTahun = '0';
 
   $iduser = $_SESSION['id_user'];
@@ -97,7 +97,7 @@ if(isset($_GET['tahun'])){
                   </div>
 
                   <form action="dropdownproses.php" method="POST">
-                  <div class='col-sm-10'>                    
+                  <div class='col-sm-10'>
                     <div class="form-group col-md-3 col-sm-3 col-xs-12">
                     <h5 class="control-label col-md-4 col-sm-4 col-xs-12" for="tahun">Tahun</h5>
                         <div class='input-group date ' id='myDatepickerFilter'>
@@ -106,15 +106,15 @@ if(isset($_GET['tahun'])){
                             <span style="margin-right:10px;" class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                             </span>
-                             
-                        </div>
-                    
 
-                      
+                        </div>
+
+
+
                     </div>
                     <button  type="submit" class="btn btn-primary" name="dropdownTahunRevisiBpt">Lihat</button>
                   </div>
-                  </form> 
+                  </form>
 
 
                   <div class="title_right">
@@ -175,9 +175,9 @@ if(isset($_GET['tahun'])){
                                $listTW = mysqli_query($connect, "SELECT * FROM beban_rencana, sub_program WHERE sub_program.id_sp = beban_rencana.id_sp AND stat_twrc = '1' AND beban_rencana.jenis ='bpt' AND sub_program.jenis='beban' ");
                             }
 
-                           
+
                             while($datalistTW = mysqli_fetch_array($listTW)){
-                                
+
                 								$idpklist = $datalistTW['id_pk'];
                 								$idspklist = $datalistTW['id_sp'];
                 								$tahun= $datalistTW['tahun'];
@@ -197,7 +197,7 @@ if(isset($_GET['tahun'])){
                               <tr >
                                 <td><?php echo $cabang['nama_cabang']?></td>
                                 <td><?php echo $dataprogramkerja['no_item'] ?></td>
-                                <td><?php echo $dataprogramkerja['MA'] ?></td>                                
+                                <td><?php echo $dataprogramkerja['MA'] ?></td>
                                 <td><?php echo $dataprogramkerja['nama_pk'] ?></td>
                                 <td><?php echo $datasubprogramkerja['nama_sp'] ?></td>
                                 <td><?php echo $qty;?></td>
@@ -211,25 +211,25 @@ if(isset($_GET['tahun'])){
                                 <td><?php echo $datatwrc4['rkap'] ?></td>
                                 <td><?php if($datatwrc4['revisi'] != 0 ) { echo $datatwrc4['revisi']; }?></td>
                 								<td>
-                								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal" 
-                								 data-id-twrc1 ="<?php echo $datatwrc1['id_twrc'];?>" 
-                								 data-id-twrc2 ="<?php echo $datatwrc2['id_twrc'];?>" 
-                								 data-id-twrc3 ="<?php echo $datatwrc3['id_twrc'];?>" 
+                								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal"
+                								 data-id-twrc1 ="<?php echo $datatwrc1['id_twrc'];?>"
+                								 data-id-twrc2 ="<?php echo $datatwrc2['id_twrc'];?>"
+                								 data-id-twrc3 ="<?php echo $datatwrc3['id_twrc'];?>"
                 								 data-id-twrc4 ="<?php echo $datatwrc4['id_twrc'];?>"
                 								 data-twrc1="<?php echo $datatwrc1['rkap'] ?>" data-twrc2="<?php echo $datatwrc2['rkap'] ?>" data-twrc3="<?php echo $datatwrc3['rkap'] ?>" data-twrc4="<?php echo $datatwrc4['rkap'] ?>">
-                								 Edit
-                								 </button>																 
-                								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
-                								 data-id-twrc1 ="<?php echo $datatwrc1['id_twrc'];?>" 
-                								 data-id-twrc2 ="<?php echo $datatwrc2['id_twrc'];?>" 
-                								 data-id-twrc3 ="<?php echo $datatwrc3['id_twrc'];?>" 
+                								 Ubah
+                								 </button>
+                								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal"
+                								 data-id-twrc1 ="<?php echo $datatwrc1['id_twrc'];?>"
+                								 data-id-twrc2 ="<?php echo $datatwrc2['id_twrc'];?>"
+                								 data-id-twrc3 ="<?php echo $datatwrc3['id_twrc'];?>"
                 								 data-id-twrc4 ="<?php echo $datatwrc4['id_twrc'];?>">
-                								 Delete
+                								 Hapus
                 								 </button>
                 								 </td>
                               </tr>
-                              <?php 
-                                  } 
+                              <?php
+                                  }
                               ?>
                             </tbody>
                           </table>
@@ -260,26 +260,26 @@ if(isset($_GET['tahun'])){
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
+                          <h4 class="modal-title" id="myModalLabel">Hapus Rencana</h4>
                         </div>
                         <div class="modal-body text-center">
                         <form action="editdatabeban.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" ">
                          <div class="alert alert-danger" role="alert">
 		 				               <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
-								  
+
 								              <h4> Anda yakin untuk menghapus data rencana ini? </h4>
 						              </div>
                           <h2 style="color:red;"></h2>
                           <form action="editdatabeban.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-						              <input name ="editidtwrc1" type="text" id="jenis" value="" hidden>						
+						              <input name ="editidtwrc1" type="text" id="jenis" value="" hidden>
 						              <input name ="editidtwrc2" type="text" id="jenis" value="" hidden>
           					      <input name ="editidtwrc3" type="text" id="jenis" value="" hidden>
           					      <input name ="editidtwrc4" type="text" id="jenis" value="" hidden>
-						 
+
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-danger" name ="deleterencanabeban" >Delete</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                          <button type="submit" class="btn btn-danger" name ="deleterencanabeban" >Hapus</button>
                         </div>
 						            </form>
                       </div>
@@ -293,11 +293,11 @@ if(isset($_GET['tahun'])){
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title" id="myModalLabel">Edit Rencana</h4>
+                          <h4 class="modal-title" id="myModalLabel">Ubah Rencana</h4>
                         </div>
                         <div class="modal-body">
                         <form action="editdatabeban.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                          
+
                           <h4>Rencana Hanya bisa diedit jika Data Realisasi belum di isi.</h4>
                           <form action="editrencanabeban.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
             						    <input name ="editidtwrc1" type="text" id="jenis" value="" hidden >
@@ -344,8 +344,8 @@ if(isset($_GET['tahun'])){
               						  </div>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name ="updaterencanabeban" >Save changes</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                          <button type="submit" class="btn btn-primary" name ="updaterencanabeban" >Simpan Perubahan</button>
                         </div>
 						          </form>
                       </div>
@@ -362,8 +362,8 @@ if(isset($_GET['tahun'])){
 					</div>
 
 				    <div class="modal-body">
-					       <form action="tambahprogrambeban.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">                       
-                 
+					       <form action="tambahprogrambeban.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
                         <input name ="jenis" type="text" id="jenis" value="bpt" hidden>
                         <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Cabang</label>
@@ -376,11 +376,11 @@ if(isset($_GET['tahun'])){
                                   $dataCabang = mysqli_query($connect, "SELECT * FROM cabang");
                                    while($ambilDataCabang = mysqli_fetch_array($dataCabang)){
                                             ?>
-                                           <option  value="<?php echo $ambilDataCabang['id_cabang'];?>"><?php echo $ambilDataCabang['nama_cabang'];?>                                             
+                                           <option  value="<?php echo $ambilDataCabang['id_cabang'];?>"><?php echo $ambilDataCabang['nama_cabang'];?>
                                            </option>
 
                             <?php }?>
-                                      
+
 
                             </select>
                           </div>
@@ -438,11 +438,11 @@ if(isset($_GET['tahun'])){
                                   $dataCabang = mysqli_query($connect, "SELECT * FROM cabang");
                                    while($ambilDataCabang = mysqli_fetch_array($dataCabang)){
                                             ?>
-                                           <option  value="<?php echo $ambilDataCabang['id_cabang'];?>"><?php echo $ambilDataCabang['nama_cabang'];?>                                             
+                                           <option  value="<?php echo $ambilDataCabang['id_cabang'];?>"><?php echo $ambilDataCabang['nama_cabang'];?>
                                            </option>
 
                             <?php }?>
-                                      
+
 
                             </select>
                           </div>
@@ -454,7 +454,7 @@ if(isset($_GET['tahun'])){
               							  <select name ="idprogramkerja" id="program-listsemua1" class="select2_single form-control" tabindex="-1" required="required">
 
                                <option>Pilih Program Kerja</option>
-              								
+
 
               							  </select>
           							   </div>
@@ -499,11 +499,11 @@ if(isset($_GET['tahun'])){
                                   $dataCabang = mysqli_query($connect, "SELECT * FROM cabang");
                                    while($ambilDataCabang = mysqli_fetch_array($dataCabang)){
                                             ?>
-                                           <option  value="<?php echo $ambilDataCabang['id_cabang'];?>"><?php echo $ambilDataCabang['nama_cabang'];?>                                             
+                                           <option  value="<?php echo $ambilDataCabang['id_cabang'];?>"><?php echo $ambilDataCabang['nama_cabang'];?>
                                            </option>
 
                             <?php }?>
-                                      
+
 
                             </select>
                           </div>
@@ -515,24 +515,24 @@ if(isset($_GET['tahun'])){
                               <select name ="programkerja" id="program-listsemua2" class="select2_single form-control" tabindex="-1" required="required">
 
                                <option>Pilih Program Kerja</option>
-                              
+
 
                               </select>
                            </div>
                          </div>
-						   
+
         						  <div class="form-group">
         							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="subProgram">Subprogram Kerja</label>
         							<div class="col-md-6 col-sm-6 col-xs-12">
         								<input name ="jenis" type="text" id="jenis" value="bpt" hidden>
-        							    
+
         								<select required="required" name="subprogram" id="subprogram-list" class="select2_single form-control" tabindex="-1">
         									<option>Pilih Subprogram Kerja</option>
         								</select>
         							</div>
         						  </div>
-						 					  
-					     
+
+
 
                  <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>

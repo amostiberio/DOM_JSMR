@@ -3,12 +3,12 @@ include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 if(isset($_GET['tahun'])){
     $nilaiTahun = $_GET['tahun'];
-  
+
   }else $nilaiTahun = '0';
 
 if(isset($_GET['cabang'])){
     $nilaiCabang = $_GET['cabang'];
-  
+
   }else $nilaiCabang = '0';
 
 
@@ -22,7 +22,7 @@ if(isset($_GET['cabang'])){
   $cabang =  mysqli_fetch_array(mysqli_query($connect,"SELECT nama_cabang FROM cabang WHERE id_cabang = '$idcabang'"));
   $namacabang = $cabang['nama_cabang'];
 
-  
+
 
 ?>
 <!DOCTYPE html>
@@ -97,7 +97,7 @@ if(isset($_GET['cabang'])){
                   </div>
 
                   <form action="dropdownproses.php" method="POST">
-                   <div class='col-sm-10'>                    
+                   <div class='col-sm-10'>
                     <div class="form-group col-md-3 col-sm-3 col-xs-12">
                     <h5 class="control-label col-md-4 col-sm-4 col-xs-12" for="tahun">Tahun</h5>
                         <div class='input-group'>
@@ -105,39 +105,39 @@ if(isset($_GET['cabang'])){
                                     <option value="0">Pilih Cabang</option>
                                     <?php $ambilCabang = mysqli_query($connect,"SELECT * FROM cabang");
                                         while($ambilDataCabang = mysqli_fetch_array($ambilCabang)){
-                                    ?>      
-                                                              
+                                    ?>
+
                                     <option value="<?php echo $ambilDataCabang['id_cabang'];?>" <?php if ($nilaiCabang == $ambilDataCabang['id_cabang']) echo 'selected'?> >
                                     <?php echo $ambilDataCabang ['nama_cabang'];?></option>
-                                       
-                                    <?php  } 
-                                      ?>                                                      
-                            </select>                             
-                        </div>                 
+
+                                    <?php  }
+                                      ?>
+                            </select>
+                        </div>
                     </div>
-                    
-                   
+
+
                   </div>
-                  <div class='col-sm-10'>                    
+                  <div class='col-sm-10'>
                     <div class="form-group col-md-3 col-sm-3 col-xs-12">
                     <h5 class="control-label col-md-4 col-sm-4 col-xs-12" for="tahun">Tahun</h5>
                         <div class='input-group date ' id='myDatepickerFilter'>
                             <input type='text' class="form-control" name= "tahun" <?php if(isset($_GET['tahun'])){ ?> value="<?php echo $nilaiTahun ;?>" <?php } ?>/>
                             <span style="margin-right:10px;" class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
-                            </span>                             
-                        </div>                 
+                            </span>
+                        </div>
                     </div>
                      <button  type="submit" class="btn btn-primary" name="dropdownTahunLaporanRealisasi">Lihat</button>
-                    <button type="submit" class="btn btn-danger" name="clearTahunLaporanRealisasi">Clear</button>
+                    <button type="submit" class="btn btn-danger" name="clearTahunLaporanRealisasi">Hapus Filter</button>
                   </div>
-                  </form> 
+                  </form>
 
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
                       <div class="input-group buttonright" >
         						  <div class="btn-group  buttonrightfloat " >
-        							<button type="button" data-toggle="modal" data-target=".bs-unggah" class="btn btn-primary">Set Time Limit Unggah Laporan</button>
+        							<button type="button" data-toggle="modal" data-target=".bs-unggah" class="btn btn-primary">Atur Batas Waktu Unggah Laporan</button>
         						  </div>
                       </div>
                     </div>
@@ -180,7 +180,7 @@ if(isset($_GET['cabang'])){
 							<td><?php echo $datalaporan['type_file']?></td>
 							<td><?php echo $datalaporan['waktu']?></td>
 							<td><a href="unduh.php?id_realisasi=<?php echo $datalaporan['id_realisasi'];?>"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button></a>
-								<button type="button" class="btn btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
+								<button type="button" class="btn btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal"
 								data-id-realisasi="<?php echo $datalaporan['id_realisasi'];?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 							</td>
 						  </tr>
@@ -221,7 +221,7 @@ if(isset($_GET['cabang'])){
 	  </div>
 	</div>
 </div>
-		
+
 <!-- Modal Unggah File -->
 <div class="modal fade bs-unggah" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
@@ -229,12 +229,12 @@ if(isset($_GET['cabang'])){
 		<div class="modal-header">
 		  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
 		  </button>
-		  <h4 class="modal-title" id="myModalLabel">Set Time Limit Unggah Laporan Realisasi</h4>
+		  <h4 class="modal-title" id="myModalLabel">Atur Batas Waktu Unggah Laporan Realisasi</h4>
 		</div>
 		  <form action="lockertanggallaporanrealisasi.php" method="post" id="demo-form2" data-parsley-validate enctype="multipart/form-data" class="form-horizontal form-label-left">
 			<div class="modal-body">
-			  
-			  
+
+
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipe">Tipe File</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
@@ -242,7 +242,7 @@ if(isset($_GET['cabang'])){
             <?php $ambilTanggalLocker = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM locker_realisasilaporan WHERE id_locker ='1'"));
                   $startDate = $ambilTanggalLocker['start_unggah'];
                   $endDate = $ambilTanggalLocker['end_unggah'];
-                
+
 
                   list($yearStart,$monthStart,$dateStart) = explode('-',$startDate);
                   $startRealDate = $monthStart."/".$dateStart."/".$yearStart;
@@ -263,8 +263,8 @@ if(isset($_GET['cabang'])){
              </fieldset>
 				</div>
 			  </div>
-			  
-			  
+
+
 			</div>
 			<div class="modal-footer">
 			  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
@@ -321,7 +321,7 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-    
+
                 date: {
                 validators: {
                     notEmpty: {

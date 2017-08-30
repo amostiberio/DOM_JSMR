@@ -3,7 +3,7 @@ include('akses.php'); //untuk memastikan dia sudah login
 include ('connect.php'); //connect ke database
 if(isset($_GET['tahun'])){
     $nilaiTahun = $_GET['tahun'];
-  
+
   }else $nilaiTahun = '0';
 
 
@@ -97,7 +97,7 @@ if(isset($_GET['tahun'])){
                   </div>
 
                   <form action="dropdownproses.php" method="POST">
-                  <div class='col-sm-10'>                    
+                  <div class='col-sm-10'>
                     <div class="form-group col-md-3 col-sm-3 col-xs-12">
                     <h5 class="control-label col-md-4 col-sm-4 col-xs-12" for="tahun">Tahun</h5>
                         <div class='input-group date ' id='myDatepickerFilter'>
@@ -106,13 +106,13 @@ if(isset($_GET['tahun'])){
                             <span style="margin-right:10px;" class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                             </span>
-                             
+
                         </div>
-                  
+
                     </div>
                     <button  type="submit" class="btn btn-primary" name="dropdownTahunRevisiSpojt">Lihat</button>
                   </div>
-                  </form> 
+                  </form>
 
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
@@ -170,9 +170,9 @@ if(isset($_GET['tahun'])){
                             }else {
                               $listTW = mysqli_query($connect, "SELECT * FROM capex_rencana, sub_program WHERE sub_program.id_sp = capex_rencana.id_sp AND stat_twrc = '1' AND sub_program.id_cabang = '$idcabang' AND capex_rencana.jenis ='spojt' AND sub_program.jenis='capex' ");
                             }
-                            
+
                             while($datalistTW = mysqli_fetch_array($listTW)){
-                                
+
 								$idpklist = $datalistTW['id_pk'];
 								$idspklist = $datalistTW['id_sp'];
 								$tahun= $datalistTW['tahun'];
@@ -203,20 +203,20 @@ if(isset($_GET['tahun'])){
                                 <td><?php echo $datatwrc4['rkap'] ?></td>
                                 <td><?php if($datatwrc4['revisi'] != 0 ) { echo $datatwrc4['revisi']; }?></td>
 								<td>
-								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal" 
-								 data-id-twrc1 ="<?php echo $datatwrc1['id_twrc'];?>" 
-								 data-id-twrc2 ="<?php echo $datatwrc2['id_twrc'];?>" 
-								 data-id-twrc3 ="<?php echo $datatwrc3['id_twrc'];?>" 
+								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal"
+								 data-id-twrc1 ="<?php echo $datatwrc1['id_twrc'];?>"
+								 data-id-twrc2 ="<?php echo $datatwrc2['id_twrc'];?>"
+								 data-id-twrc3 ="<?php echo $datatwrc3['id_twrc'];?>"
 								 data-id-twrc4 ="<?php echo $datatwrc4['id_twrc'];?>"
 								 data-twrc1="<?php echo $datatwrc1['rkap'] ?>" data-twrc2="<?php echo $datatwrc2['rkap'] ?>" data-twrc3="<?php echo $datatwrc3['rkap'] ?>" data-twrc4="<?php echo $datatwrc4['rkap'] ?>">
-								 Edit
-								 </button>																 
-								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
-								 data-id-twrc1 ="<?php echo $datatwrc1['id_twrc'];?>" 
-								 data-id-twrc2 ="<?php echo $datatwrc2['id_twrc'];?>" 
-								 data-id-twrc3 ="<?php echo $datatwrc3['id_twrc'];?>" 
+								 Ubah
+								 </button>
+								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal"
+								 data-id-twrc1 ="<?php echo $datatwrc1['id_twrc'];?>"
+								 data-id-twrc2 ="<?php echo $datatwrc2['id_twrc'];?>"
+								 data-id-twrc3 ="<?php echo $datatwrc3['id_twrc'];?>"
 								 data-id-twrc4 ="<?php echo $datatwrc4['id_twrc'];?>">
-								 Delete
+								 Hapus
 								 </button>
 								 </td>
                               </tr>
@@ -250,26 +250,26 @@ if(isset($_GET['tahun'])){
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
+                          <h4 class="modal-title" id="myModalLabel">Hapus Rencana</h4>
                         </div>
                         <div class="modal-body">
                         <form action="editdatacapex.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" ">
                          <div class="alert alert-danger" role="alert">
 		 				 <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
-								  
+
 								  <h4> Anda yakin untuk menghapus data rencana ini? </h4>
 						</div>
                           <h2 style="color:red;"></h2>
                           <form action="editdatacapex.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-          						    <input name ="editidtwrc1" type="text" id="jenis" value="" hidden>						
+          						    <input name ="editidtwrc1" type="text" id="jenis" value="" hidden>
           						    <input name ="editidtwrc2" type="text" id="jenis" value="" hidden>
           					      <input name ="editidtwrc3" type="text" id="jenis" value="" hidden>
           					      <input name ="editidtwrc4" type="text" id="jenis" value="" hidden>
-						 
+
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-danger" name ="deleterencanacapex" >Delete</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                          <button type="submit" class="btn btn-danger" name ="deleterencanacapex" >Hapus</button>
                         </div>
 					           	</form>
                       </div>
@@ -283,11 +283,11 @@ if(isset($_GET['tahun'])){
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title" id="myModalLabel">Edit Rencana</h4>
+                          <h4 class="modal-title" id="myModalLabel">Ubah Rencana</h4>
                         </div>
                         <div class="modal-body">
                         <form action="editdatacapex.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                          
+
                           <h4>Rencana Hanya bisa diedit jika Data Realisasi belum di isi.</h4>
                           <form action="editrencanabeban.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 						  <input name ="editidtwrc1" type="text" id="jenis" value="" hidden >
@@ -334,8 +334,8 @@ if(isset($_GET['tahun'])){
 						  </div>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name ="updaterencanacapex" >Save changes</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                          <button type="submit" class="btn btn-primary" name ="updaterencanacapex" >Simpan Perubahan</button>
                         </div>
 						</form>
                       </div>
@@ -475,8 +475,8 @@ if(isset($_GET['tahun'])){
 						  </div>
 						 <input name ="jenis" type="text" id="jenis" value="spojt" hidden>
 
-						  
-					     
+
+
                  <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tahun">Tahun</label>
                        <div class="col-md-6 col-sm-6 col-xs-12">

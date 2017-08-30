@@ -4,9 +4,9 @@ include ('connect.php'); //connect ke database
 
 if(isset($_GET['tahun'])){
     $nilaiTanggal = $_GET['tahun'];
-   
+
   }else $nilaiTanggal = '0';
-  
+
 
 
   $iduser = $_SESSION['id_user'];
@@ -20,7 +20,7 @@ if(isset($_GET['tahun'])){
   $namacabang = $cabang['nama_cabang'];
 
 
-  
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,7 +98,7 @@ if(isset($_GET['tahun'])){
                   </div>
 
                   <form action="dropdownproses.php" method="POST">
-                  <div class='col-sm-2'>                    
+                  <div class='col-sm-2'>
                     <div class="form-group">
                         <div class='input-group date' id='myDatepickerFilter'>
                             <input type='text' class="form-control" name= "tahun" <?php if(isset($_GET['tahun'])){ ?> value="<?php echo $nilaiTanggal ;?>" <?php } ?>/>
@@ -111,16 +111,16 @@ if(isset($_GET['tahun'])){
                   <button type="submit" class="btn btn-primary" name="dropdownTahunStatusLaporanBulanan">Lihat</button>
                   </form>
 
-                  
+
                    <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
                       <div class="input-group buttonright" >
-                        <div class="btn-group  buttonrightfloat " >                      
-                        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">Options <span class="caret"></span>
+                        <div class="btn-group  buttonrightfloat " >
+                        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">Pilihan <span class="caret"></span>
                         </button>
                         <ul role="menu" class="dropdown-menu pull-right">
-                          
-                          <li><a href="downloadexcelstatuslaporanbulanan.php?tahun=<?php echo $nilaiTanggal;?> "> Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+
+                          <li><a href="downloadexcelstatuslaporanbulanan.php?tahun=<?php echo $nilaiTanggal;?> "> Unduh Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
                           </li>
                         </ul>
                        </div>
@@ -130,20 +130,20 @@ if(isset($_GET['tahun'])){
 
                   <div class="x_content">
                       <?php if ($nilaiTanggal != '0') {
-                        
+
                         ?>
                       <table border="1"  id ="tableLaporanBulanan" class="table table-striped table-bordered text-center">
                             <thead >
                             <tr>
-                          
+
                                 <th rowspan="2">No</th>
                                 <th rowspan="2">Cabang</th>
                                 <th colspan="12">Laporan Bulanan Tahun <?php echo $nilaiTanggal; ?> </th>
-                               
+
                              </tr>
-                             
+
                             <tr>
-                          
+
                                 <th >Januari</th>
                                 <th >Februari</th>
                                 <th >Maret</th>
@@ -163,9 +163,9 @@ if(isset($_GET['tahun'])){
                               <?php
                                   $iterasinomor=1;
                                   $listCabang = mysqli_query($connect, "SELECT * FROM cabang");
-                              
-                                  while($ambilListCabang = mysqli_fetch_array($listCabang)) {		
-                                    
+
+                                  while($ambilListCabang = mysqli_fetch_array($listCabang)) {
+
                                        $nama_cabang = $ambilListCabang['nama_cabang'];
                                        $id_cabang = $ambilListCabang['id_cabang'];
 
@@ -181,14 +181,14 @@ if(isset($_GET['tahun'])){
                                        $ambilDataLaporanBulanan10= mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM realisasi_laporan WHERE id_cabang = '$id_cabang' AND tahun = '$nilaiTanggal' AND bulan ='10'"));
                                        $ambilDataLaporanBulanan11= mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM realisasi_laporan WHERE id_cabang = '$id_cabang' AND tahun = '$nilaiTanggal' AND bulan ='11'"));
                                        $ambilDataLaporanBulanan12= mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM realisasi_laporan WHERE id_cabang = '$id_cabang' AND tahun = '$nilaiTanggal' AND bulan ='12'"));
-                              
+
                               ?>
 
                               <tr>
                               <td><?php echo $iterasinomor++;?> </td>
                               <td><?php echo $nama_cabang;?> </td>
 
-                              <?php 
+                              <?php
                               if($ambilDataLaporanBulanan1){
                                  if($ambilDataLaporanBulanan1['status'] == '1'){
                               ?>
@@ -204,7 +204,7 @@ if(isset($_GET['tahun'])){
                               </td>
                              <?php }?>
 
-                              <?php 
+                              <?php
                               if($ambilDataLaporanBulanan2){
                                  if($ambilDataLaporanBulanan2['status'] == '1'){
                               ?>
@@ -220,7 +220,7 @@ if(isset($_GET['tahun'])){
                               </td>
                              <?php }?>
 
-                              <?php 
+                              <?php
                               if($ambilDataLaporanBulanan3){
                                  if($ambilDataLaporanBulanan3['status'] == '1'){
                               ?>
@@ -236,7 +236,7 @@ if(isset($_GET['tahun'])){
                               </td>
                              <?php }?>
 
-                              <?php 
+                              <?php
                               if($ambilDataLaporanBulanan4){
                                  if($ambilDataLaporanBulanan4['status'] == '1'){
                               ?>
@@ -252,7 +252,7 @@ if(isset($_GET['tahun'])){
                               </td>
                              <?php }?>
 
-                              <?php 
+                              <?php
                               if($ambilDataLaporanBulanan5){
                                  if($ambilDataLaporanBulanan5['status'] == '1'){
                               ?>
@@ -268,7 +268,7 @@ if(isset($_GET['tahun'])){
                               </td>
                              <?php }?>
 
-                              <?php 
+                              <?php
                               if($ambilDataLaporanBulanan6){
                                  if($ambilDataLaporanBulanan6['status'] == '1'){
                               ?>
@@ -284,9 +284,9 @@ if(isset($_GET['tahun'])){
                               </td>
                              <?php }?>
 
-                              
 
-                              <?php 
+
+                              <?php
                               if($ambilDataLaporanBulanan7){
                                  if($ambilDataLaporanBulanan7['status'] == '1'){
                               ?>
@@ -302,7 +302,7 @@ if(isset($_GET['tahun'])){
                               </td>
                              <?php }?>
 
-                              <?php 
+                              <?php
                               if($ambilDataLaporanBulanan8){
                                  if($ambilDataLaporanBulanan8['status'] == '1'){
                               ?>
@@ -318,7 +318,7 @@ if(isset($_GET['tahun'])){
                               </td>
                              <?php }?>
 
-                              <?php 
+                              <?php
                               if($ambilDataLaporanBulanan9){
                                  if($ambilDataLaporanBulanan9['status'] == '1'){
                               ?>
@@ -334,7 +334,7 @@ if(isset($_GET['tahun'])){
                               </td>
                              <?php }?>
 
-                              <?php 
+                              <?php
                               if($ambilDataLaporanBulanan10){
                                  if($ambilDataLaporanBulanan10['status'] == '1'){
                               ?>
@@ -349,7 +349,7 @@ if(isset($_GET['tahun'])){
 
                               </td>
                              <?php }?>
-                             <?php 
+                             <?php
                               if($ambilDataLaporanBulanan11){
                                  if($ambilDataLaporanBulanan11['status'] == '1'){
                               ?>
@@ -365,7 +365,7 @@ if(isset($_GET['tahun'])){
                               </td>
                              <?php }?>
 
-                             <?php 
+                             <?php
                               if($ambilDataLaporanBulanan12){
                                  if($ambilDataLaporanBulanan12['status'] == '1'){
                               ?>
@@ -381,7 +381,7 @@ if(isset($_GET['tahun'])){
                               </td>
                              <?php }?>
                               </tr>
-                              
+
                               <?php }
                               ?>
                             </tbody>
