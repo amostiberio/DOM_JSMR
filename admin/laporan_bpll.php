@@ -86,7 +86,7 @@ if(isset($_GET['triwulan'])){
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Monitoring Beban</h3>
+                <h3>Monitoring Beban Laporan BPLL</h3>
               </div>
 
 

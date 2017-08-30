@@ -80,7 +80,7 @@ if(isset($_GET['tahun'])){
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Monitoring Beban</h3>
+                <h3>Monitoring Beban Realisasi BPT Realisasi BPLL</h3>
               </div>
 
 
