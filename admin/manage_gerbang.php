@@ -132,11 +132,11 @@ if (isset($_GET['id'])){
                 								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal"
                                         data-id-gerbang =  "<?php echo $idGerbang;?>"
                                         data-namagerbang ="<?php echo $namaGerbang; ?>">
-                								 Edit
+                								 Ubah
                 								</button>
                                 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal"
                 								        data-id-gerbang ="<?php echo $idGerbang; ?>">
-                								 Delete
+                								 Hapus
                 								</button>
 
                 								 </td>
@@ -171,7 +171,7 @@ if (isset($_GET['id'])){
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">Delete Gerbang</h4>
+                <h4 class="modal-title" id="myModalLabel">Hapus Gerbang</h4>
               </div>
               <div class="modal-body text-center">
                 <form action="edit_gerbang.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
@@ -183,8 +183,8 @@ if (isset($_GET['id'])){
                   <input name ="edit_idgerbang" type="text"  required="required" class="form-control col-md-7 col-xs-12" hidden>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  <button type="submit" class="btn btn-danger" name ="deletegerbang" >Delete</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                  <button type="submit" class="btn btn-danger" name ="deletegerbang" >Hapus</button>
                 </div>
               </form>
             </div>
@@ -198,7 +198,7 @@ if (isset($_GET['id'])){
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">Edit Gerbang</h4>
+                <h4 class="modal-title" id="myModalLabel">Ubah Gerbang</h4>
               </div>
               <div class="modal-body">
                 <form action="edit_gerbang.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
@@ -212,8 +212,8 @@ if (isset($_GET['id'])){
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                  <button type="submit" class="btn btn-primary" name ="editgerbang" >Save changes</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                  <button type="submit" class="btn btn-primary" name ="editgerbang" >Simpan Perubahan</button>
                 </div>
                 </form>
               </div>

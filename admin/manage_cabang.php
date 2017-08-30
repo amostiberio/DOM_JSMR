@@ -148,12 +148,12 @@ include ('connect.php'); //connect ke database
                 								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal"
                 								data-namacabang ="<?php echo $namaCabang; ?>"
                 								 >
-                								 Edit
+                								 Ubah
                 								 </button>
                 								 <!-- <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal"
                                  data-id-user = "<?php echo $idUserCabang;?>"
                 								>
-                								 Delete
+                								 Hapus
                 								 </button> -->
                 								 </td>
                               </tr>
@@ -189,7 +189,7 @@ include ('connect.php'); //connect ke database
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
+                          <h4 class="modal-title" id="myModalLabel">Hapus Rencana</h4>
                         </div>
                         <div class="modal-body text-center">
                         <form action="editdataUser.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" >
@@ -204,8 +204,8 @@ include ('connect.php'); //connect ke database
 
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-danger" name ="deleteUser" >Delete</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                          <button type="submit" class="btn btn-danger" name ="deleteUser" >Hapus</button>
                         </div>
 						            </form>
                       </div>
@@ -219,7 +219,7 @@ include ('connect.php'); //connect ke database
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title" id="myModalLabel">Edit Cabang</h4>
+                          <h4 class="modal-title" id="myModalLabel">Ubah Cabang</h4>
                         </div>
                         <div class="modal-body">
                         <form action="editdataUser.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
@@ -234,8 +234,8 @@ include ('connect.php'); //connect ke database
 
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-primary" name ="editUser" >Save changes</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                          <button type="submit" class="btn btn-primary" name ="editUser" >Simpan Perubahan</button>
                         </div>
 						          </form>
                       </div>

@@ -4,7 +4,7 @@ include ('connect.php'); //connect ke database
 
 if(isset($_GET['tahun'])){
     $nilaiTahun = $_GET['tahun'];
-  
+
   }else $nilaiTahun = '0';
 
   $iduser = $_SESSION['id_user'];
@@ -93,7 +93,7 @@ if(isset($_GET['tahun'])){
                     <div class="clearfix"></div>
                   </div>
 					<form action="dropdownproses.php" method="POST">
-                  <div class='col-sm-2'>                    
+                  <div class='col-sm-2'>
                     <div class="form-group">
                         <div class='input-group date' id='myDatepickerFilter'>
                             <input type='text' class="form-control" name= "tahun" <?php if(isset($_GET['tahun'])){ ?> value="<?php echo $nilaiTahun ;?>" <?php } ?>/>
@@ -103,8 +103,8 @@ if(isset($_GET['tahun'])){
                         </div>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary" name="dropdownTahunSDM">View</button>
-				  <button type="submit" class="btn btn-danger" name="clearTahunSDM">Clear</button>
+                  <button type="submit" class="btn btn-primary" name="dropdownTahunSDM">Lihat</button>
+				  <button type="submit" class="btn btn-danger" name="clearTahunSDM">Hapus Filter</button>
                   </form>
                   <div class="title_right">
                     <div class="col-md-5 col-sm-5 col-xs-5 form-group pull-right top_search" style="margin-top:10px;">
@@ -119,10 +119,10 @@ if(isset($_GET['tahun'])){
                       </div>
 					  <div class="input-group buttonright" >
                       <div class="btn-group  buttonrightfloat " >
-						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Download <span class="caret"></span>
+						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm" type="button" aria-expanded="false">  Unduh <span class="caret"></span>
                       </button>
                       <ul role="menu" class="dropdown-menu pull-right">
-                       <li><a href="downloadjs.php?tahun=<?php echo $nilaiTahun;?>" > Download Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
+                       <li><a href="downloadjs.php?tahun=<?php echo $nilaiTahun;?>" > Unduh Excels <img src='xls.png' alt="XLSX" style="width:20px"></a>
                        </li>
 					   </ul>
 	                    </div>
@@ -155,7 +155,7 @@ if(isset($_GET['tahun'])){
 							  if($nilaiTahun > 0){
                                 $jumlah_sdm = mysqli_query($connect, "SELECT * FROM pengumpul_tol join jenis_karyawan join cabang on cabang.id_cabang=pengumpul_tol.id_cabang WHERE pengumpul_tol.tahun='$nilaiTahun' group by pengumpul_tol.tahun, pengumpul_tol.id_cabang");
                               }else{
-                                $jumlah_sdm = mysqli_query($connect, "SELECT * FROM pengumpul_tol join jenis_karyawan join cabang on cabang.id_cabang=pengumpul_tol.id_cabang group by pengumpul_tol.tahun, pengumpul_tol.id_cabang");								
+                                $jumlah_sdm = mysqli_query($connect, "SELECT * FROM pengumpul_tol join jenis_karyawan join cabang on cabang.id_cabang=pengumpul_tol.id_cabang group by pengumpul_tol.tahun, pengumpul_tol.id_cabang");
 							  }
 								$nomor = 1; $total1 =0; $total2 =0; $total3 =0; $total4 =0; $total5 =0; $total6 =0; $total7 =0; $total8=0;
                                 while($data_jumlahsdm = mysqli_fetch_array($jumlah_sdm)){
@@ -237,7 +237,7 @@ if(isset($_GET['tahun'])){
         <!-- /page content -->
 
 		<div class="x_content">
-		
+
     <!-- Modal Tambah Pengumpul Tol-->
   <div class="modal fade bs-pengumpultol" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">

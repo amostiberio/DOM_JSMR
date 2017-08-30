@@ -100,9 +100,9 @@ include ('connect.php'); //connect ke database
 	                    </button>
 	                    <ul role="menu" class="dropdown-menu pull-right">
                         <li><a data-toggle="modal" data-target=".bs-user" >Tambah User</a>
-                        </li>   
-	                     
-	                     		             
+                        </li>
+
+
 
 	                    </ul>
 	                    </div>
@@ -114,15 +114,15 @@ include ('connect.php'); //connect ke database
 
                       <table id="datatable-keytable"  class="table table-striped table-bordered text-center" >
                             <thead >
-                            
+
                                 <th>Cabang</th>
                                 <th>Username</th>
                                 <th>Password</th>
                                 <th>Role</th>
-                                <th>Jumlah Program Kerja</th>                                
+                                <th>Jumlah Program Kerja</th>
                 								<th>Aksi</th>
 
-                             
+
                             </thead>
                             <tbody>
                             <?php
@@ -151,24 +151,24 @@ include ('connect.php'); //connect ke database
                                 <td><?php echo $namaCabangUser; ?></td>
                                 <td><?php echo $userName; ?></td>
                                 <td><?php echo $password; ?></td>
-                                <td><?php echo $userRole['role']; ?></td> 
-                                <td><?php echo $totalPK[0]; ?></td>                              
+                                <td><?php echo $userRole['role']; ?></td>
+                                <td><?php echo $totalPK[0]; ?></td>
                 								<td>
-                								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal" 
-                								data-username ="<?php echo $userName; ?>" 
-                							  data-password ="<?php echo $password; ?>" 
+                								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal"
+                								data-username ="<?php echo $userName; ?>"
+                							  data-password ="<?php echo $password; ?>"
                 								 >
-                								 Edit
-                								 </button>																 
-                								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal" 
+                								 Ubah
+                								 </button>
+                								 <button type="button" class="btn btn-round btn-danger" class="btn btn-primary" data-toggle="modal" data-target=".bs-delete-modal"
                                  data-id-user = "<?php echo $idUserCabang;?>"
                 								>
-                								 Delete 
+                								 Hapus
                 								 </button>
                 								 </td>
                               </tr>
-                              <?php 
-                                  } 
+                              <?php
+                                  }
                               ?>
                             </tbody>
                           </table>
@@ -199,23 +199,23 @@ include ('connect.php'); //connect ke database
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title" id="myModalLabel">Delete Rencana</h4>
+                          <h4 class="modal-title" id="myModalLabel">Hapus Rencana</h4>
                         </div>
                         <div class="modal-body text-center">
                         <form action="editdataUser.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" ">
                          <div class="alert alert-danger" role="alert">
 		 				               <h1 class="glyphicon glyphicon-alert" aria-hidden="true"></h1>
-								  
+
 								              <h4> Anda yakin untuk menghapus data rencana ini? </h4>
 						              </div>
                           <h2 style="color:red;"></h2>
                           <input name ="idUserCabang" type="text"  required="required" class="form-control col-md-7 col-xs-12" hidden>
-						              			
-						             
+
+
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                          <button type="submit" class="btn btn-danger" name ="deleteUser" >Delete</button>
+                          <button type="submit" class="btn btn-danger" name ="deleteUser" >Hapus</button>
                         </div>
 						            </form>
                       </div>
@@ -229,11 +229,11 @@ include ('connect.php'); //connect ke database
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title" id="myModalLabel">Edit Rencana</h4>
+                          <h4 class="modal-title" id="myModalLabel">Ubah Data User</h4>
                         </div>
                         <div class="modal-body">
                         <form action="editdataUser.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                         
+
                         <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ma">Username</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -247,7 +247,7 @@ include ('connect.php'); //connect ke database
                             <input name ="Password" type="text"  required="required" class="form-control col-md-7 col-xs-12">
                           </div>
                         </div>
-                          
+
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -268,7 +268,7 @@ include ('connect.php'); //connect ke database
 					</div>
 
 				    <div class="modal-body">
-					       <form action="tambahuser.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">          
+					       <form action="tambahuser.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                         <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Role</label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
@@ -280,11 +280,11 @@ include ('connect.php'); //connect ke database
                                   $dataRole = mysqli_query($connect, "SELECT * FROM user_role");
                                    while($ambilDataRole = mysqli_fetch_array($dataRole)){
                                             ?>
-                                           <option  value="<?php echo $ambilDataRole['id_role'];?>"><?php echo $ambilDataRole['role'];?>                                             
+                                           <option  value="<?php echo $ambilDataRole['id_role'];?>"><?php echo $ambilDataRole['role'];?>
                                            </option>
 
                             <?php }?>
-                                      
+
 
                             </select>
                           </div>
@@ -302,16 +302,16 @@ include ('connect.php'); //connect ke database
                                   $dataCabang = mysqli_query($connect, "SELECT * FROM cabang");
                                    while($ambilDataCabang = mysqli_fetch_array($dataCabang)){
                                             ?>
-                                           <option  value="<?php echo $ambilDataCabang['id_cabang'];?>"><?php echo $ambilDataCabang['nama_cabang'];?>                                             
+                                           <option  value="<?php echo $ambilDataCabang['id_cabang'];?>"><?php echo $ambilDataCabang['nama_cabang'];?>
                                            </option>
 
                             <?php }?>
-                                      
+
 
                             </select>
                           </div>
                         </div>
-                        
+
           						  <div class="form-group">
           							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="ma">Username</label>
           							<div class="col-md-6 col-sm-6 col-xs-12">
@@ -338,7 +338,7 @@ include ('connect.php'); //connect ke database
 			           </div>
 
 
-			
+
 
 			<!-- Modal Tambah Cabang -->
       <div class="modal fade bs-cabang" tabindex="-1" role="dialog" aria-hidden="true">
@@ -351,10 +351,10 @@ include ('connect.php'); //connect ke database
           </div>
 
             <div class="modal-body">
-                 <form action="tambahcabang.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">          
-                       
-                        
-                        
+                 <form action="tambahcabang.php" method="post" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+
+
                         <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Cabang</label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
@@ -372,7 +372,7 @@ include ('connect.php'); //connect ke database
 
                     </div>
                  </div>
-			
+
 		</div>
 
 <style>
