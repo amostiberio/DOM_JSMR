@@ -1,69 +1,54 @@
+
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+<head>
+<title>Dashboard DOM Login Form</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>Gentelella Alela! | </title>
-
-    <!-- Bootstrap -->
-    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- Animate.css -->
-    <link href="vendors/animate.css/animate.min.css" rel="stylesheet">
-
-    <!-- Custom Theme Style -->
-    <link href="build/css/custom.min.css" rel="stylesheet">
-  </head>
-
-  <body class="login" >
-    <div
-      <a class="hiddenanchor" id="signup"></a>
-      <a class="hiddenanchor" id="signin"></a>
-
-      <div class="login_wrapper">
-        <div class="animate form login_form">
-          <section class="login_content">
-
-            <form action="loginprocess.php" method="post">
-              <h1>Login Form</h1>
-              <div>
-                <input type="text" name="username" placeholder="Username" class="form-control" placeholder="Username" required="asd" />
-              </div>
-              <div>
-                <input type="password" name ="password" class="form-control" placeholder="Password" required="" />
-              </div>
-              <div>
-                <input style="float:none;margin-left:0px;" class="btn btn-default submit" value ="Log in" type="submit">
-              </div>
-
-              <div class="clearfix"></div>
-
-              <div class="separator">
-
-
-                <div class="clearfix"></div>
-                <br />
-
-                <div>
-                <h1><i class="fa fa-group"></i><h1>
-
-                  <h1>Jasa Marga DOM</h1>
-                  <p>©2017 All Rights Reserved. </p>
-                </div>
-              </div>
-            </form>
-          </section>
-        </div>
-
-
-      </div>
-    </div>
-  </body>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link href="vendors/loginform/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- //Custom Theme files --> 
+<!-- web font --> 
+<link href="//fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Arsenal:400,400i,700,700i" rel="stylesheet">
+<!-- //web font -->
+</head>
+<body>
+	<!-- main --> 
+	<div class="main-agileinfo slider ">
+		<div class="items-group">
+			<div class="item agileits-w3layouts">
+				<div class="block text main-agileits"> 
+					<span class="circleLight"></span> 
+					<!-- login form -->
+					<div class="login-form loginw3-agile"> 
+						<div class="agile-row">
+							<h1>DOM Login Form</h1> 
+							<div class="login-agileits-top"> 	
+								<form  action="loginprocess.php"  method="post"> 
+									<p>Username </p>
+									<input type="text" class="name" name="username" required=""/>
+									<p>Password</p>
+									<input type="password" class="password" name ="password" required=""/>  
+									<label class="anim">
+										<input type="checkbox" class="checkbox">
+										<span> Remember me ?</span> 
+									</label>   
+									<input type="submit" value="Login"> 
+								</form> 	
+							</div> 
+							
+						</div>  
+					</div>   
+				</div>
+				<div class="w3lsfooteragileits">
+					<p> &copy; 2017 Dashboard DOM Jasamarga. All Rights Reserved | Developed by Jasamarga IT Division</a></p>
+				</div> 
+			</div>   
+		</div>
+	</div>	 
+	<!-- //main --> 
+</body>
 </html>
