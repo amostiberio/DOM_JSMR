@@ -153,8 +153,8 @@ if(isset($_GET['tahun'])){
                 								<th colspan="1">TW 2</th>
                 								<th colspan="1">TW 3</th>
                 								<th colspan="1">TW 4</th>
-                								<th rowspan="2">Aksi</th>
-
+<!--                 								<th rowspan="2">Aksi</th>
+ -->
                               </tr>
                               <tr>
                                 <th>RKAP</th>
@@ -202,7 +202,7 @@ if(isset($_GET['tahun'])){
                                 <td><?php echo $datatwrc2['rkap'] ?></td>
                                 <td><?php echo $datatwrc3['rkap'] ?></td>
 							                 	<td><?php echo $datatwrc4['rkap'] ?></td>
-                								<td>
+                								<!-- <td>
                 								<button type="button" class="btn btn-round btn-info" class="btn btn-primary" data-toggle="modal" data-target=".bs-edit-modal"
                 								 data-id-twrc1 ="<?php echo $datatwrc1['id_twrc'];?>"
                 								 data-id-twrc2 ="<?php echo $datatwrc2['id_twrc'];?>"
@@ -218,7 +218,7 @@ if(isset($_GET['tahun'])){
                 								 data-id-twrc4 ="<?php echo $datatwrc4['id_twrc'];?>">
                 								 Hapus
                 								 </button>
-                								 </td>
+                								 </td> -->
                               </tr>
                               <?php
                                   }

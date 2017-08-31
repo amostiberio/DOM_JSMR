@@ -161,7 +161,7 @@ if(isset($_GET['tahun'])){
                             <tbody>
                             <?php
                             if($nilaiTahun>0){
-                              $listTW = mysqli_query($connect, "SELECT * FROM beban_rencana, sub_program WHERE sub_program.id_sp = beban_rencana.id_sp AND stat_twrc = '1' AND sub_program.id_cabang = '$idcabang' AND beban_rencana.jenis ='bpll' AND sub_program.jenis='beban' beban_rencana.tahun ='$nilaiTahun'");
+                              $listTW = mysqli_query($connect, "SELECT * FROM beban_rencana, sub_program WHERE sub_program.id_sp = beban_rencana.id_sp AND stat_twrc = '1' AND sub_program.id_cabang = '$idcabang' AND beban_rencana.jenis ='bpll' AND sub_program.jenis='beban' AND  beban_rencana.tahun ='$nilaiTahun'");
                             }else{
                               $listTW = mysqli_query($connect, "SELECT * FROM beban_rencana, sub_program WHERE sub_program.id_sp = beban_rencana.id_sp AND stat_twrc = '1' AND sub_program.id_cabang = '$idcabang' AND beban_rencana.jenis ='bpll' AND sub_program.jenis='beban' ");
                             }
