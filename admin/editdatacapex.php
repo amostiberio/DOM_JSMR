@@ -15,10 +15,10 @@
 			$cekcapex = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM capex_rencana WHERE id_twrc = '$idtwrc1'"));
 			$idspcapex = $cekcapex['id_sp'];
 			$tahuncapex = $cekcapex['tahun'];
-		    $cekrealisasi = mysqli_query($connect,"SELECT id_twrc FROM capex_rencana,capex_realisasi WHERE id capex_realisasi.id_sp = '$idspcapex' AND capex_realisasi.tahun = '$tahuncapex' ");
+		    $cekrealisasi = mysqli_query($connect,"SELECT id_twrc FROM capex_rencana,capex_realisasi WHERE capex_realisasi.id_sp = '$idspcapex' AND capex_realisasi.tahun = '$tahuncapex' ");
 
 		if($cekrealisasi){
-?> 		    <script> window.alert('Nilai Realisasi telah Di isi, tidak bisa memperbaharui Nilai Rencana') </script>
+?> 		    <script> window.alert('Nilai Realisasi telah diisi, tidak bisa memperbaharui Nilai Rencana') </script>
 			<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 <?php
 		} else {
@@ -51,10 +51,10 @@
 			$cekcapex = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM capex_rencana WHERE id_twrc = '$idtwrc1'"));
 			$idspcapex = $cekcapex['id_sp'];
 			$tahuncapex = $cekcapex['tahun'];
-		    $cekrealisasi = mysqli_query($connect,"SELECT id_twrc FROM capex_rencana,capex_realisasi WHERE id capex_realisasi.id_sp = '$idspcapex' AND capex_realisasi.tahun = '$tahuncapex' ");
+		    $cekrealisasi = mysqli_query($connect,"SELECT id_twrc FROM capex_rencana,capex_realisasi WHERE capex_realisasi.id_sp = '$idspcapex' AND capex_realisasi.tahun = '$tahuncapex' ");
 
 		if($cekrealisasi){
-?> 		    <script> window.alert('Nilai Realisasi telah Di isi, tidak bisa menghapus Nilai Rencana') </script>
+?> 		    <script> window.alert('Nilai Realisasi telah diisi, tidak bisa menghapus Nilai Rencana') </script>
 			<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 <?php
 		} else {

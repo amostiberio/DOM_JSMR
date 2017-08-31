@@ -15,10 +15,10 @@
 			$cekbeban = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM beban_rencana WHERE id_twrc = '$idtwrc1'"));
 			$idspbeban = $cekbeban['id_sp'];
 			$tahunbeban = $cekbeban['tahun'];
-		    $cekrealisasi = mysqli_query($connect,"SELECT id_twrc FROM beban_rencana,beban_realisasi WHERE id beban_realisasi.id_sp = '$idspbeban' AND beban_realisasi.tahun = '$tahunbeban' ");
+		    $cekrealisasi = mysqli_query($connect,"SELECT id_twrc FROM beban_rencana,beban_realisasi WHERE  beban_realisasi.id_sp = '$idspbeban' AND beban_realisasi.tahun = '$tahunbeban' ");
 
 		if($cekrealisasi){
-?> 		    <script> window.alert('Nilai Realisasi telah Di isi, tidak bisa memperbaharui Nilai Rencana') </script>
+?> 		    <script> window.alert('Nilai Realisasi telah diisi, tidak bisa memperbaharui Nilai Rencana') </script>
 			<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 <?php
 		} else {
@@ -51,10 +51,10 @@
 			$cekbeban = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM beban_rencana WHERE id_twrc = '$idtwrc1'"));
 			$idspbeban = $cekbeban['id_sp'];
 			$tahunbeban = $cekbeban['tahun'];
-		    $cekrealisasi = mysqli_query($connect,"SELECT id_twrc FROM beban_rencana,beban_realisasi WHERE id beban_realisasi.id_sp = '$idspbeban' AND beban_realisasi.tahun = '$tahunbeban' ");
+		    $cekrealisasi = mysqli_query($connect,"SELECT id_twrc FROM beban_rencana,beban_realisasi WHERE beban_realisasi.id_sp = '$idspbeban' AND beban_realisasi.tahun = '$tahunbeban' ");
 
 		if($cekrealisasi){
-?> 		    <script> window.alert('Nilai Realisasi telah Di isi, tidak bisa menghapus Nilai Rencana') </script>
+?> 		    <script> window.alert('Nilai Realisasi telah diisi, tidak bisa menghapus Nilai Rencana') </script>
 			<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 <?php
 		} else {
