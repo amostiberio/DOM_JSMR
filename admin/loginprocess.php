@@ -12,8 +12,8 @@ session_start();
 	$data = mysqli_fetch_array($hasil);
 
 // cek kesesuaian password
-if ($password == $data['password'])
-{
+
+if (password_verify($password, $data['password'])) {
 echo "Login Sukses";
     // menyimpan username dan level ke dalam session
     $_SESSION['id_role'] = $data['id_role'];

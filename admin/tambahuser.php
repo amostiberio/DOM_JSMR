@@ -11,6 +11,11 @@
 			$idRole= anti_injection($_POST['idRole']);
 		 	$username= anti_injection($_POST['Username']);
 			$password = anti_injection($_POST['Password']);
+
+				$options = [
+    		'cost' => 12
+				];
+				$hash = password_hash($password, PASSWORD_BCRYPT, $options);
 		//cek input double
 		$cekUser = mysqli_query($connect, "SELECT id_user FROM user WHERE username='$username' AND id_cabang ='$idCabang'");
 
@@ -23,7 +28,7 @@
 <?php }
 
 		//insert semua
-		else $insert= mysqli_query($connect,"INSERT INTO user VALUES ('','$username','$password','$idRole','$idCabang')");
+		else $insert= mysqli_query($connect,"INSERT INTO user VALUES ('','$username','$hash','$idRole','$idCabang')");
 		if($insert){
 ?>		 		<script> window.alert('Data berhasil Ditambah') </script>
 				<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>

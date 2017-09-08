@@ -117,7 +117,6 @@ include ('connect.php'); //connect ke database
 
                                 <th>Cabang</th>
                                 <th>Username</th>
-                                <th>Password</th>
                                 <th>Role</th>
                                 <th>Jumlah Program Kerja</th>
                 								<th>Aksi</th>
@@ -150,7 +149,6 @@ include ('connect.php'); //connect ke database
                               <tr >
                                 <td><?php echo $namaCabangUser; ?></td>
                                 <td><?php echo $userName; ?></td>
-                                <td><?php echo $password; ?></td>
                                 <td><?php echo $userRole['role']; ?></td>
                                 <td><?php echo $totalPK[0]; ?></td>
                 								<td>
@@ -242,9 +240,8 @@ include ('connect.php'); //connect ke database
 
                         </div>
                         <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programKerja">Password</label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input name ="Password" type="text"  required="required" class="form-control col-md-7 col-xs-12">
+                            <input name ="Password" type="text"  required="required" class="form-control col-md-7 col-xs-12" hidden>
                           </div>
                         </div>
 
