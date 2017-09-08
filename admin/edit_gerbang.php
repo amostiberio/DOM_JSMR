@@ -1,10 +1,11 @@
 <?php
 	include 'connect.php';
+	include 'anti_inject.php';
 
 		if(isset($_POST['editgerbang'])){
 
-			$idgerbang = $_POST['edit_idgerbang'];
-			$namagerbang = $_POST['edit_namagerbang'];
+			$idgerbang = anti_injection($_POST['edit_idgerbang']);
+			$namagerbang = anti_injection($_POST['edit_namagerbang']);
 
 
 		$updategerbang = mysqli_query($connect,"UPDATE gerbang SET nama_gerbang ='$namagerbang' WHERE id_gerbang ='$idgerbang'");
@@ -26,7 +27,7 @@
 
 		if(isset($_POST['deletegerbang'])){
 
-			$idgerbang = $_POST['edit_idgerbang'];
+			$idgerbang = anti_injection($_POST['edit_idgerbang']);
 
 
 		$deletegerbang = mysqli_query($connect,"DELETE FROM gerbang WHERE id_gerbang ='$idgerbang'");

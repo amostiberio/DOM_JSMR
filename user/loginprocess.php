@@ -1,9 +1,10 @@
 <?php
 session_start();
 	include 'connect.php';
+	include 'anti_inject.php';
 
-		$username = $_POST['username'];
-		$password = $_POST['password'];
+		$username = anti_injection($_POST['username']);
+		$password = anti_injection($_POST['password']);
 
 // query untuk mendapatkan record dari email
 	$query = "SELECT * FROM user WHERE username = '$username'";

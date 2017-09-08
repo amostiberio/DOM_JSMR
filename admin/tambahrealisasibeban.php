@@ -1,14 +1,15 @@
 <?php
 	include 'connect.php';
+	include 'anti_inject.php';
 
 		if(isset($_POST['tambah'])){
-			$idcabang = $_POST['idcabang'];
-		 	$id_pk= $_POST['programkerja'];
-			$id_subpk = $_POST['subprogram'];
-			$jenis = $_POST['jenis'];
-			$tahun = $_POST['tahun'];
-			$sttwrl = $_POST['sttwrl'];
-			$realisasi= $_POST['realisasi'];
+			$idcabang = anti_injection($_POST['idcabang']);
+		 	$id_pk= anti_injection($_POST['programkerja']);
+			$id_subpk = anti_injection($_POST['subprogram']);
+			$jenis = anti_injection($_POST['jenis']);
+			$tahun = anti_injection($_POST['tahun']);
+			$sttwrl = anti_injection($_POST['sttwrl']);
+			$realisasi= anti_injection($_POST['realisasi']);
 		//cek input double
 		$cek_rencana = mysqli_query($connect,"SELECT * FROM beban_rencana WHERE id_sp='$id_subpk' AND tahun='$tahun' AND jenis 	= '$jenis'");
 		$datarencana = mysqli_fetch_array($cek_rencana,MYSQLI_NUM);
@@ -18,24 +19,24 @@
 		$cek_realisasi = mysqli_query($connect, "SELECT * FROM beban_realisasi WHERE id_sp = '$id_subpk' AND tahun ='$tahun' AND jenis ='$jenis' AND stat_twrl ='$sttwrl'");
 		$datarealisasi = mysqli_fetch_array($cek_realisasi,MYSQLI_NUM);
 
-		if($datarealisasi[0] > 0){ 
+		if($datarealisasi[0] > 0){
 ?>
 			<script> window.alert('Data Telah Tersedia') </script>
 			 <script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
-			
-<?php 		 		
-			
- 		
+
+<?php
+
+
 		}
 		else {
 			$insertrealisasi= mysqli_query($connect,"INSERT INTO beban_realisasi VALUES ('','$id_subpk','$tahun','$sttwrl','0','$realisasi','$jenis')");
-		
+
 			if($insertrealisasi){
 ?>		 		<script> window.alert('Data berhasil Ditambah') </script>
 				 <script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
-<?php		
+<?php
 			}
-			else{ 
+			else{
 ?>
 			<script> window.alert('Data Gagal Ditambahkan') </script>
 			 <script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
@@ -46,7 +47,7 @@
 
 ?>
 		<script> window.alert('Data Rencana Belum Tersedia') </script>
-		<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script> 
+		<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 
 <?php
 		}

@@ -1,23 +1,25 @@
 <?php
 	include 'connect.php';
-        
+	include 'anti_inject.php';
+
 		if(isset($_POST['tambah'])){
-			$idCabang = $_POST['idCabang'];
+			$idCabang = anti_injection($_POST['idCabang']);
+
 			if(!isset($idCabang)){
 				$idCabang ='0';
 			}
-			$idRole=$_POST['idRole'];
-		 	$username=$_POST['Username'];
-			$password = $_POST['Password'];
+			$idRole= anti_injection($_POST['idRole']);
+		 	$username= anti_injection($_POST['Username']);
+			$password = anti_injection($_POST['Password']);
 		//cek input double
 		$cekUser = mysqli_query($connect, "SELECT id_user FROM user WHERE username='$username' AND id_cabang ='$idCabang'");
-			
+
 
 		if(mysqli_num_rows($cekUser) > 0){
 ?>
 				<script> window.alert('User Sudah Ada di Cabang Tersebut') </script>
 				<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
-		
+
 <?php }
 
 		//insert semua
@@ -26,11 +28,11 @@
 ?>		 		<script> window.alert('Data berhasil Ditambah') </script>
 				<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 
-<?php		
+<?php
 		}else{ ?>
 			<script> window.alert('Data Gagal Ditambahkan') </script>
-			<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script> 
-			 
+			<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
+
 <?php 		 }
 		}
 ?>

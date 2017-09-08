@@ -1,17 +1,18 @@
 <?php
 	include 'connect.php';
-        
-	if(isset($_POST['editrencanabeban'])){
-			$idtwrc1 = $_POST['editidtwrc1'];
-			$idtwrc2 = $_POST['editidtwrc2'];
-			$idtwrc3 = $_POST['editidtwrc3'];
-			$idtwrc4 = $_POST['editidtwrc4'];
-			$datatwrc1 = $_POST['edittwrc1'];
-			$datatwrc2 = $_POST['edittwrc2'];
-			$datatwrc3 = $_POST['edittwrc3'];	
-			$datatwrc4 = $_POST['edittwrc4'];
+	include 'anti_inject.php';
 
-	
+	if(isset($_POST['editrencanabeban'])){
+			$idtwrc1 = anti_injection($_POST['editidtwrc1']);
+			$idtwrc2 = anti_injection($_POST['editidtwrc2']);
+			$idtwrc3 = anti_injection($_POST['editidtwrc3']);
+			$idtwrc4 = anti_injection($_POST['editidtwrc4']);
+			$datatwrc1 = anti_injection($_POST['edittwrc1']);
+			$datatwrc2 = anti_injection($_POST['edittwrc2']);
+			$datatwrc3 = anti_injection($_POST['edittwrc3']);
+			$datatwrc4 = anti_injection($_POST['edittwrc4']);
+
+
 			$cekbeban = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM beban_rencana WHERE id_twrc = '$idtwrc1'"));
 			$idspbeban = $cekbeban['id_sp'];
 			$tahunbeban = $cekbeban['tahun'];
@@ -22,8 +23,8 @@
 			<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 <?php
 		} else {
-		
-		$updatetwrc1 = mysqli_query($connect,"UPDATE beban_rencana SET rkap ='$datatwrc1' WHERE id_twrc='$idtwrc1'");		
+
+		$updatetwrc1 = mysqli_query($connect,"UPDATE beban_rencana SET rkap ='$datatwrc1' WHERE id_twrc='$idtwrc1'");
 		$updatetwrc2 = mysqli_query($connect,"UPDATE beban_rencana SET rkap ='$datatwrc2' WHERE id_twrc='$idtwrc2'");
 		$updatetwrc3 = mysqli_query($connect,"UPDATE beban_rencana SET rkap ='$datatwrc3' WHERE id_twrc='$idtwrc3'");
 		$updatetwrc4 = mysqli_query($connect,"UPDATE beban_rencana SET rkap ='$datatwrc4' WHERE id_twrc='$idtwrc4'");
@@ -33,7 +34,7 @@
 					<script> window.alert('Pembaharuan Nilai Rencana Berhasil') </script>
 					<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 
-<?php 
+<?php
 				}else{ ?>
 					<script> window.alert('Data Gagal Diperbaharui') </script>
 					<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
@@ -41,12 +42,12 @@
 <?php 		 }
 		}
 	}
- 
+
 		if(isset($_POST['deleterencanabeban'])){
-			$idtwrc1 = $_POST['editidtwrc1'];
-			$idtwrc2 = $_POST['editidtwrc2'];
-			$idtwrc3 = $_POST['editidtwrc3'];
-			$idtwrc4 = $_POST['editidtwrc4'];		
+			$idtwrc1 = anti_injection($_POST['editidtwrc1']);
+			$idtwrc2 = anti_injection($_POST['editidtwrc2']);
+			$idtwrc3 = anti_injection($_POST['editidtwrc3']);
+			$idtwrc4 = anti_injection($_POST['editidtwrc4']);
 
 			$cekbeban = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM beban_rencana WHERE id_twrc = '$idtwrc1'"));
 			$idspbeban = $cekbeban['id_sp'];
@@ -58,8 +59,8 @@
 			<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 <?php
 		} else {
-		
-		$deletetwrc1 = mysqli_query($connect,"DELETE FROM beban_rencana WHERE id_twrc='$idtwrc1'");		
+
+		$deletetwrc1 = mysqli_query($connect,"DELETE FROM beban_rencana WHERE id_twrc='$idtwrc1'");
 		$deletetwrc2 = mysqli_query($connect,"DELETE FROM beban_rencana  WHERE id_twrc='$idtwrc2'");
 		$deletetwrc3 = mysqli_query($connect,"DELETE FROM beban_rencana  WHERE id_twrc='$idtwrc3'");
 		$deletetwrc4 = mysqli_query($connect,"DELETE FROM beban_rencana  WHERE id_twrc='$idtwrc4'");
@@ -69,7 +70,7 @@
 					<script> window.alert('Penghapusan Nilai Rencana Berhasil') </script>
 					<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 
-<?php 
+<?php
 				}else{ ?>
 					<script> window.alert('Data Gagal Dihapus') </script>
 					<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
@@ -82,46 +83,46 @@
 
 
 		if(isset($_POST['editrealisasibeban'])){
-			
-			$idtwrl1 = $_POST['editidtwrl1'];	
-			$idtwrl2 = $_POST['editidtwrl2'];
-			$idtwrl3 = $_POST['editidtwrl3'];
-			$idtwrl4 = $_POST['editidtwrl4'];							
-			
-			$twrl1 = $_POST['edittwrl1'];	
-			$twrl2 = $_POST['edittwrl2'];
-			$twrl3 = $_POST['edittwrl3'];
-			$twrl4 = $_POST['edittwrl4'];	
-		
+
+			$idtwrl1 = anti_injection($_POST['editidtwrl1']);
+			$idtwrl2 = anti_injection($_POST['editidtwrl2']);
+			$idtwrl3 = anti_injection($_POST['editidtwrl3']);
+			$idtwrl4 = anti_injection($_POST['editidtwrl4']);
+
+			$twrl1 = anti_injection($_POST['edittwrl1']);
+			$twrl2 = anti_injection($_POST['edittwrl2']);
+			$twrl3 = anti_injection($_POST['edittwrl3']);
+			$twrl4 = anti_injection($_POST['edittwrl4']);
+
 			$updatetwrl1 = mysqli_query($connect,"UPDATE beban_realisasi SET realisasi='$twrl1' WHERE id_twrl = '$idtwrl1' AND stat_twrl ='1'");
 			$updatetwrl2 = mysqli_query($connect,"UPDATE beban_realisasi SET realisasi='$twrl2' WHERE id_twrl = '$idtwrl2' AND stat_twrl ='2'");
 			$updatetwrl3 = mysqli_query($connect,"UPDATE beban_realisasi SET realisasi='$twrl3' WHERE id_twrl = '$idtwrl3' AND stat_twrl ='3'");
 			$updatetwrl4 = mysqli_query($connect,"UPDATE beban_realisasi SET realisasi='$twrl4' WHERE id_twrl = '$idtwrl4' AND stat_twrl ='4'");
 
-		
+
 				if($updatetwrl1 OR $updatetwrl2 OR $updatetwrl3 OR $updatetwrl4){
 ?>
 
 					<script> window.alert('Pembaharuan Nilai Rencana Berhasil') </script>
 					<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
-				
 
-<?php 
+
+<?php
 				}else{ ?>
-					<script> window.alert('Data Gagal Diperbaharui') </script>				
+					<script> window.alert('Data Gagal Diperbaharui') </script>
 					<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 
 
 <?php 		 }
 		}
-	
+
  		if(isset($_POST['deleterealisasibeban'])){
-			$idtwrl1 = $_POST['editidtwrl1'];
-			$idtwrl2 = $_POST['editidtwrl2'];
-			$idtwrl3 = $_POST['editidtwrl3'];
-			$idtwrl4 = $_POST['editidtwrl4'];		
-		
-		$deletetwrc1 = mysqli_query($connect,"DELETE FROM beban_realisasi WHERE id_twrl='$idtwrl1'");		
+			$idtwrl1 = anti_injection($_POST['editidtwrl1']);
+			$idtwrl2 = anti_injection($_POST['editidtwrl2']);
+			$idtwrl3 = anti_injection($_POST['editidtwrl3']);
+			$idtwrl4 = anti_injection($_POST['editidtwrl4']);
+
+		$deletetwrc1 = mysqli_query($connect,"DELETE FROM beban_realisasi WHERE id_twrl='$idtwrl1'");
 		$deletetwrc2 = mysqli_query($connect,"DELETE FROM beban_realisasi  WHERE id_twrl='$idtwrl2'");
 		$deletetwrc3 = mysqli_query($connect,"DELETE FROM beban_realisasi  WHERE id_twrl='$idtwrl3'");
 		$deletetwrc4 = mysqli_query($connect,"DELETE FROM beban_realisasi  WHERE id_twrl='$idtwrl4'");
@@ -131,23 +132,23 @@
 					<script> window.alert('Penghapusan Nilai Rencana Berhasil') </script>
 					<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 
-<?php 
+<?php
 				}else{ ?>
 					<script> window.alert('Data Gagal Dihapus') </script>
 					<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 
 <?php 		 }
 		}
-	
+
 	if(isset($_POST['updaterencanabeban'])){
-			$idtwrc1 = $_POST['editidtwrc1'];
-			$idtwrc2 = $_POST['editidtwrc2'];
-			$idtwrc3 = $_POST['editidtwrc3'];
-			$idtwrc4 = $_POST['editidtwrc4'];
-			$datatwrc1 = $_POST['edittwrc1'];
-			$datatwrc2 = $_POST['edittwrc2'];
-			$datatwrc3 = $_POST['edittwrc3'];	
-			$datatwrc4 = $_POST['edittwrc4'];
+			$idtwrc1 = anti_injection($_POST['editidtwrc1']);
+			$idtwrc2 = anti_injection($_POST['editidtwrc2']);
+			$idtwrc3 = anti_injection($_POST['editidtwrc3']);
+			$idtwrc4 = anti_injection($_POST['editidtwrc4']);
+			$datatwrc1 = anti_injection($_POST['edittwrc1']);
+			$datatwrc2 = anti_injection($_POST['edittwrc2']);
+			$datatwrc3 = anti_injection($_POST['edittwrc3']);
+			$datatwrc4 = anti_injection($_POST['edittwrc4']);
 
 
 			$twrc1 = mysqli_fetch_array(mysqli_query($connect,"SELECT * FROM beban_rencana WHERE id_twrc = '$idtwrc1'"));
@@ -164,7 +165,7 @@
 			}else{
 				$datatwrcbaru1 = $datatwrc1;
 			}
-			
+
 			if($datatwrc2 == $ambildatatwrc2){
 				$datatwrcbaru2 = 0;
 			}else{
@@ -191,8 +192,8 @@
 			<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
 <?php
 		} else {
-		
-		$updatetwrc1 = mysqli_query($connect,"UPDATE beban_rencana SET revisi ='$datatwrcbaru1' WHERE id_twrc='$idtwrc1'");		
+
+		$updatetwrc1 = mysqli_query($connect,"UPDATE beban_rencana SET revisi ='$datatwrcbaru1' WHERE id_twrc='$idtwrc1'");
 		$updatetwrc2 = mysqli_query($connect,"UPDATE beban_rencana SET revisi ='$datatwrcbaru2' WHERE id_twrc='$idtwrc2'");
 		$updatetwrc3 = mysqli_query($connect,"UPDATE beban_rencana SET revisi ='$datatwrcbaru3' WHERE id_twrc='$idtwrc3'");
 		$updatetwrc4 = mysqli_query($connect,"UPDATE beban_rencana SET revisi ='$datatwrcbaru4' WHERE id_twrc='$idtwrc4'");
@@ -201,7 +202,7 @@
 
 					<script> window.alert('Pembaharuan Nilai Rencana Berhasil') </script>
 					<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
- <?php 
+ <?php
 				}else{ ?>
 					<script> window.alert('Data Gagal Diperbaharui') </script>
 					<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>

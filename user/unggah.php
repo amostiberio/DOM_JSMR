@@ -1,15 +1,16 @@
 <?php
 include 'connect.php';
+include 'anti_inject.php';
 if(isset($_POST['tambah']) && $_FILES['file']['size'] > 0)
-{	
-	$idcabang = $_POST['idcabang'];
-	$nama = $_POST['nama'];
-	$tipe = $_POST['tipe'];
-	$tanggal = $_POST['tanggal'];
+{
+	$idcabang = anti_injection($_POST['idcabang']);
+	$nama = anti_injection($_POST['nama']);
+	$tipe = anti_injection($_POST['tipe']);
+	$tanggal = anti_injection($_POST['tanggal']);
     list($month,$year) = explode('-',$tanggal);
 	$tmpName = $_FILES['file']['tmp_name'];
 	$size = $_FILES['file']['size'];
-	
+
 	$fp = fopen($tmpName, 'r');
 	$content = fread($fp, filesize($tmpName));
 	$content = addslashes($content);
@@ -19,12 +20,12 @@ if(isset($_POST['tambah']) && $_FILES['file']['size'] > 0)
 	{
 		$nama = addslashes($nama);
 	}
-	
+
 	$insert= mysqli_query($connect,"INSERT INTO realisasi_laporan VALUES ('','$nama','$tipe','$content','$size','$year','$month',now(),'$idcabang','1')");
 		if($insert){
 ?>		 		<script> window.alert('Data berhasil Ditambah') </script>
 				<script>document.location.href="javascript:history.back()";</script>
-<?php		
+<?php
 		}else{ ?>
 			<script> window.alert('Data Gagal Ditambahkan') </script>
 			<script>document.location.href="javascript:history.back()";</script>
@@ -32,7 +33,7 @@ if(isset($_POST['tambah']) && $_FILES['file']['size'] > 0)
 		}
 
 if(isset($_POST['tambah_lalinjj']) && $_FILES['file']['size'] > 0)
-{	
+{
 	$idcabang = $_POST['idcabang'];
 	$nama = $_POST['nama'];
 	$tipe = $_POST['tipe'];
@@ -40,7 +41,7 @@ if(isset($_POST['tambah_lalinjj']) && $_FILES['file']['size'] > 0)
 	$tw = $_POST['tw'];
 	$tmpName = $_FILES['file']['tmp_name'];
 	$size = $_FILES['file']['size'];
-	
+
 	$fp = fopen($tmpName, 'r');
 	$content = fread($fp, filesize($tmpName));
 	$content = addslashes($content);
@@ -50,12 +51,12 @@ if(isset($_POST['tambah_lalinjj']) && $_FILES['file']['size'] > 0)
 	{
 		$nama = addslashes($nama);
 	}
-	
+
 	$insert= mysqli_query($connect,"INSERT INTO lalin_jj VALUES ('','$nama','$tipe','$content','$size','$tahun','$tw','$idcabang')");
 		if($insert){
 ?>		 		<script> window.alert('Data berhasil Ditambah') </script>
 				<script>document.location.href="javascript:history.back()";</script>
-<?php		
+<?php
 		}else{ ?>
 			<script> window.alert('Data Gagal Ditambahkan') </script>
 			<script>document.location.href="javascript:history.back()";</script>

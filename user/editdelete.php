@@ -1,48 +1,49 @@
 <?php
 include 'connect.php';
+include 'anti_inject.php';
 
 if(isset($_POST['deletelaporan'])){
-	$idrl = $_POST['id_realisasi'];
+	$idrl = anti_injection($_POST['id_realisasi']);
 	$delete = mysqli_query($connect,"DELETE FROM realisasi_laporan WHERE id_realisasi='$idrl'");
 	if($delete){
 ?>
 		<script> window.alert('Penghapusan Laporan Berhasil') </script>
 		<script>document.location.href="javascript:history.back()";</script>
-<?php 
+<?php
 	}else{ ?>
 		<script> window.alert('Penghapusan Laporan Gagal') </script>
 		<script>document.location.href="javascript:history.back()";</script>
 <?php 	}
 	}
-	
+
 if(isset($_POST['deletett'])){
-	$idgerbang = $_POST['idgerbang'];
-	$tahun = $_POST['tahun'];
-	$tw = $_POST['tw'];
+	$idgerbang = anti_injection($_POST['idgerbang']);
+	$tahun = anti_injection($_POST['tahun']);
+	$tw = anti_injection($_POST['tw']);
 	$delete = mysqli_query($connect,"DELETE FROM transaksi_tinggi WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw'");
 	if($delete){
 ?>
 		<script> window.alert('Penghapusan Data Berhasil') </script>
 		<script>document.location.href="javascript:history.back()";</script>
-<?php 
+<?php
 	}else{ ?>
 		<script> window.alert('Penghapusan Data Gagal') </script>
 		<script>document.location.href="javascript:history.back()";</script>
 <?php 	}
 	}
-	
+
 	if(isset($_POST['edittt'])){
-	$idgerbang = $_POST['idgerbang'];
-	$tahun = $_POST['tahun'];
-	$tw = $_POST['tw'];
-	$data1 = $_POST['gardu_terbuka_lalin'];
-	$data2 = $_POST['gardu_masuk_lalin'];
-	$data3 = $_POST['gardu_keluar_lalin'];
-	$data4 = $_POST['gardu_terbuka_gto_lalin'];
-	$data5 = $_POST['gardu_masuk_gto_lalin'];
-	$data6 = $_POST['gardu_keluar_gto_lalin'];
-	$data7 = $_POST['epass_lalin'];
-	
+	$idgerbang = anti_injection($_POST['idgerbang']);
+	$tahun = anti_injection($_POST['tahun']);
+	$tw = anti_injection($_POST['tw']);
+	$data1 = anti_injection($_POST['gardu_terbuka_lalin']);
+	$data2 = anti_injection($_POST['gardu_masuk_lalin']);
+	$data3 = anti_injection($_POST['gardu_keluar_lalin']);
+	$data4 = anti_injection($_POST['gardu_terbuka_gto_lalin']);
+	$data5 = anti_injection($_POST['gardu_masuk_gto_lalin']);
+	$data6 = anti_injection($_POST['gardu_keluar_gto_lalin']);
+	$data7 = anti_injection($_POST['epass_lalin']);
+
 	$update1 = mysqli_query($connect,"UPDATE transaksi_tinggi SET nilai ='$data1' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='1'");
 	$update2 = mysqli_query($connect,"UPDATE transaksi_tinggi SET nilai ='$data2' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='2'");
 	$update3 = mysqli_query($connect,"UPDATE transaksi_tinggi SET nilai ='$data3' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='3'");
@@ -65,33 +66,33 @@ if(isset($_POST['deletett'])){
 	}
 
 	if(isset($_POST['deletejg'])){
-	$idgerbang = $_POST['idgerbang'];
-	$tahun = $_POST['tahun'];
-	$tw = $_POST['tw'];
+	$idgerbang = anti_injection($_POST['idgerbang']);
+	$tahun = anti_injection($_POST['tahun']);
+	$tw = anti_injection($_POST['tw']);
 	$delete = mysqli_query($connect,"DELETE FROM jml_gardutersedia WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw'");
 	if($delete){
 ?>
 		<script> window.alert('Penghapusan Data Berhasil') </script>
 		<script>document.location.href="javascript:history.back()";</script>
-<?php 
+<?php
 	}else{ ?>
 		<script> window.alert('Penghapusan Data Gagal') </script>
 		<script>document.location.href="javascript:history.back()";</script>
 <?php 	}
 	}
-	
+
 	if(isset($_POST['editjg'])){
-	$idgerbang = $_POST['idgerbang'];
-	$tahun = $_POST['tahun'];
-	$tw = $_POST['tw'];
-	$data1 = $_POST['gardu_terbuka_tersedia'];
-	$data2 = $_POST['gardu_masuk_tersedia'];
-	$data3 = $_POST['gardu_keluar_tersedia'];
-	$data4 = $_POST['gardu_terbuka_gto_tersedia'];
-	$data5 = $_POST['gardu_masuk_gto_tersedia'];
-	$data6 = $_POST['gardu_keluar_gto_tersedia'];
-	$data7 = $_POST['epass_tersedia'];
-	
+	$idgerbang = anti_injection($_POST['idgerbang']);
+	$tahun = anti_injection($_POST['tahun']);
+	$tw = anti_injection($_POST['tw']);
+	$data1 = anti_injection($_POST['gardu_terbuka_tersedia']);
+	$data2 = anti_injection($_POST['gardu_masuk_tersedia']);
+	$data3 = anti_injection($_POST['gardu_keluar_tersedia']);
+	$data4 = anti_injection($_POST['gardu_terbuka_gto_tersedia']);
+	$data5 = anti_injection($_POST['gardu_masuk_gto_tersedia']);
+	$data6 = anti_injection($_POST['gardu_keluar_gto_tersedia']);
+	$data7 = anti_injection($_POST['epass_tersedia']);
+
 	$update1 = mysqli_query($connect,"UPDATE jml_gardutersedia SET nilai ='$data1' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='1'");
 	$update2 = mysqli_query($connect,"UPDATE jml_gardutersedia SET nilai ='$data2' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='2'");
 	$update3 = mysqli_query($connect,"UPDATE jml_gardutersedia SET nilai ='$data3' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND tw='$tw' AND id_subgardu='3'");
@@ -112,33 +113,33 @@ if(isset($_POST['deletett'])){
 	<?php
 		}
 	}
-	
+
 	if(isset($_POST['deletejs'])){
-	$idgerbang = $_POST['idgerbang'];
-	$tahun = $_POST['tahun'];
+	$idgerbang = anti_injection($_POST['idgerbang']);
+	$tahun = anti_injection($_POST['tahun']);
 	$delete = mysqli_query($connect,"DELETE FROM pengumpul_tol WHERE id_gerbang='$idgerbang' AND tahun='$tahun'");
 	if($delete){
 ?>
 		<script> window.alert('Penghapusan Data Berhasil') </script>
 		<script>document.location.href="javascript:history.back()";</script>
-<?php 
+<?php
 	}else{ ?>
-		<script> window.alert('Penghapusan Data Gagal') </script>
 		<script>document.location.href="javascript:history.back()";</script>
+		<script> window.alert('Penghapusan Data Gagal') </script>
 <?php 	}
 	}
-	
+
 	if(isset($_POST['editjs'])){
-	$idgerbang = $_POST['idgerbang'];
-	$tahun = $_POST['tahun'];
-	$data1 = $_POST['kpl_gerbangtol'];
-	$data2 = $_POST['kspt'];
-	$data3 = $_POST['kry_jasamarga'];
-	$data4 = $_POST['kry_jlj'];
-	$data5 = $_POST['kry_jlo'];
-	$data6 = $_POST['sakit_permanen'];
-	$data7 = $_POST['tugt'];
-	
+	$idgerbang = anti_injection($_POST['idgerbang']);
+	$tahun = anti_injection($_POST['tahun']);
+	$data1 = anti_injection($_POST['kpl_gerbangtol']);
+	$data2 = anti_injection($_POST['kspt']);
+	$data3 = anti_injection($_POST['kry_jasamarga']);
+	$data4 = anti_injection($_POST['kry_jlj']);
+	$data5 = anti_injection($_POST['kry_jlo']);
+	$data6 = anti_injection($_POST['sakit_permanen']);
+	$data7 = anti_injection($_POST['tugt']);
+
 	$update1 = mysqli_query($connect,"UPDATE pengumpul_tol SET jumlah ='$data1' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND id_karyawan='5'");
 	$update2 = mysqli_query($connect,"UPDATE pengumpul_tol SET jumlah ='$data2' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND id_karyawan='6'");
 	$update3 = mysqli_query($connect,"UPDATE pengumpul_tol SET jumlah ='$data3' WHERE id_gerbang='$idgerbang' AND tahun='$tahun' AND id_karyawan='1'");
@@ -159,15 +160,15 @@ if(isset($_POST['deletett'])){
 	<?php
 		}
 	}
-	
+
 	if(isset($_POST['delete_lj'])){
-	$id = $_POST['id'];
+	$id = anti_injection($_POST['id']);
 	$delete = mysqli_query($connect,"DELETE FROM lalin_jj WHERE id_lalinjj='$id'");
 	if($delete){
 ?>
 		<script> window.alert('Penghapusan Laporan Berhasil') </script>
 		<script>document.location.href="javascript:history.back()";</script>
-<?php 
+<?php
 	}else{ ?>
 		<script> window.alert('Penghapusan Laporan Gagal') </script>
 		<script>document.location.href="javascript:history.back()";</script>

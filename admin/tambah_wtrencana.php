@@ -1,26 +1,27 @@
 <?php
 	include 'connect.php';
+	include 'anti_inject.php';
 
 		if(isset($_POST['tambah'])){
-			$idsemester= $_POST['idsemester'];
+			$idsemester= anti_injection($_POST['idsemester']);
 
-      $idgardu_keluar = $_POST['idgardu_keluar'];
-      $gardu_keluar = $_POST['gardu_keluar'];
+      $idgardu_keluar = anti_injection($_POST['idgardu_keluar']);
+      $gardu_keluar = anti_injection($_POST['gardu_keluar']);
 
-			$idgardu_masuk = $_POST['idgardu_masuk'];
-      $gardu_masuk = $_POST['gardu_masuk'];
+			$idgardu_masuk = anti_injection($_POST['idgardu_masuk']);
+      $gardu_masuk = anti_injection($_POST['gardu_masuk']);
 
-			$idgardu_terbuka = $_POST['idgardu_terbuka'];
-      $gardu_terbuka = $_POST['gardu_terbuka'];
+			$idgardu_terbuka = anti_injection($_POST['idgardu_terbuka']);
+      $gardu_terbuka = anti_injection($_POST['gardu_terbuka']);
 
-      $idgardu_tol_ambilkartu = $_POST['idgardu_tol_ambilkartu'];
-      $gardu_tol_ambilkartu = $_POST['gardu_tol_ambilkartu'];
+      $idgardu_tol_ambilkartu = anti_injection($_POST['idgardu_tol_ambilkartu']);
+      $gardu_tol_ambilkartu = anti_injection($_POST['gardu_tol_ambilkartu']);
 
-      $idgardu_tol_transaksi = $_POST['idgardu_tol_transaksi'];
-      $gardu_tol_transaksi = $_POST['gardu_tol_transaksi'];
+      $idgardu_tol_transaksi = anti_injection($_POST['idgardu_tol_transaksi']);
+      $gardu_tol_transaksi = anti_injection($_POST['gardu_tol_transaksi']);
 
-      $idpanjang_antrian = $_POST['idpanjang_antrian'];
-      $panjang_antrian = $_POST['panjang_antrian'];
+      $idpanjang_antrian = anti_injection($_POST['idpanjang_antrian']);
+      $panjang_antrian = anti_injection($_POST['panjang_antrian']);
 
 
 			//cek input double

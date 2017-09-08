@@ -1,24 +1,25 @@
 <?php
 include 'connect.php';
+include 'anti_inject.php';
 if(isset($_POST['tambah'])){
-	$idcabang = $_POST['cabang'];
-	$idgerbang= $_POST['gerbang'];
-	$tahun= $_POST['tahun'];
+	$idcabang = anti_injection($_POST['cabang']);
+	$idgerbang= anti_injection($_POST['gerbang']);
+	$tahun= anti_injection($_POST['tahun']);
 
-	$idkpl_gerbangtol = $_POST['idkpl_gerbangtol'];
-	$kpl_gerbangtol = $_POST['kpl_gerbangtol'];
-	$idkspt = $_POST['idkspt'];
-	$kspt = $_POST['kspt'];
-	$idkry_jasamarga = $_POST['idkry_jasamarga'];
-	$kry_jasamarga = $_POST['kry_jasamarga'];
-	$idkry_jlj = $_POST['idkry_jlj'];
-	$kry_jlj = $_POST['kry_jlj'];
-	$idkry_jlo = $_POST['idkry_jlo'];
-	$kry_jlo = $_POST['kry_jlo'];
-	$idsakit_permanen = $_POST['idsakit_permanen'];
-	$sakit_permanen = $_POST['sakit_permanen'];
-	$idtugt = $_POST['idtugt'];
-	$tugt = $_POST['tugt'];
+	$idkpl_gerbangtol = anti_injection($_POST['idkpl_gerbangtol']);
+	$kpl_gerbangtol = anti_injection($_POST['kpl_gerbangtol']);
+	$idkspt = anti_injection($_POST['idkspt']);
+	$kspt = anti_injection($_POST['kspt']);
+	$idkry_jasamarga = anti_injection($_POST['idkry_jasamarga']);
+	$kry_jasamarga = anti_injection($_POST['kry_jasamarga']);
+	$idkry_jlj = anti_injection($_POST['idkry_jlj']);
+	$kry_jlj = anti_injection($_POST['kry_jlj']);
+	$idkry_jlo = anti_injection($_POST['idkry_jlo']);
+	$kry_jlo = anti_injection($_POST['kry_jlo']);
+	$idsakit_permanen = anti_injection($_POST['idsakit_permanen']);
+	$sakit_permanen = anti_injection($_POST['sakit_permanen']);
+	$idtugt = anti_injection($_POST['idtugt']);
+	$tugt = anti_injection($_POST['tugt']);
 
 	//cek input double
 	$cek_js = mysqli_query($connect, "SELECT * FROM pengumpul_tol WHERE id_gerbang = '$idgerbang' AND tahun ='$tahun'");
@@ -26,7 +27,7 @@ if(isset($_POST['tambah'])){
 	if($data[0] > 0){ ?>
 		<script> window.alert('Gagal, Data Telah Tersedia') </script>
 		<script>document.location.href="<?php echo $_SERVER['HTTP_REFERER'];?>";</script>
-<?php 		
+<?php
 	}else{
 		//insert data
 		$insert_jumlahsdm = mysqli_query($connect,"INSERT INTO pengumpul_tol VALUES

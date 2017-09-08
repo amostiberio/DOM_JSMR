@@ -1,9 +1,10 @@
 <?php
 	include 'connect.php';
+	include 'anti_inject.php';
 
 		if(isset($_POST['tambah'])){
-			$idcabang = $_POST['idcabang'];
-		 	$gerbang= $_POST['gerbang'];
+			$idcabang = anti_injection($_POST['idcabang']);
+		 	$gerbang= anti_injection($_POST['gerbang']);
 
 		//cek input double
 		$cek_gerbang = mysqli_query($connect, "SELECT * FROM gerbang WHERE nama_gerbang = '$gerbang'");

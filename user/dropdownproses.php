@@ -1,10 +1,10 @@
 <?php
 include 'connect.php';
-
+include 'anti_inject.php';
 
 
 if(isset($_POST['dropdownTahunGardu'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
  ?>
@@ -23,7 +23,7 @@ if(isset($_POST['clearTahunGardu'])){
 }
 
 if(isset($_POST['dropdownTahunLalin'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
  ?>
@@ -42,7 +42,7 @@ if(isset($_POST['clearTahunLalin'])){
 }
 
 if(isset($_POST['dropdownTahunSDM'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
  ?>
@@ -61,7 +61,7 @@ if(isset($_POST['clearTahunSDM'])){
 }
 
 if(isset($_POST['dropdownTahunRatio'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
  ?>
@@ -80,8 +80,8 @@ if(isset($_POST['clearTahunRatio'])){
 }
 
 if(isset($_POST['dropdownTahunGardu1'])){
-            $tahun = $_POST['tahun'];
-			$id_gerbang = $_POST ['id_gerbang'];
+            $tahun = anti_injection($_POST['tahun']);
+			      $id_gerbang = anti_injection($_POST['id_gerbang']);
 
             if($tahun > 0 ){
  ?>
@@ -94,15 +94,15 @@ if(isset($_POST['dropdownTahunGardu1'])){
 <?php        }
 
 if(isset($_POST['clearTahunGardu1'])){
-	$id_gerbang = $_POST ['id_gerbang'];
+	$id_gerbang = anti_injection($_POST['id_gerbang']);
 ?>
                 <script>document.location.href="gerbang_jmlgardu.php?id_gerbang=<?php  echo $id_gerbang;?>";</script>
 <?php
 }
 
 if(isset($_POST['dropdownTahunLalin1'])){
-            $tahun = $_POST['tahun'];
-			$id_gerbang = $_POST ['id_gerbang'];
+            $tahun = anti_injection($_POST['tahun']);
+			$id_gerbang = anti_injection($_POST['id_gerbang']);
 
             if($tahun > 0 ){
  ?>
@@ -115,7 +115,7 @@ if(isset($_POST['dropdownTahunLalin1'])){
 <?php        }
 
 if(isset($_POST['clearTahunLalin1'])){
-	$id_gerbang = $_POST ['id_gerbang'];
+	$id_gerbang = anti_injection($_POST['id_gerbang']);
 ?>
                 <script>document.location.href="gerbang_lalin.php?id_gerbang=<?php echo $id_gerbang;?>";</script>
 <?php
@@ -123,8 +123,8 @@ if(isset($_POST['clearTahunLalin1'])){
 
 
  if(isset($_POST['dropdownTW'])){
-            $triwulan = $_POST['dropDownListTW'];
-            $tahun =$_POST['tahun'];
+            $triwulan = anti_injection($_POST['dropDownListTW']);
+            $tahun = anti_injection($_POST['tahun']);
              if($tahun >0 && $triwulan >0){ ?>
                 <script>document.location.href="laporan_bpt.php?tahun=<?php echo $tahun;?>&triwulan=<?php echo $triwulan;?>";</script>
 
@@ -149,8 +149,8 @@ if(isset($_POST['clearTahunLalin1'])){
 }
 
 if(isset($_POST['dropdownTWBPLL'])){
-            $triwulan = $_POST['dropDownListTW'];
-            $tahun =$_POST['tahun'];
+            $triwulan = anti_injection($_POST['dropDownListTW']);
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 && $triwulan >0){ ?>
                   <script>document.location.href="laporan_bpll.php?tahun=<?php echo $tahun;?>&triwulan=<?php echo $triwulan;?>";</script>
@@ -176,8 +176,8 @@ if(isset($_POST['dropdownTWBPLL'])){
 
 
 if(isset($_POST['dropdownTWSPOJT'])){
-            $triwulan = $_POST['dropDownListTW'];
-            $tahun =$_POST['tahun'];
+            $triwulan = anti_injection($_POST['dropDownListTW']);
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 && $triwulan >0){ ?>
                   <script>document.location.href="laporan_spojt.php?tahun=<?php echo $tahun;?>&triwulan=<?php echo $triwulan;?>";</script>
@@ -203,8 +203,8 @@ if(isset($_POST['dropdownTWSPOJT'])){
 }
 
 if(isset($_POST['dropdownTWSPJT'])){
-            $triwulan = $_POST['dropDownListTW'];
-            $tahun =$_POST['tahun'];
+            $triwulan = anti_injection($_POST['dropDownListTW']);
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 && $triwulan >0){ ?>
                   <script>document.location.href="laporan_spjt.php?tahun=<?php echo $tahun;?>&triwulan=<?php echo $triwulan;?>";</script>
@@ -231,7 +231,7 @@ if(isset($_POST['dropdownTWSPJT'])){
 
 
         if(isset($_POST['dropdownTahun'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
 ?>
@@ -244,7 +244,7 @@ if(isset($_POST['dropdownTWSPJT'])){
 <?php
 }
  if(isset($_POST['dropdownTahunRencanaBpt'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
 ?>
@@ -257,7 +257,7 @@ if(isset($_POST['dropdownTWSPJT'])){
 <?php
 }
   if(isset($_POST['dropdownTahunRealisasiBpt'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
 ?>
@@ -271,7 +271,7 @@ if(isset($_POST['dropdownTWSPJT'])){
 }
 
  if(isset($_POST['dropdownTahunRencanaBpll'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
 ?>
@@ -285,7 +285,7 @@ if(isset($_POST['dropdownTWSPJT'])){
 }
 
 if(isset($_POST['dropdownTahunRealisasiBpll'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
 ?>
@@ -299,7 +299,7 @@ if(isset($_POST['dropdownTahunRealisasiBpll'])){
 }
 
  if(isset($_POST['dropdownTahunRencanaSpjt'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
 ?>
@@ -312,7 +312,7 @@ if(isset($_POST['dropdownTahunRealisasiBpll'])){
 <?php
 }
  if(isset($_POST['dropdownTahunRealisasiSpjt'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
 ?>
@@ -326,7 +326,7 @@ if(isset($_POST['dropdownTahunRealisasiBpll'])){
 }
 
 if(isset($_POST['dropdownTahunRencanaSpojt'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
 ?>
@@ -340,7 +340,7 @@ if(isset($_POST['dropdownTahunRencanaSpojt'])){
 }
 
 if(isset($_POST['dropdownTahunRealisasiSpojt'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
 ?>
@@ -353,7 +353,7 @@ if(isset($_POST['dropdownTahunRealisasiSpojt'])){
 <?php
 }
 if(isset($_POST['dropdownWaktuTransaksi1'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
 ?>
@@ -372,8 +372,8 @@ if(isset($_POST['clearTahunWT1'])){
 }
 
 if(isset($_POST['dropdownWaktuTransaksiPergerbang'])){
-            $tahun = $_POST['tahun'];
-						$id_gerbang = $_POST['idgerbang'];
+            $tahun = anti_injection($_POST['tahun']);
+						$id_gerbang = anti_injection($_POST['idgerbang']);
 
             if($tahun > 0 ){
 ?>
@@ -386,13 +386,13 @@ if(isset($_POST['dropdownWaktuTransaksiPergerbang'])){
 <?php
 }
 if(isset($_POST['clearTahunWT1Pergerbang'])){
-	$id_gerbang = $_POST ['idgerbang'];
+	$id_gerbang = anti_injection($_POST['idgerbang']);
 ?>
                 <script>document.location.href="waktu_transaksi1_pergerbang.php?id=<?php echo $id_gerbang;?>";</script>
 <?php
 }
 if(isset($_POST['dropdownWaktuTransaksi2'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
 ?>
@@ -411,7 +411,7 @@ if(isset($_POST['clearTahunWT2'])){
 }
 
 if(isset($_POST['dropdownTahunLaporanBulanan'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
 ?>
@@ -430,7 +430,7 @@ if(isset($_POST['clearTahunLaporanBulanan'])){
 }
 
 if(isset($_POST['dropdownTahunRevisiBpt'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
 ?>
@@ -443,7 +443,7 @@ if(isset($_POST['dropdownTahunRevisiBpt'])){
 <?php
 }
 if(isset($_POST['dropdownTahunRevisiBpll'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
 ?>
@@ -456,7 +456,7 @@ if(isset($_POST['dropdownTahunRevisiBpll'])){
 <?php
 }
 if(isset($_POST['dropdownTahunRevisiSpojt'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
 ?>
@@ -469,7 +469,7 @@ if(isset($_POST['dropdownTahunRevisiSpojt'])){
 <?php
 }
 if(isset($_POST['dropdownTahunRevisiSpjt'])){
-            $tahun = $_POST['tahun'];
+            $tahun = anti_injection($_POST['tahun']);
 
             if($tahun > 0 ){
 ?>
